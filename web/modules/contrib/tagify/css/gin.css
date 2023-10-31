@@ -1,8 +1,0 @@
-:root {
-  --tagify-dd-color-primary: var(--gin-bg-layer3);
-  --tagify-dd-bg-color: var(--gin-bg-layer2);
-}
-
-.tagify__dropdown__item--active {
-  color: var(--gin-color-text) !important;
-}
