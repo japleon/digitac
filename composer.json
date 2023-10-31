@@ -15,7 +15,7 @@
         }
     ],
     "require": {
-        "composer/installers": "^2.0",
+        "composer/installers": "^2.2",
         "drupal/admin_toolbar": "^3.4",
         "drupal/better_exposed_filters": "^6.0",
         "drupal/block_field": "^1.0@RC",
