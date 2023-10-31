@@ -1,84 +1,129 @@
 {
-    "name": "pantheon-upstreams/drupal-composer-managed",
-    "description": "Install Drupal 9 with Composer on Pantheon.",
+    "name": "drupal/recommended-project",
+    "description": "Project template for Drupal projects with a relocated document root",
     "type": "project",
-    "license": "MIT",
+    "license": "GPL-2.0-or-later",
+    "homepage": "https://www.drupal.org/project/drupal",
+    "support": {
+        "docs": "https://www.drupal.org/docs/user_guide/en/index.html",
+        "chat": "https://www.drupal.org/node/314178"
+    },
     "repositories": [
         {
             "type": "composer",
             "url": "https://packages.drupal.org/8"
-        },
-        {
-            "type": "path",
-            "url": "upstream-configuration"
         }
     ],
     "require": {
-        "pantheon-upstreams/upstream-configuration": "dev-main",
-        "composer/installers": "^1.9",
-        "drupal/core-composer-scaffold": "^10",
-        "drupal/core-recommended": "^10",
-        "pantheon-systems/drupal-integrations": "^10",
-        "cweagans/composer-patches": "^1.7",
-        "drush/drush": "^11 || ^12"
-    },
-    "require-dev": {
-        "drupal/core-dev": "^10"
+        "composer/installers": "^2.0",
+        "drupal/admin_toolbar": "^3.4",
+        "drupal/better_exposed_filters": "^6.0",
+        "drupal/block_field": "^1.0@RC",
+        "drupal/bootstrap5": "^3.0",
+        "drupal/bootstrap_multiselect": "^2.0",
+        "drupal/chosen": "^4.0",
+        "drupal/core-composer-scaffold": "^10.1",
+        "drupal/core-project-message": "^10.1",
+        "drupal/core-recommended": "^10.1",
+        "drupal/email_registration": "^1.2",
+        "drupal/entity_usage": "^2.0@beta",
+        "drupal/entityqueue": "^1.7",
+        "drupal/gin_login": "^2.0",
+        "drupal/honeypot": "^2.1",
+        "drupal/maxlength": "^2.1",
+        "drupal/menu_item_extras": "^3.0",
+        "drupal/menu_per_role": "^1.5",
+        "drupal/paragraphs": "^1.15",
+        "drupal/password_policy": "^4.0",
+        "drupal/pathauto": "^1.11",
+        "drupal/rate": "^3.0",
+        "drupal/recaptcha_v3": "^2.0",
+        "drupal/security_review": "^2.0",
+        "drupal/tagify": "^1.0",
+        "drupal/twig_tweak": "^3.2",
+        "drupal/views_ajax_history": "^1.7",
+        "drupal/views_arg_entity_field": "^2.0",
+        "drupal/views_autosubmit": "^1.5",
+        "drupal/views_show_more": "^2.0",
+        "drupal/votingapi": "^3.0@beta"
     },
     "conflict": {
         "drupal/drupal": "*"
     },
     "minimum-stability": "stable",
     "prefer-stable": true,
+    "config": {
+        "allow-plugins": {
+            "composer/installers": true,
+            "drupal/core-composer-scaffold": true,
+            "drupal/core-project-message": true,
+            "phpstan/extension-installer": true,
+            "dealerdirect/phpcodesniffer-composer-installer": true
+        },
+        "sort-packages": true
+    },
     "extra": {
+        "enable-patching": true,
+        "patches": {
+            "drupal/rate": {
+               "PHP Fatal Error | undefined method Drupal Core Extension ModuleHandler::getImplementations()":"https://www.drupal.org/files/issues/2022-12-16/3327528-2.patch",
+               "Entity queries must explicitly set whether the query should be access checked or not":"https://www.drupal.org/files/issues/2023-07-06/3331890-rate-entity-query-access-list-3.0.1-22.patch"
+            }
+        },
         "drupal-scaffold": {
             "locations": {
-                "web-root": "./web"
-            },
-            "allowed-packages": ["pantheon-systems/drupal-integrations"],
-            "file-mapping": {
-                "[project-root]/.editorconfig": false,
-                "[project-root]/pantheon.upstream.yml": false,
-                "[project-root]/.gitattributes": false
+                "web-root": "web/"
             }
         },
         "installer-paths": {
-            "web/core": ["type:drupal-core"],
-            "web/libraries/{$name}": ["type:drupal-library"],
-            "web/modules/contrib/{$name}": ["type:drupal-module"],
-            "web/profiles/contrib/{$name}": ["type:drupal-profile"],
-            "web/themes/contrib/{$name}": ["type:drupal-theme"],
-            "drush/Commands/contrib/{$name}": ["type:drupal-drush"],
-            "web/modules/custom/{$name}": ["type:drupal-custom-module"],
-            "web/profiles/custom/{$name}": ["type:drupal-custom-profile"],
-            "web/themes/custom/{$name}": ["type:drupal-custom-theme"],
-            "web/private/scripts/quicksilver/{$name}/": ["type:quicksilver-script"]
+            "web/core": [
+                "type:drupal-core"
+            ],
+            "web/libraries/{$name}": [
+                "type:drupal-library"
+            ],
+            "web/modules/contrib/{$name}": [
+                "type:drupal-module"
+            ],
+            "web/profiles/contrib/{$name}": [
+                "type:drupal-profile"
+            ],
+            "web/themes/contrib/{$name}": [
+                "type:drupal-theme"
+            ],
+            "drush/Commands/contrib/{$name}": [
+                "type:drupal-drush"
+            ],
+            "web/modules/custom/{$name}": [
+                "type:drupal-custom-module"
+            ],
+            "web/profiles/custom/{$name}": [
+                "type:drupal-custom-profile"
+            ],
+            "web/themes/custom/{$name}": [
+                "type:drupal-custom-theme"
+            ]
         },
-        "composer-exit-on-patch-failure": true,
-        "patchLevel": {
-            "drupal/core": "-p2"
-        },
-        "enable-patching": true
-    },
-    "autoload": {
-        "classmap": ["upstream-configuration/scripts/ComposerScripts.php"]
-    },
-    "scripts": {
-        "pre-update-cmd": ["DrupalComposerManaged\\ComposerScripts::preUpdate"],
-        "post-update-cmd": ["DrupalComposerManaged\\ComposerScripts::postUpdate"]
-    },
-    "config": {
-        "preferred-install": "dist",
-        "sort-packages": false,
-        "platform": {
-            "php": "8.2.0"
-        },
-        "allow-plugins": {
-            "composer/installers": true,
-            "cweagans/composer-patches": true,
-            "drupal/core-composer-scaffold": true,
-            "dealerdirect/phpcodesniffer-composer-installer": true,
-            "phpstan/extension-installer": true
+        "drupal-core-project-message": {
+            "include-keys": [
+                "homepage",
+                "support"
+            ],
+            "post-create-project-cmd-message": [
+                "<bg=blue;fg=white>                                                         </>",
+                "<bg=blue;fg=white>  Congratulations, you’ve installed the Drupal codebase  </>",
+                "<bg=blue;fg=white>  from the drupal/recommended-project template!          </>",
+                "<bg=blue;fg=white>                                                         </>",
+                "",
+                "<bg=yellow;fg=black>Next steps</>:",
+                "  * Install the site: https://www.drupal.org/docs/installing-drupal",
+                "  * Read the user guide: https://www.drupal.org/docs/user_guide/en/index.html",
+                "  * Get support: https://www.drupal.org/support",
+                "  * Get involved with the Drupal community:",
+                "      https://www.drupal.org/getting-involved",
+                "  * Remove the plugin that prints this message:",
+                "      composer remove drupal/core-project-message"
+            ]
         }
     }
 }
