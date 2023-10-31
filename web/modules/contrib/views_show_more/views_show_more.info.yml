@@ -1,0 +1,12 @@
+name: Views Show More Pager
+description: Provide a show more pager plugin for Views.
+package: Views
+type: module
+core_version_requirement: ^9 || ^10
+dependencies:
+  - drupal:views
+
+# Information added by Drupal.org packaging script on 2023-07-25
+version: '2.0.0'
+project: 'views_show_more'
+datestamp: 1690301573

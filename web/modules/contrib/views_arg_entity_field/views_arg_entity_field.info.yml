@@ -1,0 +1,10 @@
+name: 'Views Contextual Filter Default Entity Field Values'
+type: module
+description: 'Views argument_default plugin to pull values of the ''Current'' entity''s fields'
+core_version_requirement: ^8 || ^9 || ^10
+package: 'Views'
+
+# Information added by Drupal.org packaging script on 2023-03-29
+version: '2.0.3'
+project: 'views_arg_entity_field'
+datestamp: 1680117329
