@@ -61,7 +61,8 @@
 #/web/themes/contrib/
 /web/profiles/contrib/
 /web/libraries/
-/web/private/scripts/quicksilver
+/web/private/scripts/quic
+
 
 
 # Generally you should only ignore the root vendor directory. It's important
