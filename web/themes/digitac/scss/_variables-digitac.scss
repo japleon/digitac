@@ -1,0 +1,128 @@
+// merged from _variables_drupal.scss
+// Theme variables.
+
+$navbar-brand-image-height: 36px !default;
+$navbar-brand-image-height-lg: 60px !default;
+$navbar-brand-image-width: auto !default;
+$navbar-brand-image-margin: 0 1rem 0 0 !default;
+$navbar-brand-site-title-text-transform: uppercase !default;
+$navbar-brand-site-title-font-size: 1.5rem !default;
+$navbar-brand-site-title-font-weight: bold !default;
+$navbar-brand-site-title-letter-spacing: 2px !default;
+$navbar-brand-site-slogan-font-size: 0.875rem !default;
+$region-padding: 0 0.5rem !default;
+$footer-padding: 2rem 0 !default;
+$nav-tabs-link-active-bg-sm: #dee2e6 !default;
+$local-tasks-primary-margin: 1rem 0 !default;
+$local-tasks-secondary-margin: 0 0 1rem 0 !default;
+$table-striped-bg: #f9f9f9 !default;
+
+// media queries
+$xs: 360px;
+$sm: 576px;
+$md: 768px;
+$lg: 992px;
+$xl: 1024px;
+$xxl: 1280px;
+$xl3: 1440px;
+$xl4: 1600px;
+
+// CUSTOM
+// Color system
+// -----------------------------------------------------------------------------
+$white: #ffffff !default;
+$black: #000000 !default;
+
+// custom colors
+
+/* $blue: #619FCA !default;
+$blue-600: #193A46 !default;
+$orange: #F7AB6E !default;
+$pink: #E889A0 !default;
+$pink-400: #E789A0 !default;
+$green: #79C6B4 !default;
+$yellow: #FFEA80 !default;
+$purple: #7875B4 !default;
+$grey: #92999B !default; */
+
+// colores
+/* $orange: #FDB675 !default;
+$grey: #424242 !default;
+$grey-100: #CCDAE0 !default;
+$blue: #0E83B3 !default;
+$blue-200: #2283A2 !default;
+$blue-400: #0F4456 !default; */
+$grey: #585757;
+$grey-25: #FCFCFD;
+$grey-50: #F9FAFB;
+$grey-100: #F2F4F7;
+$grey-200: #EAECF0;
+$grey-300: #D0D5DD;
+$grey-500: #667085;
+$grey-600: #475467;
+$grey-700: #344054;
+$grey-800: #1D2939;
+$grey-900: #101828;
+$red-500: #F04438;
+$blue-25: #E2EDF1;
+$blue-50: #C6DBE2;
+$blue-200: #8CB7C6;
+$blue-500: #36809A;
+$blue-600: #196E8C;
+$blue-700: #115B75;
+$blue-900: #115B75;
+
+$primary: $grey-900;
+$secondary: $grey-600;
+/* $primary: $grey;
+$secondary: $orange; */
+//$tertiary: $pink;
+
+
+
+// Fonts
+// -----------------------------------------------------------------------------
+$font-family-primary: "Open Sans",
+  arial,
+  sans-serif;
+$font-family-secondary: "Inter", arial, sans-serif;
+$font-family-base: $font-family-primary;
+$font-weight-regular: 400; // regular
+$font-weight-medium: 500; // medium
+$font-weight-semibold: 600; // semibold
+$font-weight-bold: 700; // bold
+
+// merged from _variables_bootstrap.scss
+// Bootstrap variables (overrides).
+
+// override default bootstrap colors for accessibility
+// $white: #fff !default;
+// $black: #000 !default;
+// $gray-700: #495057 !default;
+
+$blue: #003cc5 !default;
+
+// $cyan: #006170 !default;
+// $pink: #e21181 !default;
+// $green: #008a00 !default;
+
+// $breadcrumb-divider-color: $gray-700 !default;
+// $breadcrumb-active-color: $gray-700 !default;
+
+// $navbar-light-color: rgba($black, .6) !default;
+// $navbar-dark-color: rgba($white, .6) !default;
+
+$form-text-margin-top: 0 !default;
+$legend-font-size: 1rem !default;
+$table-cell-padding-x: 0.75rem;
+
+// scss-docs-start theme-color-variables
+/* $primary: $blue-600;
+$secondary: #e8ecf2 !default;
+$terciary: #64788e !default; */
+$interactivo: #ffc000 !default;
+
+
+
+// MAPAS SCSS
+// https://getbootstrap.com/docs/4.1/getting-started/theming/

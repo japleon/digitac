@@ -1,0 +1,189 @@
+{#
+/**
+ * @file
+ * Theme override to display a node.
+ *
+ * Available variables:
+ * - node: The node entity with limited access to object properties and methods.
+ *   Only method names starting with "get", "has", or "is" and a few common
+ *   methods such as "id", "label", and "bundle" are available. For example:
+ *   - node.getCreatedTime() will return the node creation timestamp.
+ *   - node.hasField('field_example') returns TRUE if the node bundle includes
+ *     field_example. (This does not indicate the presence of a value in this
+ *     field.)
+ *   - node.isPublished() will return whether the node is published or not.
+ *   Calling other methods, such as node.delete(), will result in an exception.
+ *   See \Drupal\node\Entity\Node for a full list of public properties and
+ *   methods for the node object.
+ * - label: (optional) The title of the node.
+ * - content: All node items. Use {{ content }} to print them all,
+ *   or print a subset such as {{ content.field_example }}. Use
+ *   {{ content|without('field_example') }} to temporarily suppress the printing
+ *   of a given child element.
+ * - author_picture: The node author user entity, rendered using the "compact"
+ *   view mode.
+ * - metadata: Metadata for this node.
+ * - date: (optional) Themed creation date field.
+ * - author_name: (optional) Themed author name field.
+ * - url: Direct URL of the current node.
+ * - display_submitted: Whether submission information should be displayed.
+ * - attributes: HTML attributes for the containing element.
+ *   The attributes.class element may contain one or more of the following
+ *   classes:
+ *   - node: The current template type (also known as a "theming hook").
+ *   - node--type-[type]: The current node type. For example, if the node is an
+ *     "Article" it would result in "node--type-article". Note that the machine
+ *     name will often be in a short form of the human readable label.
+ *   - node--view-mode-[view_mode]: The View Mode of the node; for example, a
+ *     teaser would result in: "node--view-mode-teaser", and
+ *     full: "node--view-mode-full".
+ *   The following are controlled through the node publishing options.
+ *   - node--promoted: Appears on nodes promoted to the front page.
+ *   - node--sticky: Appears on nodes ordered above other non-sticky nodes in
+ *     teaser listings.
+ *   - node--unpublished: Appears on unpublished nodes visible only to site
+ *     admins.
+ * - title_attributes: Same as attributes, except applied to the main title
+ *   tag that appears in the template.
+ * - content_attributes: Same as attributes, except applied to the main
+ *   content tag that appears in the template.
+ * - author_attributes: Same as attributes, except applied to the author of
+ *   the node tag that appears in the template.
+ * - title_prefix: Additional output populated by modules, intended to be
+ *   displayed in front of the main title tag that appears in the template.
+ * - title_suffix: Additional output populated by modules, intended to be
+ *   displayed after the main title tag that appears in the template.
+ * - view_mode: View mode; for example, "teaser" or "full".
+ * - teaser: Flag for the teaser state. Will be true if view_mode is 'teaser'.
+ * - page: Flag for the full page state. Will be true if view_mode is 'full'.
+ * - readmore: Flag for more state. Will be true if the teaser content of the
+ *   node cannot hold the main body content.
+ * - logged_in: Flag for authenticated user status. Will be true when the
+ *   current user is a logged-in member.
+ * - is_admin: Flag for admin user status. Will be true when the current user
+ *   is an administrator.
+ *
+ * @see template_preprocess_node()
+ *
+ */
+#}
+{%
+  set classes = [
+    'node',
+    'node--type-' ~ node.bundle|clean_class,
+    'node-challenge',
+    node.isPromoted() ? 'node--promoted',
+    node.isSticky() ? 'node--sticky',
+    not node.isPublished() ? 'node--unpublished',
+    view_mode ? 'node--view-mode-' ~ view_mode|clean_class,
+  ]
+%}
+{{ attach_library('bootstrap5/node') }}
+
+<article{{ attributes.addClass(classes) }}>
+    <div class="challenge">
+
+      <div class="challenge__header">
+        <div class="challenge__header-content">
+          <div class="tag">
+            {{ content.	field_reto_categoria.0 }}
+          </div>
+
+          <div class="title">
+            {{label}}
+          </div>
+        </div>
+
+
+        <div class="challenge__header-image">
+            {# <svg xmlns="http://www.w3.org/2000/svg" width="497" height="401" fill="none">
+              <clipPath id="clip-path2">
+                <rect width="98.495" height="264.672" x=".913" y="195.207" fill="#D9D9D9" rx="49.247" transform="rotate(-43.39 .913 195.207)"/>
+                <rect width="98.495" height="248.996" x="254" y="93.663" fill="#D9D9D9" rx="49.247" transform="rotate(-43.39 254 93.663)"/>
+                <rect width="98.495" height="458.387" x="55" y="67.663" fill="#D9D9D9" rx="49.247" transform="rotate(-43.39 55 67.663)"/>
+              </clipPath>
+              <image clip-path="url(#clip-path2)" xlink:href="{{content.field_reto_imagen.0}}" alt="Image" class="svg__image">
+            </svg> #}
+
+            <svg width="488" height="191" viewBox="0 0 488 191" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <clipPath id="clip-path3">
+                <rect x="104" width="384" height="191" rx="95.5" fill="#D9D9D9"/>
+              </clipPath>
+              <image clip-path="url(#clip-path3)" xlink:href="{{content.field_reto_imagen.0}}" alt="Image" class="svg__image">
+            </svg>
+
+
+        </div>
+      </div>
+
+
+    </div>
+
+
+    <div class="tab-actions">
+      <ul>
+        <li class="tab-actions__item active">{{'Ideas'|t}} <span class="number">34</span></li>
+        <li class="tab-actions__item"><a href="#">{{'Experiencias'|t}} <span class="number">15</span></a></li>
+        <li class="tab-actions__item"><a href="#">{{'Sobre este reto'|t}}</a></li>
+      </ul>
+    </div>
+
+    <div class="message">
+      <div class="message__content">
+        <p class="message__title">{{'Tablero de ideas'|t}}</p>
+        <p class="message__text">{{'En este tablero puedes proponer nuevas ideas que den solución al reto, e interactuar con otras ideas que han propuesto otros usuarios'|t}}</p>
+      </div>
+    </div>
+
+
+
+    <div class="tab-ideas">
+
+      <div class="actions">
+        <ul>
+          <li class="actions__item new nueva_idea"><a href="/nueva-idea" class="btn btn-primary btn-primary--icon">{{'Nueva idea'|t}}</a></li>
+          {% if 'administrator' in user.getroles(TRUE) or 'moderador' in user.getroles(TRUE) %}
+            <li class="actions__item admin admin_reto"><a href="/admin-retos" class="btn btn-secondary btn-secondary--icon">{{'Administrar ideas'|t}}</a></li>
+            <li class="actions__item statistics estadisticas"><a href="/nuevo-reto" class="btn btn-secondary btn-secondary--icon">{{'Estadísticas'|t}}</a> </li>
+          {% endif %}
+
+        </ul>
+      </div>
+
+      {{ drupal_view('distributivas', 'block_1', node.id ) }}
+
+
+    </div>
+
+
+    <div class="tab_experiencias" style="display:none">
+
+      <div class="actions">
+        <ul>
+          <li class="actions__item new nueva_idea"><a href="/nueva-idea" class="btn btn-primary btn-primary--icon">{{'Nueva experiencia'|t}}</a></li>
+          {% if 'administrator' in user.getroles(TRUE) or 'moderador' in user.getroles(TRUE) %}
+            <li class="actions__item admin admin_reto"><a href="/admin-retos" class="btn btn-secondary btn-secondary--icon">{{'Administrar experiencias'|t}}</a></li>
+            <li class="actions__item statistics estadisticas"><a href="/nuevo-reto" class="btn btn-secondary btn-secondary--icon">{{'Estadísticas'|t}}</a> </li>
+          {% endif %}
+
+        </ul>
+      </div>
+
+      {{ drupal_view('distributivas', 'block_3', node.id ) }}
+
+
+    </div>
+
+
+
+    <div class="tab_sobre_reto" style="display:none">
+
+        <div class="cuerpo">
+          {{ content.body }}
+        </div>
+
+    </div>
+
+
+
+</article>

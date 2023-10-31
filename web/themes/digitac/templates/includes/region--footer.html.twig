@@ -1,0 +1,40 @@
+{%
+  set classes = [
+    'region',
+    'region-' ~ region|clean_class,
+  ]
+%}
+
+
+{% if content %}
+
+<div{{attributes.addClass(classes)}}>
+	<div class="menu">
+		{{ drupal_block("system_menu_block:main", {depth: 2, expand_all_items: TRUE}) }}
+	</div>
+
+	<div class="menu_rrss">
+		{{ drupal_block("system_menu_block:rrss", {depth: 2, expand_all_items: TRUE}) }}
+	</div>
+
+	<div class="footer__logo">
+		<a href="https://www.digitac-hub.com">
+			<img src="/themes/digitac/images/digitac-logo-white.svg" class=""/>
+		</a>
+	</div>
+
+	<div class="copyright">
+		<span>© Copyright {{ 'now' | date('Y') }} Digitac HUB<span>
+	</div>
+
+	<div class="menu_footer">
+		{{ drupal_block("system_menu_block:footer", {depth: 2, expand_all_items: TRUE}) }}
+	</div>
+
+
+</div>
+
+{% endif %}
+
+
+

@@ -1,0 +1,49 @@
+<?php
+use Drupal\taxonomy\Entity\Term;
+
+function digitac_preprocess_views_view_unformatted(&$variables)
+{
+  $view = $variables['view'];
+  if (($view->id() == 'cursos') && ($view->current_display == 'block_1') )
+  {
+      $term = Term::load($view->args[0]);
+      $variables['viewcat'] = $term->getName();
+      $variables['viewimg'] = $term->get('field_tx_cat_curso_imagen')->entity->getFileUri(); 
+  }
+}
+
+function digitac_preprocess_views_view(&$variables)
+{
+  $view = $variables['view'];
+  if (($view->id() == 'cursos') && ($view->current_display == 'block_1') )
+  {
+      $term = Term::load($view->args[0]);
+      $variables['viewcat'] = $term->getName(); 
+      $variables['viewimg'] = $term->get('field_tx_cat_curso_imagen')->entity->getFileUri(); 
+  }
+}
+
+function digitac_preprocess_links__language_block(&$variables) {
+
+  $currentLanguageCode = \Drupal::languageManager()
+    ->getCurrentLanguage()
+    ->getId();
+
+  $variables['curr_lang'] = substr ($currentLanguageCode,0,2);
+
+}
+
+function digitac_theme_suggestions_file_link_alter(array &$suggestions, array $variables) 
+{
+ // Get the node type.
+  $node = \Drupal::routeMatch()->getParameter('node');
+  $type = '';
+
+  if ($node != null)
+    {$type = $node->getType();}
+
+  // Create the theme hook suggestion. 
+  $suggestions[] = 'file_link__' . 'type_' . $type;
+}
+
+

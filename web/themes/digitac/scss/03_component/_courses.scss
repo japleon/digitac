@@ -1,0 +1,51 @@
+.courses {
+    &__item {
+        margin-bottom: rem(32px);
+        border: rem(1px) solid $grey-200;
+        border-radius: rem(16px);
+
+        .views-field-title {
+            a {
+                margin-bottom: rem(8px);
+                font-family: $font-family-base;
+                font-style: normal;
+                font-weight: 500;
+                font-size: rem(20px);
+                line-height: rem(30px);
+                color: $grey-900;
+                text-decoration: none;
+            }
+        }
+
+        .views-field-body {
+            p {
+                font-family: $font-family-base;
+                font-style: normal;
+                font-weight: 400;
+                font-size: rem(16px);
+                line-height: rem(24px);
+            }
+        }
+
+        .views-field-field-curso-target,
+        .views-field-field-curso-tipo,
+        .views-field-field-curso-fecha-inicio,
+        .views-field-field-curso-gratuidad {
+            display: inline-flex;
+            margin-right: rem(8px);
+
+            .field-content {
+                padding: rem(4px) rem(10px);
+                border: rem(1px) solid $grey-300;
+                border-radius: rem(8px);
+                font-family: $font-family-base;
+                font-style: normal;
+                font-weight: 500;
+                font-size: 14px;
+                line-height: 20px;
+                text-align: center;
+                color: $grey-700;
+            }
+        }
+    }
+}

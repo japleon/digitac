@@ -1,0 +1,15 @@
+.view-id-content {
+    background-color: $grey-50;
+    border-top: rem(1px) solid $grey-200;
+
+    .views-form {
+        .table {
+            max-width: rem(1216px);
+            margin: 0 auto;
+            padding: 0 rem(12px);
+            background-color: $white;
+            border: rem(1px) solid $grey-300;
+            border-radius: rem(12px);
+        }
+    }
+}

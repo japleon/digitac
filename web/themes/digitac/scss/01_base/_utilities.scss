@@ -1,0 +1,26 @@
+.overflow {
+  overflow: hidden;
+}
+
+.body-overflow {
+  overflow: hidden;
+}
+
+.only-desktop {
+  display:none;
+  @media (min-width: 1024px) {
+    display: block;
+  }
+}
+
+// section titles
+.btitle {
+  margin-bottom: rem(48px);
+  font-family: $font-family-base;
+  font-style: normal;
+  font-weight: 400;
+  font-size: rem(36px);
+  line-height: rem(44px);
+  letter-spacing: -0.02em;
+  color: $primary;
+}

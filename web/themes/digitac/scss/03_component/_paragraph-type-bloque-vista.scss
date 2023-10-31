@@ -1,0 +1,20 @@
+.paragraph--type--bloque-vista {
+    .views-element-container {
+        > h2 {
+            max-width: rem(1216px);
+            margin: 0 auto;
+            padding: rem(43px) rem(12px);
+            font-weight: 400;
+            font-size: rem(30px);
+            line-height: rem(38px);
+            letter-spacing: -0.02em;
+            color: $primary;
+
+            @include media(md) {
+                padding: rem(78px) rem(12px);
+                font-size: rem(36px);
+                line-height: rem(44px);
+            }
+        }
+    }
+}

@@ -1,0 +1,26 @@
+<div class="curso">
+
+    <div class="title">{{ fields.title.content }}</div>
+    <div class="valoracion">
+        <div class="stars">
+                {% if fields.value.content|render|striptags|trim %}
+                    {% set media = fields.value.content|striptags %}
+                    {% for i in range(1, media) %}
+                        *   
+                    {% endfor %}
+                    {% if media matches '/^[-+]?[0-9]*\\.[0-9]+$/' %}
+                        /
+                        {% set media = media + 1 %}
+                    {% endif %}
+                    {% if media < 5 %}
+                        {% for i in range(media,4) %}
+                            O   
+                        {% endfor %}
+                    {% endif %}
+
+                {% endif %}
+        </div>
+        <div class="votes">{{ fields.value_1.content }}</div>
+    </div>
+
+</div>

@@ -1,0 +1,49 @@
+.training {
+    padding: rem(32px) 0 0;
+    position: relative;
+
+    &__carousel {
+        padding-bottom: rem(88px);
+    }
+
+    &__image {
+        max-width: rem(277px);
+        height: rem(278px);
+        margin: 0 auto rem(24px);
+        background-image: url('../images/svg/training-points.svg');
+        background-repeat: no-repeat;
+        background-size: contain;
+        background-position: center;
+
+        .svg__image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+        }
+    }
+
+    &__item {
+        &-title {
+            font-family: $font-family-base;
+            font-style: normal;
+            font-weight: 600;
+            font-size: rem(20px);
+            line-height: rem(30px);
+            text-align: center;
+            color: $primary;
+            display: block;
+        }
+
+        &-number {
+            font-family: $font-family-base;
+            font-style: normal;
+            font-weight: 600;
+            font-size: rem(16px);
+            line-height: rem(24px);
+            text-align: center;
+            color: $blue-700;
+            display: block;
+        }
+    }
+}

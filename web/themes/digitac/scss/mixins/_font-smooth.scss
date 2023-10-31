@@ -1,0 +1,11 @@
+// stylelint-disable
+// ------------------------------------------------------
+// FONT SMOOTH
+// edit font rendering -> tip: use for light text on dark backgrounds
+// https://github.com/CodyHouse/codyhouse-framework/blob/master/main/assets/css/base/_mixins.scss
+// ------------------------------------------------------
+// sass-lint:disable no-vendor-prefixes
+@mixin fontsmooth {
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+}

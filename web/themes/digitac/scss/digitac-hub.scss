@@ -1,0 +1,60 @@
+// Core
+// ------------------------------------------------------
+@import 'variables-digitac.scss';
+
+// Mixins
+// ------------------------------------------------------
+@import 'mixins/breakpoints.scss';
+@import 'mixins/mediaqueries.scss';
+@import 'mixins/rem.scss';
+
+// BASE
+// ------------------------------------------------------
+@import '01_base/fonts';
+@import '01_base/global.scss';
+@import '01_base/utilities.scss';
+
+// LAYOUT
+// ------------------------------------------------------
+@import '02_layout/header.scss';
+@import '02_layout/footer.scss';
+
+
+// COMPONENT
+// ------------------------------------------------------
+@import '03_component/slick';
+@import '03_component/button';
+@import '03_component/training';
+@import '03_component/paragraph-cabecera-slider';
+@import '03_component/paragraph-claim';
+@import '03_component/paragraph-type-bloque-vista';
+@import '03_component/paragraph-header';
+@import '03_component/block-slider-news';
+@import '03_component/block-ideas';
+@import '03_component/selectbox';
+@import '03_component/actions';
+@import '03_component/tab-actions';
+@import '03_component/message';
+@import '03_component/tab-ideas';
+@import '03_component/courses';
+/* @import '03_component/article-head';
+@import '03_component/foreword-head';
+@import '03_component/paragraph-cols';
+@import '03_component/paragraph-image';
+@import '03_component/paragraph-intro';
+@import '03_component/quotes';
+@import '03_component/nav_buttons';
+@import '03_component/aag-month'; */
+
+// THEME
+// ------------------------------------------------------
+@import '05_theme/view-id-view_noticias';
+@import '05_theme/view-id-view_retos';
+@import '05_theme/view-id-content';
+@import '05_theme/view-id-cursos';
+
+// page
+@import '05_theme/page/node--type-noticia';
+@import '05_theme/page/node--type-reto';
+@import '05_theme/page/node--type-idea';
+

@@ -1,0 +1,79 @@
+.tab-actions {
+  margin-bottom: rem(40px);
+
+  ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    align-items: center;
+  }
+
+  &__item {
+    margin-left: rem(8px);
+    display: inline-flex;
+    align-items: center;
+
+    .number {
+      margin-left: rem(8px);
+      padding: rem(4px) rem(10px);
+      background-color: $grey-50;
+      border: rem(1px) solid $grey-200;
+      border-radius: rem(16px);
+      font-family: $font-family-base;
+      font-style: normal;
+      font-weight: 500;
+      font-size: rem(14px);
+      line-height: rem(20px);
+      text-align: center;
+      color: $grey-700;
+      display: inline-flex;
+      transition: all 0.3s ease;
+    }
+
+    a {
+      min-height: rem(50px);
+      padding: rem(10px) rem(14px);
+      border-radius: rem(6px);
+      font-family: $font-family-base;
+      font-style: normal;
+      font-weight: 600;
+      font-size: rem(16px);
+      line-height: rem(24px);
+      color: $grey-500;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      transition: all 0.3s ease;
+
+      &:hover {
+        background-color: $blue-50;
+        color: $blue-700;
+
+        .number {
+          background-color: $blue-50;
+          border-color: $blue-200;
+          color: $blue-700;
+        }
+      }
+    }
+
+    &.active {
+      padding: rem(10px) rem(14px);
+      border-radius: rem(6px);
+      background-color: $blue-50;
+      color: $blue-700;
+
+      .number {
+        background-color: $blue-50;
+        border-color: $blue-200;
+        color: $blue-700;
+      }
+    }
+
+
+    &:first-child {
+      margin-left: 0;
+    }
+  }
+}

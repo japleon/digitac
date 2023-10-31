@@ -1,0 +1,20 @@
+<div class="block-slider-news__item">
+
+    <div class="block-slider-news__item-image">
+        {{ fields.field_noticia_imagen.content }}
+
+        <div class="region">
+            {{ fields.field_noticia_region.content }}
+        </div>
+    </div>
+
+    <div class="block-slider-news__item-content">
+        <div class="category">
+            <span class="type">{{ fields.field_noticia_tipo.content }}</span>
+            <span class="date">{{ fields.created.content }}</span>
+        </div>
+        <div class="title">{{ fields.title.content }}</div>
+        <div class="content">{{ fields.body.content }}</div>
+    </div>
+
+</div>

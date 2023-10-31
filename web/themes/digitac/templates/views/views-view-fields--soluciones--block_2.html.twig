@@ -1,0 +1,55 @@
+        {% if fields.field_solucion_imagen.content|render|striptags('<img>')|trim %}
+        <div class="block-slider-news__item-image">
+            {{ fields.field_solucion_imagen.content }}
+        </div>
+        {% else %}
+            Hay que poner una imagen por defecto???
+        {% endif %}
+        
+
+        <div class="block-slider-news__item-content">
+            <div class="category">
+                <span class="type">{{ fields.type.content }}</span>
+            </div>
+            <a href="{{ fields.view_node.content|render|striptags|trim }}" class="btn btn--link">
+                <div class="title">{{ fields.title.content }}</div>
+            </a>
+            <div class="content">{{ fields.body.content }}</div>
+
+           <div class="tags">
+                {% if fields.field_solucion_tipo.content|render|striptags|trim %}
+               <span class="tag">{{ fields.field_solucion_tipo.content }}</span>
+               {% endif %}
+                {% if fields.field_solucion_precio.content|render|striptags|trim %}
+               <span class="tag">{{ fields.field_solucion_precio.content }}</span>
+               {% endif %}
+           </div>
+
+           <div class="valoracion">
+
+            <div class="stars">
+
+<!--                Aqui el problema es que una view bloque no me deja insertar el rate widget, por lo que hay que renderizarlo a mano. Cambiar la * por una imagen de una estrella rellena, y el / por media estrella, y la O por estrella vacia-->
+            
+                {% if fields.value.content|render|striptags|trim %}
+                    {% set media = fields.value.content|striptags %}
+                    {% for i in range(1, media) %}
+                        *   
+                    {% endfor %}
+                    {% if media matches '/^[-+]?[0-9]*\\.[0-9]+$/' %}
+                        /
+                        {% set media = media + 1 %}
+                    {% endif %}
+                    {% if media < 5 %}
+                        {% for i in range(media,4) %}
+                            O   
+                        {% endfor %}
+                    {% endif %}
+
+                {% endif %}
+
+            </div>
+            <div class="votes">{{ fields.value_1.content }}</div>
+           </div>
+
+        </div>

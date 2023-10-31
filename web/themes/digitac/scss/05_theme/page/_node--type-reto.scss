@@ -1,0 +1,50 @@
+.node-challenge {
+    max-width: rem(1216px);
+    margin: 0 auto;
+    padding: 0 rem(12px);
+
+    .challenge {
+        &__header {
+            padding: rem(62px) 0 rem(48px);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            .title {
+                font-family: $font-family-base;
+                font-style: normal;
+                font-weight: 400;
+                font-size: rem(36px);
+                line-height: rem(44px);
+                letter-spacing: -0.02em;
+                color: $black;
+            }
+
+            .tag {
+                font-family: $font-family-base;
+                font-style: normal;
+                font-weight: 600;
+                font-size: rem(16px);
+                line-height: rem(24px);
+                color: $blue-500;
+            }
+
+            &-image {
+                background-image: url('../images/svg/challenge-points.svg');
+                background-repeat: no-repeat;
+                background-size: contain;
+                background-position: center;
+
+                svg {
+                    image {
+                        width: calc(100% + 20px);
+                        height: 100%;
+                        object-fit: cover;
+                    }
+                }
+
+            }
+        }
+
+    }
+}

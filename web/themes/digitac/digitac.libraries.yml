@@ -1,0 +1,21 @@
+global-styling:
+  version: 1.x
+  css:
+    theme:
+      css/slick.css: {}
+      css/slick-theme.css: {}
+      css/digitac-hub.css: {}
+
+global-scripts:
+  version: 1.x
+  js:
+    https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js: {}
+    https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js: {}
+    js/slick.min.js: {}
+    js/digitac.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupal.ajax
+    - core/drupal
+    - core/drupalSettings
+    - core/jquery.once

@@ -1,0 +1,325 @@
+.path-frontpage {
+  //overflow: hidden;
+}
+
+.intro {
+  max-width: rem(1438px);
+  width: 100vw;
+  height: 100vh;
+  margin-bottom: 0;
+  overflow: hidden;
+  position: relative;
+  display: none;
+
+  @include media(lg) {
+    display: block;
+  }
+
+  &__header {
+    width: 100%;
+    height: rem(40px);
+    padding: rem(12px) rem(32px);
+    border-bottom: rem(1px) solid $primary;
+    position: relative;
+    z-index: 20;
+    display: flex;
+    align-items: flex-end;
+
+    .logo {
+      &--minsait {
+        max-width: rem(67px);
+        margin-right: rem(33px);
+      }
+
+      &--indra {
+        max-width: rem(82px);
+        position: relative;
+        top: rem(2px);
+        display: inline-flex;
+      }
+    }
+  }
+
+  .box-blue {
+    width: rem(1613px);
+    height: rem(971px);
+    background: #C3DFF3;
+    transform: translatex(85%) translatey(-70%) rotate(25deg);
+    animation-name: animationBlue;
+    animation-delay: 1s;
+    animation-duration: 2.2s;
+    animation-fill-mode: forwards;
+    animation-timing-function: cubic-bezier(0, 0.71, 0.45, 1);
+  }
+
+  .box-image {
+    width: rem(1072px);
+    height: rem(784px);
+    background-image: url(../images/intro/intro-image.png);
+    background-repeat: no-repeat;
+    background-size: contain;
+    transform: translatex(74%) translatey(-262%) rotate(25deg);
+    position: absolute;
+    z-index: 3;
+    animation-name: animationImage;
+    animation-delay: 1.8s;
+    animation-duration: 2s;
+    animation-fill-mode: forwards;
+    animation-timing-function: cubic-bezier(0, 0.71, 0.45, 1);
+  }
+
+  .box-grey {
+    width: rem(1673px);
+    height: rem(971px);
+    background: #F9FCFC;
+    transform: translatex(50%) translatey(-390%) rotate(25deg);
+    position: absolute;
+    z-index: 3;
+    animation-name: animationGrey;
+    animation-delay: 1.3s;
+    animation-duration: 1s;
+    animation-fill-mode: forwards;
+    animation-timing-function: cubic-bezier(0, 0.71, 0.45, 1);
+  }
+
+  .box-pink {
+    width: rem(1076px);
+    height: rem(788px);
+    background: #E789A0;
+    transform: translatex(85%) translatey(-250%) rotate(25deg);
+    position: absolute;
+    z-index: 5;
+    animation-name: animationPink;
+    animation-delay: 1s;
+    animation-duration: 2s;
+    animation-fill-mode: forwards;
+    animation-timing-function: cubic-bezier(0, 0.71, 0.45, 1);
+  }
+
+  .box-lines {
+    width: rem(3027px);
+    height: rem(982px);
+    background-image: url('../images/intro/lines.svg');
+    background-repeat: no-repeat;
+    background-size: contain;
+    transform: translatex(-30%) translatey(80%);
+    position: absolute;
+    z-index: 7;
+    animation-name: animationLines;
+    animation-delay: 1s;
+    animation-duration: 2.5s;
+    animation-fill-mode: forwards;
+    animation-timing-function: cubic-bezier(.19,.71,.45,.5);
+  }
+
+  .box-logo {
+    position: absolute;
+    top: 50%;
+    left: 68%;
+    transform: translate(-50%, -50%);
+    z-index: 10;
+    opacity: 0;
+    animation-name: animationLogo;
+    animation-delay: 2.5s;
+    animation-duration: 2s;
+    animation-fill-mode: forwards;
+    animation-timing-function: ease;
+
+    .logo {
+      width: rem(296px);
+      height: rem(113px);
+      background-image: url('../images/Logo_v2.svg');
+      background-repeat: no-repeat;
+      background-size: contain;
+    }
+
+    p {
+      font-family: $font-family-base;
+      font-weight: $font-weight-regular;
+      font-size: rem(18px);
+      line-height: rem(48px);
+      color: $primary;
+    }
+  }
+
+  .box-arrow {
+    width: rem(34px);
+    height: rem(34px);
+    margin: 0 auto;
+    background-image: url('../images/intro/arrow-down.svg');
+    background-repeat: no-repeat;
+    background-size: contain;
+    position: absolute;
+    bottom: 16%;
+    right: 0;
+    left: 0;
+    z-index: 9;
+    opacity: 0;
+    animation: animationArrow 0.75s alternate infinite, animationArrowOpacity 2s 2.5s forwards ease;
+
+    @include media(xl3) {
+      bottom: 5%;
+    }
+  }
+
+  // states
+  &.hide {
+    @include media(lg) {
+      display: none;
+    }
+  }
+
+  // animations
+  @keyframes animationArrow {
+    from {
+      transform: translateY(0);
+    }
+    to {
+      transform: translateY(10px);
+    }
+  }
+
+  @keyframes animationArrowOpacity {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+
+  @keyframes animationLogo {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+
+
+  @keyframes animationBlue {
+    0% {
+      transform: translatex(57%) translatey(-83%) rotate(25deg);
+    }
+    100% {
+      transform: translatex(-140%) translatey(150%) rotate(25deg);
+    }
+  }
+
+  @keyframes animationImage {
+    0% {
+      transform: translatex(74%) translatey(-262%) rotate(25deg);
+    }
+    100% {
+      transform: translatex(5%) translatey(-50%) rotate(11deg);
+    }
+  }
+
+  @keyframes animationGrey {
+    0% {
+      transform: translatex(50%) translatey(-390%) rotate(25deg);
+    }
+    100% {
+      transform: translatex(10%) translatey(5%) rotate(25deg);
+    }
+  }
+
+  @keyframes animationPink {
+    0% {
+      transform: translatex(85%) translatey(-250%) rotate(25deg);
+    }
+    100% {
+      transform: translatex(2%) translatey(-4%) rotate(25deg);
+    }
+  }
+
+  @keyframes animationLines {
+    0% {
+      transform: translatex(-30%) translatey(-300%);
+    }
+    100% {
+      transform: translatex(-30%) translatey(80%);
+    }
+  }
+
+
+  @include media(xl3) {
+    @keyframes animationGrey {
+      0% {
+        transform: translatex(50%) translatey(-390%) rotate(25deg);
+      }
+      100% {
+        transform: translatex(13%) translatey(5%) rotate(25deg);
+      }
+    }
+
+    @keyframes animationPink {
+      0% {
+        transform: translatex(85%) translatey(-250%) rotate(25deg);
+      }
+      100% {
+        transform: translatex(0) translatey(0) rotate(25deg);
+      }
+    }
+  }
+}
+
+.section--primary .view-listados {
+  .views-row {
+    &:nth-child(1),
+    &:nth-child(2),
+    &:nth-child(3),
+    &:nth-child(4),
+    &:nth-child(5),
+    &:nth-child(6) {
+      @include media(lg) {
+        opacity: 0;
+        transform: translateY(100%);
+
+        &.fade {
+          animation-name: animationListados;
+          animation-duration: 0.5s;
+          animation-fill-mode: forwards;
+          animation-timing-function: ease;
+        }
+
+
+        @keyframes animationListados {
+          0% {
+            opacity: 0;
+            transform: translateY(100%);
+          }
+          100% {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+      }
+    }
+
+  }
+}
+
+.section {
+  &--animation {
+    @include media(lg) {
+      background-color: $white;
+      position: sticky;
+      top: rem(205px);
+      margin-bottom: 40px;
+    }
+  }
+
+  &--no-margin {
+    margin-bottom: 0;
+  }
+
+  &--padding {
+    padding-bottom: rem(100px);
+  }
+
+  &--extra-top {
+    top: rem(205px);
+  }
+}

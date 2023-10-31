@@ -1,0 +1,69 @@
+.slick-slider {
+    // arrows
+    .slick-arrow {
+        width: rem(36px);
+        height: rem(36px);
+        background-repeat: no-repeat;
+        background-size: rem(20px);
+        background-position: center;
+        background-color: $white;
+        border-radius: 50%;
+        border: rem(1px) solid $grey-300;
+        position: absolute;
+        bottom: rem(-88px);
+        bottom: 0;
+        top: inherit;
+        z-index: 1;
+
+        &::before {
+            display: none;
+        }
+
+        &.slick-prev {
+            background-image: url('../images/icons/icon-arrow-left.svg');
+            left: 0;
+        }
+
+        &.slick-next {
+            background-image: url('../images/icons/icon-arrow-right.svg');
+            left: rem(44px);
+        }
+    }
+
+    // dots
+    .slick-dots {
+        display: inline-flex;
+        position: absolute;
+        bottom: rem(-57px);
+        bottom: 32px;
+        left: rem(100px);
+
+        li {
+            width: auto;
+            height: auto;
+            margin-right: rem(8px);
+            button {
+                width: 42px;
+                height: 6px;
+                padding: 0;
+                background: $grey-300;
+                border-radius: 3px;
+                text-indent: -9999px;
+
+                &::before {
+                    display: none;
+                }
+            }
+
+            &.slick-active {
+                button {
+                    background: $grey-900;
+                }
+            }
+        }
+    }
+}
+
+.block-card-slider {
+    padding-bottom: rem(88px);
+}

@@ -1,0 +1,15 @@
+name: digitac
+type: theme
+description: This is a sub theme for digitac
+core_version_requirement: ^8 || ^9 || ^10
+# Defines the base theme
+base theme: 'bootstrap5'
+# Defines libraries group in which we can add css/js.
+libraries:
+  - digitac/global-styling
+  - digitac/global-scripts
+# Regions, quote the names
+regions:
+  header: 'Header'
+  content: 'Content'
+  footer: 'Footer'

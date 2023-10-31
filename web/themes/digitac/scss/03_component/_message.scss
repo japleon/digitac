@@ -1,0 +1,46 @@
+.message {
+    margin-bottom: rem(40px);
+    padding: rem(16px);
+    background-color: $grey-25;
+    border: rem(1px) solid $grey-300;
+    border-radius: rem(12px);
+
+    &__content {
+        padding-left: rem(28px);
+        position: relative;
+
+        &::before {
+            content: '';
+            width: rem(20px);
+            height: rem(20px);
+            background-image: url('../images/icons/icon-idea.svg');
+            background-repeat: no-repeat;
+            background-size: contain;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+    }
+
+    &__title {
+        margin-bottom: rem(4px);
+        font-family: $font-family-secondary;
+        font-style: normal;
+        font-weight: 600;
+        font-size: rem(15px);
+        line-height: rem(22px);
+        letter-spacing: -0.1px;
+        color: $grey-800;
+    }
+
+    &__text {
+        margin-bottom: 0;
+        font-family: $font-family-secondary;
+        font-style: normal;
+        font-weight: 400;
+        font-size: 13px;
+        line-height: 18px;
+        letter-spacing: -0.1px;
+        color: $grey-600;
+    }
+}

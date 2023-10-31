@@ -1,0 +1,105 @@
+.view-id-view_retos {
+    position: relative;
+
+    &.view-display-id-block_3 {
+        max-width: rem(1216px);
+        margin: 0 auto;
+        padding: 0 rem(12px);
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+
+        .view-filters {
+            .js-form-item {
+                margin: 0 rem(16px) 0 0;
+
+                .form-select {
+                    min-height: rem(42px);
+                }
+            }
+        }
+
+        .view-content {
+            width: 100%;
+            margin-top: rem(40px);
+            display: flex;
+            flex-direction: column;
+            gap: rem(16px);
+
+            @include media(md) {
+                /* column-count: 2;
+                break-inside: avoid;
+                column-gap: rem(16px); */
+                flex-direction: row;
+                flex-wrap: wrap;
+                justify-content: space-between;
+
+                &::after {
+                    content: '';
+                    display: block;
+                    clear: both;
+                }
+            }
+
+            @include media(lg) {
+                column-count: 3;
+                break-inside: avoid;
+            }
+
+            .block-slider-news__item {
+                width: 100%;
+                margin-bottom: rem(32px);
+                break-inside: avoid;
+                padding-right: 0;
+                padding-left: 0;
+
+                @include media(md) {
+                    width: calc(50% - 15px);
+                }
+
+                @include media(lg) {
+                    width: calc(33.3% - 20px);
+                }
+            }
+        }
+
+        .pager-show-more {
+            margin-top: rem(40px);
+            display: flex;
+            justify-content: center;
+
+            .pager__item {
+                padding: 0;
+                display: inline-flex;
+
+                a {
+                    min-width: rem(120px);
+                    margin: 0;
+                    padding: rem(10px) rem(16px);
+                    text-align: center;
+                    border: none;
+                    border-radius: 0;
+                    border: rem(1px) solid $secondary;
+                    font-family: $font-family-base;
+                    font-weight: 600;
+                    font-size: rem(14px);
+                    line-height: rem(20px);
+                    text-decoration: none;
+                    border-radius: rem(50px);
+                    color: $white;
+                    border-color: $blue-600;
+                    background-color: $blue-600;
+                    transition: all 0.3s ease;
+
+                    &:hover {
+                        border-color: $blue-700;
+                        background-color: $blue-700;
+                        color: $white;
+                    }
+                }
+            }
+
+        }
+    }
+}
+

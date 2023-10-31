@@ -1,0 +1,103 @@
+.paragraph-cabecera-slider {
+    margin-bottom: rem(126px);
+    position: relative;
+
+    // head
+    &__head {
+        width: 100%;
+        position: absolute;
+        top: 50%;
+        left: 0;
+        transform: translateY(-50%);
+        z-index: 2;
+
+        &-box {
+            max-width: rem(604px);
+            .title {
+                margin-bottom: rem(4px);
+                font-family: $font-family-base;
+                font-style: normal;
+                font-weight: 600;
+                font-size: rem(16px);
+                line-height: rem(24px);
+                color: $white;
+            }
+
+            .subtitle {
+                margin-bottom: rem(32px);
+                font-family: $font-family-base;
+                font-style: normal;
+                font-weight: 600;
+                font-size: rem(48px);
+                line-height: rem(60px);
+                letter-spacing: -0.02em;
+                color: $white;
+            }
+
+            .btn.btn--head {
+                padding: rem(12px) rem(20px);
+                background-color: $white;
+                border-radius: rem(50px);
+                font-family: $font-family-base;
+                font-style: normal;
+                font-weight: 600;
+                font-size: rem(16px);
+                line-height: rem(24px);
+                color: $black;
+            }
+        }
+
+    }
+
+
+    // block number
+    .block-number {
+        max-width: rem(1216px);
+        margin: 0 auto;
+        padding: rem(38px) rem(60px);
+        background-color: $white;
+        border-radius: rem(16px);
+        box-shadow: 0 rem(20px) rem(24px) rem(-4px) rgba(16, 24, 40, 0.08), 0 rem(8px) rem(8px) rem(-4px) rgba(16, 24, 40, 0.03);
+        display: flex;
+        justify-content: space-between;
+        position: absolute;
+        bottom: rem(-60px);
+        right: 0;
+        left: 0;
+
+
+        &__item {
+            //width: 25%;
+            padding: 0 rem(48px);
+            border-right: rem(1px) solid $grey-700;
+
+            &:first-child {
+                padding-left: 0;
+            }
+
+            &:last-child {
+                padding-right: 0;
+                border-right: none;
+            }
+        }
+
+        &__number {
+            font-family: $font-family-base;
+            font-style: normal;
+            font-weight: 400;
+            font-size: rem(48px);
+            line-height: rem(60px);
+            letter-spacing: -0.02em;
+            color: $black;
+        }
+
+        &__text {
+            font-family: $font-family-base;
+            font-style: normal;
+            font-weight: 600;
+            font-size: rem(18px);
+            line-height: rem(28px);
+            color: $primary;
+        }
+    }
+}

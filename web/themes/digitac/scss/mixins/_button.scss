@@ -1,0 +1,33 @@
+/* stylelint-disable
+* ------------------------------------------------------
+* BUTTON
+* ------------------------------------------------------
+*/
+@mixin button {
+  display: inline-flex;
+  min-height: rem($btn-height);
+  padding: rem($btn-padding-y $btn-padding-x);
+  cursor: pointer;
+  user-select: none;
+  transition: background 0.25s;
+  text-align: center;
+  vertical-align: middle;
+  border: 1px solid transparent;
+  border-radius: $border-radius-base;
+  background: transparent;
+  font-family: $font-family-base;
+  font-weight: 500;
+  line-height: 1.2;
+
+  & + & {
+    margin-left: rem($btn-margin-left);
+  }
+
+  &:focus {
+    outline: 0;
+  }
+
+  @include hover {
+    text-decoration: none;
+  }
+}

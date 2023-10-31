@@ -1,0 +1,111 @@
+.btn {
+  margin: 0;
+  padding: rem(10px) rem(16px);
+  text-align: center;
+  border: none;
+  border-radius: 0;
+  border: rem(1px) solid $secondary;
+  font-family: $font-family-base;
+  font-weight: 600;
+  font-size: rem(14px);
+  line-height: rem(20px);
+  text-decoration: none;
+  transition: all 0.3s ease;
+
+
+  &:focus {
+    box-shadow: none;
+  }
+
+  &.btn--primary,
+  &.btn-primary {
+    border-radius: rem(50px);
+    color: $white;
+    border-color: $blue-600;
+    background-color: $blue-600;
+
+    &:hover {
+      border-color: $blue-700;
+      background-color: $blue-700;
+      color: $white;
+    }
+
+    /* &.disabled {
+      border-color: $grey;
+      color: $grey;
+      pointer-events: none;
+    } */
+
+    &--icon {
+      padding-left: rem(40px);
+      position: relative;
+
+      &-download {
+        &::before {
+          content: '';
+          width: rem(20px);
+          height: rem(20px);
+          background-image: url('../images/icons/icon-download.svg');
+          background-repeat: no-repeat;
+          background-size: contain;
+          position: absolute;
+          top: 50%;
+          left: rem(12px);
+          transform: translateY(-50%);
+        }
+      }
+    }
+  }
+
+  &.btn--secondary,
+  &.btn-secondary {
+    border-radius: rem(50px);
+    color: $grey-700;
+    border-color: $grey-300;
+    background-color: $white;
+
+    &:hover {
+      border-color: $grey-300;
+      background-color: $grey-50;
+      color: $grey-700;
+    }
+
+    &--icon {
+      padding-left: rem(40px);
+      position: relative;
+    }
+  }
+
+  &.btn--link,
+  &.btn-link {
+    border: none;
+    padding: 0 rem(28px) 0 0;
+    font-weight: 600;
+    font-size: rem(14px);
+    line-height: rem(20px);
+    color: $blue-700;
+    position: relative;
+
+    &::after {
+      content: '';
+      width: rem(20px);
+      height: rem(20px);
+      background-image: url('../images/icons/icon-arrow-right-link.svg');
+      background-repeat: no-repeat;
+      background-size: contain;
+      background-position: center;
+      position: absolute;
+      top: 50%;
+      right: 0;
+      transform: translateY(-50%);
+      transition: all 0.3s ease;
+    }
+
+    &:hover {
+      &::after {
+        right: rem(4px);
+      }
+    }
+  }
+
+}
