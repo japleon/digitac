@@ -1,0 +1,5 @@
+services:
+  digitac_h.route_subscriber:
+    class: Drupal\digitac_h\Routing\RouteSubscriber
+    tags:
+      - { name: event_subscriber }

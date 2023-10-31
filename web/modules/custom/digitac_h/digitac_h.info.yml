@@ -1,0 +1,7 @@
+name: digitac_h module
+type: module
+description: digitac_h functionality
+core_version_requirement: ^8 || ^9 || ^10
+dependencies:
+  - drupal:field
+  - drupal:node

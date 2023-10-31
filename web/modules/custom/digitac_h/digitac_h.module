@@ -1,0 +1,73 @@
+<?php
+
+/**
+ * @file
+ * Module file for digitac_h.
+ */
+use Drupal\node\Entity\Node;
+use Drupal\Core\Routing\RouteMatchInterface;
+use Drupal\comment\CommentInterface;
+use Drupal\Core\Render\Element;
+
+
+function digitac_h_form_alter(&$form, &$form_state, $form_id) {
+    
+    if ($form_id == 'views_form_content_block_1'){
+        $form['header']['#weight'] = 800;
+        unset($form['actions']);
+    }
+
+}
+
+
+function digitac_h_node_presave(\Drupal\Core\Entity\EntityInterface $node)  {
+
+  if ($node->bundle() == 'idea') {
+
+    $current_user = \Drupal::currentUser()->getDisplayName(); 
+    $current_time = \Drupal::time()->getCurrentTime();
+    $date_output = strtoupper(date('d M y · H:i', $current_time));
+    $date_output .= date('a', $current_time);
+
+    if ( ($node->field_idea_estado->first()->getValue()['target_id']) != ($node->original->field_idea_estado->first()->getValue()['target_id']) )
+    {
+
+      $term_name = \Drupal\taxonomy\Entity\Term::load($node->field_idea_estado->first()->getValue()['target_id'])->get('name')->value;
+      $node->field_idea_cambios_estado[] = $term_name .'||'.$date_output.'||'.$current_user;
+    }
+
+    if ( ($node->field_idea_estado->first()->getValue()['target_id']) == 16)
+    { $node->status = 0;}
+    else
+    { $node->status = 1;}
+
+  }
+}
+
+
+
+function digitac_h_comment_links_alter(array &$links, CommentInterface $comment, array &$context) {
+
+  $content_type = $context['commented_entity']->bundle();
+  $comment_type = $comment->bundle();
+
+
+  if (($content_type == 'idea') && ($comment_type == 'comment')) {
+    $cr_user = \Drupal::currentUser();
+    $cm_user = $comment->getOwner();
+    if ($cm_user->id() != $cr_user->id())
+    {
+      unset($links['comment']['#links']['comment-edit']);
+      unset($links['comment']['#links']['comment-delete']);
+    }
+    else{
+      unset($links['comment']['#links']['comment-reply']);
+    }
+    
+    if ($comment->getParentComment() != null){
+      unset($links['comment']['#links']['comment-reply']);
+    }
+    unset($links['comment']['#links']['comment-approve']);
+     
+  }
+}
