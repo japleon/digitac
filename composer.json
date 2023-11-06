@@ -26,7 +26,6 @@
         "drupal/core-composer-scaffold": "^10.1",
         "drupal/core-project-message": "^10.1",
         "drupal/core-recommended": "^10.1",
-        "drush/drush": "^11 || ^12",
         "drupal/email_registration": "^1.2",
         "drupal/entity_usage": "^2.0@beta",
         "drupal/entityqueue": "^1.7",
@@ -49,7 +48,8 @@
         "drupal/views_arg_entity_field": "^2.0",
         "drupal/views_autosubmit": "^1.5",
         "drupal/views_show_more": "^2.0",
-        "drupal/votingapi": "^3.0@beta"
+        "drupal/votingapi": "^3.0@beta",
+        "drush/drush": "^11 || ^12"
     },
     "conflict": {
         "drupal/drupal": "*"
