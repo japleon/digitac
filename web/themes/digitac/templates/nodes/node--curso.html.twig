@@ -79,84 +79,125 @@
 %}
 {{ attach_library('bootstrap5/node') }}
 
-<article{{ attributes.addClass(classes) }}>
+<article{{attributes.addClass(classes)}}>
+
+	<div class="challenge">
+		<div class="challenge__header">
+			<div class="challenge__header-content">
+				<div class="tag">
+					{{content.field_curso_categoria.0}}
+				</div>
+
+				<div class="title">
+					{{label}}
+                              <br>
+
+                              {% for key,item in content.field_curso_target['#items'] %}
+                                    {%if item.entity.name.value %}
+                                    <span class="tag target">{{item.entity.name.value}}</span>
+                                    {% endif %}
+                              {% endfor %}
+
+				</div>
+
+                        {{ drupal_view('votingapi_votes', 'block_2', node.id ) }}
+			</div>
 
 
-    <div class="categoria">
-     {{content.field_curso_categoria.0}}
-    </div>
+			<div class="challenge__header-image">
+
+				<svg width="488" height="191" viewbox="0 0 488 191" fill="none" xmlns="http://www.w3.org/2000/svg">
+					<clipPath id="clip-path3">
+						<rect x="104" width="384" height="191" rx="95.5" fill="#D9D9D9"/>
+					</clipPath>
+					<image clip-path="url(#clip-path3)" xlink:href="{{content.field_curso_imagen.0}}" alt="Image" class="svg__image">
+				</svg>
 
 
-    <div class="titulo">
-     {{label}}
-    </div>
+			</div>
+		</div>
+	</div>
+
+      <div class="headband-company">
+            <div class="headband-company__content">
+                  <div class="col col-company">
+                        <span class="company__title">{{content.field_curso_empresa_formacion.0}}</span>
+                        {% if content.field_curso_enlace.0['#url_title'] %}
+                        <span class="company__link"><a href="{{content.field_curso_enlace.0['#url_title']}}">{{'Accede al curso'|t}}</a></span>
+                        {% endif %}
+                  </div>
+                  <div class="col col--price">
+                        <span class="price">
+                              {{content.field_curso_gratuidad.0}}
+                              {{content.field_curso_precio.0}}
+                        </span>
+                        <span class="date">
+                              {{content.field_curso_fecha_inicio.0}}
+                        </span>
+                  </div>
+                  <div class="col col-time">
+                        <span>{{content.field_curso_duracion.0}}</span>
+		            <span>{{content.field_curso_duracion_sesiones.0}}</span>
+                  </div>
+                  <div class="col col-place">
+                        <span>{{content.field_curso_tipo.0}}</span>
+                  </div>
+            </div>
+      </div>
+
+	<div class="course-content">
+            <div class="course-content__body">
+                  <h2>{{'Sobre este curso'|t}}</h2>
+                  {{ content.body }}
+            </div>
+
+            <div class="ratings">
+                  <div class="ratings__content">
+                        {% if logged_in %}
+                        <span>{{'Valora este curso'|t}}</span>
+                        {{ content.rate_stars }}
+                        {% else %}
+                        <span class="ratings__login">{{'Para hacer una valoración'|t}}&nbsp;<a href="/user/login">necesitas estar logado</a></span>
+                        {% endif %}
+                  </div>
+            </div>
+
+            {% if content.field_curso_audiencia.0!="" %}
+            <div class="course-content__body">
+                  <h2>{{'Audiencia del curso'|t}}</h2>
+
+                  {{content.field_curso_audiencia.0}}
+            </div>
+            {% endif %}
+
+            {% if content.field_curso_aprenderas.0!="" %}
+            <div class="course-content__body">
+                  <h2>{{'Lo que aprenderás'|t}}</h2>
+
+		      {{content.field_curso_aprenderas.0}}
+            </div>
+            {% endif %}
+            
+
+      </div>
+
+	{# ------------------ #}
 
 
-    <div class="target">
-          {{content.field_curso_target}}
-    </div>
+	{# <div class="target">
+		{{content.field_curso_target}}
+	</div> #}
 
-    {{ drupal_view('votingapi_votes', 'block_2', node.id ) }}
-    <div class="info"> ??? </div>
-
-    <div class="imagen">
-          {{content.field_curso_imagen.0}}
-    </div>
+	{# {{ drupal_view('votingapi_votes', 'block_2', node.id ) }} #}
+	{# <div class="info">
+		???
+	</div> #}
 
 
 
-    <div class="empresa">
-          {{content.field_curso_empresa_formacion.0}}
-    </div>
-
-    <div class="enlace">
-          {{content.field_curso_enlace.0}}
-    </div>
-
-    <div class="precio">
-          {{content.field_curso_gratuidad.0}}
-          {{content.field_curso_precio.0}}
-    </div>
-
-    <div class="fecha">
-          {{content.field_curso_fecha_inicio.0}}
-    </div>
-
-    <div class="duracion">
-          {{content.field_curso_duracion.0}}
-          {{content.field_curso_duracion_sesiones.0}}
-    </div>
-
-
-    <div class="tipo">
-          {{content.field_curso_tipo.0}}
-    </div>
-
-
-    {{'Sobre este curso'|t}}
-    <div class="cuerpo">
-        {{ content.body }}
-    </div>
 
 
 
-    <div class="stars">
-    {% if logged_in %}
-    VALORA ESTE curso  {{ content.rate_stars }}
-    {% else %}
-    ENLACE A REGISTRO/LOGIN 
-    {% endif %}
-    </div>
-
-    {{'Audiencia del curso'|t}}
-    <div class="audiencia">
-          {{content.field_curso_audiencia.0}}
-    </div>
-
-    {{'Lo que aprenderás'|t}}
-    <div class="audiencia">
-          {{content.field_curso_aprenderas.0}}
-    </div>
 
 
 </article>

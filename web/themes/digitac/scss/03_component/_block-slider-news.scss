@@ -1,5 +1,10 @@
 .block-slider-news {
     padding-bottom: rem(88px);
+    overflow-x: hidden;
+
+    @include media(md) {
+
+    }
 
     &__item {
         $blockSliderItem: ".block-slider-news__item";
@@ -68,6 +73,12 @@
                     color: $blue-700;
                     text-transform: uppercase;
                 }
+
+                + a.btn {
+                    &::after {
+                        display: none;
+                    }
+                }
             }
 
             .title,
@@ -122,8 +133,13 @@
                 margin-bottom: rem(46px);
 
                 @include media(md) {
-                    width: rem(592px);
+                    width: 100%;
                     height: rem(300px);
+                    margin-bottom: rem(56px);
+                }
+
+                @include media(lg) {
+                    width: rem(592px);
                     margin-bottom: 0;
                     margin-right: rem(32px);
                     flex: 1 0 rem(592px);
@@ -142,22 +158,52 @@
                 font-family: $font-family-base;
                 font-style: normal;
                 font-weight: 500;
-                font-size: 14px;
-                line-height: 20px;
+                font-size: rem(14px);
+                line-height: rem(20px);
                 text-align: center;
                 color: $grey-700;
+            }
+
+            .valoracion {
+                display: flex;
+
+                .stars {
+                    display: flex;
+                }
+
+                .votes {
+                    margin-left: rem(6px);
+                    margin-top: rem(3px);
+                }
             }
         }
     }
 
     &__button {
-        max-width: rem(1216px);
-        margin: 0 auto;
+        width: 100%;
+        max-width: rem(1272px);
+        margin: rem(-20px) auto 0;
         text-align: right;
-        position: absolute;
-        right: 0;
-        left: 0;
-        bottom: rem(16px);
+
+        @include media(md) {
+            width: auto;
+            margin: 0 auto;
+            padding-right: rem(32px);
+            position: absolute;
+            right: 0;
+            left: 0;
+            bottom: rem(16px);
+        }
+
+        .btn {
+            max-width: rem(340px);
+            width: 100%;
+
+            @include media(md) {
+                max-width: inherit;
+                width: auto;
+            }
+        }
 
     }
 
@@ -168,7 +214,7 @@
         &::after {
             content: '';
             width: 100vw;
-            height: 1px;
+            height: rem(1px);
             background-color: $grey-300;
             position: absolute;
             left: 50%;

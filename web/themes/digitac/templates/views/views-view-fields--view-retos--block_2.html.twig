@@ -1,24 +1,37 @@
-<div class="block-slider-news__item">
+<div class="container">
+    <div class="challenge">
+        <div class="challenge__header">
+            <div class="challenge__header-content">
+                <div class="tag">
+                    {{ fields.field_reto_categoria.content }}
+                </div>
+
+                <div class="title">
+                    {{ fields.title.content }}
+                </div>
+            </div>
 
 
-    <div class="block-slider-news__item-content">
-        <div class="category">
-            <span class="type">{{ fields.field_reto_categoria.content }}</span>
+            <div class="challenge__header-image">
+
+                <svg width="488" height="191" viewBox="0 0 488 191" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <clipPath id="clip-path3">
+                    <rect x="104" width="384" height="191" rx="95.5" fill="#D9D9D9"/>
+                </clipPath>
+                <image clip-path="url(#clip-path3)" xlink:href="{{ fields.field_reto_imagen.content|render|striptags|trim }}" alt="Image" class="svg__image">
+                </svg>
+
+
+            </div>
         </div>
-        <div class="title">{{ fields.title.content }}</div>
     </div>
-
-    <div class="block-slider-news__item-image">
-        {{ fields.field_reto_imagen.content }}
+    <div class="tab-actions js-tab-actions">
+        <ul>
+            <li class="tab-actions__item{% if tab_sel == 'admin-ideas' or tab_sel == 'idea' %} active{%endif%}"><a href="/reto/{{fields.nid.content|render|striptags|trim}}#idea">{{'Ideas'|t}} <span class="number">{{ drupal_view('retos_propiedades', 'block_2', fields.nid.content|render|striptags|trim ) }}</span></a></li>
+            <li class="tab-actions__item{% if tab_sel == 'admin-experiencias' or tab_sel == 'experiencia' %} active{%endif%}"><a href="/reto/{{fields.nid.content|render|striptags|trim}}#experience">{{'Experiencias'|t}} <span class="number">{{ drupal_view('retos_propiedades', 'block_4', fields.nid.content|render|striptags|trim ) }}</span></a></li>
+            <li class="tab-actions__item"><a href="/reto/{{fields.nid.content|render|striptags|trim}}#challenge">{{'Sobre este reto'|t}} </a></li>
+        </ul>
     </div>
-
-{{fields.nid.content}}
-
-    <div class="enlaces_reto">
-        <div class="ideas"><a href=#>{{'Ideas'|t}} {{ drupal_view('retos_propiedades', 'block_2', fields.nid.content|render|striptags|trim ) }}</a></div>
-        <div class="experiencias"><a href=#>{{'Experiencias'|t}} {{ drupal_view('retos_propiedades', 'block_4', fields.nid.content|render|striptags|trim ) }}</a></div>
-        <div class="ideas"><a href=#>{{'Sobre este reto'|t}} </a></div>
-    </div>
-
-
 </div>
+
+

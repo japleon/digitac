@@ -12,39 +12,205 @@ use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Ajax\AjaxResponse;
 use Drupal\Core\Ajax\HtmlCommand;
 use Drupal\Core\Ajax\InvokeCommand;
-
+use Drupal\user\Entity\User;
+use Drupal\Core\Url;
+use Drupal\Core\StringTranslation\TranslatableMarkup;
+use Drupal\taxonomy\Entity\Term;
 
 
 function digitac_h_form_alter(&$form, &$form_state, $form_id) {
+
+
+   if ( (str_contains($form_id,'views_form_content_page_4')) || (str_contains($form_id,'views_form_content_page_5')) || (str_contains($form_id,'views_form_content_page_6')) )
+    {
+
+          $form['agrupador_1'] = [
+            '#type' => 'markup',
+            '#weight' => -3,
+            '#markup' => t('</div>')
+          ];
+   }
     
     if ($form_id == 'views_form_content_block_1'){
         $form['header']['#weight'] = 800;
         unset($form['actions']);
     }
 
+    if ($form_id == 'views_exposed_form'){
+
+//      dpm($form);
+
+      foreach($form['field_curso_target_target_id']['#options'] as $key => $value){  
+        $query = \Drupal::entityQuery('node')->accessCheck(TRUE)->condition('type', 'curso')->condition('field_curso_target', $key);
+        $counter = $query->count()->execute();
+        $form['field_curso_target_target_id']['#options'][$key] .= ' ('. $counter .')';
+      }
+
+      foreach($form['field_curso_gratuidad_target_id']['#options'] as $key => $value){  
+        $query = \Drupal::entityQuery('node')->accessCheck(TRUE)->condition('type', 'curso')->condition('field_curso_gratuidad', $key);
+        $counter = $query->count()->execute();
+        $form['field_curso_gratuidad_target_id']['#options'][$key] .= ' ('. $counter .')';
+      }
+
+      foreach($form['field_curso_categoria_target_id']['#options'] as $key => $value){  
+        $query = \Drupal::entityQuery('node')->accessCheck(TRUE)->condition('type', 'curso')->condition('field_curso_categoria', $key);
+        $counter = $query->count()->execute();
+        $form['field_curso_categoria_target_id']['#options'][$key] .= ' ('. $counter .')';
+      }
+
+      foreach($form['field_curso_tipo_target_id']['#options'] as $key => $value){  
+        $query = \Drupal::entityQuery('node')->accessCheck(TRUE)->condition('type', 'curso')->condition('field_curso_tipo', $key);
+        $counter = $query->count()->execute();
+        $form['field_curso_tipo_target_id']['#options'][$key] .= ' ('. $counter .')';
+      }
+
+      $current_time = \Drupal::time()->getCurrentTime('d');    
+      $time_30 = $current_time+2592000;   
+      $time_90 = $current_time+(2592000*3);   
+      $time_180 = $current_time+(2592000*6);   
+
+      $start = \Drupal::service('date.formatter')->format($current_time, 'custom', 'Y-m-d');
+      $end = \Drupal::service('date.formatter')->format($time_30, 'custom', 'Y-m-d');
+      
+      $query = \Drupal::entityQuery('node')->accessCheck(TRUE)->condition('type', 'curso')->condition('field_curso_fecha_inicio', $end ,'<=')->condition('field_curso_fecha_inicio', $start ,'>');
+      $counter = $query->count()->execute();
+      $form['field_curso_tipo_target_id']['#options'][997]='Próximo mes ('. $counter .')';
+
+      $end = \Drupal::service('date.formatter')->format($time_90, 'custom', 'Y-m-d');
+
+      $query = \Drupal::entityQuery('node')->accessCheck(TRUE)->condition('type', 'curso')->condition('field_curso_fecha_inicio', $end ,'<=')->condition('field_curso_fecha_inicio', $start ,'>');
+      $counter = $query->count()->execute();
+      $form['field_curso_tipo_target_id']['#options'][998]='Próximos 3 meses ('. $counter .')';
+
+      $end = \Drupal::service('date.formatter')->format($time_180, 'custom', 'Y-m-d');
+
+      $query = \Drupal::entityQuery('node')->accessCheck(TRUE)->condition('type', 'curso')->condition('field_curso_fecha_inicio', $end ,'<=')->condition('field_curso_fecha_inicio', $start ,'>');
+      $counter = $query->count()->execute();
+      $form['field_curso_tipo_target_id']['#options'][999]='Próximos 6 meses ('. $counter .')';
+
+      foreach($form['field_curso_pais_target_id']['#options'] as $key => $value){  
+        $query = \Drupal::entityQuery('node')->accessCheck(TRUE)->condition('type', 'curso')->condition('field_curso_pais', $key);
+        $counter = $query->count()->execute();
+        $form['field_curso_pais_target_id']['#options'][$key] .= ' ('. $counter .')';
+      }
+
+      foreach($form['type']['#options'] as $key => $value){  
+        $query = \Drupal::entityQuery('node')->accessCheck(TRUE)->condition('type', $key);
+        $counter = $query->count()->execute();
+        $form['type']['#options'][$key] .= ' ('. $counter .')';
+      }
+
+      foreach($form['field_solucion_gratuidad_target_id']['#options'] as $key => $value){  
+        $query = \Drupal::entityQuery('node')->accessCheck(TRUE)->condition('field_solucion_gratuidad', $key);
+        $counter = $query->count()->execute();
+        $form['field_solucion_gratuidad_target_id']['#options'][$key] .= ' ('. $counter .')';
+      }
+
+      foreach($form['field_solucion_tipo_target_id']['#options'] as $key => $value){  
+        $query = \Drupal::entityQuery('node')->accessCheck(TRUE)->condition('field_solucion_tipo', $key);
+        $counter = $query->count()->execute();
+        $form['field_solucion_tipo_target_id']['#options'][$key] .= ' ('. $counter .')';
+      }
+
+      foreach($form['field_solucion_pais_target_id']['#options'] as $key => $value){  
+        $query = \Drupal::entityQuery('node')->accessCheck(TRUE)->condition('field_solucion_pais', $key);
+        $counter = $query->count()->execute();
+        $form['field_solucion_pais_target_id']['#options'][$key] .= ' ('. $counter .')';
+      }
+
+
+
+    }
+
+}
+
+
+function digitac_h_theme() {
+
+  $theme['estado_reto_template'] = [
+    'variables' => [
+      'custom_text' => NULL,
+      'nid' => NULL,
+      'estado' => NULL,
+    ],
+    'template' => 'estado-reto',
+  ];
+
+    $theme['estado_idea_template'] = [
+    'variables' => [
+      'custom_text' => NULL,
+      'nid' => NULL,
+      'estado' => NULL
+    ],
+    'template' => 'estado-idea',
+  ];
+
+  $theme['estado_experiencia_template'] = [
+    'variables' => [
+      'custom_text' => NULL,
+      'nid' => NULL,
+      'estado' => NULL
+    ],
+    'template' => 'estado-experiencia',
+  ];
+
+    $theme['eliminar_comentario_template'] = [
+    'variables' => [
+      'id' => NULL,
+    ],
+    'template' => 'eliminar-comentario',
+  ];
+
+  return $theme;
 }
 
 
 function digitac_h_node_presave(\Drupal\Core\Entity\EntityInterface $node)  {
 
-  if ($node->bundle() == 'idea') {
+  if (($node->bundle() == 'idea') || ($node->bundle() == 'experiencia')) {
+
+// cambios de estado.
 
     $current_user = \Drupal::currentUser()->getDisplayName(); 
     $current_time = \Drupal::time()->getCurrentTime();
     $date_output = strtoupper(date('d M y · H:i', $current_time));
     $date_output .= date('a', $current_time);
 
-    if ( ($node->field_idea_estado->first()->getValue()['target_id']) != ($node->original->field_idea_estado->first()->getValue()['target_id']) )
+/*    if($node->isNew())
     {
+      $node->field_idea_estado->target_id = 16;
+    }*/
 
+    if (($node->isNew()) || ( (!$node->isNew()) && ( ($node->field_idea_estado->first()->getValue()['target_id']) != ($node->original->field_idea_estado->first()->getValue()['target_id']) )))
+    {
       $term_name = \Drupal\taxonomy\Entity\Term::load($node->field_idea_estado->first()->getValue()['target_id'])->get('name')->value;
       $node->field_idea_cambios_estado[] = $term_name .'||'.$date_output.'||'.$current_user;
     }
 
-    if ( ($node->field_idea_estado->first()->getValue()['target_id']) == 16)
+
+/*    if ($node->isNew()) 
     { $node->status = 0;}
     else
-    { $node->status = 1;}
+    {*/
+      if ( ($node->field_idea_estado->first()->getValue()['target_id']) == 16)
+      { $node->status = 0;}
+      else
+      { $node->status = 1;} 
+//    }
+
+    $reto_id = \Drupal::routeMatch()->getParameter('arg_0');
+    $display_id = \Drupal::routeMatch()->getParameter('display_id');
+    
+    if ($node->isNew()) 
+      {$node->field_idea_reto->target_id= intval($reto_id);}
+/*    if ($display_id == 'page_1')
+      {$node->field_idea_experiencia=false;}
+    else
+      {$node->field_idea_experiencia=true;}*/
+
+    $query = \Drupal::entityQuery('node')->accessCheck(TRUE)->condition('type', $node->bundle());
+    $counter = $query->count()->execute();
+    $node->field_idea_numero=$counter+1;
 
   }
 }
@@ -78,34 +244,676 @@ function digitac_h_form_user_register_form_alter(&$form, FormStateInterface $for
    }
 
 
-function digitac_h_form_user_pass_reset_form_alter(&$form, FormStateInterface $form_state) {
+/*function digitac_h_form_user_form_alter(&$form, FormStateInterface $form_state) {
 
     $form['actions'] = [
       '#type' => 'button',
-      '#value' => 'ENvioO',
+      '#value' => 'Guardar contraseña',
+      '#weight' => 10,
       '#ajax' => [
         'callback' => 'setMessageResetPass',
       ],
     ];
-}
+}*/
 
  function setMessageResetPass(array $form, FormStateInterface $form_state) {
 
     $response = new AjaxResponse();
-    $userID = User::load(\Drupal::currentUser()->id());
+    $userID = \Drupal::currentUser()->id();
 
     $response->addCommand(
       new HtmlCommand(
-        '#block-digitac-content',
+        '#user-form',
         '<div class="my_top_message">' . t('The PASS  is Reset. GO @result', ['@result' => $userID]) . '</div>'),
     );
     return $response;
 
    }
 
+function digitac_h_form_user_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
+
+
+  if (!in_array('administrator', \Drupal::currentUser()->getRoles())) {
+
+    if($form_id == 'user_form'){
+
+          $form['agrupador_1'] = [
+            '#type' => 'markup',
+            '#weight' => 3,
+            '#markup' => t('<div class="box-grey">')
+          ];
+
+          $form['account']['mail']['#access'] = FALSE;
+
+          $form['contrass'] = [
+            '#type' => 'markup',
+            '#weight' => 3,
+            '#markup' => t('<p><strong>Contraseña</strong></p>')
+          ]; 
+          $form['actions']['submit']['#weight'] = 4;
+
+          $form['agrupador_2'] = [
+            '#type' => 'markup',
+            '#weight' => 5,
+            '#markup' => t('</div>')
+          ];
+
+    }
+
+
+  }
+}
+
+function digitac_h_preprocess_user(&$variables)
+{
+  $session = \Drupal::request() -> getSession();
+  $hash= \Drupal\Component\Utility\Crypt::hashBase64('asdfwe');
+
+  $timestamp = \Drupal::time()->getCurrentTime();
+  $session->set('pass_reset_hash', $hash);
+  $session->set('pass_reset_timeout', $timestamp);
+  $user = \Drupal::currentUser();
+  $expiration_date = $user->getLastAccessedTime();
+
+
+$form = Drupal::formBuilder()->getForm(Drupal\user\Form\UserPasswordResetForm::class, $user,$expiration_date, $hash, $timestamp);
+// Add your own function before form submit here
+$variables['login_form'] = Drupal::service('renderer')->renderPlain($form);
+
+}
+
+
+function digitac_h_form_user_login_form_alter(&$form, FormStateInterface $form_state) {
+
+  $url_object = Url::fromRoute('user.pass');
+  $form['password_reset_link'] = [
+    '#type' => 'link',
+    '#url' => $url_object,
+    '#title' => new TranslatableMarkup('Olvidé la contraseña<br>'),
+    '#attributes' => [
+      'class' => ['user-reset-password-link'],
+    ],
+  ];
+}
 
 
 
+function es_moderador_reto($reto_id)
+{
+
+      $reto_r = \Drupal::entityTypeManager()->getStorage('node')->load($reto_id);
+      $current_user_id = \Drupal::currentUser()->id();
+      $moderadores = $reto_r->field_reto_moderadores->getValue();
+      $moderador_reto = false;
+
+      foreach( $moderadores as $modera){
+        if ($modera['target_id']==$current_user_id)
+        {$moderador_reto = true;}
+      }
+      return ($moderador_reto);
+}
+
+function digitac_h_form_node_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+
+    if($form_id == 'node_reto_frontal_form'){
+
+      $form['agrupador_1'] = [
+        '#type' => 'markup',
+        '#weight' => -9,
+        '#markup' => t('<div class="box-grey">')
+      ];
+
+      $form['desc_titulo'] = [
+        '#type' => 'markup',
+        '#weight' => 0,
+        '#markup' => t('<p>Cuanto más corto y descriptivo mejor</p>')
+      ];
+
+      $form['desc_desc'] = [
+        '#type' => 'markup',
+        '#weight' => 1,
+        '#markup' => t('<p>Desarrolla un enunciado que resuma los objetivos del reto. Cuanto más estructurado y detallado mejor</p>')
+      ];
+
+      $form['agrupador_1_cierre'] = [
+        '#type' => 'markup',
+        '#weight' => 3,
+        '#markup' => t('</div>')
+      ];
+
+      if ( (in_array('administrator', \Drupal::currentUser()->getRoles())) || (in_array('moderador', \Drupal::currentUser()->getRoles()))) {
+      $form['tit_estado'] = [
+        '#type' => 'markup',
+        '#weight' => 3,
+        '#markup' => t('<h2>Estado</h2><p>El estado por defecto del reto siempre es “Borrador”. Para que se vea en la plataforma debes cambiarlo a “Abierto” o “Cerrado”</p>')
+      ];
+
+      $form['tit_moderacion'] = [
+        '#type' => 'markup',
+        '#weight' => 4,
+        '#markup' => t('<div class="box-grey"><h2>Moderación</h2><p>Debes asignar un moderador como mínimo. Todos los moderadores y expertos deben estar dados de alta en el backoffice del Gestor de Contenidos Drupal. Si alguno no te aparece aquí, debes darlo de alta allí primero para poder asignarlo.</p>')
+      ];
+
+      $form['desc_exp'] = [
+        '#type' => 'markup',
+        '#weight' => 6,
+        '#markup' => t('<p>Los usuarios expertos no son moderadores. Son usuarios reconocidos, que ayudan a dinamizar el reto y la plataforma en general.</p></div><h2>Tags</h2><p>También puedes asignar tags al reto para que los usuarios puedan asignarlas a sus ideas. Para que tre aparezcan aquí las tags, deben darse de alta previamente en el backoffice del gestor de contenidos Drupal.</p>')
+      ];
+
+      $form['tit_dates'] = [
+        '#type' => 'markup',
+        '#weight' => 7,
+        '#markup' => t('<div class="box-grey"><h2>Programar fechas</h2><p>Si lo deseas, puedes programar un comienzo y un fin para este reto. Si programas la finalización, al finalizar cambiará de estado automáticamente a “Cerrado”.</p>')
+      ];
+
+      $form['tit_config'] = [
+        '#type' => 'markup',
+        '#weight' => 9,
+        '#markup' => t('</div><div class="box-switch"><h2>Configuración</h2><p>Por defecto todas las siguientes opciones están activas. Puedes desactivarlas en función de los objetivos del reto que estás creando.</p>')
+      ];
+    
+      $form['tit_config_2'] = [
+        '#type' => 'markup',
+        '#weight' => 19,
+        '#markup' => t('</div>')
+      ];
+      };
+
+
+
+      $form['actions']['submit_cancel'] = array (
+        '#type' => 'submit',
+        '#weight' => 20,
+        '#attributes' => array('class' => array('clase-customizada-secondary-button')),
+        '#value' => t('Cancelar'),
+        '#submit' => array('new_reto_cancel_handler'),
+        '#limit_validation_errors' => [],
+      );
+
+      $form['revision_information']['#access'] = FALSE;
+      
+      $form['actions']['submit']['#submit'][]= 'new_reto_submit_handler';
+    
+    }
+
+  if($form_id == 'node_idea_frontal_form'){
+
+      $idea_id = explode('nid=',$_SERVER['REQUEST_URI'])[1];
+      
+      if ($idea_id!=null)
+      {
+      $idea_n = \Drupal::entityTypeManager()->getStorage('node')->load($idea_id);
+      $reto_id = $idea_n->field_idea_reto->getValue()[0]['target_id'];
+      }
+      else
+      { $reto_id = \Drupal::routeMatch()->getParameter('arg_0');}
+
+      $moderador_reto = es_moderador_reto($reto_id);
+
+      $form['agrupador_1'] = [
+        '#type' => 'markup',
+        '#weight' => -9,
+        '#markup' => t('<div class="box-grey">')
+      ];
+
+
+        $form['desc_titulo'] = [
+        '#type' => 'markup',
+        '#weight' => 0,
+        '#markup' => t('<p>Cuanto más corto y descriptivo mejor</p>')
+      ];
+
+      $form['desc_desc'] = [
+        '#type' => 'markup',
+        '#weight' => 1,
+        '#markup' => t('<p>Desarrolla un enunciado que resuma bien la idea propuesta. Cuanto más estructurado y detallado mejor</p>')
+      ];
+
+      $form['desc_tags'] = [
+        '#type' => 'markup',
+        '#weight' => 3,
+        '#markup' => t('<p>Selecciona las tags que tengan relación con tu idea: Puedes dejar este campo vacío.</p>')
+      ];
+      
+      $form['tit_rel_ideas'] = [
+        '#type' => 'markup',
+        '#weight' => 4,
+        '#markup' => t('</div><h2>Relacionar ideas</h2><p>Selecciona las ideas que tengan relación con la tuya. Puedes no seleccionar ninguna.</p>')
+      ];
+
+      if ($moderador_reto) {
+      $form['tit_estado'] = [
+        '#type' => 'markup',
+        '#weight' => 5,
+        '#markup' => t('<h2>Estado</h2><p>El estado por defecto del reto siempre es “Borrador”. Para que se vea en la plataforma debes cambiarlo a “Abierto” o “Cerrado”.</p>')
+      ];
+      }
+      else{
+        $form['field_idea_estado']=null;
+      }
+
+
+      if ( (!(in_array('administrator', \Drupal::currentUser()->getRoles()))) && (!(in_array('moderador', \Drupal::currentUser()->getRoles())))) {
+      $form['tit_aviso'] = [
+        '#type' => 'markup',
+        '#weight' => 9,
+        '#markup' => t('<div class="aviso">La idea no se verá instantáneamente en la plataforma. Un moderador deberá aprobarla primero.</div>')
+      ];
+      }
+
+      $form['actions']['submit_cancel'] = array (
+        '#type' => 'submit',
+        '#weight' => 9,
+        '#attributes' => array('class' => array('clase-customizada-secondary-button')),
+        '#value' => t('Cancelar'),
+        '#submit' => array('new_idea_cancel_handler'),
+        '#limit_validation_errors' => [],
+      );
+
+      unset($form['meta']);
+      $form['revision_information']['#access'] = FALSE;
+      
+      $form['actions']['submit']['#submit'][]= 'new_idea_submit_handler';
+
+  }
+
+    if($form_id == 'node_experiencia_frontal_form'){
+
+      $idea_id = explode('nid=',$_SERVER['REQUEST_URI'])[1];
+
+      if ($idea_id!=null)
+      {
+      $idea_n = \Drupal::entityTypeManager()->getStorage('node')->load($idea_id);
+      $reto_id = $idea_n->field_idea_reto->getValue()[0]['target_id'];
+      }
+      else
+      { $reto_id = \Drupal::routeMatch()->getParameter('arg_0');}
+
+      $moderador_reto = es_moderador_reto($reto_id);
+
+
+      $form['agrupador_1'] = [
+        '#type' => 'markup',
+        '#weight' => -9,
+        '#markup' => t('<div class="box-grey">')
+      ];
+
+        $form['desc_titulo'] = [
+        '#type' => 'markup',
+        '#weight' => 0,
+        '#markup' => t('<p>Cuanto más corto y descriptivo mejor</p>')
+      ];
+
+      $form['desc_desc'] = [
+        '#type' => 'markup',
+        '#weight' => 1,
+        '#markup' => t('<p>Desarrolla un enunciado que resuma bien la experiencia propuesta. Cuanto más estructurado y detallado mejor</p>')
+      ];
+
+      $form['desc_tags'] = [
+        '#type' => 'markup',
+        '#weight' => 3,
+        '#markup' => t('<p>Selecciona las tags que tengan relación con tu experiencia: Puedes dejar este campo vacío.</p>')
+      ];
+      
+      $form['tit_rel_experiencia'] = [
+        '#type' => 'markup',
+        '#weight' => 5,
+        '#markup' => t('</div><h2>Relacionar experiencias</h2><p>Selecciona las experiencias que tengan relación con la tuya. Puedes no seleccionar ninguna.</p>')
+      ];
+
+      if ($moderador_reto) {
+      $form['tit_estado'] = [
+        '#type' => 'markup',
+        '#weight' => 6,
+        '#markup' => t('<h2>Estado</h2><p>El estado por defecto del reto siempre es “Borrador”. Para que se vea en la plataforma debes cambiarlo a “Abierto” o “Cerrado”.</p>')
+      ];
+      }
+      else{
+        $form['field_idea_estado']=null;
+      }
+
+      $form['actions']['submit_cancel'] = array (
+        '#type' => 'submit',
+        '#weight' => 9,
+        '#attributes' => array('class' => array('clase-customizada-secondary-button')),
+        '#value' => t('Cancelar'),
+        '#submit' => array('new_experiencia_cancel_handler'),
+        '#limit_validation_errors' => [],
+      );
+
+      unset($form['meta']);
+      $form['revision_information']['#access'] = FALSE;
+      
+      $form['actions']['submit']['#submit'][]= 'new_experiencia_submit_handler';
+
+  }
+
+
+}
+
+function new_reto_submit_handler($form, &$form_state) {
+  $form_state->setRedirect('entity.node.canonical', ['node' => 65]);
+}
+function new_idea_submit_handler($form, &$form_state) {
+  $form_state->setRedirect('entity.node.canonical', ['node' => '77']);
+}
+function new_experiencia_submit_handler($form, &$form_state) {
+  $form_state->setRedirect('entity.node.canonical', ['node' => 79]);
+}
+function new_idea_cancel_handler($form, &$form_state) {
+   $curr_rou = explode('/',\Drupal::service('path.current')->getPath());
+   $form_state->setRedirect('entity.node.canonical',['node' => $curr_rou[2]]);
+}
+function new_experiencia_cancel_handler($form, &$form_state) {
+   $curr_rou = explode('/',\Drupal::service('path.current')->getPath());
+   $form_state->setRedirect('entity.node.canonical',['node' => $curr_rou[2]]);
+}
+function new_reto_cancel_handler($form, &$form_state) {
+    $redirect_path = "/retos";
+    $url = url::fromUserInput($redirect_path);
+    $form_state->setRedirect($url->getRouteName(),$url->getRouteParameters());
+}
+
+
+
+function digitac_h_preprocess_node(&$vars) {
+  $vars['param']['start'] = $_GET['start'];
+  $vars['param']['end'] = $_GET['end'];
+  $vars['param']['pais'] = $_GET['pais'];
+
+  if (($vars['node']->getType() == 'idea')||($vars['node']->getType() == 'experiencia')) 
+  {
+    $reto_id = $vars['node']->field_idea_reto->getValue()[0]['target_id'];
+    $reto_r = \Drupal::entityTypeManager()->getStorage('node')->load($reto_id);
+    $vars['tiene_comentarios']= $reto_r->field_reto_comentarios->getValue()[0]['value'];
+    $vars['tiene_votacion']= $reto_r->field_reto_votacion->getValue()[0]['value'];
+    $vars['es_moderador']= es_moderador_reto($reto_id);
+
+    $date_formatter = \Drupal::service('date.formatter');
+    $currTime = \Drupal::time()->getCurrentTime();
+    $creatTime = $vars['node']->getCreatedTime();
+    $vars['hence'] = $date_formatter->formatDiff($creatTime, $currTime, [
+    'granularity' => 1,
+    'return_as_object' => TRUE,
+  ])->toRenderable();
+
+  }
+
+
+}
+
+
+function digitac_h_entity_operation(\Drupal\Core\Entity\EntityInterface $entity) {
+
+  if ($entity->getEntityTypeId() == 'comment') {
+    
+    $operations=[];
+    $operations['aprobar_comentario'] = [
+      'title' => t('Aprobar'),
+      'url' => Url::fromRoute('comment.approve', ['comment' => $entity->id()]),
+      'weight' => 99950,
+      'query' => [
+        'destination' => '/admin-comentarios'
+      ]
+    ]; 
+    return $operations;
+  }
+}
+
+function digitac_h_views_query_alter(&$view,$query) {
+   
+  $viewId = $view->id();
+
+  if ($viewId == 'comment') {
+        if ($view->current_display == 'page_1'){
+
+          $current_user_id = \Drupal::currentUser()->id();
+          $query_retos = \Drupal::entityQuery('node')->accessCheck(TRUE)->condition('type', 'reto')->condition('field_reto_moderadores', $current_user_id)->accessCheck(TRUE);
+          $results_retos = $query_retos->execute();
+ 
+          foreach($results_retos as $reto_r){
+
+            $query_ideas = \Drupal::entityQuery('node')->accessCheck(TRUE)->condition('type', 'idea')->condition('field_idea_reto', $reto_r)->accessCheck(TRUE);
+            $results_ideas = $query_ideas->execute();
+      
+            foreach($results_ideas as $idea_r){
+              $query->addWhere(0, 'node_field_data_comment_field_data.nid', $idea_r, '=');
+            }
+
+          }
+          $query->where[0]["type"]='OR';
+
+        }
+  }
+
+  if ($viewId == 'estadisticas') {
+
+      if ($view->current_display == 'block_1'){
+      $contextualFilterDate = $query->where[0]["conditions"][0]["value"][":node_field_data_created"];
+      $contextualFilterDate_2 = $query->where[0]["conditions"][1]["value"][":node_field_data_created1"];
+      }
+      if ($view->current_display == 'block_2'){
+      $contextualFilterDate = $query->where[0]["conditions"][0]["value"][":node_field_data_created2"];
+      $contextualFilterDate_2 = $query->where[0]["conditions"][1]["value"][":node_field_data_created3"];
+      }
+      if ($view->current_display == 'block_3'){
+      $contextualFilterDate = $query->where[0]["conditions"][0]["value"][":node_field_data_created4"];
+      $contextualFilterDate_2 = $query->where[0]["conditions"][1]["value"][":node_field_data_created5"];
+      }
+      if ($view->current_display == 'block_7'){
+      $contextualFilterDate = $query->where[0]["conditions"][0]["value"][":node_field_data_created12"];
+      $contextualFilterDate_2 = $query->where[0]["conditions"][1]["value"][":node_field_data_created13"];
+      }
+
+      unset($query->where[0]["conditions"][0]);
+      unset($query->where[0]["conditions"][1]);
+
+  }
+  if ($viewId == 'estadisticas_usuarios') {
+      if ($view->current_display == 'block_4'){
+      $contextualFilterDate = $query->where[0]["conditions"][0]["value"][":node_field_data_created6"];
+      $contextualFilterDate_2 = $query->where[0]["conditions"][1]["value"][":node_field_data_created7"];
+      if ($query->where[0]["conditions"][2]["value"] == 'null')
+          {unset($query->where[0]["conditions"][2]);}
+      }
+      if ($view->current_display == 'block_5'){
+      $contextualFilterDate = $query->where[0]["conditions"][0]["value"][":node_field_data_created8"];
+      $contextualFilterDate_2 = $query->where[0]["conditions"][1]["value"][":node_field_data_created9"];
+      if ($query->where[0]["conditions"][2]["value"] == 'null')
+          {unset($query->where[0]["conditions"][2]);}
+      }
+      if ($view->current_display == 'block_6'){
+      $contextualFilterDate = $query->where[0]["conditions"][0]["value"][":node_field_data_created10"];
+      $contextualFilterDate_2 = $query->where[0]["conditions"][1]["value"][":node_field_data_created11"];
+      if ($query->where[0]["conditions"][2]["value"] == 'null')
+          {unset($query->where[0]["conditions"][2]);}
+      }
+
+      unset($query->where[0]["conditions"][0]);
+      unset($query->where[0]["conditions"][1]);
+
+    }
+
+  if ($viewId == 'estadisticas_comentarios') {
+      if ($view->current_display == 'block_1'){
+      $contextualFilterDate = $query->where[0]["conditions"][0]["value"][":comment_field_data_created"];
+      $contextualFilterDate_2 = $query->where[0]["conditions"][1]["value"][":comment_field_data_created1"];
+      }
+      if ($view->current_display == 'block_2'){
+      $contextualFilterDate = $query->where[0]["conditions"][0]["value"][":comment_field_data_created2"];
+      $contextualFilterDate_2 = $query->where[0]["conditions"][1]["value"][":comment_field_data_created3"];
+      if ($query->where[0]["conditions"][2]["value"] == 'null')
+          {unset($query->where[0]["conditions"][2]);}
+
+      }
+
+      unset($query->where[0]["conditions"][0]);
+      unset($query->where[0]["conditions"][1]);
+
+  }
+
+    if ($viewId == 'estadisticas_soluciones') {
+      if ($view->current_display == 'block_4'){
+      $contextualFilterDate = $query->where[0]["conditions"][0]["value"][":votingapi_result_timestamp"];
+      $contextualFilterDate_2 = $query->where[0]["conditions"][1]["value"][":votingapi_result_timestamp1"];
+      }
+      if ($view->current_display == 'block_1'){
+      $contextualFilterDate = $query->where[0]["conditions"][0]["value"][":votingapi_result_timestamp2"];
+      $contextualFilterDate_2 = $query->where[0]["conditions"][1]["value"][":votingapi_result_timestamp3"];
+      }
+
+      unset($query->where[0]["conditions"][0]);
+      unset($query->where[0]["conditions"][1]);
+
+    }
+
+    if ($viewId == 'user_admin_people') {
+        if ($view->current_display == 'block_1'){
+          $contextualFilterDate = $query->where[0]["conditions"][0]["value"][":users_field_data_created"];
+          $contextualFilterDate_2 = $query->where[0]["conditions"][1]["value"][":users_field_data_created1"];
+
+          if ($query->where[0]["conditions"][2]["value"] == 'null')
+          {unset($query->where[0]["conditions"][2]);}
+        
+          unset($query->where[0]["conditions"][0]);
+          unset($query->where[0]["conditions"][1]);
+
+        }
+
+    }
+
+
+
+
+      if (($contextualFilterDate!='null') && ($contextualFilterDate_2!='null'))
+      {
+        $submittedDate = $contextualFilterDate;
+        $newdate = new DateTime($submittedDate);
+        $unixts = $newdate->getTimestamp();
+
+        $submittedDate_2 = $contextualFilterDate_2;
+        $newdate_2 = new DateTime($submittedDate_2);
+        $unixts_2 = $newdate_2->getTimestamp();
+
+        if (($viewId == 'estadisticas') || ($viewId == 'estadisticas_usuarios')) {
+          $query->addWhere(0, 'node_field_data.created', $unixts, '>=');
+          $query->addWhere(0, 'node_field_data.created', $unixts_2 , '<');
+        }     
+        if ($viewId == 'estadisticas_comentarios'){
+          $query->addWhere(0, 'comment_field_data.created', $unixts, '>=');
+          $query->addWhere(0, 'comment_field_data.created', $unixts_2 , '<');
+        } 
+        if ($viewId == 'estadisticas_soluciones'){
+          $query->addWhere(0, 'votingapi_result_node_field_data.timestamp', $unixts, '>=');
+          $query->addWhere(0, 'votingapi_result_node_field_data.timestamp', $unixts_2 , '<');
+        }         
+        if ($viewId == 'user_admin_people') {
+          if ($view->current_display == 'block_1'){
+            $query->addWhere(0, 'users_field_data.created', $unixts, '>=');
+            $query->addWhere(0, 'users_field_data.created', $unixts_2 , '<');
+          }
+        }
+
+      }
+      else
+      { 
+        if (($viewId == 'estadisticas') || ($viewId == 'estadisticas_usuarios') || ($viewId == 'estadisticas_soluciones')){
+          $query->addWhere(0, 'node_field_data.status', '1', '=');
+        }     
+        if ($viewId == 'estadisticas_comentarios'){
+          $query->addWhere(0, 'comment_field_data.status', '1', '=');
+        } 
+        if ($viewId == 'user_admin_people') {
+          if ($view->current_display == 'block_1'){
+            $query->addWhere(0, 'users_field_data.status', '1', '=');
+          }
+        }
+    
+      }
+
+  if ($viewId == 'cursos') {
+    if ($view->current_display == 'block_2'){
+
+      foreach ($query->where[0]['conditions'] as $key=>$cond)
+      {
+        if ((reset($cond['value'])==997) || (reset($cond['value'])==998) || (reset($cond['value'])==999))
+        { unset($query->where[0]['conditions'][$key]);}
+      } 
+    }
+  }
+
+
+}
+
+
+function digitac_h_preprocess_views_view(&$variables)
+{
+  $view = $variables['view'];
+  if (($view->id() == 'cursos') && ($view->current_display == 'block_1') )
+  {
+      $term = Term::load($view->args[0]);
+      $variables['viewcat'] = $term->getName(); 
+      $variables['viewimg'] = ($term->get('field_tx_cat_curso_imagen')->entity!=null)?$term->get('field_tx_cat_curso_imagen')->entity->getFileUri():''; 
+  }
+
+}
+
+function digitac_h_preprocess_views_view_fields(&$variables)
+{
+  $view = $variables['view'];
+
+  if (($view->id() == 'distributivas'))
+  {
+    $reto_r = \Drupal::entityTypeManager()->getStorage('node')->load($view->args[0]);
+    $variables['tiene_comentarios']= $reto_r->field_reto_comentarios->getValue()[0]['value'];
+    $variables['tiene_votacion']= $reto_r->field_reto_votacion->getValue()[0]['value'];
+  }
+  else if (($view->id() == 'view_retos') && ($view->current_display == 'block_2') )
+  {
+      $curr_rou_ = \Drupal::service('path.current')->getPath();
+      $curr_rou = explode('/',$curr_rou_);
+
+      if ($curr_rou[1]=="node")
+      {
+        $curr_alias = explode('/',\Drupal::service('path_alias.manager')->getAliasByPath($curr_rou_));
+        $variables['tab_sel'] = $curr_alias[1];
+      }
+      else
+      {$variables['tab_sel'] = $curr_rou[1];}
+  }
+
+}
+
+
+function digitac_h_preprocess_views_view_unformatted(&$variables)
+{
+  $view = $variables['view'];
+
+  if (($view->id() == 'cursos') && ($view->current_display == 'block_1') )
+  {
+      $term = Term::load($view->args[0]);
+      $variables['viewcat'] = $term->getName(); 
+      $variables['viewimg'] = ($term->get('field_tx_cat_curso_imagen')->entity!=null)?$term->get('field_tx_cat_curso_imagen')->entity->getFileUri():''; 
+  }
+
+  if (($view->id() == 'estadisticas_soluciones') && ($view->current_display == 'block_1') )
+  {
+    $query = \Drupal::entityQuery('node')->accessCheck(TRUE)->condition('type', 'curso' )->condition('status', 1 );
+    $counter = $query->count()->execute();
+    $variables['numcursos']=$counter;
+  }
+
+  if (($view->id() == 'estadisticas_soluciones') && ($view->current_display == 'block_4') )
+  {
+    $query = \Drupal::entityQuery('node')->accessCheck(TRUE)->condition('type', 'tramite' )->condition('status', 1 );
+    $counter = $query->count()->execute();
+    $variables['numtramites']=$counter;
+  }
+
+}
+
+//COMMENTS
 
 function digitac_h_comment_links_alter(array &$links, CommentInterface $comment, array &$context) {
 
@@ -113,22 +921,77 @@ function digitac_h_comment_links_alter(array &$links, CommentInterface $comment,
   $comment_type = $comment->bundle();
 
 
-  if (($content_type == 'idea') && ($comment_type == 'comment')) {
+  if ((($content_type == 'idea')||($content_type == 'experiencia')) && ($comment_type == 'comment')) {
+    
     $cr_user = \Drupal::currentUser();
     $cm_user = $comment->getOwner();
+
     if ($cm_user->id() != $cr_user->id())
     {
       unset($links['comment']['#links']['comment-edit']);
       unset($links['comment']['#links']['comment-delete']);
+      unset($links['comment']['#links']['comment-reply']['url']);
+      $links['comment']['#links']['comment-reply']['attributes'] = [ 'type' => 'reply', 'id' => $comment->id()];
+
     }
     else{
+
       unset($links['comment']['#links']['comment-reply']);
+      unset($links['comment']['#links']['comment-delete']['url']);
+      $links['comment']['#links']['comment-delete']['attributes'] = [ 'type' => 'delete', 'id' => $comment->id()];
+
     }
     
     if ($comment->getParentComment() != null){
       unset($links['comment']['#links']['comment-reply']);
     }
+
     unset($links['comment']['#links']['comment-approve']);
      
   }
+}
+
+function digitac_h_preprocess_comment(&$variables)
+{
+
+$values = array(
+    'entity_type' => 'node',
+    'entity_id' => $variables['commented_entity']->id(),
+    'field_name' => 'field_idea_comentarios',
+    'comment_type' => 'comment',
+    'pid' =>  $variables['comment']->id(),
+  );
+
+ $variables['reply_form']='';
+if ($variables['comment']->get('pid')->target_id == null)
+{
+  $comment = \Drupal::entityTypeManager()->getStorage('comment')->create($values);
+  $form = \Drupal::service('entity.form_builder')->getForm($comment);
+  $variables['reply_form']=$form;
+}
+
+}
+
+
+function digitac_h_preprocess_paragraph(&$variables) {
+  
+  if ($variables['paragraph']->getType() === 'usuario_stats')
+  {
+    $variables['usuario'] = $variables['user'];
+  }
+  else if ($variables['paragraph']->getType() === 'cabecera')
+  {  
+    $reto_id = explode('/',\Drupal::service('path.current')->getPath());
+    if (($reto_id[4]) && ($reto_id[1]=='estado-idea'))
+    {
+      $variables['paragraph']->set('field_pg_cab_secc_target_volver','/admin-ideas/'.$reto_id[4]);
+      $variables['paragraph']->save();
+    }
+    if (($reto_id[4]) && ($reto_id[1]=='estado-experiencia'))
+    {
+      $variables['paragraph']->set('field_pg_cab_secc_target_volver','/admin-experiencias/'.$reto_id[4]);
+      $variables['paragraph']->save();
+    }
+  }
+
 }

@@ -4,7 +4,7 @@
     &__item {
         $blockSliderItem: ".block-ideas__item";
         //overflow: hidden;
-        padding: rem(16px) rem(16px) 0;
+        padding: 0 rem(16px);
         border: rem(1px) solid $grey-200;
         border-radius: rem(16px);
 
@@ -35,7 +35,7 @@
                 text-align: center;
                 color: $grey-700;
                 position: absolute;
-                top: rem(-30px);
+                top: rem(-15px);
                 left: rem(24px);
                 z-index: 2;
 
@@ -83,6 +83,7 @@
                 line-height: rem(30px);
                 color: $primary;
                 text-decoration: none;
+                word-break: break-word;
             }
 
             .title a {
@@ -127,6 +128,13 @@
                     display: inline-flex;
                     justify-content: center;
                     align-items: center;
+                    position: relative;
+
+                    .star_expertoTac {
+                        position: absolute;
+                        bottom: rem(-7px);
+                        right: rem(-2px);
+                    }
                 }
 
                 &__name {
@@ -205,7 +213,7 @@
     }
 
     &__button {
-        max-width: rem(1216px);
+        max-width: rem(1272px);
         margin: 0 auto;
         text-align: right;
         position: absolute;

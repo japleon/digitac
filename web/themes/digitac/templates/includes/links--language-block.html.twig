@@ -35,17 +35,21 @@
 
 {% if links -%}
   <div class="selectBox">
-					<div class="selectBox__value">{{ curr_lang | upper}}</div>
-					<div class="dropdown-menu">
-          
-    {%- for key, item in links -%}
-        {%- if item.link -%}
-        {{ item.link }}
-        {%- endif -%}
-    {%- endfor -%}
+    <div class="selectBox__value">
+      <a href="#">{{ curr_lang | upper}}</a>
+    </div>
+    <div class="dropdown-menu">
+      <ul>
+        {%- for key, item in links -%}
+            {%- if item.link -%}
+        <li>
+            {{ item.link }}
+        </li>
+            {%- endif -%}
+        {%- endfor -%}
+      </ul>
+    </div>
+  </div>
 
-          </div>
-				</div>
-									
 
 {%- endif %}

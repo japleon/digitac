@@ -1,0 +1,73 @@
+{#
+/**
+ * @file
+ * Default view template to display all the fields in a row.
+ *
+ * Available variables:
+ * - view: The view in use.
+ * - fields: A list of fields, each one contains:
+ *   - content: The output of the field.
+ *   - raw: The raw data for the field, if it exists. This is NOT output safe.
+ *   - class: The safe class ID to use.
+ *   - handler: The Views field handler controlling this field.
+ *   - inline: Whether or not the field should be inline.
+ *   - wrapper_element: An HTML element for a wrapper.
+ *   - wrapper_attributes: List of attributes for wrapper element.
+ *   - separator: An optional separator that may appear before a field.
+ *   - label: The field's label text.
+ *   - label_element: An HTML element for a label wrapper.
+ *   - label_attributes: List of attributes for label wrapper.
+ *   - label_suffix: Colon after the label.
+ *   - element_type: An HTML element for the field content.
+ *   - element_attributes: List of attributes for HTML element for field content.
+ *   - has_label_colon: A boolean indicating whether to display a colon after
+ *     the label.
+ *   - element_type: An HTML element for the field content.
+ *   - element_attributes: List of attributes for HTML element for field content.
+ * - row: The raw result from the query, with all data it fetched.
+ *
+ * @see template_preprocess_views_view_fields()
+ *
+ * @ingroup themeable
+ */
+#}
+<div class="group-row">
+
+    <span class="group-row__number"> {{ fields.counter.content|render|striptags|trim }} </span>
+    <span class="group-row__title"> {{ fields.title.content|render|striptags|trim }} </span>
+
+    <div class="group-row__rating">
+        <div class="stars">
+        {% if fields.value.content|render|striptags|trim %}
+
+                    {% set media = fields.value.content|render|striptags %}
+                    {% set media_dec = media|split('.')%}
+
+                    {% if media_dec.0 > 0 %}
+                        {% for i in range(1, media_dec.0) %}
+                            <img src="/themes/digitac/images/icons/icon-star.svg" alt=""/>
+                        {% endfor %}
+                    {% else %}
+                        {% set media_final= 0 %}
+                    {% endif %}
+
+                    {% set media_final= media_dec.0 %}
+                    {% if media_dec.1 matches '/^[1-9]+/' %}
+                        <img src="/themes/digitac/images/icons/icon-star-half.svg" alt=""/>
+                        {% set media_final= media_dec.0 + 1 %}
+                    {% endif %}
+                    {% if media_final < 5 %}
+                        {% for i in range(media_final,4) %}
+                            <img src="/themes/digitac/images/icons/icon-star-empty.svg" alt=""/>
+                        {% endfor %}
+                    {% endif %}
+
+
+        {% endif %}
+        </div>
+        <span class="votes">{{ fields.value_1.content|render|striptags|trim }}</span>
+    </div>
+
+</div>
+<br>
+

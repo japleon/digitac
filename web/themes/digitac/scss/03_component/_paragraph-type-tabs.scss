@@ -1,0 +1,28 @@
+.paragraph--type--tabs {
+    padding-bottom: rem(40px);
+    position: relative;
+
+    .container {
+        max-width: rem(1272px);
+        margin: 0 auto;
+
+        @include media(lg) {
+            padding: 0 rem(12px) 0 rem(312px);
+        }
+    }
+
+    &::after {
+        content: '';
+        width: 100vw;
+        height: 1px;
+        background: $grey-200;
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    .tab-actions {
+        margin-bottom: 0;
+    }
+}

@@ -2,25 +2,70 @@
     margin-bottom: rem(126px);
     position: relative;
 
+    @include media(md) {
+        margin-bottom: rem(167px);
+    }
+
+    @include media(lg) {
+        margin-bottom: rem(126px);
+    }
+
+    .slick-slide {
+        img {
+            height: rem(463px);
+            object-fit: cover;
+
+            @include media(md) {
+                height: rem(703px);
+            }
+        }
+    }
+
     // head
     &__head {
-        width: 100%;
-        position: absolute;
-        top: 50%;
-        left: 0;
-        transform: translateY(-50%);
+        width: calc(100% + 24px);
+        margin: 0 rem(-12px);
         z-index: 2;
+
+        @include media(md) {
+            width: 100%;
+            margin: 0;
+            position: absolute;
+            top: 50%;
+            left: 0;
+            transform: translateY(-50%);
+
+        }
 
         &-box {
             max-width: rem(604px);
+            min-height: 535px;
+            padding: rem(46px) rem(12px) 0;
+            border-top: 1px solid $white;
+            background-color: $blue-600;
+            text-align: center;
+
+            @include media(md) {
+                min-height: inherit;
+                padding: 0;
+                border-top: none;
+                background: none;
+                text-align: left;
+            }
+
             .title {
                 margin-bottom: rem(4px);
                 font-family: $font-family-base;
                 font-style: normal;
                 font-weight: 600;
-                font-size: rem(16px);
-                line-height: rem(24px);
+                font-size: rem(14px);
+                line-height: rem(20px);
                 color: $white;
+
+                @include media(md) {
+                    font-size: rem(16px);
+                    line-height: rem(24px);
+                }
             }
 
             .subtitle {
@@ -28,13 +73,20 @@
                 font-family: $font-family-base;
                 font-style: normal;
                 font-weight: 600;
-                font-size: rem(48px);
-                line-height: rem(60px);
+                font-size: rem(30px);
+                line-height: rem(38px);
                 letter-spacing: -0.02em;
                 color: $white;
+
+                @include media(md) {
+                    font-size: rem(48px);
+                    line-height: rem(60px);
+                }
             }
 
             .btn.btn--head {
+                width: 100%;
+                max-width: 343px;
                 padding: rem(12px) rem(20px);
                 background-color: $white;
                 border-radius: rem(50px);
@@ -44,6 +96,11 @@
                 font-size: rem(16px);
                 line-height: rem(24px);
                 color: $black;
+
+                @include media(md) {
+                    width: auto;
+                    max-width: inherit;
+                }
             }
         }
 
@@ -52,24 +109,57 @@
 
     // block number
     .block-number {
-        max-width: rem(1216px);
-        margin: 0 auto;
-        padding: rem(38px) rem(60px);
-        background-color: $white;
-        border-radius: rem(16px);
-        box-shadow: 0 rem(20px) rem(24px) rem(-4px) rgba(16, 24, 40, 0.08), 0 rem(8px) rem(8px) rem(-4px) rgba(16, 24, 40, 0.03);
-        display: flex;
-        justify-content: space-between;
-        position: absolute;
-        bottom: rem(-60px);
-        right: 0;
-        left: 0;
+        margin-top: -230px;
 
 
-        &__item {
+        @include media(md) {
+            width: calc(100% - 64px);
+            max-width: rem(1272px);
+            position: absolute;
+            right: 0;
+            left: 0;
+            bottom: rem(-100px);
+        }
+
+        @include media(lg) {
+            width: auto;
+            bottom: rem(-60px);
+        }
+
+
+        /* &__item {
             //width: 25%;
-            padding: 0 rem(48px);
-            border-right: rem(1px) solid $grey-700;
+            margin-bottom: rem(12px);
+            padding: 0 0 rem(12px);
+            text-align: center;
+            position: relative;
+
+            @include media(md) {
+                margin-bottom: 0;
+                padding: 0 rem(24px);
+                text-align: left;
+                border-right: rem(1px) solid $grey-700;
+            }
+
+            @include media(lg) {
+                padding: 0 rem(48px);
+            }
+
+            &::after {
+                content: '';
+                width: rem(112px);
+                height: rem(1px);
+                margin: 0 auto;
+                background: $grey-700;
+                position: absolute;
+                bottom: 0;
+                right: 0;
+                left: 0;
+
+                @include media(md) {
+                    display: none;
+                }
+            }
 
             &:first-child {
                 padding-left: 0;
@@ -78,6 +168,10 @@
             &:last-child {
                 padding-right: 0;
                 border-right: none;
+
+                &::after {
+                    display: none;
+                }
             }
         }
 
@@ -85,10 +179,15 @@
             font-family: $font-family-base;
             font-style: normal;
             font-weight: 400;
-            font-size: rem(48px);
-            line-height: rem(60px);
+            font-size: rem(36px);
+            line-height: rem(44px);
             letter-spacing: -0.02em;
             color: $black;
+
+            @include media(md) {
+                font-size: rem(48px);
+                line-height: rem(60px);
+            }
         }
 
         &__text {
@@ -98,6 +197,6 @@
             font-size: rem(18px);
             line-height: rem(28px);
             color: $primary;
-        }
+        } */
     }
 }

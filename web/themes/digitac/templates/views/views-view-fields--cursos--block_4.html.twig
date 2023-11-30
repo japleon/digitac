@@ -1,26 +1,34 @@
-<div class="curso">
+<div class="course">
 
-    <div class="title">{{ fields.title.content }}</div>
-    <div class="valoracion">
-        <div class="stars">
+    <div class="course__title">{{ fields.title.content }}</div>
+    <div class="course__rating">
+        <div class="course__stars">
                 {% if fields.value.content|render|striptags|trim %}
-                    {% set media = fields.value.content|striptags %}
-                    {% for i in range(1, media) %}
-                        *   
-                    {% endfor %}
-                    {% if media matches '/^[-+]?[0-9]*\\.[0-9]+$/' %}
-                        /
-                        {% set media = media + 1 %}
+                    {% set media = fields.value.content|render|striptags %}
+                    {% set media_dec = media|split('.')%}
+
+                    {% if media_dec.0 > 0 %}
+                        {% for i in range(1, media_dec.0) %}
+                            <img src="/themes/digitac/images/icons/icon-star.svg" alt=""/>
+                        {% endfor %}
+                    {% else %}
+                        {% set media_final= 0 %}
                     {% endif %}
-                    {% if media < 5 %}
-                        {% for i in range(media,4) %}
-                            O   
+                    
+                    {% set media_final= media_dec.0 %}
+                    {% if media_dec.1 matches '/^[1-9]+/' %}
+                        <img src="/themes/digitac/images/icons/icon-star-half.svg" alt=""/>
+                        {% set media_final= media_dec.0 + 1 %}
+                    {% endif %}
+                    {% if media_final < 5 %}
+                        {% for i in range(media_final,4) %}
+                            <img src="/themes/digitac/images/icons/icon-star-empty.svg" alt=""/>
                         {% endfor %}
                     {% endif %}
 
                 {% endif %}
         </div>
-        <div class="votes">{{ fields.value_1.content }}</div>
+        <div class="course__votes">{{ fields.value_1.content }}</div>
     </div>
 
 </div>

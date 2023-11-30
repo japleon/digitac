@@ -3,9 +3,58 @@
         margin-bottom: rem(32px);
         border: rem(1px) solid $grey-200;
         border-radius: rem(16px);
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
 
-        .views-field-title {
-            a {
+        @include media(lg) {
+            flex-direction: row;
+        }
+    }
+
+    &__image {
+        width: 100%;
+        height: rem(240px);
+
+        @include media(lg) {
+            width: rem(320px);
+            height: auto;
+            min-height: 100%;
+            flex: 1 0 rem(320px);
+        }
+
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    }
+
+    &__content {
+        padding: rem(24px);
+
+        .valoracion {
+            display: flex;
+            align-items: center;
+
+            .votes {
+                margin-left: rem(10px);
+                padding-top: rem(4px);
+                font-family: $font-family-base;
+                font-style: normal;
+                font-weight: 400;
+                font-size: rem(16px);
+                line-height: rem(24px);
+                color: $primary;
+            }
+        }
+
+        a {
+            &::after {
+                display: none;
+            }
+
+            .title {
                 margin-bottom: rem(8px);
                 font-family: $font-family-base;
                 font-style: normal;
@@ -13,11 +62,25 @@
                 font-size: rem(20px);
                 line-height: rem(30px);
                 color: $grey-900;
+                text-align: left;
                 text-decoration: none;
             }
         }
 
-        .views-field-body {
+        .category {
+            .type {
+                margin-bottom: rem(8px);
+                font-family: $font-family-base;
+                font-style: normal;
+                font-weight: 600;
+                font-size: rem(14px);
+                line-height: rem(20px);
+                color: $blue-700;
+                text-transform: uppercase;
+            }
+        }
+
+        .content {
             p {
                 font-family: $font-family-base;
                 font-style: normal;
@@ -27,22 +90,22 @@
             }
         }
 
-        .views-field-field-curso-target,
-        .views-field-field-curso-tipo,
-        .views-field-field-curso-fecha-inicio,
-        .views-field-field-curso-gratuidad {
+        .tags {
+            //margin-bottom: rem(12px);
             display: inline-flex;
-            margin-right: rem(8px);
+            flex-wrap: wrap;
 
-            .field-content {
+            .tag {
+                margin-bottom: rem(12px);
+                margin-right: rem(8px);
                 padding: rem(4px) rem(10px);
                 border: rem(1px) solid $grey-300;
                 border-radius: rem(8px);
                 font-family: $font-family-base;
                 font-style: normal;
                 font-weight: 500;
-                font-size: 14px;
-                line-height: 20px;
+                font-size: rem(14px);
+                line-height: rem(20px);
                 text-align: center;
                 color: $grey-700;
             }

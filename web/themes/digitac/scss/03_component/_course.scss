@@ -1,0 +1,67 @@
+.course {
+    padding: 0 0 rem(24px);
+    position: relative;
+
+    &::after {
+        content: '';
+        width: calc(100% + 48px);
+        height: 1px;
+        background: #EAECF0;
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        left: rem(-24px);
+    }
+
+    &__number {
+        padding-top: rem(24px);
+        font-family: $font-family-base;
+        font-style: normal;
+        font-weight: 600;
+        font-size: rem(18px);
+        line-height: rem(28px);
+        color: $grey-500;
+        display: inline-flex;
+    }
+
+    &__title {
+        a {
+            margin-bottom: rem(12px);
+            font-family: $font-family-base;
+            font-style: normal;
+            font-weight: 600;
+            font-size: rem(14px);
+            line-height: rem(20px);
+            color: $blue-700;
+            display: inline-flex;
+            text-decoration: none;
+
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+    }
+
+    &__rating {
+        display: flex;
+        align-items: center;
+    }
+
+    &__votes {
+        font-family: $font-family-base;
+        font-style: normal;
+        font-weight: 400;
+        font-size: rem(16px);
+        line-height: rem(24px);
+        color: $primary;
+    }
+
+    // last
+    &:last-child {
+        padding-bottom: 0;
+
+        &::after {
+            display: none;
+        }
+    }
+}

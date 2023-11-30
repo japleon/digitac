@@ -1,0 +1,94 @@
+.text-formatted {
+    &.field--name-body {
+        h2 {
+            margin-bottom: rem(16px);
+            font-family: $font-family-base;
+            font-style: normal;
+            font-weight: 400;
+            font-size: rem(30px);
+            line-height: rem(38px);
+            color: $primary;
+        }
+
+        h3 {
+            font-family: $font-family-base;
+            font-style: normal;
+            font-weight: 700;
+            font-size: rem(20px);
+            line-height: rem(30px);
+            color: $primary;
+        }
+
+        h4,
+        h5,
+        h6 {
+            font-family: $font-family-base;
+            font-style: normal;
+            font-weight: 600;
+            font-size: rem(18px);
+            line-height: rem(28px);
+            color: $primary;
+        }
+
+        p {
+            font-family: $font-family-base;
+            font-style: normal;
+            font-weight: 400;
+            font-size: rem(18px);
+            line-height: rem(28px);
+            color: $secondary;
+
+            a {
+                color: $secondary;
+                text-decoration: underline;
+            }
+        }
+
+        ul,
+        ol {
+            li {
+                font-family: $font-family-base;
+                font-style: normal;
+                font-weight: 400;
+                font-size: rem(18px);
+                line-height: rem(28px);
+                color: $secondary;
+            }
+        }
+
+    }
+
+    table {
+        width: 100%;
+
+        thead {
+            th {
+                padding: rem(12px) rem(24px);
+                background-color: $grey-25;
+                border-bottom: rem(1px) solid $grey-300;
+                font-family: $font-family-base;
+                font-style: normal;
+                font-weight: 500;
+                font-size: 12px;
+                line-height: 18px;
+                color: $grey-600;
+            }
+        }
+
+        tbody {
+            tr {
+                td {
+                    padding: rem(26px) rem(24px);
+                    border-bottom: rem(1px) solid $grey-300;
+                    font-family: $font-family-base;
+                    font-style: normal;
+                    font-weight: 400;
+                    font-size: rem(14px);
+                    line-height: rem(20px);
+                    color: $grey-800;
+                }
+            }
+        }
+
+    }
+}

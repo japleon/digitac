@@ -1,0 +1,28 @@
+{#
+/**
+ * @file
+ * Theme override for a 'form' element.
+ *
+ * Available variables
+ * - attributes: A list of HTML attributes for the wrapper element.
+ * - children: The child elements of the form.
+ *
+ * @see template_preprocess_form()
+ */
+#}
+<form{{ attributes }}>
+
+
+
+{% if ('views-form-content-page-4' in attributes.id|render) or ('views-form-content-page-5' in attributes.id|render) or ('views-form-content-page-6' in attributes.id|render) %}
+  <div class="wrapper">
+  {{ children }}
+{% else %}
+  {{ children }}
+{% endif %}
+
+</form>
+
+
+
+

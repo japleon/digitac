@@ -3,32 +3,56 @@
     <div class="block-ideas__item-image">
         {{ fields.field_idea_imagen.content }}
 
+    {% if fields.field_idea_estado.content|render|striptags|trim %}
         <div class="region">
             {{ fields.field_idea_estado.content }}
         </div>
+    {% endif %}
+
     </div>
 
     <div class="block-ideas__item-content">
         <div class="category">
-            <span class="type">IDEA {{ fields.field_idea_numero.content }}</span>
+            <span class="type">{% if fields.type.content|render|striptags|trim == 'Idea'%}{{'IDEA'|t}}{%else%}{{'EXPERIENCIA'|t}}{%endif%} {{ fields.field_idea_numero.content }}</span>
+            
+            
             <span class="date">{{ fields.created.content }}</span>
         </div>
         <div class="title">{{ fields.title.content }}</div>
         <div class="content">{{ fields.body.content }}</div>
 
+
+
         <div class="author">
-            <span class="author__letters">{{ fields.uid.content|render|striptags|trim|first }}</span>
+            <span class="author__letters">
+                {% set siglas = fields.uid.content|render|striptags|trim|split(' ') %}
+                {% for item in siglas%}
+                    {{ item|first|upper }}
+                {% endfor %}
+
+                {% if 'experto' in user.getroles()  %}
+                <div class="star_expertoTac"><img src="/themes/digitac/images/icons/icon-verified.svg" alt="" /></div>
+                {% endif %}
+            </span>
             <span class="author__name">
                 {{ fields.uid.content }}
-                <span class="expert">Experto TAC</span>
+
+                {% if 'experto' in user.getroles()  %}
+                <span class="expert">{{'Experto TAC'|t}}</span>
+                {% endif %}
+
             </span>
         </div>
     </div>
 
     <div class="block-ideas__item-ratings">
+        {% if tiene_votacion == 1 %}
         <div class="stars">{{ fields.node_rate_widget_field.content }}</div>
         <div class="votes">{{ fields.value.content }}</div>
+        {% endif %}
+        {% if tiene_comentarios == 1 %}
         <div class="comments"><span class="sr-only">Comentarios</span> {{ fields.comment_count.content }}</div>
+        {% endif %}
     </div>
 
 </div>

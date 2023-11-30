@@ -56,15 +56,19 @@
     <div class="view-empty">
 
       {% if display_id == 'block_1' %}
-        <span>{{ 'Oooooops'|t }}</span>
-        <span>{{ 'Parece que no hay ideas opr aqui'|t }}</span>
-        <span>{{ '¿Por que no propones tu la primera?'|t }}</span>
-        <span><a href=#>{{ 'Nueva idea'|t }}</a></span>
+        <div class="block-empty">
+          <span class="block-empty__title">{{ 'Oooooops'|t }}</span>
+          <span class="block-empty__subtitle">{{ 'Parece que no hay ideas opr aqui'|t }}</span>
+          <span class="block-empty__text">{{ '¿Por que no propones tu la primera?'|t }}</span>
+          <a class="btn btn--primary btn-primary--icon btn-primary--icon-check" href='/nueva-idea/{{view.args[0]}}'>{{ 'Nueva idea'|t }}</a>
+        </div>
       {% elseif display_id == 'block_3' %}
-        <span>{{ 'Oooooops'|t }}</span>
-        <span>{{ 'Parece que no hay experiencias opr aqui'|t }}</span>
-        <span>{{ '¿Por que no propones tu la primera?'|t }}</span>
-        <span><a href=#>{{ 'Nueva experiencia'|t }}</a></span>
+        <div class="block-empty">
+          <span class="block-empty__title">{{ 'Oooooops'|t }}</span>
+          <span class="block-empty__subtitle">{{ 'Parece que no hay experiencias opr aqui'|t }}</span>
+          <span class="block-empty__text">{{ '¿Por que no propones tu la primera?'|t }}</span>
+          <a class="btn btn--primary btn-primary--icon btn-primary--icon-check" href='/nueva-experiencia/{{view.args[0]}}'>{{ 'Nueva experiencia'|t }}</a>
+        </div>
       {% endif %}
 
     </div>

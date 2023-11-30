@@ -1,0 +1,250 @@
+{#
+/**
+ * @file
+ * Theme override to display a node.
+ *
+ * Available variables:
+ * - node: The node entity with limited access to object properties and methods.
+ *   Only method names starting with "get", "has", or "is" and a few common
+ *   methods such as "id", "label", and "bundle" are available. For example:
+ *   - node.getCreatedTime() will return the node creation timestamp.
+ *   - node.hasField('field_example') returns TRUE if the node bundle includes
+ *     field_example. (This does not indicate the presence of a value in this
+ *     field.)
+ *   - node.isPublished() will return whether the node is published or not.
+ *   Calling other methods, such as node.delete(), will result in an exception.
+ *   See \Drupal\node\Entity\Node for a full list of public properties and
+ *   methods for the node object.
+ * - label: (optional) The title of the node.
+ * - content: All node items. Use {{ content }} to print them all,
+ *   or print a subset such as {{ content.field_example }}. Use
+ *   {{ content|without('field_example') }} to temporarily suppress the printing
+ *   of a given child element.
+ * - author_picture: The node author user entity, rendered using the "compact"
+ *   view mode.
+ * - metadata: Metadata for this node.
+ * - date: (optional) Themed creation date field.
+ * - author_name: (optional) Themed author name field.
+ * - url: Direct URL of the current node.
+ * - display_submitted: Whether submission information should be displayed.
+ * - attributes: HTML attributes for the containing element.
+ *   The attributes.class element may contain one or more of the following
+ *   classes:
+ *   - node: The current template type (also known as a "theming hook").
+ *   - node--type-[type]: The current node type. For example, if the node is an
+ *     "Article" it would result in "node--type-article". Note that the machine
+ *     name will often be in a short form of the human readable label.
+ *   - node--view-mode-[view_mode]: The View Mode of the node; for example, a
+ *     teaser would result in: "node--view-mode-teaser", and
+ *     full: "node--view-mode-full".
+ *   The following are controlled through the node publishing options.
+ *   - node--promoted: Appears on nodes promoted to the front page.
+ *   - node--sticky: Appears on nodes ordered above other non-sticky nodes in
+ *     teaser listings.
+ *   - node--unpublished: Appears on unpublished nodes visible only to site
+ *     admins.
+ * - title_attributes: Same as attributes, except applied to the main title
+ *   tag that appears in the template.
+ * - content_attributes: Same as attributes, except applied to the main
+ *   content tag that appears in the template.
+ * - author_attributes: Same as attributes, except applied to the author of
+ *   the node tag that appears in the template.
+ * - title_prefix: Additional output populated by modules, intended to be
+ *   displayed in front of the main title tag that appears in the template.
+ * - title_suffix: Additional output populated by modules, intended to be
+ *   displayed after the main title tag that appears in the template.
+ * - view_mode: View mode; for example, "teaser" or "full".
+ * - teaser: Flag for the teaser state. Will be true if view_mode is 'teaser'.
+ * - page: Flag for the full page state. Will be true if view_mode is 'full'.
+ * - readmore: Flag for more state. Will be true if the teaser content of the
+ *   node cannot hold the main body content.
+ * - logged_in: Flag for authenticated user status. Will be true when the
+ *   current user is a logged-in member.
+ * - is_admin: Flag for admin user status. Will be true when the current user
+ *   is an administrator.
+ *
+ * @see template_preprocess_node()
+ *
+ */
+#}
+{%
+  set classes = [
+    'node',
+    'node--type-' ~ node.bundle|clean_class,
+    node.isPromoted() ? 'node--promoted',
+    node.isSticky() ? 'node--sticky',
+    not node.isPublished() ? 'node--unpublished',
+    view_mode ? 'node--view-mode-' ~ view_mode|clean_class,
+  ]
+%}
+{{ attach_library('bootstrap5/node') }}
+
+{{ drupal_view('view_retos', 'block_2', content.field_idea_reto.0['#entity'].nid.value ) }}
+
+<article{{ attributes.addClass(classes) }}>
+
+    <div class="headband-title">
+      <div class="headband-title__content">
+        {{label}}
+      </div>
+    </div>
+
+    <div class="headband">
+      <div class="headband__content">
+        <div class="headband__col">
+          <div class="author">
+
+
+            <span class="author__letters">
+              {% set siglas = author_name|render|striptags|trim|split(' ') %}
+              {% for item in siglas%}
+                {{ item|first|upper }}
+              {% endfor %}
+
+              {% if 'experto' in node.getOwner().getroles()  %}
+                <div class="star_expertoTac"><img src="/themes/digitac/images/icons/icon-verified.svg" alt="" /></div>
+              {% endif %}
+            </span>
+            <span class="author__name">{{author_name}}</span>
+          </div>
+
+          <div class="category">
+            <span class="category__type">{{ 'EXPERIENCIA'|t }} {{content.field_idea_numero.0}}</span>
+            <span class="category__date">{{'Hace'|t}} {{hence}}</span>
+          </div>
+
+          <div class="state">
+            {{content.field_idea_estado.0['#entity'].tid.value}}
+            {{ content.field_idea_estado.0 }}
+          </div>
+
+        </div>
+
+        <div class="headband__col">
+          <div class="comments">
+            <span class="sr-only">Comentarios:</span> {{ content.field_idea_comentarios['#items'].comment_count }}
+          </div>
+
+          {{ drupal_view('votingapi_votes', 'block_2', node.id ) }}
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="idea">
+        <div class="body">
+            {{ content.body }}
+        </div>
+
+        <div class="tags">
+            {{ content.field_idea_tags }}
+        </div>
+
+        {% if content.field_idea_ideas_relacionadas.0 %}
+        <div class="related-ideas">
+            <div class="related-ideas__title">{{ 'Experiencias relacionadas'|t}}</div>
+            {{ content.field_idea_ideas_relacionadas }}
+        </div>
+        {% endif %}
+      </div> {# /.idea #}
+    </div>
+
+    <div class="ratings">
+      <div class="ratings__content">
+        {% if logged_in %}
+           <span>{{'Valora esta experiencia'|t}}</span>  {{ content.rate_stars }}
+        {% else %}
+            <span class="ratings__login">{{'Para hacer una valoración'|t}}&nbsp;<a href="/user/login">necesitas estar logado</a></span>
+        {% endif %}
+      </div>
+    </div>
+
+
+    <div class="container">
+      <div class="idea">
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+          <li class="nav-item" role="presentation">
+            <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">
+              Comentarios <span class="number-comments">{{ content.field_idea_comentarios['#items'].comment_count }}</span>
+            </button>
+          </li>
+          <li class="nav-item" role="presentation">
+            <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">
+              Archivos adjuntos
+            </button>
+          </li>
+          <li class="nav-item" role="presentation">
+            <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact" type="button" role="tab" aria-controls="contact" aria-selected="false">
+              Estados
+            </button>
+          </li>
+        </ul>
+
+        <div class="tab-content" id="myTabContent">
+          <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+            <div class="tab__comments">
+              Numero comentarios: {{ content.field_idea_comentarios['#items'].comment_count }}
+              {{ content.field_idea_comentarios}}
+            </div> {# tab comments #}
+
+            {% if not logged_in %}
+              <span class="ratings__login">{{'Para hacer un comentario'|t}}&nbsp;<a href="/user/login">necesitas estar logado</a></span>
+            {% endif %}
+
+          </div>
+          <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+            <div class="tab__files">
+              {% for key, item in content.field_idea_archivos%}
+                {% if key|first != '#' %}
+                <div class="tab__files-item">
+                  <div class="tab__files-name">
+                    <div class="name">
+                      {{ item['#file'].getOwner().displayname}}
+                    </div>
+
+                    <div class="date">
+                      {{ item['#file'].created.value|date('Y-m-d')}}
+                    </div>
+                  </div>
+
+                  <div class="tab__files-file">
+                  {{ item }}
+                  </div>
+                </div>
+                {% endif %}
+
+              {% endfor %}
+
+              {% if not logged_in %}
+                <span class="ratings__login">{{'Para subir adjuntos'|t}}&nbsp;<a href="/user/login">necesitas estar logado</a></span>
+              {% endif %}
+
+
+            </div>
+          </div>
+          <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+            <div class="tab__states">
+              <div class="states">
+                {% for key, item in content.field_idea_cambios_estado  %}
+                  {% if key|first != '#' %}
+                    {% set cambio = item['#context'].value|split('||') %}
+                    <div class="counter {% if cambio.0 == 'Cerrado' %}closed{% endif %}">{{key+1}}</div>
+                    <div class="states__item">
+                      <div class="state {% if cambio.0 == 'Cerrado' %}closed{% endif %}">{{ cambio.0 }}</div>
+                      <div class="date">{{ cambio.1 }}</div>
+                      <div class="author">{{ cambio.2 }}</div>
+                    </div>
+
+                  {% endif %}
+                {% endfor %}
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div> {# /.idea #}
+    </div>
+
+
+
+</article>

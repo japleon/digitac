@@ -53,14 +53,28 @@
   ]
 %}
 
-  <div class="tabs">
-  {% if multiple %}
-      {% for item in items %}
-        <div{{ item.attributes.addClass('field__item') }}>{{ item.content }}</div>
-      {% endfor %}
-  {% else %}
-    {% for item in items %}
-      <div{{ attributes.addClass(classes, 'field__item') }}>{{ item.content }}</div>
-    {% endfor %}
-  {% endif %}
+  <div class="container">
+    <div class="tab-actions">
+      <ul>
+        {% if multiple %}
+            {% for item in items %}
+              <li {{ item.attributes.addClass('field__item tab-actions__item') }}><a href="#" id="socios" data-bs-toggle="tab" data-bs-target="#socios" type="button" role="tab" aria-controls="socios" aria-selected="true">{{ item.content }}</a></li>
+            {% endfor %}
+        {% else %}
+          {% for item in items %}
+            <li {{ attributes.addClass(classes, 'field__item tab-actions__item') }}><a href="#" id="Reconocimientos" data-bs-toggle="tab" data-bs-target="#Reconocimientos" type="button" role="tab" aria-controls="Reconocimientos" aria-selected="true">{{ item.content }}</a></li>
+          {% endfor %}
+        {% endif %}
+      <ul>
+    </div>
   </div>
+
+
+
+{# <div class="tab-actions">
+      <ul>
+        <li class="tab-actions__item active">{{'Ideas'|t}} <span class="number">34</span></li>
+        <li class="tab-actions__item"><a href="#">{{'Experiencias'|t}} <span class="number">15</span></a></li>
+        <li class="tab-actions__item"><a href="#">{{'Sobre este reto'|t}}</a></li>
+      </ul>
+    </div> #}

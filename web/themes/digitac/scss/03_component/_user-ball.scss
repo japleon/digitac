@@ -1,0 +1,29 @@
+.user-ball {
+    width: auto;
+    min-width: rem(40px);
+    height: rem(40px);
+    padding: rem(6px);
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    background-color: $grey-100;
+    border-color: rem(1px) solid rgba($grey-900, 0.75);
+    border-radius: 50%;
+    font-family: $font-family-base;
+    font-style: normal;
+    font-weight: 600;
+    font-size: rem(16px);
+    line-height: rem(24px);
+    text-align: center;
+    color: $grey-600;
+    display: inline-grid;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+
+    .star_expertoTac {
+        position: absolute;
+        bottom: rem(-4px);
+        right: 0;
+    }
+}

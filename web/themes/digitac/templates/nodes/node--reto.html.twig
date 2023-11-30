@@ -117,72 +117,91 @@
       </div>
 
 
-    </div>
+    </div> {# challenge #}
 
 
-    <div class="tab-actions">
-      <ul>
-        <li class="tab-actions__item active">{{'Ideas'|t}} <span class="number">34</span></li>
-        <li class="tab-actions__item"><a href="#">{{'Experiencias'|t}} <span class="number">15</span></a></li>
-        <li class="tab-actions__item"><a href="#">{{'Sobre este reto'|t}}</a></li>
-      </ul>
-    </div>
+  <ul class="nav nav-tabs nav-tabs-actions" id="myTab" role="tablist">
+    <li class="nav-item" role="presentation">
+      <button class="nav-link nav-link-ideas active" id="idea-tab" data-bs-toggle="tab" data-bs-target="#idea" type="button" role="tab" aria-controls="idea" aria-selected="true">
+        {{'Ideas'|t}} <span class="number">{{ drupal_view('ideas', 'block_3', node.id ) }}</span>
+      </button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button class="nav-link nav-link-experience" id="experience-tab" data-bs-toggle="tab" data-bs-target="#experience" type="button" role="tab" aria-controls="experience" aria-selected="false">
+        {{'Experiencias'|t}} <span class="number">{{ drupal_view('ideas', 'block_4', node.id ) }}</span>
+      </button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button class="nav-link" id="challenge-tab" data-bs-toggle="tab" data-bs-target="#challenge" type="button" role="tab" aria-controls="challenge" aria-selected="false">
+        {{'Sobre este reto'|t}}</a>
+      </button>
+    </li>
+  </ul>
 
-    <div class="message">
-      <div class="message__content">
-        <p class="message__title">{{'Tablero de ideas'|t}}</p>
-        <p class="message__text">{{'En este tablero puedes proponer nuevas ideas que den solución al reto, e interactuar con otras ideas que han propuesto otros usuarios'|t}}</p>
-      </div>
-    </div>
+  <div class="tab-content" id="myTabContent">
+    <div class="tab-pane tab-pane-idea fade show active" id="idea" role="tabpanel" aria-labelledby="idea-tab">
 
-
-
-    <div class="tab-ideas">
-
-      <div class="actions">
-        <ul>
-          <li class="actions__item new nueva_idea"><a href="/nueva-idea" class="btn btn-primary btn-primary--icon">{{'Nueva idea'|t}}</a></li>
-          {% if 'administrator' in user.getroles(TRUE) or 'moderador' in user.getroles(TRUE) %}
-            <li class="actions__item admin admin_reto"><a href="/admin-retos" class="btn btn-secondary btn-secondary--icon">{{'Administrar ideas'|t}}</a></li>
-            <li class="actions__item statistics estadisticas"><a href="/nuevo-reto" class="btn btn-secondary btn-secondary--icon">{{'Estadísticas'|t}}</a> </li>
-          {% endif %}
-
-        </ul>
-      </div>
-
-      {{ drupal_view('distributivas', 'block_1', node.id ) }}
-
-
-    </div>
-
-
-    <div class="tab_experiencias" style="display:none">
-
-      <div class="actions">
-        <ul>
-          <li class="actions__item new nueva_idea"><a href="/nueva-idea" class="btn btn-primary btn-primary--icon">{{'Nueva experiencia'|t}}</a></li>
-          {% if 'administrator' in user.getroles(TRUE) or 'moderador' in user.getroles(TRUE) %}
-            <li class="actions__item admin admin_reto"><a href="/admin-retos" class="btn btn-secondary btn-secondary--icon">{{'Administrar experiencias'|t}}</a></li>
-            <li class="actions__item statistics estadisticas"><a href="/nuevo-reto" class="btn btn-secondary btn-secondary--icon">{{'Estadísticas'|t}}</a> </li>
-          {% endif %}
-
-        </ul>
+      <div class="message" id="message-idea">
+        <a href="#" class="message__close js-message-close"><span class="visually-hidden">Cerrar mensaje</span></a>
+        <div class="message__content">
+          <p class="message__title">{{'Tablero de ideas'|t}}</p>
+          <p class="message__text">{{'En este tablero puedes proponer nuevas ideas que den solución al reto, e interactuar con otras ideas que han propuesto otros usuarios'|t}}</p>
+        </div>
       </div>
 
-      {{ drupal_view('distributivas', 'block_3', node.id ) }}
+      <div class="tab-ideas">
 
+        <div class="actions">
+          <ul>
+            <li class="actions__item new nueva_idea"><a href="/nueva-idea/{{node.id}}" class="btn btn-primary btn-primary--icon">{{'Nueva idea'|t}}</a></li>
+            {% if 'administrator' in user.getroles(TRUE) or 'moderador' in user.getroles(TRUE) %}
+              <li class="actions__item admin admin_reto"><a href="/admin-ideas/{{node.id}}" class="btn btn-secondary btn-secondary--icon">{{'Administrar ideas'|t}}</a></li>
+              <li class="actions__item statistics estadisticas"><a href="/estadisticas" class="btn btn-secondary btn-secondary--icon">{{'Estadísticas'|t}}</a> </li>
+            {% endif %}
+
+          </ul>
+        </div>
+
+        {{ drupal_view('distributivas', 'block_1', node.id ) }}
+
+      </div> {# tab-ideas #}
 
     </div>
 
+    <div class="tab-pane tab-pane-experience fade" id="experience" role="tabpanel" aria-labelledby="experience-tab">
+
+      <div class="tab-experiences">
+        <div class="actions">
+          <ul>
+            <li class="actions__item new nueva_idea"><a href="/nueva-experiencia/{{node.id}}" class="btn btn-primary btn-primary--icon">{{'Nueva experiencia'|t}}</a></li>
+            {% if 'administrator' in user.getroles(TRUE) or 'moderador' in user.getroles(TRUE) %}
+              <li class="actions__item admin admin_reto"><a href="/admin-experiencias/{{node.id}}" class="btn btn-secondary btn-secondary--icon">{{'Administrar experiencias'|t}}</a></li>
+              <li class="actions__item statistics estadisticas"><a href="/estadisticas" class="btn btn-secondary btn-secondary--icon">{{'Estadísticas'|t}}</a> </li>
+            {% endif %}
+
+          </ul>
+        </div>
+
+        {{ drupal_view('distributivas', 'block_3', node.id ) }}
 
 
-    <div class="tab_sobre_reto" style="display:none">
+      </div> {# tab-experiencias #}
 
+    </div>
+
+    <div class="tab-pane tab-pane-challenge fade" id="challenge" role="tabpanel" aria-labelledby="challenge-tab">
+
+      <div class="tab_sobre_reto">
         <div class="cuerpo">
           {{ content.body }}
         </div>
+      </div> {# tab-sobre-este-reto #}
 
     </div>
+  </div>
+
+
+
 
 
 

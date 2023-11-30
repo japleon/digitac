@@ -29,14 +29,40 @@
 @import '03_component/paragraph-claim';
 @import '03_component/paragraph-type-bloque-vista';
 @import '03_component/paragraph-header';
+@import '03_component/paragraph-image-text';
+@import '03_component/paragraph-cabecera-solo-imagen';
+@import '03_component/paragraph-text-text';
+@import '03_component/paragraph-type-tabs';
+@import '03_component/paragraph-usuario-stats';
 @import '03_component/block-slider-news';
 @import '03_component/block-ideas';
 @import '03_component/selectbox';
 @import '03_component/actions';
 @import '03_component/tab-actions';
+@import '03_component/nav-tabs-actions';
 @import '03_component/message';
+@import '03_component/message-comments';
 @import '03_component/tab-ideas';
 @import '03_component/courses';
+@import '03_component/course';
+@import '03_component/block-empty';
+@import '03_component/courses-rating';
+@import '03_component/sponsors';
+@import '03_component/block-digitac-h';
+@import '03_component/block-error';
+@import '03_component/block-contact';
+@import '03_component/block-number';
+@import '03_component/form';
+@import '03_component/node-reto-frontal-form';
+@import '03_component/statistics';
+@import '03_component/table';
+@import '03_component/text-formatted';
+@import '03_component/user-ball';
+@import '03_component/modal';
+@import '03_component/tooltip';
+@import '03_component/block-formblock-user-edit';
+
+
 /* @import '03_component/article-head';
 @import '03_component/foreword-head';
 @import '03_component/paragraph-cols';
@@ -52,9 +78,15 @@
 @import '05_theme/view-id-view_retos';
 @import '05_theme/view-id-content';
 @import '05_theme/view-id-cursos';
+@import '05_theme/view-id-soluciones';
+@import '05_theme/view-filters';
 
 // page
 @import '05_theme/page/node--type-noticia';
 @import '05_theme/page/node--type-reto';
 @import '05_theme/page/node--type-idea';
+@import '05_theme/page/node--type-curso';
+@import '05_theme/page/login';
+@import '05_theme/page/register';
+@import '05_theme/page/my-account';
 

@@ -1,0 +1,53 @@
+.message-comments {
+    margin-bottom: rem(22px);
+    padding: rem(16px);
+    background-color: $blue-25;
+    border: rem(1px) solid $blue-300;
+    border-radius: rem(12px);
+    position: relative;
+
+    @include media(md) {
+        margin-bottom: rem(40px);
+    }
+
+
+    &__content {
+        padding-left: rem(52px);
+        position: relative;
+        font-family: $font-family-base;
+
+        p {
+            margin-bottom: 0;
+            font-style: normal;
+            font-weight: 600;
+            font-size: rem(14px);
+            line-height: rem(20px);
+            color: $blue-700;
+            position: relative;
+
+            &::before {
+                content: '';
+                width: rem(38px);
+                height: rem(38px);
+                background-image: url('../images/icons/icon-info.svg');
+                background-repeat: no-repeat;
+                background-size: contain;
+                position: absolute;
+                top: 50%;
+                left: rem(-52px);
+                transform: translateY(-50%);
+            }
+        }
+
+        a {
+            margin-top: rem(12px);
+            font-style: normal;
+            font-weight: 600;
+            font-size: rem(14px);
+            line-height: rem(20px);
+            color: $blue-600;
+            display: inline-flex;
+        }
+    }
+
+}

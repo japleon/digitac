@@ -1,0 +1,89 @@
+.paragraph-usuario-stats {
+    // block number
+    .block-number {
+        @include media(lg) {
+            max-width: 100%;
+            width: 100%;
+            margin-top: -100px;
+        }
+
+
+       /*  &__item {
+            //width: 25%;
+            width: 100%;
+            margin-bottom: rem(12px);
+            padding: 0 0 rem(12px);
+            text-align: center;
+            position: relative;
+
+            @include media(md) {
+                margin-bottom: 0;
+                padding: 0 rem(24px);
+                text-align: left;
+                border-right: rem(1px) solid $grey-700;
+            }
+
+            @include media(lg) {
+                padding: 0 rem(48px);
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+            }
+
+            &::after {
+                content: '';
+                width: rem(112px);
+                height: rem(1px);
+                margin: 0 auto;
+                background: $grey-700;
+                position: absolute;
+                bottom: 0;
+                right: 0;
+                left: 0;
+
+                @include media(md) {
+                    display: none;
+                }
+            }
+
+            &:first-child {
+                padding-left: 0;
+            }
+
+            &:last-child {
+                padding-right: 0;
+                border-right: none;
+
+                &::after {
+                    display: none;
+                }
+            }
+        }
+
+        &__number {
+            font-family: $font-family-base;
+            font-style: normal;
+            font-weight: 400;
+            font-size: rem(36px);
+            line-height: rem(44px);
+            letter-spacing: -0.02em;
+            color: $black;
+
+            @include media(md) {
+                font-size: rem(48px);
+                line-height: rem(60px);
+            }
+        }
+
+        &__text {
+            margin-bottom: rem(6px);
+            font-family: $font-family-base;
+            font-style: normal;
+            font-weight: 600;
+            font-size: rem(18px);
+            line-height: rem(28px);
+            color: $primary;
+            text-align: left;
+        } */
+    }
+}

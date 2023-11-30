@@ -16,12 +16,78 @@
  * @see template_preprocess_user()
  */
 #}
-  {% if content %}
-  <div class="bola_iniciales">
 
-    {% set siglas = user.name.0.value|striptags|split(',') %}
-    {% for item in siglas%}
-      {{ item|first|upper }}
-    {% endfor %}
-  </div>
-  {% endif %}
+<div class="user-account">
+    {{ drupal_entity('paragraphs_library_item', 2)| without('label') }}
+
+
+    {% if content %}
+      
+      {{ drupal_entity('paragraphs_library_item', 3)| without('label') }}
+
+      <div class="user-account__body">
+        <div class="container">
+          <h2>{{'Mis datos'|t}}</h2>
+
+          <div class="data">
+            <div class="data__row">
+              <div class="data__row-col name">
+              {{content.field_usr_nombre}}
+              </div>
+
+              <div class="data__row-col lastname">
+              {{content.field_usr_apellidos}}
+              </div>
+            </div>
+
+            <div class="data__row">
+              <div class="data__row-col">
+                <div class="field__label">País de residencia *</div>
+                <div class="field__item">
+                {{content.field_usr_pais.0}}
+                </div>
+              </div>
+            </div>
+
+            <div class="data__row">
+              <div class="data__row-col">
+                <div class="field__label">Email *</div>
+                <div class="field__item">
+                {{ user.mail.value}}
+                </div>
+              </div>
+            </div>
+
+            <div class="data__row">
+              <div class="data__row-col">
+                <div class="field__label">Empresa / Organismo / Institución</div>
+                <div class="field__item">
+                {% if content.field_usr_empresa|render|striptags|trim %}
+                {{content.field_usr_empresa}}
+                {% else %}
+                {{'Haz click en'|t}} <a href="/editar-usuario">{{'Editar mis datos'|t}}</a> {{'para añadir Empresa/Organismo/Institucion'|t}}
+                {% endif %}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="user-box">
+        <div class="container">
+          <h2>{{ 'Contraseña'| t}}</h2>
+          <a href="/editar-usuario" class="btn btn-primary">{{ 'Cambiar contraseña'|t}}</a>
+        </div>
+      </div>
+
+      <div class="user-box user-box--secondary">
+        <div class="container">
+          <a href=# class="btn btn-secondary">{{ 'Eliminar mi cuenta'|t}}</a>
+        </div>
+      </div>
+
+
+    {% endif %}
+
+</div>

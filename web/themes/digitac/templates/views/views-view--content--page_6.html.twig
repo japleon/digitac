@@ -39,41 +39,56 @@
     dom_id ? 'js-view-dom-id-' ~ dom_id,
   ]
 %}
+
+
+  {{ drupal_view('view_retos', 'block_2',view.args[0] ) }}
+
+
 <div{{ attributes.addClass(classes) }}>
   {{ title_prefix }}
   {% if title %}
     {{ title }}
   {% endif %}
   {{ title_suffix }}
-  {% if header %}
-    <div class="view-header">
-      {{ header }}
-    </div>
-  {% endif %}
-  {% if exposed %}
-    <div class="view-filters">
-      {{ exposed }}
-    </div>
-  {% endif %}
-  {% if attachment_before %}
-    <div class="attachment attachment-before">
-      {{ attachment_before }}
-    </div>
-  {% endif %}
 
-  {% if rows %}
-    <div class="view-content">
-      {{ rows }}
-    </div>
-  {% elseif empty %}
-    <div class="view-empty">
-      {{ empty }}
-    </div>
-  {% endif %}
+  <div class="view-width">
 
-  {% if pager %}
-    {{ pager }}
-  {% endif %}
+    <div class="view-box">
+      <div class="view-container">
+      {% if header %}
+        <div class="view-header">
+          Experiencias <span>{{ header }} {{'experiencias'|t}}</span>
+        </div>
+      {% endif %}
+      {% if exposed %}
+        <div class="view-filters">
+          <a href='/nueva-experiencia/{{view.args[0]}}' class="btn btn-primary">{{'Nueva experiencia'|t}}</a>
+          {{ exposed }}
+        </div>
+      {% endif %}
+      </div>
+    </div>
+    {% if attachment_before %}
+      <div class="attachment attachment-before">
+        {{ attachment_before }}
+      </div>
+    {% endif %}
+
+    {% if rows %}
+      <div class="view-content">
+        {{ rows }}
+      </div>
+    {% elseif empty %}
+      <div class="view-empty">
+        {{ empty }}
+      </div>
+    {% endif %}
+
+    {% if pager %}
+      {{ pager }}
+    {% endif %}
+  </div> {# view-width #}
+
   {% if attachment_after %}
     <div class="attachment attachment-after">
       {{ attachment_after }}

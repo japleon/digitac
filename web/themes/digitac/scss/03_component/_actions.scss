@@ -1,16 +1,39 @@
 .actions {
+  width: 100%;
+
+  @include media(md) {
+    width: auto;
+  }
 
   ul {
     margin: 0;
     padding: 0;
     list-style: none;
     display: flex;
+    flex-direction: column;
+
+    @include media(md) {
+      flex-direction: row;
+    }
   }
 
   &__item {
-    margin-left: rem(12px);
+    width: 100%;
+    margin-bottom: rem(12px);
+
+    @include media(md) {
+      width: auto;
+      margin-bottom: 0;
+      margin-left: rem(12px);
+    }
 
     a {
+      width: 100%;
+
+      @include media(md) {
+        width: auto;
+      }
+
       &::before {
         content: '';
         width: rem(20px);
@@ -41,6 +64,8 @@
     }
 
     &.statistics {
+      padding: 0;
+      background: none;
       a {
         &::before {
           background-image: url('../images/icons/icon-statistics.svg');

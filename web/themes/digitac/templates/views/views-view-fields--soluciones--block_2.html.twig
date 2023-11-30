@@ -1,27 +1,38 @@
         {% if fields.field_solucion_imagen.content|render|striptags('<img>')|trim %}
-        <div class="block-slider-news__item-image">
+        <div class="courses__image">
             {{ fields.field_solucion_imagen.content }}
         </div>
         {% else %}
             Hay que poner una imagen por defecto???
         {% endif %}
-        
 
-        <div class="block-slider-news__item-content">
+
+        <div class="courses__content">
             <div class="category">
                 <span class="type">{{ fields.type.content }}</span>
             </div>
             <a href="{{ fields.view_node.content|render|striptags|trim }}" class="btn btn--link">
                 <div class="title">{{ fields.title.content }}</div>
             </a>
+
+            {% if(fields.type.content|render|striptags|trim == 'Solución') %}
             <div class="content">{{ fields.body.content }}</div>
+            {% else %}
+            <div class="content">{{ fields.field_tramite_sobre_este.content }}</div>
+            {% endif %}
+
 
            <div class="tags">
                 {% if fields.field_solucion_tipo.content|render|striptags|trim %}
-               <span class="tag">{{ fields.field_solucion_tipo.content }}</span>
+
+                {% set tags = fields.field_solucion_tipo.content|render|striptags|trim|split('|') %}
+                {% for key,item in tags %}
+                    <span class="tag">{{item}}</span>
+                {% endfor %}
+
                {% endif %}
-                {% if fields.field_solucion_precio.content|render|striptags|trim %}
-               <span class="tag">{{ fields.field_solucion_precio.content }}</span>
+                {% if fields.field_solucion_precio.content|render|striptags|trim !='' %}
+               <span class="tag">{{ fields.field_solucion_gratuidad.content }}</span>
                {% endif %}
            </div>
 
@@ -30,19 +41,27 @@
             <div class="stars">
 
 <!--                Aqui el problema es que una view bloque no me deja insertar el rate widget, por lo que hay que renderizarlo a mano. Cambiar la * por una imagen de una estrella rellena, y el / por media estrella, y la O por estrella vacia-->
-            
+
                 {% if fields.value.content|render|striptags|trim %}
-                    {% set media = fields.value.content|striptags %}
-                    {% for i in range(1, media) %}
-                        *   
-                    {% endfor %}
-                    {% if media matches '/^[-+]?[0-9]*\\.[0-9]+$/' %}
-                        /
-                        {% set media = media + 1 %}
+                    {% set media = fields.value.content|render|striptags %}
+                    {% set media_dec = media|split('.')%}
+
+                    {% if media_dec.0 > 0 %}
+                        {% for i in range(1, media_dec.0) %}
+                            <img src="/themes/digitac/images/icons/icon-star.svg" alt=""/>
+                        {% endfor %}
+                    {% else %}
+                        {% set media_final= 0 %}
                     {% endif %}
-                    {% if media < 5 %}
-                        {% for i in range(media,4) %}
-                            O   
+                    
+                    {% set media_final= media_dec.0 %}
+                    {% if media_dec.1 matches '/^[1-9]+/' %}
+                        <img src="/themes/digitac/images/icons/icon-star-half.svg" alt=""/>
+                        {% set media_final= media_dec.0 + 1 %}
+                    {% endif %}
+                    {% if media_final < 5 %}
+                        {% for i in range(media_final,4) %}
+                            <img src="/themes/digitac/images/icons/icon-star-empty.svg" alt=""/>
                         {% endfor %}
                     {% endif %}
 

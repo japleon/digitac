@@ -50,13 +50,32 @@
       {{ header }}
     </div>
   {% endif %}
-  {% if exposed %}
-    <div class="view-filters">
-      {{ exposed }}
-    </div>
-  {% endif %}
 
+  <div class="view-col">
+    <a href="#" class="btn btn-primary btn-primary--icon btn-primary--icon-filter btn--filter js-filters">Filtrar resultados</a>
+    {% if exposed %}
+      <div class="view-filters">
+        <div class="view-filters__container">
+          <div class="view-filters__head">
+            <p>Filtrar resultados</p>
+
+            <a href="#" class="btn-close-filters js-close-filters">
+              <span class="visually-hidden">Cerrar filtros</span>
+            </a>
+          </div>
+
+          {{ exposed }}
+        </div>
+      </div>
+
+      <div class="view-filters-layer" aria-hidden="true"></div>
+    {% endif %}
+
+    <div class="view-block view-block--desktop">
     {{ drupal_view('cursos', 'block_4' ) }}
+    </div>
+  </div>
+
 
 
   {% if rows %}
@@ -72,6 +91,14 @@
   {% if pager %}
     {{ pager }}
   {% endif %}
+
+
+    {# para mobile lo ponemos aqui o antes del pager? iria debajo del listado de soluciones #}
+    <div class="view-block view-block--mob">
+    {{ drupal_view('cursos', 'block_4' ) }}
+    </div>
+
+
   {% if attachment_after %}
     <div class="attachment attachment-after">
       {{ attachment_after }}

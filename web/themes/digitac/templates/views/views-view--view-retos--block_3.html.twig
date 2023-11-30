@@ -45,8 +45,8 @@
     <ul>
       <li class="actions__item new nuevo_reto"><a href="/nuevo-reto" class="btn btn-primary btn-primary--icon">{{'Nuevo reto'|t}}</a></li>
       {% if 'administrator' in user.getroles(TRUE) or 'moderador' in user.getroles(TRUE) %}
-        <li class="actions__item admin admin_reto"><a href="/admin-retos" class="btn btn-secondary btn-secondary--icon">{{'Administrar reto'|t}}</a></li>
-        <li class="actions__item statistics estadisticas"><a href="/nuevo-reto" class="btn btn-secondary btn-secondary--icon">{{'Estadísticas'|t}}</a> </li>
+        <li class="actions__item admin admin_reto"><a href="/admin-retos" class="btn btn-secondary btn-secondary--icon">{{'Administrar retos'|t}}</a></li>
+        <li class="actions__item statistics estadisticas"><a href="/estadisticas" class="btn btn-secondary btn-secondary--icon">{{'Estadísticas'|t}}</a> </li>
       {% endif %}
 
     </ul>

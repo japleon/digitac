@@ -81,40 +81,46 @@
 {{ attach_library('bootstrap5/node') }}
 
 <article{{ attributes.addClass(classes) }}>
-  <div class="node-news__content">
+  <div class="container">
+    <div class="node-news__content">
+      <div class="node-news__date">
+        {% set date_c = node.created.value|date("d") ~ ' ' ~ node.created.value|date("M")|t() ~ ' ' ~ node.created.value|date("y") %}
+        {{ content.field_noticia_tipo.0 }} | {{ date_c }}
+      </div>
 
-    <div class="node-news__date">
-      {% set date_c = node.created.value|date("d") ~ ' ' ~ node.created.value|date("M")|t() ~ ' ' ~ node.created.value|date("y") %}
-      {{ content.field_noticia_tipo.0 }} | {{ date_c }}
+      <div class="node-news__title">
+      {{label}}
+      </div>
+
+      {% if content.field_noticia_imagen.0['#markup'] %}
+      <div class="node-news__image">
+        <img src="{{content.field_noticia_imagen.0['#markup']}}">
+      </div>
+      {% endif %}
+
+      {% if content.field_noticia_entradilla.0 %}
+      <div class="node-news__entrance">
+        {{ content.field_noticia_entradilla.0 }}
+      </div>
+      {% endif %}
+
+      {% if content.field_noticia_archivo.0 %}
+      <div class="node-news__file">
+        {{ content.field_noticia_archivo.0 }}
+      </div>
+      {% endif %}
+
+      {% if content.field_noticia_enlace.0 %}
+      <div class="node-news__link">
+        {{ content.field_noticia_enlace.0 }}
+      </div>
+      {% endif %}
+
+      <div class="node-news__body">
+        {{ content.body }}
+      </div>
+
     </div>
-
-    <div class="node-news__title">
-     {{label}}
-    </div>
-
-    <div class="node-news__image">
-      <img src="{{content.field_noticia_imagen.0['#markup']}}">
-    </div>
-
-    <div class="node-news__entrance">
-      {{ content.field_noticia_entradilla.0 }}
-    </div>
-
-
-    <div class="node-news__file">
-      {{ content.field_noticia_archivo.0 }}
-    </div>
-
-    <div class="node-news__link">
-      {{ content.field_noticia_enlace.0 }}
-    </div>
-
-
-
-    <div class="node-news__body">
-      {{ content.body }}
-    </div>
-
   </div>
 
 

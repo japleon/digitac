@@ -1,0 +1,58 @@
+.tooltip-icon {
+    $tooltipIconParent: ".tooltip-icon";
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+
+    &__icon {
+        width: 24px;
+        height: 24px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    &__text {
+        visibility: hidden;
+        width: rem(120px);
+        background-color: $primary;
+        font-family: $font-family-base;
+        font-style: normal;
+        font-weight: 600;
+        font-size: rem(12px);
+        line-height: rem(18px);
+        color: $white;
+        text-align: center;
+        border-radius: rem(6px);
+        padding: rem(8px) 0;
+        position: absolute;
+        z-index: 1;
+        top: 135%;
+        left: 50%;
+        margin-left: rem(-60px);
+        opacity: 0;
+        transition: opacity 0.3s;
+
+
+        &::after {
+            content: '';
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            margin-left: rem(-5px);
+            border-width: rem(5px);
+            border-style: solid;
+            border-color: transparent transparent $primary transparent;
+        }
+    }
+
+    &:hover {
+        #{$tooltipIconParent}__text {
+            visibility: visible;
+            opacity: 1;
+        }
+    }
+}
+
+
+

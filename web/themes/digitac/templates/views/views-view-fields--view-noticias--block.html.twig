@@ -3,9 +3,11 @@
     <div class="block-slider-news__item-image">
         {{ fields.field_noticia_imagen.content }}
 
+        {% if fields.field_noticia_region.content|render|striptags|trim %}
         <div class="region">
             {{ fields.field_noticia_region.content }}
         </div>
+        {% endif %}
     </div>
 
     <div class="block-slider-news__item-content">

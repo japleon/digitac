@@ -54,13 +54,12 @@
 
     {% block content %}
     <div class="container">
-        <div class="title">
-          {{ content.field_pg_cab_solo_img_titulo}}
-        </div>
-      <div class="paragraph-pg-header__image">
-        {{ content.field_pg_cab_solo_img_imagen.0['#markup']}}
+      <div class="title">
+        {{ content.field_pg_cab_solo_img_titulo}}
       </div>
-
+    </div>
+    <div class="paragraph-pg-header__image">
+      {{ content.field_pg_cab_solo_img_imagen}}
     </div>
     {% endblock %}
   </div>

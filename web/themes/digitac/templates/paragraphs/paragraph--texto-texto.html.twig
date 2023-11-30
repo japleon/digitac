@@ -42,6 +42,7 @@
   set classes = [
     'paragraph',
     'paragraph-' ~ paragraph.bundle|clean_class,
+    'paragraph-text-text',
     'paragraph--type--' ~ paragraph.bundle|clean_class,
     view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
     not paragraph.isPublished() ? 'paragraph--unpublished'
@@ -55,18 +56,19 @@
     {% if content.field_pg_txt_txt_tab_id|render|striptags|trim %}
       <div class="tab" id="{{content.field_pg_txt_txt_tab_id|render|striptags|trim}}">
     {% endif %}
-
-        <div class="texto_izq">
+      <div class="pg__box">
+        <div class="pg__text">
           {{ content.field_pg_txt_txt_texto_izq}}
         </div>
-        <div class="texto_dch">
+        <div class="pg__text">
           {{ content.field_pg_txt_txt_texto_dch}}
         </div>
+      </div>
 
     {% if content.field_pg_txt_txt_tab_id|render|striptags|trim %}
-      </div">
+      </div>
     {% endif %}
-    
+
     </div>
     {% endblock %}
   </div>

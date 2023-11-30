@@ -1,0 +1,13 @@
+.block-formblock-user-edit {
+    max-width: rem(1272px);
+    margin: 0 auto;
+    padding: 0 rem(12px);
+
+    @include media(md) {
+        padding: 0 rem(32px);
+    }
+
+    @include media(lg) {
+        padding: 0 rem(12px);
+    }
+}

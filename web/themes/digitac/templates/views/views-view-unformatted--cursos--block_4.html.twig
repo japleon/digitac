@@ -15,11 +15,11 @@
  * @see template_preprocess_views_view_unformatted()
  */
 #}
-<div class="container">
-    <div class="titulo"> {{ 'Cursos mejor valorados'|t }}</div>
-    <div class="listado">
+<div class="courses-rating">
+    <div class="courses-rating__title">{{ 'Cursos mejor valorados'|t }}</div>
+    <div class="courses-rating__list">
     {% for key, row in rows %}
-        {{ key+1 }}.-
+        <span class="course__number">{{ key+1 }}</span>
         {{- row.content -}}
     {% endfor %}
     </div>

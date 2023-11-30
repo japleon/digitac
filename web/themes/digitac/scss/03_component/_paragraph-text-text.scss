@@ -1,0 +1,80 @@
+.paragraph-text-text {
+    .container {
+
+        .pg__box {
+            padding: rem(40px) 0;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: rem(12px);
+            position: relative;
+
+            @include media(md) {
+                padding: rem(70px) 0;
+            }
+
+            @include media(lg) {
+                padding: rem(80px) 0;
+                grid-template-columns: rem(280px) 1fr;
+                gap: rem(32px);
+            }
+
+            &::after {
+                content: '';
+                width: 100vw;
+                height: 1px;
+                background: $grey-200;
+                position: absolute;
+                top: 0;
+                left: 50%;
+                transform: translateX(-50%);
+            }
+
+            .field--name-field-pg-txt-txt-texto-izq {
+                p {
+                    margin-bottom: 0;
+                    font-family: $font-family-base;
+                    font-style: normal;
+                    font-weight: 400;
+                    font-size: rem(30px);
+                    line-height: rem(38px);
+                    letter-spacing: -0.02em;
+                    color: $primary;
+
+                    @include media(md) {
+                        font-size: rem(36px);
+                        line-height: rem(44px);
+                    }
+                }
+            }
+
+            .field--name-field-pg-txt-txt-texto-dch {
+                a {
+                    margin: rem(40px) 0 0;
+                    padding: rem(10px) rem(16px);
+                    text-align: center;
+                    border: none;
+                    border-radius: 0;
+                    border: rem(1px) solid $secondary;
+                    font-family: $font-family-base;
+                    font-weight: 600;
+                    font-size: rem(14px);
+                    line-height: rem(20px);
+                    text-decoration: none;
+                    transition: all 0.3s ease;
+                    display: inline-flex;
+
+                    border-radius: rem(50px);
+                    color: $white;
+                    border-color: $blue-600;
+                    background-color: $blue-600;
+
+                    &:hover {
+                    border-color: $blue-700;
+                    background-color: $blue-700;
+                    color: $white;
+                    }
+                }
+            }
+        }
+    }
+}

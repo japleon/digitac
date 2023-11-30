@@ -84,8 +84,10 @@
 <article{{ attributes.addClass(classes) }}>
 
 
-    <div class="titulo">
-     {{label}}
+    <div class="headband-title">
+      <div class="headband-title__content">
+        {{label}}
+      </div>
     </div>
 
 
@@ -93,107 +95,181 @@
       <div class="headband__content">
         <div class="headband__col">
           <div class="author">
-            <span class="author__letters">{{ author_name|render|striptags|trim|first }}</span>
+
+
+            <span class="author__letters">
+              {% set siglas = author_name|render|striptags|trim|split(' ') %}
+              {% for item in siglas%}
+                {{ item|first|upper }}
+              {% endfor %}
+
+              {% if 'experto' in node.getOwner().getroles()  %}
+                <div class="star_expertoTac"><img src="/themes/digitac/images/icons/icon-verified.svg" alt="" /></div>
+              {% endif %}
+            </span>
             <span class="author__name">{{author_name}}</span>
           </div>
 
           <div class="category">
             <span class="category__type">{{ 'IDEA'|t }} {{content.field_idea_numero.0}}</span>
-            <span class="category__date">{{date}}</span>
+            <span class="category__date">{{'Hace'|t}} {{hence}}</span>
           </div>
 
           <div class="state">
+            {{content.field_idea_estado.0['#entity'].tid.value}}
             {{ content.field_idea_estado.0 }}
           </div>
-          
+
         </div>
 
         <div class="headband__col">
+          {% if tiene_comentarios==1 %}
           <div class="comments">
             <span class="sr-only">Comentarios:</span> {{ content.field_idea_comentarios['#items'].comment_count }}
           </div>
-
-          {{ drupal_view('votingapi_votes', 'block_2', node.id ) }}
+          {% endif %}
+          {% if tiene_votacion==1 %}
+            {{ drupal_view('votingapi_votes', 'block_2', node.id ) }}
+          {% endif %}
         </div>
+
       </div>
     </div>
 
-    <div class="idea">
-      <div class="body">
-          {{ content.body }}
-      </div>
+    <div class="container">
+      <div class="idea">
+        <div class="body">
+            {{ content.body }}
+        </div>
 
-      <div class="tags">
-          {{ content.field_idea_tags }}
-      </div>
+        <div class="tags">
+            {{ content.field_idea_tags }}
+        </div>
 
-      <div class="related-ideas">
+        {% if content.field_idea_ideas_relacionadas.0 %}
+        <div class="related-ideas">
+            <div class="related-ideas__title">{{ 'Ideas relacionadas'|t}}</div>
+            {{ content.field_idea_ideas_relacionadas }}
+        </div>
+        {% endif %}
 
-          {% if content.field_idea_experiencia %}
-          <div class="related-ideas__title">{{ 'Experiencias relacionadas'|t}}</div>
-          {% else %}
-          <div class="related-ideas__title">{{ 'Ideas relacionadas'|t}}</div>
-          {% endif %}
+      </div> {# /.idea #}
+    </div>
 
-          {{ content.field_idea_ideas_relacionadas }}
-      </div>
-    </div> {# /.idea #}
-
+    {% if tiene_votacion==1 %}
     <div class="ratings">
       <div class="ratings__content">
         {% if logged_in %}
-        <span>Valora esta idea</span>  {{ content.rate_stars }}
+        <span>{{'Valora esta idea'|t}}</span>  {{ content.rate_stars }}
         {% else %}
-        <span>ENLACE A REGISTRO/LOGIN</span>
+            <span class="ratings__login">{{'Para hacer una valoración'|t}}&nbsp;<a href="/user/login">necesitas estar logado</a></span>
         {% endif %}
       </div>
     </div>
+    {% endif %}
 
 
-    <div class="idea">
-      <div class="tab_comentarios">
-      COMENTARIOS
-      Numero comentarios:   {{ content.field_idea_comentarios['#items'].comment_count }}
-      {{ content.field_idea_comentarios}}
+    <div class="container">
+      <div class="idea">
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
 
-      </div>
-    </div> {# /.idea #}
+          {% if tiene_comentarios==1 %}
+          <li class="nav-item" role="presentation">
+            <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">
+              Comentarios <span class="number-comments">{{ content.field_idea_comentarios['#items'].comment_count }}</span>
+            </button>
+          </li>
+          {% endif %}
+
+          <li class="nav-item" role="presentation">
+            <button class="nav-link {% if tiene_comentarios==0 %}active{%endif%}" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="{% if tiene_comentarios==1 %}false{%else%}true{%endif%}">
+              Archivos adjuntos
+            </button>
+          </li>
+          <li class="nav-item" role="presentation">
+            <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact" type="button" role="tab" aria-controls="contact" aria-selected="false">
+              Estados
+            </button>
+          </li>
+        </ul>
+
+        <div class="tab-content" id="myTabContent">
+
+          {% if tiene_comentarios==1 %}
+          <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+
+            {% if es_moderador==1%}
+            <div class="aviso_moderacion">
+              {{ drupal_view('usuario_stats_comentarios', 'block_2', node.id ) }}
+            </div>
+            {% endif %}
+
+            <div class="tab__comments">
+              {{ content.field_idea_comentarios}}
+            </div> {# tab comments #}
+            
+            {% if not logged_in %}
+              <span class="ratings__login">{{'Para hacer un comentario'|t}}&nbsp;<a href="/user/login">necesitas estar logado</a></span>
+            {% endif %}
+
+          </div>
+          {% endif %}
 
 
+          <div class="tab-pane fade {% if tiene_comentarios==0 %}show active{%endif%}" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+            <div class="tab__files">
+              {% for key, item in content.field_idea_archivos%}
+                {% if key|first != '#' %}
+                <div class="tab__files-item">
+                  <div class="tab__files-name">
+                    <div class="name">
+                      {{ item['#file'].getOwner().displayname}}
+                    </div>
 
-<div class="tab_archivos">
-ARCHIVOS:
+                    <div class="date">
+                      {{ item['#file'].created.value|date('Y-m-d')}}
+                    </div>
+                  </div>
 
-      {% for key, item in content.field_idea_archivos%}
-        {% if key|first != '#' %}
-        <div class="archivo">
-          {{ item['#file'].getOwner().displayname}}
-          {{ item['#file'].created.value|date('Y-m-d')}}
-          {{ item }}
+                  <div class="tab__files-file">
+                  {{ item }}
+                  </div>
+                </div>
+                {% endif %}
+              {% endfor %}
+              
+              {% if not logged_in %}
+                <span class="ratings__login">{{'Para subir adjuntos'|t}}&nbsp;<a href="/user/login">necesitas estar logado</a></span>
+              {% endif %}
+
+            </div> {# tab files #}
+          </div>
+          <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+            <div class="tab__states">
+              <div class="states">
+                {% for key, item in content.field_idea_cambios_estado  %}
+                  {% if key|first != '#' %}
+                    {% set cambio = item['#context'].value|split('||') %}
+                    <div class="counter {% if cambio.0 == 'Cerrado' %}closed{% endif %}">{{key+1}}</div>
+                    <div class="states__item">
+                      <div class="state {% if cambio.0 == 'Cerrado' %}closed{% endif %}">{{ cambio.0 }}</div>
+                      <div class="date">{{ cambio.1 }}</div>
+                      <div class="author">{{ cambio.2 }}</div>
+                    </div>
+
+                  {% endif %}
+                {% endfor %}
+              </div>
+            </div> {# tab states #}
+          </div>
         </div>
-        {% endif %}
 
-      {% endfor %}
-
-</div>
+      </div> {# /.idea #}
+    </div>
 
 
-<div class="tab_estados">
 
 
-    {% for key, item in content.field_idea_cambios_estado  %}
-      {% if key|first != '#' %}
-        <div class="cambio_estado">
-        {% set cambio = item['#context'].value|split('||') %}
-        Estado: {{ cambio.0 }}<br>
-        Fecha:  {{ cambio.1 }}<br>
-        Autor: {{ cambio.2 }}<br><br>
-        </div>
-
-      {% endif %}
-    {% endfor %}
-
-</div>
 
 
 

@@ -1,0 +1,124 @@
+.modal {
+    $modalParent: ".modal";
+
+    &.show {
+        display: flex !important;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .modal-dialog {
+        width: 100%;
+        max-width: rem(480px);
+    }
+
+    &-content {
+        padding: rem(24px);
+    }
+
+    &-header {
+        padding: rem(88px) 0 0;
+
+        border: none;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        font-family: $font-family-base;
+        position: relative;
+
+        .btn-close {
+            width: rem(44px);
+            height: rem(44px);
+            position: absolute;
+            top: 0;
+            right: 0;
+        }
+
+        &__content {
+            position: relative;
+            z-index: 2;
+        }
+
+        h3 {
+            margin-bottom: rem(4px);
+            font-style: normal;
+            font-weight: 600;
+            font-size: rem(18px);
+            line-height: rem(28px);
+            color: $primary;
+        }
+
+        p {
+            margin-bottom: rem(12px);
+            font-style: normal;
+            font-weight: 400;
+            font-size: rem(14px);
+            line-height: rem(20px);
+            color: $grey-600;
+        }
+    }
+
+    &-body {
+        padding: 0;
+        border: none;
+        font-family: $font-family-base;
+
+        p {
+            font-style: normal;
+            font-weight: 600;
+            font-size: rem(14px);
+            line-height: rem(20px);
+            color: $grey-700;
+        }
+    }
+
+    &-footer {
+        padding: 0;
+        border: none;
+        display: flex;
+        gap: rem(12px);
+
+        .btn {
+            width: calc(50% - 6px);
+        }
+    }
+
+
+    &-delete {
+        #{$modalParent}-header {
+            &::before {
+                content: '';
+                width: rem(192px);
+                height: rem(192px);
+                background-image: url('../images/icons/icon-modal-trash.svg');
+                background-repeat: no-repeat;
+                background-position: center;
+                background-size: contain;
+                display: flex;
+                position: absolute;
+                top: 0;
+                left: 0;
+            }
+        }
+    }
+
+    &-idea {
+        #{$modalParent}-header {
+            margin-bottom: rem(32px);
+
+            &::before {
+                content: '';
+                width: rem(192px);
+                height: rem(192px);
+                background-image: url('../images/icons/icon-modal-check.svg');
+                background-repeat: no-repeat;
+                background-position: center;
+                background-size: contain;
+                display: flex;
+                position: absolute;
+                top: 0;
+                left: 0;
+            }
+        }
+    }
+}

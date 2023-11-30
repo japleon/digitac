@@ -16,16 +16,19 @@
  */
 #}
 
-<div class="container">
-    <div class="sponsors">
-        <h3>{{'Aliados'|t}}</h3>
-        {{'Lorem ipsum bla bla bla'|t}}
-    </div>
+<div class="sponsors">
+    <div class="container">
+        <div class="sponsors__container">
+            <div class="sponsors__description">
+                <h3>{{'Aliados'|t}}</h3>
+                <p>{{'Lorem ipsum bla bla bla'|t}}</p>
+            </div>
 
-    <div class="sponsors_logos">
-    {% for row in rows %}
-    {{- row.content -}}
-    {% endfor %}
+            <div class="sponsors__logos">
+                {% for row in rows %}
+                {{- row.content -}}
+                {% endfor %}
+            </div>
+        </div>
     </div>
-
 </div>

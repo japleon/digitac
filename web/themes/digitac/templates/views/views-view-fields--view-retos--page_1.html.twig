@@ -1,0 +1,43 @@
+<div class="challenge-content">
+    <div class="container">
+        <div class="challenge">
+
+            <div class="challenge__header">
+                <div class="challenge__header-content">
+                    <div class="tag">
+                        {{ fields.field_reto_categoria.content }}
+                    </div>
+
+                    <div class="title">
+                        {{ fields.title.content }}
+                    </div>
+                </div>
+
+                <div class="challenge__header-image">
+
+                    <svg width="488" height="191" viewBox="0 0 488 191" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <clipPath id="clip-path3">
+                        <rect x="104" width="384" height="191" rx="95.5" fill="#D9D9D9"/>
+                    </clipPath>
+                    <image clip-path="url(#clip-path3)" xlink:href="{{ fields.field_reto_imagen.content|render|striptags|trim }}" alt="Image" class="svg__image">
+                    </svg>
+
+
+                </div>
+            </div>
+        </div>
+        <div class="tab-actions js-tab-actions">
+            <ul>
+                <li class="tab-actions__item active"><a href="/reto/{{fields.nid.content|render|striptags|trim}}#idea">{{'Ideas'|t}} <span class="number">{{ drupal_view('ideas', 'block_3', fields.nid.content|render|striptags|trim ) }}</span></a></li>
+                <li class="tab-actions__item"><a href="/reto/{{fields.nid.content|render|striptags|trim}}#experience">{{'Experiencias'|t}} <span class="number">{{ drupal_view('ideas', 'block_4', fields.nid.content|render|striptags|trim ) }}</span></a></li>
+                <li class="tab-actions__item"><a href="/reto/{{fields.nid.content|render|striptags|trim}}#challenge">{{'Sobre este reto'|t}}</a></li>
+            </ul>
+        </div>
+    </div>
+
+    {{ drupal_entity('paragraphs_library_item', 5)| without('label') }}
+</div>
+
+{{ drupal_entity('paragraphs_library_item', 6)| without('label') }}
+
+

@@ -127,8 +127,18 @@ svg {
 }
 
 .container {
-  max-width: rem(1216px);
+  max-width: rem(1272px);
   margin: 0 auto;
+  padding: 0 rem(12px);
+
+  @include media(md) {
+    padding: 0 rem(32px);
+  }
+
+  @include media(lg) {
+    padding: 0 rem(12px);
+  }
+
 
   @media (max-width: 992px) {
     max-width: 100% !important;

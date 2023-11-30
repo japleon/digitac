@@ -20,7 +20,12 @@
     {% for key, row in rows %}
         <div class="courses__item">{{- row.content -}}</div>
         {% if key == 4 %}
-            PROPON UN CURSO
+            <div class="message message--alt">
+                <div class="message__content">
+                    <p class="message__title">¿Tienes un catálogo de cursos y quieres que aparezcan aquí?</p>
+                    <a href="#">Ponte en contacto con nosotros</a>
+                </div>
+            </div>
         {% endif %}
     {% endfor %}
     </div>

@@ -34,8 +34,8 @@
 {% if links -%}
   <ul{{ attributes }}>
     {%- for item in links -%}
-      <li{{ item.attributes }}>        
-        <a href="{{ item.link['#url'] }}"><img src="themes/digitac/images/{{ item.text }}.gif"></a>
+      <li{{ item.attributes }}>
+        <a href="{{ item.link['#url'] }}" {% if item.text_attributes.type=='delete'%} data-bs-toggle="modal" data-bs-target="#exampleModal-{{item.text_attributes.id}}"{% endif %} {% if item.text_attributes.type=='reply'%} id="#reply-button-{{item.text_attributes.id}}"{% endif %}><img src="../themes/digitac/images/{{ item.text }}.svg"></a>
       </li>
     {%- endfor -%}
   </ul>

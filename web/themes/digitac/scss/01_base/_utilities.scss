@@ -15,12 +15,19 @@
 
 // section titles
 .btitle {
-  margin-bottom: rem(48px);
+  margin-bottom: rem(22px);
   font-family: $font-family-base;
   font-style: normal;
   font-weight: 400;
-  font-size: rem(36px);
-  line-height: rem(44px);
+  font-size: rem(30px);
+  line-height: rem(38px);
   letter-spacing: -0.02em;
   color: $primary;
+
+
+  @include media(md) {
+    margin-bottom: rem(48px);
+    font-size: rem(36px);
+    line-height: rem(44px);
+  }
 }

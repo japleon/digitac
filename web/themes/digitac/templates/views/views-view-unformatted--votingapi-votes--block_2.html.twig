@@ -1,0 +1,53 @@
+{#
+/**
+ * @file
+ * Theme override to display a view of unformatted rows.
+ *
+ * Available variables:
+ * - title: The title of this group of rows. May be empty.
+ * - rows: A list of the view's row items.
+ *   - attributes: The row's HTML attributes.
+ *   - content: The row's content.
+ * - view: The view object.
+ * - default_row_class: A flag indicating whether default classes should be
+ *   used on rows.
+ *
+ * @see template_preprocess_views_view_unformatted()
+ */
+#}
+    {% set votacion = 0%}
+    {% for row in rows %}
+       {% set votacion = votacion + row.content['#row']._entity.value[0].value %}
+    {% endfor %}
+
+    {% set media = votacion / rows|length %}
+    {% set media_dec = media|split('.')%}
+
+    {% if media_dec.0 > 0 %}
+        {% for i in range(1, media_dec.0) %}
+            <img src="/themes/digitac/images/icons/icon-star.svg" alt=""/>
+        {% endfor %}
+    {% else %}
+        {% set media_final= 0 %}
+    {% endif %}
+
+    {% set media_final= media_dec.0 %}
+    {% if media_dec.1 matches '/^[1-9]+/' %}
+        <img src="/themes/digitac/images/icons/icon-star-half.svg" alt=""/>
+        {% set media_final= media_dec.0 + 1 %}
+    {% endif %}
+    {% if media_final < 5 %}
+        {% for i in range(media_final,4) %}
+            <img src="/themes/digitac/images/icons/icon-star-empty.svg" alt=""/>
+        {% endfor %}
+    {% endif %}
+
+    <span class="number">{{media}}</span>
+
+    <div class="tooltip-icon">
+        <span class="tooltip-icon__icon">
+            <img src="/themes/digitac/images/icons/icon-help.svg" alt=""/>
+        </span>
+        <span class="tooltip-icon__text">{{ rows|length }} valoraciones</span>
+    </div>
+

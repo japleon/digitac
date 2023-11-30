@@ -1,0 +1,59 @@
+.paragraph-image-text {
+    .container {
+        .pg__box {
+            padding: rem(40px) 0;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: rem(32px);
+            position: relative;
+
+            @include media(md) {
+                padding: rem(70px) 0;
+            }
+
+            @include media(lg) {
+                padding: rem(80px) 0;
+                grid-template-columns: rem(280px) 1fr;
+            }
+        }
+
+        .pg__image {
+            img {
+                max-width: rem(160px);
+
+                @include media(md) {
+                    max-width: rem(208px);
+                }
+            }
+        }
+
+        .pg__text {
+            .text-formatted {
+                h2 {
+                    margin-bottom: rem(20px);
+                    font-family: $font-family-base;
+                    font-style: normal;
+                    font-weight: 400;
+                    font-size: rem(24px);
+                    line-height: rem(32px);
+                    color: $primary;
+
+                    @include media(md) {
+                        font-size: rem(30px);
+                        line-height: rem(38px);
+                    }
+                }
+
+                p {
+                    margin-bottom: rem(20px);
+                    font-family: $font-family-base;
+                    font-style: normal;
+                    font-weight: 400;
+                    font-size: rem(18px);
+                    line-height: rem(28px);
+                    color: $secondary;
+                }
+            }
+        }
+    }
+}

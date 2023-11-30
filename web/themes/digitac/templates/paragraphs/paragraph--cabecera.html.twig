@@ -61,13 +61,14 @@
         <div class="subtitle">
           {{ content.field_pg_cabecera_subtitulo}}
         </div>
-        <a href="javascript:history.back()" class="btn btn--link">{{ 'Volver'|t}}</a>
+        {% if content.field_pg_cabecera_volver.0['#markup'] == 'Activado' %}
+        <a href="{% if content.field_pg_cab_secc_target_volver.0 == '' %}javascript:history.back(){%else%}{{content.field_pg_cab_secc_target_volver.0}}{% endif %}" class="btn btn--link btn--link-back">{{ 'Volver'|t}}</a>
+        {% endif %}
       </div>
 
       <div class="paragraph-pg-header__image">
-        {{ content.field_pg_cabecera_imagen.0['#markup']}}
+        {{ content.field_pg_cabecera_imagen.0}}
       </div>
-
 
     </div>
     {% endblock %}

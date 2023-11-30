@@ -36,22 +36,49 @@
       pointer-events: none;
     } */
 
+    &--alt {
+      border-color: $red-600;
+      background-color: $red-600;
+
+      &:hover {
+        border-color: $red-700;
+        background-color: $red-700;
+      }
+
+    }
+
     &--icon {
       padding-left: rem(40px);
       position: relative;
 
+      &::before {
+        content: '';
+        width: rem(20px);
+        height: rem(20px);
+        background-repeat: no-repeat;
+        background-size: contain;
+        position: absolute;
+        top: 50%;
+        left: rem(12px);
+        transform: translateY(-50%);
+
+      }
+
       &-download {
         &::before {
-          content: '';
-          width: rem(20px);
-          height: rem(20px);
           background-image: url('../images/icons/icon-download.svg');
-          background-repeat: no-repeat;
-          background-size: contain;
-          position: absolute;
-          top: 50%;
-          left: rem(12px);
-          transform: translateY(-50%);
+        }
+      }
+
+      &-check {
+        &::before {
+          background-image: url('../images/icons/icon-check.svg');
+        }
+      }
+
+      &-filter {
+        &::before {
+          background-image: url('../images/icons/icon-filter.svg');
         }
       }
     }
@@ -104,6 +131,22 @@
     &:hover {
       &::after {
         right: rem(4px);
+      }
+    }
+
+    &-back {
+      padding: 0 0 0 rem(28px);
+      &::after {
+        background-image: url('../images/icons/icon-arrow-left-link.svg');
+        right: inherit;
+        left: 0;
+      }
+
+      &:hover {
+        &::after {
+          right: inherit;
+          left: rem(4px);
+        }
       }
     }
   }

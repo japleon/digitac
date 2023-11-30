@@ -1,0 +1,31 @@
+digitac_h.estado_reto:
+  path: '/estado-reto/{nid}/{estado}'
+  defaults:
+    _controller: '\Drupal\digitac_h\Controller\DigitacHController::estadoReto'
+    _title: 'Estado Reto'
+  requirements:
+    _permission: 'access content'
+
+digitac_h.estado_idea:
+  path: '/estado-idea/{nid}/{estado}/{rid}'
+  defaults:
+    _controller: '\Drupal\digitac_h\Controller\DigitacHController::estadoIdea'
+    _title: 'Estado Idea'
+  requirements:
+    _permission: 'access content'
+
+digitac_h.estado_experiencia:
+  path: '/estado-experiencia/{nid}/{estado}/{rid}'
+  defaults:
+    _controller: '\Drupal\digitac_h\Controller\DigitacHController::estadoExperiencia'
+    _title: 'Estado Experiencia'
+  requirements:
+    _permission: 'access content'    
+
+digitac_h.comenario_eliminar:
+  path: '/eliminar-comentario/{id}'
+  defaults:
+    _controller: '\Drupal\digitac_h\Controller\DigitacHController::comentarioEliminar'
+    _title: 'Comentario Eliminar'
+  requirements:
+    _permission: 'access content'    

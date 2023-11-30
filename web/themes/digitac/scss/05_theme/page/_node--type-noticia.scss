@@ -1,9 +1,10 @@
 .node-news {
-    max-width: rem(1216px);
-    margin: 0 auto;
-    padding: 0 rem(12px);
+    margin: 0;
+    padding: rem(87px) rem(12px) rem(100px);
+
 
     &__content {
+        max-width: rem(900px);
         font-family: $font-family-base;
     }
 
@@ -39,7 +40,7 @@
     }
 
     &__body {
-        margin-bottom: rem(96px);
+        //margin-bottom: rem(96px);
 
         .text-formatted {
             h2 {
@@ -110,7 +111,7 @@
                 display: block;
                 content: "";
                 //padding-top: percentage(9 / 16);
-                padding-top: 20%;
+                padding-top: 57%;
             }
 
             .field--name-field-media-oembed-video-item,

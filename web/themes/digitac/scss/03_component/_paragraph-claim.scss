@@ -1,24 +1,52 @@
 .paragraph-pg-claim {
-    padding: rem(120px) 0;
+    padding: rem(100px) 0;
+
+    @include media(md) {
+        padding: rem(130px) 0;
+    }
+
+    @include media(lg) {
+        padding: rem(120px) 0;
+    }
 
     .container {
         display: flex;
+        flex-direction: column-reverse;
         justify-content: space-between;
         align-items: center;
+
+        @include media(lg) {
+            flex-direction: row;
+        }
     }
 
     &__box {
         max-width: rem(490px);
+        text-align: center;
+
+        @include media(md) {
+            max-width: rem(592px);
+        }
+
+        @include media(lg) {
+            text-align: left;
+        }
 
         .title {
             margin-bottom: rem(8px);
             font-family: $font-family-base;
             font-style: normal;
             font-weight: 400;
-            font-size: rem(36px);
-            line-height: rem(44px);
+            font-size: rem(30px);
+            line-height: rem(38px);
             letter-spacing: -0.02em;
             color: $primary;
+
+
+            @include media(md) {
+                font-size: rem(36px);
+                line-height: rem(44px);
+            }
 
 
             &-xl {
@@ -41,19 +69,46 @@
             line-height: rem(24px);
             color: $secondary;
         }
+
+        .btn {
+            max-width: rem(340px);
+            width: 100%;
+
+            @include media(md) {
+                width: auto;
+                max-width: inherit;
+            }
+        }
     }
 
     &__image {
+        margin-bottom: rem(55px);
         background-image: url('../images/svg/claim-points.svg');
         background-repeat: no-repeat;
         background-size: contain;
         background-position: center;
 
+        @include media(lg) {
+            margin-bottom: 0;
+        }
+
+
         svg {
+            height: 281px;
+            display: flex;
+
+            @include media(md) {
+                height: auto;
+            }
+
             image {
-                width: 100%;
-                height: 100%;
+                height: 281px;
                 object-fit: cover;
+
+                @include media(md) {
+                    width: 100%;
+                    height: 100%;
+                }
             }
         }
 

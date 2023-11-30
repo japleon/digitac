@@ -35,7 +35,7 @@
         display: inline-flex;
         position: absolute;
         bottom: rem(-57px);
-        bottom: 32px;
+        bottom: rem(32px);
         left: rem(100px);
 
         li {
@@ -43,12 +43,16 @@
             height: auto;
             margin-right: rem(8px);
             button {
-                width: 42px;
-                height: 6px;
+                width: rem(32px);
+                height: rem(6px);
                 padding: 0;
                 background: $grey-300;
                 border-radius: 3px;
                 text-indent: -9999px;
+
+                @include media(md) {
+                    width: rem(42px);
+                }
 
                 &::before {
                     display: none;
@@ -61,6 +65,10 @@
                 }
             }
         }
+    }
+
+    &.slick-dotted {
+        margin-bottom: 0;
     }
 }
 

@@ -1,0 +1,165 @@
+.user-account {
+    .paragraph-cabecera {
+        padding-bottom: 0;
+    }
+
+   /*  .block-number {
+        margin-bottom: rem(122px);
+    } */
+
+    &__body {
+        margin: rem(80px) 0;
+
+        h2 {
+            margin-bottom: rem(40px);
+            font-family: $font-family-base;
+            font-style: normal;
+            font-weight: 400;
+            font-size: rem(30px);
+            line-height: rem(38px);
+            color: $primary;
+        }
+    }
+
+    .data {
+        &__row {
+            margin-bottom: rem(20px);
+            display: flex;
+
+            &:last-child {
+                max-width: rem(294px);
+                margin-bottom: 0;
+
+                a {
+                    color: $blue-500;
+                    text-decoration: none;
+
+                    &:hover {
+                        text-decoration: underline;
+                    }
+                }
+            }
+
+            &-col {
+                min-width: rem(446px);
+                display: flex;
+                flex-direction: column;
+            }
+
+            .field__label {
+                margin-bottom: rem(6px);
+                font-family: $font-family-base;
+                font-style: normal;
+                font-weight: 500;
+                font-size: rem(14px);
+                line-height: rem(20px);
+                color: $grey-800;
+            }
+
+            .field__item {
+                font-family: $font-family-base;
+                font-style: normal;
+                font-weight: 400;
+                font-size: rem(16px);
+                line-height: rem(24px);
+                color: $grey-500;
+            }
+        }
+    }
+
+
+    .user-headband {
+        padding: rem(80px) 0 rem(160px);
+        background-color: $blue-500;
+
+        .container {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        &__description {
+            display: flex;
+            align-items: center;
+
+            .user-ball {
+                width: auto;
+                min-width: rem(40px);
+                height: rem(40px);
+                padding: rem(6px);
+                display: inline-flex;
+                justify-content: center;
+                align-items: center;
+                background-color: $grey-100;
+                border-color: rem(1px) solid rgba($grey-900, 0.75);
+                border-radius: 50%;
+                font-family: $font-family-base;
+                font-style: normal;
+                font-weight: 600;
+                font-size: rem(16px);
+                line-height: rem(24px);
+                text-align: center;
+                color: $grey-600;
+                position: relative;
+
+                .star_expertoTac {
+                    position: absolute;
+                    bottom: rem(-4px);
+                    right: 0;
+                }
+            }
+        }
+
+        &__profile {
+            margin-left: rem(12px);
+
+
+            .name {
+                font-family: $font-family-base;
+                font-style: normal;
+                font-weight: 600;
+                font-size: rem(14px);
+                line-height: rem(20px);
+                color: $white;
+            }
+
+            .expertoTac{
+                font-family: $font-family-base;
+                font-style: normal;
+                font-weight: 400;
+                font-size: rem(14px);
+                line-height: rem(20px);
+                color: $white;
+            }
+        }
+    }
+
+    .user-box {
+        padding: rem(80px) 0;
+        background-color: $grey-50;
+        border-top: rem(1px) solid $grey-200;
+        border-bottom: rem(1px) solid $grey-200;
+
+        h2 {
+            margin-bottom: rem(24px);
+            font-family: $font-family-base;
+            font-style: normal;
+            font-weight: 400;
+            font-size: rem(30px);
+            line-height: rem(38px);
+            color: $primary;
+        }
+
+        // modifier
+        &--secondary {
+            background-color: $white;
+            border: none;
+        }
+    }
+
+}
+
+// form
+.block-formblock-user-edit {
+    margin-top: rem(80px);
+    background-color: $white;
+}

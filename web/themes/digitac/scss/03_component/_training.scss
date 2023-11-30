@@ -1,6 +1,14 @@
 .training {
-    padding: rem(32px) 0 0;
+    padding: rem(100px) 0 0;
     position: relative;
+
+    @include media(md) {
+        padding: rem(130px) 0 0;
+    }
+
+    @include media(lg) {
+        padding: rem(32px) 0 0;
+    }
 
     &__carousel {
         padding-bottom: rem(88px);

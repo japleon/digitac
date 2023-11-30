@@ -1,0 +1,238 @@
+.login {
+    $loginParent: ".login";
+
+    @include media(md) {
+        min-height: rem(960px);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    @include media(xl) {
+        min-height: auto;
+    }
+
+    &__col {
+        position: relative;
+        width: 100%;
+
+        @include media(md) {
+            width: 100%;
+        }
+
+        @include media(xl) {
+            width: 50%;
+        }
+
+        &-logo {
+            width: rem(136px);
+            padding: 0 rem(16px);
+
+            @include media(md) {
+                display: none;
+            }
+
+            @include media(xl) {
+                width: rem(176px);
+                padding: 0;
+                position: absolute;
+                bottom: rem(60px);
+                bottom: rem(60px);
+                left: rem(60px);
+                z-index: 2;
+                display: block;
+            }
+
+            .logo {
+                width: 100%;
+
+                &-mob {
+                    @include media(xl) {
+                        display: none;
+                    }
+                }
+
+                &-desktop {
+                    display: none;
+
+                    @include media(xl) {
+                        display: block;
+                    }
+                }
+            }
+        }
+
+        &-left {
+            margin: rem(56px) 0 rem(44px);
+
+            @include media(md) {
+                margin: 0;
+                min-height: rem(960px);
+                position: absolute;
+                top: 0;
+                left: 0;
+            }
+
+            @include media(xl) {
+                min-height: auto;
+                position: relative;
+            }
+
+            > img {
+                display: none;
+                object-fit: cover;
+
+                @include media(md) {
+                    width: 100%;
+                    height: 100%;
+                    display: block;
+                }
+            }
+        }
+
+        &-right {
+            padding: 0 rem(16px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            @include media(md) {
+                max-width: rem(520px);
+                margin: 0 auto;
+                padding: rem(100px) rem(32px) rem(54px);
+                background: $white;
+                box-shadow: 0 20px 24px -4px rgba(16, 24, 40, 0.08), 0px 8px 8px -4px rgba(16, 24, 40, 0.03);
+                border-radius: rem(12px);
+            }
+
+            @include media(xl) {
+                max-width: inherit;
+                padding: 0 rem(24px);
+                background: none;
+                box-shadow: none;
+            }
+        }
+
+        &-container {
+            max-width: rem(478px);
+            width: 100%;
+        }
+
+        &-description {
+            max-width: rem(478px);
+            margin-bottom: rem(32px);
+
+            h1 {
+                margin-bottom: rem(12px);
+                font-family: $font-family-base;
+                font-style: normal;
+                font-weight: 400;
+                font-size: rem(24px);
+                line-height: rem(32px);
+                color: $primary;
+
+                @include media(md) {
+                    font-size: rem(30px);
+                    line-height: rem(38px);
+                }
+            }
+
+            p {
+                margin-bottom: 0;
+                font-family: $font-family-base;
+                font-style: normal;
+                font-weight: 400;
+                font-size: rem(16px);
+                line-height: rem(24px);
+                color: $grey-500;
+
+                a {
+                    margin-left: rem(12px);
+                    font-family: $font-family-base;
+                    font-style: normal;
+                    font-weight: 400;
+                    font-size: rem(16px);
+                    line-height: rem(24px);
+                    color: $blue-600;
+                    display: inline-flex;
+                    text-decoration: none;
+
+                    &:hover {
+                        text-decoration: underline;
+                    }
+                }
+            }
+        }
+
+        form {
+            .form-item {
+                margin: 0 0 rem(12px);
+
+                @include media(md) {
+                    margin: 0 0 rem(20px);
+                }
+
+                label {
+                    margin-bottom: rem(4px);
+                    font-family: $font-family-base;
+                    font-style: normal;
+                    font-weight: 500;
+                    font-size: rem(14px);
+                    line-height: rem(20px);
+                    color: $grey-800;
+                }
+
+                input {
+                    height: rem(44px);
+                    margin-bottom: rem(6px);
+                    padding: rem(10px) rem(14px);
+                    background: $white;
+                    border: rem(1px) solid $grey-300;
+                    box-shadow: 0 rem(1px) rem(2px) rgba(16, 24, 40, 0.05);
+                    border-radius: rem(8px);
+                }
+
+                .description {
+                    margin: rem(4px) 0 0;
+                }
+            }
+
+            .user-reset-password-link {
+                margin: rem(4px) 0 rem(24px);
+                font-family: $font-family-base;
+                font-style: normal;
+                font-weight: 500;
+                font-size: rem(14px);
+                line-height: rem(20px);
+                color: $blue-600;
+                text-decoration: none;
+                display: inline-flex;
+
+                &:hover {
+                    text-decoration: underline;
+                }
+            }
+
+            .btn {
+                width: 100%;
+            }
+        }
+    }
+
+    &--password {
+        #{$loginParent}__col {
+            form {
+                .form-item + p {
+                    font-size: rem(14px);
+                }
+            }
+
+            &-description {
+                .btn {
+                    margin-top: rem(12px);
+                }
+            }
+
+        }
+    }
+}

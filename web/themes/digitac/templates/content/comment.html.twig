@@ -85,21 +85,34 @@
   <mark class="hidden" data-comment-timestamp="{{ new_indicator_timestamp }}"></mark>
 
   <footer class="comment__meta">
-    {{ user_picture }}
     <div class="comment__submitted">
-      <div class="username">
-      {{ submitted.getArguments()['@username'] }}
+      <div class="comment__user">
+
+
+        <div class="user-ball">
+          {% set siglas = submitted.getArguments()['@username']|striptags|split(' ') %}
+          {% for item in siglas%}
+            {{ item|first|upper }}
+          {% endfor %}
+
+          {% if 'experto' in comment.getOwner().getroles() %}
+          <div class="star_expertoTac"><img src="/themes/digitac/images/icons/icon-verified.svg" alt="" /></div>
+          {% endif %}
+        </div>
+        <div class="comment__username">
+        {{ submitted.getArguments()['@username'] }}
+        </div>
       </div>
-      <div class="comentario_num">
-      COMENTARIO XXX
+      <div class="comment__number">
+        COMENTARIO {{comment.id()}}
       </div>
-      <div class="fecha">
+      <div class="comment__date">
       {{ submitted.getArguments()['@datetime'] }}
       </div>
     </div>
 
     {{ content.links}}
- 
+
     {#
       Indicate the semantic relationship between parent and child comments for
       accessibility. The list is difficult to navigate in a screen reader
@@ -111,16 +124,82 @@
 
   </footer>
 
-  <div{{ content_attributes.addClass('content') }}>
+  <div{{ content_attributes.addClass('comment__content') }}>
     {{ content.comment_body }}
-  </div>
-  <div class="adjunto">
 
-  {% if content.field_comment_archivo.0['#file'].filemime.value ends with 'pdf' %}
-      <a href="{{ file_url(content.field_comment_archivo.0['#file'].uri.value) }}"> icono {{ content.field_comment_archivo.0['#file'].filename.value }} ({{ content.field_comment_archivo.0['#file'].filesize.value}} B) </a></span>
-  {% else %}
-    <img src="{{ file_url(content.field_comment_archivo.0['#file'].uri.value) }}"></img>
-  {% endif %}
+    <div class="file">
 
+    {% if content.field_comment_archivo.0['#file'].filemime.value ends with 'pdf' %}
+        <a href="{{ file_url(content.field_comment_archivo.0['#file'].uri.value) }}">{{ content.field_comment_archivo.0['#file'].filename.value }} <span>({{ content.field_comment_archivo.0['#file'].filesize.value}} B)</span></a></span>
+    {% else %}
+      <img src="{{ file_url(content.field_comment_archivo.0['#file'].uri.value) }}"></img>
+    {% endif %}
+
+    </div>
   </div>
+
+{{reply_form}}
+
+<a href="" data-bs-toggle="modal" data-bs-target="#exampleModal-{{comment.id}}">Borrar comentario</a> lo dejamos como enlace hasta tener el modal.
+
+
 </article>
+
+
+<!-- MODAL -->
+<div class="modal modal-delete fade" id="exampleModal-{{comment.id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div class="modal-header__content">
+          <h3 class="modal-title" id="exampleModalLabel">{{'Eliminar Comentario'|t}}</h3>
+          <p>{{'Vas a eliminar el siguiente comentario:'|t}}</p>
+        </div>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p> {{ content.comment_body }}</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        <a href="/eliminar-comentario/{{comment.id}}" type="button" class="btn btn-primary btn-primary--alt">Eliminar</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+{# <div class="modal modal-idea fade" id="exampleModal-{{comment.id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div class="modal-header__content">
+          <h3 class="modal-title" id="exampleModalLabel">Crear nueva idea</h3>
+          <p>Para crear una idea necesitas estar registrado en la plataforma</p>
+        </div>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary">Entrar en mi cuenta</button>
+        <button type="button" class="btn btn-primary">Registrarme</button>
+      </div>
+    </div>
+  </div>
+</div> #}
+
+{# <div class="modal modal-idea fade" id="exampleModal-{{comment.id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div class="modal-header__content">
+          <h3 class="modal-title" id="exampleModalLabel">Valorar idea</h3>
+          <p>Para valorar una idea necesitas estar registrado en la plataforma</p>
+        </div>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary">Entrar en mi cuenta</button>
+        <button type="button" class="btn btn-primary">Registrarme</button>
+      </div>
+    </div>
+  </div>
+</div> #}

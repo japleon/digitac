@@ -1,0 +1,86 @@
+.view-row {
+    margin-bottom: rem(40px);
+    display: flex;
+    justify-content: space-between;
+
+    > p {
+        flex: 0 1 rem(260px);
+    }
+}
+
+.filter-tags {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+
+    &__content {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: flex-end;
+
+        .tag {
+            margin-bottom: rem(12px);
+            margin-left: rem(12px);
+            padding: rem(4px) rem(24px) rem(4px) rem(10px);
+            border-radius: rem(8px);
+            border: rem(1px) solid $grey-300;
+            background-color: $white;
+            font-family: $font-family-base;
+            font-style: normal;
+            font-weight: 500;
+            font-size: rem(14px);
+            line-height: rem(20px);
+            text-align: center;
+            color: $grey-700;
+            display: inline-flex;
+            align-items: center;
+            position: relative;
+
+            .remove-tag {
+                width: rem(16px);
+                height: rem(16px);
+                display: inline-flex;
+                background-image: url('../images/icons/icon-close-menu.svg');
+                background-repeat: no-repeat;
+                background-size: rem(30px);
+                background-position: center;
+                position: absolute;
+                right: rem(4px);
+                top: 50%;
+                transform: translateY(-50%);
+                text-indent: -9999px;
+            }
+        }
+    }
+
+    .filter-tags__remove {
+        padding-left: rem(28px);
+        font-family: $font-family-base;
+        font-style: normal;
+        font-weight: 600;
+        font-size: rem(14px);
+        line-height: rem(20px);
+        color: $blue-700;
+        text-decoration: none;
+        position: relative;
+
+        &::before {
+            content: '';
+            width: rem(20px);
+            height: rem(20px);
+            background-image: url('../images/icons/icon-close-filters.svg');
+            background-repeat: no-repeat;
+            background-size: rem(30px);
+            background-position: center;
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+    }
+
+    // states
+    &.hidden {
+        display: none;
+    }
+}

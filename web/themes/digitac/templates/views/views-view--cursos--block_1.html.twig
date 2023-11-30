@@ -47,7 +47,9 @@
         <clipPath id="clip-path">
         <rect y="88.4844" width="125.31" height="267.991" rx="62.655" transform="rotate(-44.9202 0 88.4844)" fill="#D9D9D9"/>
         </clipPath>
+        {% if viewimg !='' %}
         <image clip-path="url(#clip-path)" xlink:href="{{ file_url(viewimg) }}" alt="Image" class="svg__image">
+        {% endif %}
       </svg>
     </div>
     <span class="training__item-title">{{ viewcat }}</span>
