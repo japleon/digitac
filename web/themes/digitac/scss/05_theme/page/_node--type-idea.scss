@@ -14,6 +14,33 @@
                     line-height: rem(28px);
                     color: $grey-600;
                 }
+
+                img {
+                    max-width: 100%;
+                    width: auto;
+                    height: auto;
+                }
+            }
+        }
+
+        .tags {
+            margin: rem(40px) 0;
+
+            .field--name-field-idea-tags {
+                display: flex;
+
+                .field__item {
+                    margin-right: rem(8px);
+                    padding: rem(4px) rem(10px);
+                    border-radius: rem(8px);
+                    border: rem(1px) solid $grey-300;
+                    background-color: $white;
+                    font-weight: 500;
+                    font-size: rem(14px);
+                    line-height: rem(20px);
+                    text-align: center;
+                    color: $grey-700;
+                }
             }
         }
 
@@ -280,7 +307,7 @@
 
         .tooltip-icon {
             margin-left: rem(10px);
-            top: rem(4px);
+            top: rem(1px);
         }
     }
 
@@ -310,6 +337,10 @@
             .vote-form {
                 position: relative;
                 top: rem(3px);
+            }
+
+            .fivestar-rating-wrapper > div > .rating-option-result {
+                display: none;
             }
         }
     }
@@ -436,7 +467,7 @@
                     }
 
                     .description {
-                        padding-left: rem(30px);
+                        padding-left: rem(36px);
                         font-family: $font-family-base;
                         font-style: normal;
                         font-weight: 400;
@@ -453,7 +484,7 @@
                             background-repeat: no-repeat;
                             background-size: contain;
                             position: absolute;
-                            top: 0;
+                            top: rem(18px);
                             left: 0;
                         }
                     }
@@ -745,6 +776,12 @@
                             line-height: rem(24px);
                             color: $grey-600;
                         }
+
+                        img {
+                            max-width: 100%;
+                            width: auto;
+                            height: auto;
+                        }
                     }
 
                     .file {
@@ -784,6 +821,12 @@
                             &:hover {
                                 text-decoration: underline;
                             }
+                        }
+
+                        img {
+                            max-width: 100%;
+                            width: auto;
+                            height: auto;
                         }
                     }
                 }

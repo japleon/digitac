@@ -28,7 +28,7 @@ class FinForm extends FormBase {
 
         $form['fin_header'] = [
           '#type' => 'markup',
-          '#markup' => t("<h2>Solicita información</h2>")
+          '#markup' => t("<div class='box-grey'><h2>Solicita información</h2>")
         ];
 
         $form['fin_name'] = [
@@ -92,7 +92,7 @@ class FinForm extends FormBase {
             'wrapper' => 'my-form-wrapper',
             'callback' => '::setMessage',
           ],
-          '#suffix' => '</div>'
+          '#suffix' => '</div></div>'
         ];
 
         return $form;

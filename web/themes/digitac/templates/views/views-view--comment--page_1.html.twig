@@ -39,54 +39,39 @@
     dom_id ? 'js-view-dom-id-' ~ dom_id,
   ]
 %}
+
+
+{{ drupal_entity('paragraphs_library_item', 14)| without('label') }}
+
+
 <div{{ attributes.addClass(classes) }}>
   {{ title_prefix }}
   {% if title %}
     {{ title }}
   {% endif %}
   {{ title_suffix }}
-  {% if header %}
-    <div class="view-header">
-      {{ header }}
-    </div>
-  {% endif %}
 
-
-  <div class="view-row">
-    <p class="js-count-filters"><span>0</span> soluciones y trámites disponibles</p>
-
-    <div class="filter-tags hidden">
-      <div class="filter-tags__content"></div>
-      <a href="#" class="js-remove-filters filter-tags__remove">Borrar todo</a>
-    </div>
-  </div>
-
-  <div class="view-block">
-    <div class="view-col">
-      <a href="#" class="btn btn-primary btn-primary--icon btn-primary--icon-filter btn--filter js-filters">Filtrar resultados</a>
+  <div class="view-width">
+    <div class="view-box">
+      <div class="view-container">
+      {% if header %}
+        <div class="view-header">
+          Comentarios pendientes <span>{{ header }} {{'comentarios'|t}}</span>
+        </div>
+      {% endif %}
       {% if exposed %}
         <div class="view-filters">
-          <div class="view-filters__container">
-            <div class="view-filters__head">
-              <p>Filtrar resultados</p>
-
-              <a href="#" class="btn-close-filters js-close-filters">
-                <span class="visually-hidden">Cerrar filtros</span>
-              </a>
-            </div>
-
-            {{ exposed }}
-          </div>
+          {{ exposed }}
         </div>
-
-        <div class="view-filters-layer" aria-hidden="true"></div>
       {% endif %}
-
-      <div class="view-block view-block--desktop">
-        {{ drupal_view('soluciones', 'block_4' ) }}
       </div>
     </div>
 
+    {% if attachment_before %}
+      <div class="attachment attachment-before">
+        {{ attachment_before }}
+      </div>
+    {% endif %}
 
     {% if rows %}
       <div class="view-content">
@@ -101,14 +86,7 @@
     {% if pager %}
       {{ pager }}
     {% endif %}
-  </div>
-
-  {# para mobile lo ponemos aqui o antes del pager? iria debajo del listado de soluciones #}
-  <div class="view-block view-block--mob">
-  {{ drupal_view('soluciones', 'block_4' ) }}
-  </div>
-
-
+  </div> {# view-width #}
 
   {% if attachment_after %}
     <div class="attachment attachment-after">

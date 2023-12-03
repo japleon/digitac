@@ -32,7 +32,7 @@
 
                {% endif %}
                 {% if fields.field_solucion_precio.content|render|striptags|trim !='' %}
-               <span class="tag">{{ fields.field_solucion_gratuidad.content }}</span>
+               <span class="tag pay">{{ fields.field_solucion_gratuidad.content }}</span>
                {% endif %}
            </div>
 
@@ -53,7 +53,7 @@
                     {% else %}
                         {% set media_final= 0 %}
                     {% endif %}
-                    
+
                     {% set media_final= media_dec.0 %}
                     {% if media_dec.1 matches '/^[1-9]+/' %}
                         <img src="/themes/digitac/images/icons/icon-star-half.svg" alt=""/>

@@ -1,10 +1,13 @@
 <div class="block-ideas__item">
 
-    <div class="block-ideas__item-image">
-        {{ fields.field_idea_imagen.content }}
+    <div class="block-ideas__item-image{% if fields.field_idea_imagen.content|render|striptags('<img>')|trim=='' %} no_image{% endif %}">
+        {% if fields.field_idea_imagen.content|render|striptags('<img>')|trim!='' %}
+            {{ fields.field_idea_imagen.content }}
+        {% endif %}
 
     {% if fields.field_idea_estado.content|render|striptags|trim %}
         <div class="region">
+            {{ fields.field_idea_estado_1.content }}
             {{ fields.field_idea_estado.content }}
         </div>
     {% endif %}
@@ -14,8 +17,8 @@
     <div class="block-ideas__item-content">
         <div class="category">
             <span class="type">{% if fields.type.content|render|striptags|trim == 'Idea'%}{{'IDEA'|t}}{%else%}{{'EXPERIENCIA'|t}}{%endif%} {{ fields.field_idea_numero.content }}</span>
-            
-            
+
+
             <span class="date">{{ fields.created.content }}</span>
         </div>
         <div class="title">{{ fields.title.content }}</div>
@@ -47,8 +50,10 @@
 
     <div class="block-ideas__item-ratings">
         {% if tiene_votacion == 1 %}
-        <div class="stars">{{ fields.node_rate_widget_field.content }}</div>
-        <div class="votes">{{ fields.value.content }}</div>
+        <div class="votes-row">
+            <div class="stars">{{ fields.node_rate_widget_field.content }}</div>
+            <div class="votes">{%if fields.value.content|striptags|trim==''%}0{%else%}{{ fields.value.content }}{%endif%}</div>
+        </div>
         {% endif %}
         {% if tiene_comentarios == 1 %}
         <div class="comments"><span class="sr-only">Comentarios</span> {{ fields.comment_count.content }}</div>

@@ -1,6 +1,14 @@
 .view-id-view_noticias {
     position: relative;
 
+    .block-card-slider {
+        margin: 0 rem(-16px);
+
+        .region {
+            padding-left: rem(10px);
+        }
+    }
+
     &.view-display-id-block_3 {
         max-width: rem(1272px);
         margin: 0 auto;

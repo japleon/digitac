@@ -3,6 +3,7 @@
     margin: 0;
 }
 
+
 .form-type-textfield,
 .form-type-email {
     margin: 0 0 rem(20px);
@@ -30,6 +31,18 @@
         font-size: rem(16px);
         line-height: rem(24px);
         color: $grey-500;
+
+       &::-webkit-input-placeholder,
+        &::-moz-placeholder,
+        &:-ms-input-placeholder,
+        &:-moz-placeholder {
+            font-family: $font-family-base;
+            font-style: normal;
+            font-weight: 400;
+            font-size: rem(16px);
+            line-height: rem(24px);
+            color: $grey-500;
+        }
     }
 
     .counter {
@@ -221,6 +234,21 @@
     }
 
     .description {
+        padding-left: rem(36px);
+        position: relative;
+
+        &::before {
+            content: '';
+            width: rem(24px);
+            height: rem(24px);
+            background-image: url('../images/icons/icon-alert.svg');
+            background-repeat: no-repeat;
+            background-size: contain;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
         a {
             color: $blue-600;
             text-decoration: none;
@@ -472,44 +500,8 @@
     margin-top: rem(24px);
 }
 
-.fieldgroup.form-composite {
-    margin-bottom: rem(80px);
-
-    .showmore {
-        margin-top: rem(24px);
-        padding-right: rem(28px);
-        font-family: $font-family-base;
-        font-style: normal;
-        font-weight: 600;
-        font-size: rem(14px);
-        line-height: rem(20px);
-        color: $grey-600;
-        text-decoration: none;
-        position: relative;
-        display: inline-flex;
-
-        &::after {
-            content: "";
-            width: rem(20px);
-            height: rem(20px);
-            background-image: url("../images/icons/icon-arrow-down-black.svg");
-            background-repeat: no-repeat;
-            background-size: contain;
-            position: absolute;
-            top: 50%;
-            right: 0;
-            transform: translateY(-50%) rotate(0deg); /* Inicialmente no rotada */
-            transform-origin: center center;
-            transition: all 0.3s ease;
-        }
-
-        &.active {
-            &::after {
-                transform: translateY(-50%) rotate(-180deg);
-            }
-        }
-    }
-
+.fieldgroup.form-composite,
+.vbo-table {
     .form-type-checkbox {
         display: block;
         position: relative;
@@ -569,6 +561,67 @@
             display: none;
         }
     }
+}
+
+.vbo-table {
+    .form-type-checkbox {
+        margin-bottom: 0;
+
+        label {
+            &.visually-hidden {
+                width: auto !important;
+                height: auto !important;
+                padding: 0 !important;
+                margin: 0 !important;
+                overflow: inherit !important;
+                position: relative !important;
+                text-indent: -9999px;
+                /* clip: rect(0, 0, 0, 0) !important;
+                white-space: nowrap !important;
+                border: 0 !important; */
+            }
+        }
+    }
+}
+
+.fieldgroup.form-composite {
+    margin-bottom: rem(80px);
+
+    .showmore {
+        margin-top: rem(24px);
+        padding-right: rem(28px);
+        font-family: $font-family-base;
+        font-style: normal;
+        font-weight: 600;
+        font-size: rem(14px);
+        line-height: rem(20px);
+        color: $grey-600;
+        text-decoration: none;
+        position: relative;
+        display: inline-flex;
+
+        &::after {
+            content: "";
+            width: rem(20px);
+            height: rem(20px);
+            background-image: url("../images/icons/icon-arrow-down-black.svg");
+            background-repeat: no-repeat;
+            background-size: contain;
+            position: absolute;
+            top: 50%;
+            right: 0;
+            transform: translateY(-50%) rotate(0deg); /* Inicialmente no rotada */
+            transform-origin: center center;
+            transition: all 0.3s ease;
+        }
+
+        &.active {
+            &::after {
+                transform: translateY(-50%) rotate(-180deg);
+            }
+        }
+    }
+
 
     .form-type-radio {
         display: block;

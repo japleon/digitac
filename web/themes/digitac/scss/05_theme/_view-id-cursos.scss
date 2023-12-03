@@ -1,13 +1,16 @@
-.view-id-cursos {
+.view-id-cursos,
+.view-id-soluciones {
     &.view-display-id-block_2 {
         max-width: rem(1272px);
         margin: rem(32px) auto 0;
         padding: 0 rem(12px);
 
-        @include media(md) {
-            display: grid;
-            grid-template-columns: 250px 1fr;
-            gap: 32px 60px;
+        .view-block {
+            @include media(lg) {
+                display: grid;
+                grid-template-columns: 250px 1fr;
+                gap: 32px 60px;
+            }
         }
 
         .view-filters {
@@ -90,6 +93,10 @@
             }
 
             form {
+                .fieldgroup legend {
+                    display: block;
+                }
+
                 .form--inline {
                     display: flex;
                     flex-direction: column;
@@ -201,21 +208,23 @@
                 }
             }
         }
-    }
-}
 
-.view-block {
-    &--desktop {
-        display: none;
+        .view-block {
+            &--desktop {
+                display: none;
 
-        @include media(lg) {
-            display: block;
+                @include media(lg) {
+                    display: block;
+                }
+            }
+
+            &--mob {
+                @include media(lg) {
+                    display: none;
+                }
+            }
         }
     }
 
-    &--mob {
-        @include media(lg) {
-            display: none;
-        }
-    }
 }
+

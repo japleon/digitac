@@ -2,6 +2,8 @@
 namespace Drupal\digitac_h\Controller;
 
 use Drupal\Core\Controller\ControllerBase;
+use Drupal\comment\Entity\Comment;
+
 
 /**
  * Provides route responses for the Example module.
@@ -132,6 +134,39 @@ class DigitacHController extends ControllerBase {
       {
         throw new \Symfony\Component\HttpKernel\Exception\NotFoundHttpException();
       }
+
+    }
+    else
+    {
+      throw new \Symfony\Component\HttpKernel\Exception\NotFoundHttpException();
+    }
+
+
+
+  }
+
+
+  public function comentarioAprobar($id) {
+  
+    $comment = \Drupal::entityTypeManager()->getStorage('comment')->load($id);  
+    if ($comment){
+
+//      $userID = \Drupal::currentUser()->id();
+
+//      if ($comment->getOwner()->id() == $userID)
+//      {
+        $comment->status = 1;
+        $comment->save();
+return [
+  '#theme' => 'aprobar_comentario_template',
+  '#id' => $id,
+];
+
+ /*     }
+      else
+      {
+        throw new \Symfony\Component\HttpKernel\Exception\NotFoundHttpException();
+      }*/
 
     }
     else

@@ -10,11 +10,10 @@
  * @see template_preprocess_form()
  */
 #}
+
 <form{{ attributes }}>
 
-
-
-{% if ('views-form-content-page-4' in attributes.id|render) or ('views-form-content-page-5' in attributes.id|render) or ('views-form-content-page-6' in attributes.id|render) %}
+{% if ('views-form-content-page-4' in attributes.id|render) or ('views-form-content-page-5' in attributes.id|render) or ('views-form-content-page-6' in attributes.id|render) or ('views-form-comment-page-1' in attributes.id|render) %}
   <div class="wrapper">
   {{ children }}
 {% else %}

@@ -1,6 +1,14 @@
 .view-id-view_retos {
     position: relative;
 
+    /* .container {
+        padding: 0;
+    }*/
+
+    .block-card-slider {
+        margin: 0 rem(-16px);
+    }
+
     &.view-display-id-block_3 {
         max-width: rem(1272px);
         margin: 0 auto;

@@ -19,11 +19,11 @@
     <div class="courses">
     {% for key, row in rows %}
         <div class="courses__item">{{- row.content -}}</div>
-        {% if key == 4 %}
+        {% if key == 3 %}
             <div class="message message--alt">
                 <div class="message__content">
                     <p class="message__title">¿Tienes un catálogo de cursos y quieres que aparezcan aquí?</p>
-                    <a href="#">Ponte en contacto con nosotros</a>
+                    <a href="/contact">{{'Ponte en contacto con nosotros'|t}}</a>
                 </div>
             </div>
         {% endif %}

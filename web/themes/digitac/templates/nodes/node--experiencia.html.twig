@@ -163,16 +163,28 @@
     <div class="container">
       <div class="idea">
         <ul class="nav nav-tabs" id="myTab" role="tablist">
+
+
+          {% if tiene_comentarios==1 %}
           <li class="nav-item" role="presentation">
             <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">
               Comentarios <span class="number-comments">{{ content.field_idea_comentarios['#items'].comment_count }}</span>
             </button>
           </li>
+          {% endif %}
+
+          {% set files_count = content.field_idea_archivos|length-17 %}
+          {% if files_count < 0%}
+            {% set files_count = 0 %}
+          {% endif %}
           <li class="nav-item" role="presentation">
-            <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">
-              Archivos adjuntos
+            <button class="nav-link {% if tiene_comentarios==0 %}active{%endif%}" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="{% if tiene_comentarios==1 %}false{%else%}true{%endif%}">
+              Archivos adjuntos <span class="number-comments">{{files_count}}</span>
             </button>
           </li>
+
+
+
           <li class="nav-item" role="presentation">
             <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact" type="button" role="tab" aria-controls="contact" aria-selected="false">
               Estados
@@ -180,44 +192,58 @@
           </li>
         </ul>
 
+
         <div class="tab-content" id="myTabContent">
+          {% if tiene_comentarios==1 %}
           <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+
+            {% if es_moderador==1%}
+            <div class="aviso_moderacion">
+              {{ drupal_view('usuario_stats_comentarios', 'block_2', node.id ) }}
+            </div>
+            {% endif %}
+
             <div class="tab__comments">
-              Numero comentarios: {{ content.field_idea_comentarios['#items'].comment_count }}
               {{ content.field_idea_comentarios}}
             </div> {# tab comments #}
-
+            
             {% if not logged_in %}
               <span class="ratings__login">{{'Para hacer un comentario'|t}}&nbsp;<a href="/user/login">necesitas estar logado</a></span>
             {% endif %}
 
           </div>
+          {% endif %}
           <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
             <div class="tab__files">
-              {% for key, item in content.field_idea_archivos%}
-                {% if key|first != '#' %}
-                <div class="tab__files-item">
-                  <div class="tab__files-name">
-                    <div class="name">
-                      {{ item['#file'].getOwner().displayname}}
+
+              {% if content.field_idea_archivos.0 %}
+                {% for key, item in content.field_idea_archivos%}
+                  {% if key|first != '#' %}
+                  <div class="tab__files-item">
+                    <div class="tab__files-name">
+                      <div class="name">
+                        {{ item['#file'].getOwner().displayname}}
+                      </div>
+
+                      <div class="date">
+                        {{ item['#file'].created.value|date('Y-m-d')}}
+                      </div>
                     </div>
 
-                    <div class="date">
-                      {{ item['#file'].created.value|date('Y-m-d')}}
+                    <div class="tab__files-file">
+                    {{ item }}
                     </div>
                   </div>
+                  {% endif %}
 
-                  <div class="tab__files-file">
-                  {{ item }}
-                  </div>
+                {% endfor %}
+              {% else %}
+                <div class="block-empty">
+                  <span class="block-empty__title">{{ 'Oooooops'|t }}</span>
+                  <span class="block-empty__subtitle">{{ 'Parece que todabía no hay archivos adjuntos'|t }}</span>
                 </div>
-                {% endif %}
-
-              {% endfor %}
-
-              {% if not logged_in %}
-                <span class="ratings__login">{{'Para subir adjuntos'|t}}&nbsp;<a href="/user/login">necesitas estar logado</a></span>
               {% endif %}
+
 
 
             </div>

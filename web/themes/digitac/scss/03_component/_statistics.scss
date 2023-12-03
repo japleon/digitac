@@ -327,6 +327,18 @@
                     display: flex;
                     justify-content: center;
                     align-items: center;
+                    position: relative;
+
+                    .star_expertoTac {
+                        position: absolute;
+                        bottom: rem(-5px);
+                        right: rem(-4px);
+
+                        @include media(xxl) {
+                          bottom: rem(-5px);
+                          right: rem(-4px);
+                        }
+                    }
                 }
 
                 &__user {

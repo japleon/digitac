@@ -54,7 +54,7 @@
     {% block content %}
     <div class="container">
     {% if content.field_pg_img_txt_tab_id|render|striptags|trim %}
-      <div class="tab" id="{{content.field_pg_img_txt_tab_id|render|striptags|trim}}">
+      <div class="tab-pane tab-pane-{{content.field_pg_img_txt_tab_id|render|striptags|trim}} fade" id="{{content.field_pg_img_txt_tab_id|render|striptags|trim}}">
     {% endif %}
         <div class="pg__box">
           <div class="pg__image">

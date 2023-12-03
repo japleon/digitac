@@ -108,6 +108,42 @@
                 line-height: rem(20px);
                 text-align: center;
                 color: $grey-700;
+
+                &.pay {
+                    padding-left: rem(24px);
+                    position: relative;
+
+                    &::before {
+                        content: '';
+                        width: rem(14px);
+                        height: rem(14px);
+                        background-image: url('../images/icons/icon-price.svg');
+                        background-repeat: no-repeat;
+                        background-size: contain;
+                        position: absolute;
+                        top: 50%;
+                        left: rem(8px);
+                        transform: translateY(-50%);
+                    }
+                }
+
+                &.date {
+                    padding-left: rem(24px);
+                    position: relative;
+
+                    &::before {
+                        content: '';
+                        width: rem(14px);
+                        height: rem(14px);
+                        background-image: url('../images/icons/icon-calendar.svg');
+                        background-repeat: no-repeat;
+                        background-size: contain;
+                        position: absolute;
+                        top: 50%;
+                        left: rem(8px);
+                        transform: translateY(-50%);
+                    }
+                }
             }
         }
     }

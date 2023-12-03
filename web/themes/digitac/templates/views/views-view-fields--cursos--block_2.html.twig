@@ -19,7 +19,7 @@
            <div class="tags">
 
             {% if fields.field_curso_target.content|render|striptags|trim %}
-            
+
                 {% set tags = fields.field_curso_target.content|render|striptags|trim|split('|') %}
                 {% for key,item in tags %}
                     <span class="tag target">{{item}}</span>
@@ -30,10 +30,10 @@
                <span class="tag tipo">{{ fields.field_curso_tipo.content }}</span>
             {% endif %}
             {% if fields.field_curso_gratuidad.content|render|striptags|trim %}
-               <span class="tag gratuidad">{{ fields.field_curso_gratuidad.content }}</span>
+               <span class="tag pay">{{ fields.field_curso_gratuidad.content }}</span>
             {% endif %}
             {% if fields.field_curso_fecha_inicio.content|render|striptags|trim %}
-               <span class="tag gratuidad">{{ fields.field_curso_fecha_inicio.content }}</span>
+               <span class="tag date">{{ fields.field_curso_fecha_inicio.content }}</span>
             {% endif %}
 
 
@@ -57,7 +57,7 @@ Cambiar la * por una imagen de una estrella rellena, y el / por media estrella, 
                     {% else %}
                         {% set media_final= 0 %}
                     {% endif %}
-                    
+
                     {% set media_final= media_dec.0 %}
                     {% if media_dec.1 matches '/^[1-9]+/' %}
                         <img src="/themes/digitac/images/icons/icon-star-half.svg" alt=""/>

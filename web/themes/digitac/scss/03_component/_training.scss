@@ -12,6 +12,10 @@
 
     &__carousel {
         padding-bottom: rem(88px);
+
+        @include media(lg) {
+            padding-bottom: rem(104px);
+        }
     }
 
     &__image {

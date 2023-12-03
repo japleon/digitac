@@ -292,6 +292,90 @@
     }
   }
 
+
+
+  .account-list:not(.account-lang) {
+    margin-bottom: 0;
+    list-style: none;
+    display: flex;
+    align-items: center;
+
+    .nav-link {
+      margin: 0;
+      padding: rem(10px) rem(16px);
+      border-radius: rem(50px);
+      border: none;
+      border: rem(1px) solid $secondary;
+      font-family: $font-family-base;
+      font-weight: 600;
+      font-size: rem(14px);
+      line-height: rem(20px);
+      text-align: center;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+
+    .nav-item {
+      &:first-child {
+        .nav-link {
+          margin-right: rem(12px);
+          padding: rem(8px) rem(14px);
+          border: none;
+          font-family: $font-family-base;
+          font-style: normal;
+          font-weight: 600;
+          font-size: 14px;
+          line-height: 20px;
+          color: $white;
+          position: relative;
+
+          &::after {
+            content: '';
+            width: 0;
+            height: rem(4px);
+            margin: 0 auto;
+            background-color: $white;
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            left: 0;
+            transition: all 0.3s ease;
+
+            @include media(xxl) {
+              bottom: rem(-48px);
+            }
+          }
+
+          &:hover {
+            &::after {
+              width: calc(100% - 20px);
+
+              @include media(xxl) {
+                width: calc(100% - 28px);
+              }
+            }
+          }
+        }
+      }
+
+      &:last-child {
+        margin-left: rem(10px);
+
+        .nav-link {
+          color: $grey-700;
+          border-color: $grey-300;
+          background-color: $white;
+
+          &:hover {
+            border-color: $grey-300;
+            background-color: $grey-50;
+            color: $grey-700;
+          }
+        }
+      }
+    }
+  }
+
   .lang_sel {
     margin-left: rem(12px);
 
@@ -305,6 +389,10 @@
       .selectBox__value {
         a {
           color: $primary;
+
+          @include media(xxl) {
+            color: $white;
+          }
         }
       }
 
@@ -317,12 +405,13 @@
       }
     }
   }
+
   .selectBox {
     padding: 0;
   }
 
 
-
+  // user ball letters
   .user-ball {
     width: 100%;
     max-width: rem(32px);
@@ -435,6 +524,39 @@
       background-image: url('../images/icons/icon-burger-black.svg');
     }
 
+    .account-list:not(.account-lang) {
+      .nav-item {
+        &:first-child {
+          .nav-link {
+            color: $primary;
+
+            &::after {
+              background-color: $primary;
+              bottom: rem(-39px);
+            }
+
+          }
+        }
+      }
+    }
+
+
+    .lang_sel {
+      .selectBox {
+        .selectBox__value {
+          a {
+            color: $primary;
+
+            &::after {
+              background-image: url('../images/icons/icon-arrow-down-black.svg');
+            }
+          }
+        }
+      }
+    }
+
+
+
   }
 
   &.active {
@@ -449,7 +571,7 @@
 body:not(.path-frontpage) {
   .header {
     $headerParent: ".header";
-    position: relative;
+    position: sticky;
     top: 0;
     background-color: $white;
     border-bottom: 1px solid rgb(232, 232, 234);
@@ -514,12 +636,29 @@ body:not(.path-frontpage) {
       background-image: url('../images/icons/icon-burger-black.svg');
     }
 
-    .selectBox__value {
-      a {
-        color: $primary;
+    .account-list:not(.account-lang) {
+      .nav-item {
+        &:first-child {
+          .nav-link {
+            color: $primary;
 
-        &::after {
-          background-image: url('../images/icons/icon-arrow-down-black.svg');
+            &::after {
+              background-color: $primary;
+            }
+
+          }
+        }
+      }
+    }
+
+    .selectBox {
+      .selectBox__value {
+        a {
+          color: $primary;
+
+          &::after {
+            background-image: url('../images/icons/icon-arrow-down-black.svg');
+          }
         }
       }
     }
@@ -530,3 +669,4 @@ body:not(.path-frontpage) {
 
   }
 }
+

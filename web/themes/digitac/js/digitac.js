@@ -64,8 +64,15 @@
       var headerHeight = $('.header').height();
       if($(this).scrollTop() >= headerHeight){
         $('.header').addClass('fixed');
+        if($('body:not(.path-frontpage)').length) {
+          $('.wrap').addClass('push');
+        }
       } else {
         $('.header').removeClass('fixed');
+
+        if($('body:not(.path-frontpage)').length) {
+          $('.wrap').removeClass('push');
+        }
       }
     });
   });
@@ -92,11 +99,12 @@
   // --------------------------------------
   // SELECTBOX
   // --------------------------------------
+  $('.selectBox ul').addClass('account-lang');
+
   if($(window).width() >= 1280) {
     $(".selectBox__value a").on("click", function(e) {
       $(this).parents('.selectBox').toggleClass("show");
     });
-
 
     $('.selectBox .dropdown-item').on('click', function(e) {
       e.preventDefault();
@@ -320,20 +328,131 @@
       var currentStateText = $(this).text().trim();
 
       if (currentStateText.indexOf("17") !== -1) {
+        // abierta
         $(this).addClass('state-01');
         $(this).text(currentStateText.replace('17', ''));
       } else if (currentStateText.indexOf("19") !== -1) {
+        // cerrada
         $(this).addClass('state-02');
         $(this).text(currentStateText.replace('19', ''));
       } else if (currentStateText.indexOf("16") !== -1) {
+        // borrador
         $(this).addClass('state-03');
         $(this).text(currentStateText.replace('16', ''));
       } else if (currentStateText.indexOf("18") !== -1) {
+        // evaluacion
         $(this).addClass('state-04');
         $(this).text(currentStateText.replace('18', ''));
       }
     });
   }
+
+  if ($('.node--type-reto').length) {
+    $(".block-ideas__item .region").each(function() {
+      var currentStateText = $(this).text().trim();
+
+      if (currentStateText.indexOf("17") !== -1) {
+        // abierta
+        $(this).addClass('region-01');
+        $(this).text(currentStateText.replace('17', ''));
+      } else if (currentStateText.indexOf("19") !== -1) {
+        // cerrada
+        $(this).addClass('region-02');
+        $(this).text(currentStateText.replace('19', ''));
+      } else if (currentStateText.indexOf("16") !== -1) {
+        // borrador
+        $(this).addClass('region-03');
+        $(this).text(currentStateText.replace('16', ''));
+      } else if (currentStateText.indexOf("18") !== -1) {
+        // evaluacion
+        $(this).addClass('region-04');
+        $(this).text(currentStateText.replace('18', ''));
+      }
+    });
+  }
+
+  function regionStates () {
+    if ($('.view-view-retos').length) {
+      $(".view-view-retos .region").each(function() {
+        var currentStateText = $(this).text().trim();
+        if (currentStateText.indexOf("14") !== -1) {
+          // abierta
+          $(this).addClass('region-01');
+          $(this).text(currentStateText.replace('14', ''));
+        } else if (currentStateText.indexOf("15") !== -1) {
+          // cerrada
+          $(this).addClass('region-02');
+          $(this).text(currentStateText.replace('15', ''));
+        } else if (currentStateText.indexOf("13") !== -1) {
+          // borrador
+          $(this).addClass('region-03');
+          $(this).text(currentStateText.replace('13', ''));
+        }
+      });
+    }
+  }
+
+  $(document).ready(function() {
+    regionStates();
+  });
+
+
+  // --------------------------------------
+  // ---- RETOS - Distributiva - Filtro select onchange ----
+  // --------------------------------------
+
+  /* $(document).ready(function() {
+    // Agrega un evento onchange al elemento select
+    $('#edit-field-reto-categoria-target-id').on('change', function() {
+      // Obtiene el nuevo valor seleccionado del select
+      var selectedValue = $(this).val();
+
+      // Limpia el filtro anterior
+      limpiarFiltroAnterior();
+
+      // Imita el envío del formulario para activar la recarga AJAX
+      $('#views-exposed-form-view-retos-block-3').submit(function(event) {
+        // Previene el comportamiento predeterminado del formulario
+        event.preventDefault();
+      });
+
+      // Actualiza la URL con el nuevo valor seleccionado
+      actualizarURL(selectedValue);
+    });
+
+    function limpiarFiltroAnterior() {
+      // No necesitas restablecer el valor del select aquí
+      // $('#edit-field-reto-categoria-target-id').val('All');
+    }
+
+    // Vincula el evento 'ajaxComplete' para manejar la recarga AJAX
+    $(document).on('ajaxComplete.limpiarFiltroAnterior', function() {
+      // Asegúrate de que la lógica aquí utilice correctamente el valor del select
+      regionStates();
+    });
+
+    function regionStates() {
+      // Implementa la lógica específica para manejar la recarga AJAX
+      console.log('Recarga AJAX completada');
+      // Puedes agregar lógica adicional aquí según tus necesidades
+    }
+
+    function actualizarURL(selectedValue) {
+      // Obtiene la URL actual
+      var currentURL = window.location.href;
+
+      // Reemplaza completamente la URL en el navegador sin recargar la página
+      window.location.replace(actualizarParametroURL(currentURL, 'field_reto_categoria_target_id', selectedValue));
+    }
+
+    function actualizarParametroURL(url, key, value) {
+      var urlObj = new URL(url);
+      urlObj.searchParams.set(key, value);
+      return urlObj.toString();
+    }
+  }); */
+
+
 
 
   // --------------------------------------
@@ -489,15 +608,20 @@
   // --------------------------------------
   // ---- COMENTARIOS - DESPLEGABLE ----
   // --------------------------------------
+
   $(".modal").on("shown.bs.modal", function () {
     if ($(".modal-backdrop").length > 1) {
       $(".modal-backdrop").not(':first').remove();
     }
+    $(this).insertAfter('.modal-backdrop');
   });
 
   $('a[data-bs-toggle="modal"]').on('click', function() {
     $('.modal-backdrop').prependTo($(this));
   });
+
+
+
 
 
   // --------------------------------------
@@ -598,7 +722,7 @@
   // ---- NUEVA IDEA / EXPERIENCIA - CUSTOM CHECKBOX ----
   // --------------------------------------
   function customizeCheckbox() {
-    if (!$('.block-formblock-node').length) {
+    if (!$('.box-switch').length) {
       $('.js-form-type-checkbox input').each(function() {
         var inputElement = $(this);
         var labelElement = inputElement.closest('.js-form-type-checkbox').find('label');
@@ -626,16 +750,18 @@
   // --------------------------------------
   // ---- NUEVA IDEA / EXPERIENCIA - CUSTOM RADIO ----
   // --------------------------------------
-  $('.js-form-type-radio input').each(function() {
-    var inputElement = $(this);
-    var labelElement = inputElement.closest('.js-form-type-radio').find('label');
+  if(!$('.rating-table').length) {
+    $('.js-form-type-radio input').each(function() {
+      var inputElement = $(this);
+      var labelElement = inputElement.closest('.js-form-type-radio').find('label');
 
-    // Mover el input al final del label
-    labelElement.append(inputElement);
+      // Mover el input al final del label
+      labelElement.append(inputElement);
 
-    // Agregar el span después del input
-    $('<span class="checkmark"></span>').insertAfter(inputElement);
-  });
+      // Agregar el span después del input
+      $('<span class="checkmark"></span>').insertAfter(inputElement);
+    });
+  }
 
   $('.js-form-type-radio input').each(function() {
     var radioInput = $(this);
@@ -813,6 +939,8 @@
     // Puedes adaptar esto según cómo esté implementado en tu aplicación
     actualizarNumeroCursos();
   });
+
+
 
 
 

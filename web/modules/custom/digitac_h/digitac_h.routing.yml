@@ -29,3 +29,12 @@ digitac_h.comenario_eliminar:
     _title: 'Comentario Eliminar'
   requirements:
     _permission: 'access content'    
+
+
+digitac_h.comenario_aprobar:
+  path: '/aprobar-comentario/{id}'
+  defaults:
+    _controller: '\Drupal\digitac_h\Controller\DigitacHController::comentarioAprobar'
+    _title: 'Comentario Aprobar'
+  requirements:
+    _permission: 'access content'    

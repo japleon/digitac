@@ -25,7 +25,7 @@
             }
 
             .region {
-                padding: rem(4px) rem(10px);
+                padding: rem(4px) rem(10px) rem(4px) rem(24px);
                 background-color: $white;
                 border: rem(1px) solid $grey-300;
                 box-shadow: 0 rem(1px) rem(2px) rgba(16, 24, 40, 0.05);
@@ -41,6 +41,41 @@
                 top: rem(-14px);
                 left: rem(15px);
                 z-index: 2;
+
+                &::before {
+                    content: '';
+                    width: rem(8px);
+                    height: rem(8px);
+                    border-radius: 50%;
+                    position: absolute;
+                    top: 50%;
+                    left: rem(10px);
+                    transform: translateY(-50%);
+                }
+
+                &-01 {
+                    &::before {
+                        background-color: $green;
+                    }
+                }
+
+                &-02 {
+                    &::before {
+                        background-color: $red-500;
+                    }
+                }
+
+                &-03 {
+                    &::before {
+                        background-color: $orange;
+                    }
+                }
+
+                &-04 {
+                    &::before {
+                        background-color: $blue-200;
+                    }
+                }
 
             }
         }
@@ -93,6 +128,13 @@
             }
 
             .title a {
+                overflow: hidden;
+                display: -webkit-box;
+                -webkit-box-orient: vertical;
+                -webkit-line-clamp: 3;
+                text-overflow: ellipsis;
+                text-align: left;
+
                 &:hover {
                     text-decoration: underline;
                 }
@@ -100,6 +142,22 @@
 
             .title {
                 margin-bottom: rem(8px);
+            }
+
+            .content {
+                margin-bottom: rem(20px);
+                overflow: hidden;
+                display: -webkit-box;
+                -webkit-box-orient: vertical;
+                -webkit-line-clamp: 6;
+                text-overflow: ellipsis;
+                text-align: left;
+
+                P {
+                    &:last-child {
+                        margin-bottom: 0;
+                    }
+                }
             }
 
             .content,
@@ -151,6 +209,7 @@
             }
 
             .tag {
+                margin-bottom: rem(12px);
                 margin-right: rem(8px);
                 padding: rem(4px) rem(10px);
                 border: rem(1px) solid $grey-300;
@@ -162,6 +221,43 @@
                 line-height: rem(20px);
                 text-align: center;
                 color: $grey-700;
+                display: inline-flex;
+
+                &.pay {
+                    padding-left: rem(24px);
+                    position: relative;
+
+                    &::before {
+                        content: '';
+                        width: rem(14px);
+                        height: rem(14px);
+                        background-image: url('../images/icons/icon-price.svg');
+                        background-repeat: no-repeat;
+                        background-size: contain;
+                        position: absolute;
+                        top: 50%;
+                        left: rem(8px);
+                        transform: translateY(-50%);
+                    }
+                }
+
+                &.date {
+                    padding-left: rem(24px);
+                    position: relative;
+
+                    &::before {
+                        content: '';
+                        width: rem(14px);
+                        height: rem(14px);
+                        background-image: url('../images/icons/icon-calendar.svg');
+                        background-repeat: no-repeat;
+                        background-size: contain;
+                        position: absolute;
+                        top: 50%;
+                        left: rem(8px);
+                        transform: translateY(-50%);
+                    }
+                }
             }
 
             .valoracion {
@@ -195,6 +291,11 @@
             bottom: rem(16px);
         }
 
+        @include media(lg) {
+            max-width: calc(1272px - 24px);
+            padding-right: 0;
+        }
+
         .btn {
             max-width: rem(340px);
             width: 100%;
@@ -206,6 +307,7 @@
         }
 
     }
+
 
     // modifier
     &--border {

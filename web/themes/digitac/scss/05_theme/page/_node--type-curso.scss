@@ -22,20 +22,38 @@
                 color: $primary;
             }
 
-            .text-formatted {
-                margin-bottom: rem(48px);
-                p {
+            p {
+                margin-bottom: rem(32px);
+                font-family: $font-family-base;
+                font-style: normal;
+                font-weight: 400;
+                font-size: rem(18px);
+                line-height: rem(28px);
+                color: $grey-600;
+
+                &:last-child {
+                    margin-bottom: 0;
+                }
+            }
+
+            ul {
+                margin-bottom: rem(32px);
+                li {
                     font-family: $font-family-base;
                     font-style: normal;
                     font-weight: 400;
                     font-size: rem(18px);
                     line-height: rem(28px);
                     color: $grey-600;
-
-                    &:last-child {
-                        margin-bottom: 0;
-                    }
                 }
+            }
+
+            img {
+                max-width: 100%;
+                width: auto;
+                height: auto;
+                margin: rem(48px) 0;
+                border-radius: rem(12px);
             }
         }
     }
@@ -66,6 +84,15 @@
             @include media(lg) {
                 flex-direction: row;
                 align-items: center;
+            }
+
+            .rating-option-result {
+                display: none;
+            }
+
+            form {
+                position: relative;
+                top: rem(2px);
             }
 
             span {
@@ -204,6 +231,35 @@
 
                     &.company__title {
                         margin-bottom: 0;
+                        display: flex;
+                        flex-direction: column;
+
+                        .group {
+                            margin-right: rem(32px);
+                        }
+
+                        .name {
+                            padding-bottom: rem(8px);
+                            padding-left: rem(16px);
+                            border-left: rem(1px) solid $primary;
+                            font-family: $font-family-base;
+                            font-style: normal;
+                            font-weight: 600;
+                            font-size: rem(18px);
+                            line-height: rem(28px);
+                            color: $primary;
+                        }
+
+                        .seccion {
+                            padding-left: rem(16px);
+                            border-left: rem(1px) solid $primary;
+                            font-family: $font-family-base;
+                            font-style: normal;
+                            font-weight: 400;
+                            font-size: rem(18px);
+                            line-height: rem(28px);
+                            color: $primary;
+                        }
                     }
 
                     &.company__link {
@@ -299,6 +355,10 @@
                     .company__title {
                         @include media(lg) {
                             margin-right: rem(20px);
+                        }
+
+                        .logo {
+                            max-width: rem(150px);
                         }
                     }
 

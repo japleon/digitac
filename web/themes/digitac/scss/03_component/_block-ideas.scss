@@ -22,7 +22,7 @@
             }
 
             .region {
-                padding: rem(4px) rem(10px);
+                padding: rem(4px) rem(10px) rem(4px) rem(24px);
                 background-color: $white;
                 border: rem(1px) solid $grey-300;
                 box-shadow: 0 rem(1px) rem(2px) rgba(16, 24, 40, 0.05);
@@ -39,6 +39,47 @@
                 left: rem(24px);
                 z-index: 2;
 
+                &::before {
+                    content: '';
+                    width: rem(8px);
+                    height: rem(8px);
+                    border-radius: 50%;
+                    position: absolute;
+                    top: 50%;
+                    left: rem(10px);
+                    transform: translateY(-50%);
+                }
+
+                &-01 {
+                    &::before {
+                        background-color: $green;
+                    }
+                }
+
+                &-02 {
+                    &::before {
+                        background-color: $red-500;
+                    }
+                }
+
+                &-03 {
+                    &::before {
+                        background-color: $orange;
+                    }
+                }
+
+                &-04 {
+                    &::before {
+                        background-color: $blue-200;
+                    }
+                }
+
+            }
+
+            // state
+            &.no_image {
+                height: auto;
+                margin-bottom: rem(32px);
             }
         }
 
@@ -154,6 +195,24 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+
+            .votes-row {
+                display: flex;
+
+                .votes {
+                    margin-left: rem(12px);
+                    font-family: $font-family-base;
+                    font-style: normal;
+                    font-weight: 400;
+                    font-size: rem(16px);
+                    line-height: rem(24px);
+                    color: $primary;
+                }
+            }
+
+            .fivestar-rating-wrapper > div > .rating-option-result {
+                display: none;
+            }
 
             .comments {
                 padding-left: rem(32px);

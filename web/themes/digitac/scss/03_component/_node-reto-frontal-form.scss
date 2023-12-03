@@ -58,6 +58,21 @@
       padding: 0 rem(12px);
     }
 
+    h2 {
+        font-family: $font-family-base;
+        font-style: normal;
+        font-weight: 400;
+        font-size: rem(30px);
+        line-height: rem(38px);
+        color: $primary;
+    }
+
+    .form-item,
+    h2,
+    p {
+        max-width: rem(904px);
+    }
+
     .form-type-textfield {
         margin: 0 0 rem(6px);
         /* position: relative;
@@ -415,15 +430,15 @@
 
 
     // submits
-    /* .form-submit  {
+    .form-submit  {
         width: auto;
         min-width: rem(108px);
         margin-top: rem(80px);
     }
 
-    #edit-submit {
+    #edit-submit-cancel {
         margin-right: rem(16px);
-        border-radius: rem(50px);
+        /* border-radius: rem(50px); */
         color: $grey-700;
         border-color: $grey-300;
         background-color: $white;
@@ -433,7 +448,19 @@
             background-color: $grey-50;
             color: $grey-700;
         }
-    } */
+    }
+
+    #edit-submit {
+        color: $white;
+        border-color: $blue-600;
+        background-color: $blue-600;
+
+        &:hover {
+        border-color: $blue-700;
+        background-color: $blue-700;
+        color: $white;
+        }
+    }
 
 
     .box-grey {

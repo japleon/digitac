@@ -74,4 +74,21 @@
 
 .block-card-slider {
     padding-bottom: rem(88px);
+
+    &.slick-slider {
+        .slick-arrow {
+            &.slick-prev {
+                left: rem(17px);
+            }
+
+            &.slick-next {
+                left: rem(61px);
+            }
+        }
+
+        .slick-dots {
+            left: rem(117px);
+        }
+    }
+
 }

@@ -181,9 +181,13 @@
           </li>
           {% endif %}
 
+          {% set files_count = content.field_idea_archivos|length-17 %}
+          {% if files_count < 0%}
+            {% set files_count = 0 %}
+          {% endif %}
           <li class="nav-item" role="presentation">
             <button class="nav-link {% if tiene_comentarios==0 %}active{%endif%}" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="{% if tiene_comentarios==1 %}false{%else%}true{%endif%}">
-              Archivos adjuntos
+              Archivos adjuntos <span class="number-comments">{{files_count}}</span>
             </button>
           </li>
           <li class="nav-item" role="presentation">
@@ -218,30 +222,37 @@
 
           <div class="tab-pane fade {% if tiene_comentarios==0 %}show active{%endif%}" id="profile" role="tabpanel" aria-labelledby="profile-tab">
             <div class="tab__files">
-              {% for key, item in content.field_idea_archivos%}
-                {% if key|first != '#' %}
-                <div class="tab__files-item">
-                  <div class="tab__files-name">
-                    <div class="name">
-                      {{ item['#file'].getOwner().displayname}}
-                    </div>
-
-                    <div class="date">
-                      {{ item['#file'].created.value|date('Y-m-d')}}
-                    </div>
-                  </div>
-
-                  <div class="tab__files-file">
-                  {{ item }}
-                  </div>
-                </div>
-                {% endif %}
-              {% endfor %}
               
-              {% if not logged_in %}
-                <span class="ratings__login">{{'Para subir adjuntos'|t}}&nbsp;<a href="/user/login">necesitas estar logado</a></span>
+              {% if content.field_idea_archivos.0 %}
+                {% for key, item in content.field_idea_archivos%}
+                  {% if key|first != '#' %}
+                  <div class="tab__files-item">
+                    <div class="tab__files-name">
+                      <div class="name">
+                        {{ item['#file'].getOwner().displayname}}
+                      </div>
+
+                      <div class="date">
+                        {{ item['#file'].created.value|date('Y-m-d')}}
+                      </div>
+                    </div>
+
+                    <div class="tab__files-file">
+                    {{ item }}
+                    </div>
+                  </div>
+                  {% endif %}
+                {% endfor %}
+              {% else %}
+                <div class="block-empty">
+                  <span class="block-empty__title">{{ 'Oooooops'|t }}</span>
+                  <span class="block-empty__subtitle">{{ 'Parece que todabía no hay archivos adjuntos'|t }}</span>
+                </div>
               {% endif %}
 
+
+
+              
             </div> {# tab files #}
           </div>
           <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">

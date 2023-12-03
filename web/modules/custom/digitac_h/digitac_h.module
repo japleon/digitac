@@ -16,6 +16,7 @@ use Drupal\user\Entity\User;
 use Drupal\Core\Url;
 use Drupal\Core\StringTranslation\TranslatableMarkup;
 use Drupal\taxonomy\Entity\Term;
+use Drupal\Core\StringTranslation;
 
 
 function digitac_h_form_alter(&$form, &$form_state, $form_id) {
@@ -161,6 +162,13 @@ function digitac_h_theme() {
     'template' => 'eliminar-comentario',
   ];
 
+  $theme['aprobar_comentario_template'] = [
+    'variables' => [
+      'id' => NULL,
+    ],
+    'template' => 'aprobar-comentario',
+  ];
+
   return $theme;
 }
 
@@ -221,7 +229,8 @@ function digitac_h_form_user_register_form_alter(&$form, FormStateInterface $for
 
     $form['actions'] = [
       '#type' => 'button',
-      '#value' => 'ENvioO',
+      '#value' => 'Envío',
+      '#weight' => 99,
       '#ajax' => [
         'callback' => 'setMessage',
       ],
@@ -360,7 +369,7 @@ function digitac_h_form_node_form_alter(&$form, FormStateInterface $form_state, 
       $form['agrupador_1'] = [
         '#type' => 'markup',
         '#weight' => -9,
-        '#markup' => t('<div class="box-grey">')
+        '#markup' => t('<div class="box-grey"><h2>Información básica</h2>')
       ];
 
       $form['desc_titulo'] = [
@@ -433,7 +442,10 @@ function digitac_h_form_node_form_alter(&$form, FormStateInterface $form_state, 
       $form['revision_information']['#access'] = FALSE;
       
       $form['actions']['submit']['#submit'][]= 'new_reto_submit_handler';
-    
+      $form['actions']['submit']['#weight']=99;
+      $form['actions']['submit']['#value']=t('Guardar reto');
+
+
     }
 
   if($form_id == 'node_idea_frontal_form'){
@@ -954,6 +966,17 @@ function digitac_h_comment_links_alter(array &$links, CommentInterface $comment,
 function digitac_h_preprocess_comment(&$variables)
 {
 
+    $date_formatter = \Drupal::service('date.formatter');
+    $currTime = \Drupal::time()->getCurrentTime();
+    $creatTime = explode(',', $variables['submitted']->getArguments()["@datetime"]);
+    $timestamp = strtotime(str_replace('/','-',str_replace('-','',$creatTime[1])));
+
+    $variables['hence'] = $date_formatter->formatDiff($timestamp, $currTime, [
+    'granularity' => 1,
+    'return_as_object' => TRUE,
+  ])->toRenderable();
+
+
 $values = array(
     'entity_type' => 'node',
     'entity_id' => $variables['commented_entity']->id(),
@@ -968,6 +991,10 @@ if ($variables['comment']->get('pid')->target_id == null)
   $comment = \Drupal::entityTypeManager()->getStorage('comment')->create($values);
   $form = \Drupal::service('entity.form_builder')->getForm($comment);
   $variables['reply_form']=$form;
+//  $variables['reply_form']['actions']['submit']['#value']=t('Send comment');
+//  dpm($variables['reply_form']['actions']['submit']);
+
+
 }
 
 }

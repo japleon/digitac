@@ -64,33 +64,9 @@ set footer_classes = 'footer' ~
   </header>
 
   <main role="main">
+        <div class="edit_content_wrapper">
         {{ page.content }}
-
-        {% if is_front%}
-        <div class="training">
-          <div class="container">
-            <h2 class="btitle">{{'Capacitación'|t}}</h2>
-
-            <div class="training__carousel" id="training-carousel">
-              {{ drupal_view('cursos', 'block_1', 32) }}
-              {{ drupal_view('cursos', 'block_1', 33) }}
-              {{ drupal_view('cursos', 'block_1', 34) }}
-              {{ drupal_view('cursos', 'block_1', 97) }}
-              {{ drupal_view('cursos', 'block_1', 98) }}
-              {{ drupal_view('cursos', 'block_1', 99) }}
-              {{ drupal_view('cursos', 'block_1', 100) }}
-              {{ drupal_view('cursos', 'block_1', 101) }}
-              {{ drupal_view('cursos', 'block_1', 102) }}
-            </div>
-
-            <div class="block-slider-news__button">
-              <a href="/capacitacion" class="btn btn--primary">{{'Ver todos los cursos'|t}}</a>
-          </div>
-
-          </div>
         </div>
-        {% endif %}
-
   </main>
 
   <footer class="{{ footer_classes }}" id="footer">

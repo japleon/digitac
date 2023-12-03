@@ -115,6 +115,12 @@ svg {
   background-color: $white;
   border-left: rem(1px) solid $grey-300;
   border-right: rem(1px) solid $grey-300;
+
+  &.push {
+    @include media(lg) {
+      padding-top: rem(133px);
+    }
+  }
 }
 
 .contextual-region {

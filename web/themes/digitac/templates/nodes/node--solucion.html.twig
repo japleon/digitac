@@ -94,7 +94,10 @@
 
 				<div class="tags">
                               {{content.field_solucion_tipo}}
+
+                              <div class="target pay">
                               {{content.field_solucion_gratuidad.0}}
+                              </div>
 				</div>
 
 			</div>
@@ -106,7 +109,7 @@
 					<clipPath id="clip-path3">
 						<rect x="104" width="384" height="191" rx="95.5" fill="#D9D9D9"/>
 					</clipPath>
-					<image clip-path="url(#clip-path3)" xlink:href="{{content.field_solucion_imagen.0|render|striptags|trim}}" alt="Image" class="svg__image">
+					<image x="104" x="104" width="384" height="191" preserveAspectRatio="xMidYMid slice" clip-path="url(#clip-path3)" href="{{content.field_solucion_imagen.0|render|striptags|trim}}" alt="Image" class="svg__image">
 				</svg>
 
 
@@ -119,7 +122,7 @@
                   <div class="col col-company">
                         <span class="company__title">{{content.field_solucion_compania.0}}</span>
                         <span class="company__link"><a href="{{content.field_solucion_enlace.0['#url_title']}}">{{'Accede a la solución'|t}}</a></span>
-                  </div>            
+                  </div>
             </div>
       </div>
 

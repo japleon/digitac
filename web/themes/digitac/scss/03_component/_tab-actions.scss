@@ -35,12 +35,12 @@
       font-style: normal;
       font-weight: 500;
       font-size: rem(14px);
-      line-height: rem(20px);
+      line-height: rem(14px);
       text-align: center;
       color: $grey-700;
       display: inline-flex;
       transition: all 0.3s ease;
-      display: inline-flex;
+      display: flex;
       justify-content: center;
       align-items: center;
     }

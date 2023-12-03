@@ -51,47 +51,58 @@
     </div>
   {% endif %}
 
-  <div class="view-col">
-    <a href="#" class="btn btn-primary btn-primary--icon btn-primary--icon-filter btn--filter js-filters">Filtrar resultados</a>
-    {% if exposed %}
-      <div class="view-filters">
-        <div class="view-filters__container">
-          <div class="view-filters__head">
-            <p>Filtrar resultados</p>
+  <div class="view-row">
+    <p class="js-count-filters"><span>0</span> cursos disponibles</p>
 
-            <a href="#" class="btn-close-filters js-close-filters">
-              <span class="visually-hidden">Cerrar filtros</span>
-            </a>
-          </div>
-
-          {{ exposed }}
-        </div>
-      </div>
-
-      <div class="view-filters-layer" aria-hidden="true"></div>
-    {% endif %}
-
-    <div class="view-block view-block--desktop">
-    {{ drupal_view('cursos', 'block_4' ) }}
+    <div class="filter-tags hidden">
+      <div class="filter-tags__content"></div>
+      <a href="#" class="js-remove-filters filter-tags__remove">Borrar todo</a>
     </div>
   </div>
 
 
+  <div class="view-block">
+    <div class="view-col">
+      <a href="#" class="btn btn-primary btn-primary--icon btn-primary--icon-filter btn--filter js-filters">Filtrar resultados</a>
+      {% if exposed %}
+        <div class="view-filters">
+          <div class="view-filters__container">
+            <div class="view-filters__head">
+              <p>Filtrar resultados</p>
 
-  {% if rows %}
-    <div class="view-content">
-      {{ rows }}
+              <a href="#" class="btn-close-filters js-close-filters">
+                <span class="visually-hidden">Cerrar filtros</span>
+              </a>
+            </div>
+
+            {{ exposed }}
+          </div>
+        </div>
+
+        <div class="view-filters-layer" aria-hidden="true"></div>
+      {% endif %}
+
+      <div class="view-block view-block--desktop">
+      {{ drupal_view('cursos', 'block_4' ) }}
+      </div>
     </div>
-  {% elseif empty %}
-    <div class="view-empty">
-      {{ empty }}
-    </div>
-  {% endif %}
 
-  {% if pager %}
-    {{ pager }}
-  {% endif %}
 
+
+    {% if rows %}
+      <div class="view-content">
+        {{ rows }}
+      </div>
+    {% elseif empty %}
+      <div class="view-empty">
+        {{ empty }}
+      </div>
+    {% endif %}
+
+    {% if pager %}
+      {{ pager }}
+    {% endif %}
+  </div>
 
     {# para mobile lo ponemos aqui o antes del pager? iria debajo del listado de soluciones #}
     <div class="view-block view-block--mob">

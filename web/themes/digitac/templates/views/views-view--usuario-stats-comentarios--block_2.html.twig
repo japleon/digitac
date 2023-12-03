@@ -39,13 +39,13 @@
     dom_id ? 'js-view-dom-id-' ~ dom_id,
   ]
 %}
+{% if rows.0|render|striptags|trim != '0' %}
 <div{{ attributes.addClass(classes) }}>
   <div class="message-comments">
     <div class="message-comments__content">
       <p>{{ rows.0 }} {{'comentarios pendientes de moderar'|t}}</p>
-      {% if rows.0|render|striptags|trim != '0' %}
       <a href=/admin-comentarios/{{view.args[0]}}>{{'Ver comentarios'|t}}</a>
-      {% endif %}
     </div>
   </div>
 </div>
+{% endif %}

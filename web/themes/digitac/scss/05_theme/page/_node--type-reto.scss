@@ -29,6 +29,7 @@
         }
 
         .title {
+            margin-bottom: rem(12px);
             font-family: $font-family-base;
             font-style: normal;
             font-weight: 400;
@@ -50,10 +51,78 @@
             font-size: rem(16px);
             line-height: rem(24px);
             color: $blue-500;
+            text-transform: uppercase;
+
+            &.target {
+                margin-right: rem(8px);
+                padding: rem(4px) rem(10px);
+                border-radius: rem(8px);
+                border: rem(1px) solid $grey-300;
+                background-color: $white;
+                font-weight: 500;
+                font-size: rem(14px);
+                line-height: rem(20px);
+                text-align: center;
+                text-transform: inherit;
+                color: $grey-700;
+            }
         }
 
         .tags-rounded {
             display: flex;
+        }
+
+        .tags {
+            margin-bottom: rem(12px);
+            display: flex;
+            align-items: center;
+
+            .field--name-field-solucion-tipo {
+                display: flex;
+            }
+            .field__item {
+                margin-right: rem(8px);
+                padding: rem(4px) rem(10px);
+                border-radius: rem(8px);
+                border: rem(1px) solid $grey-300;
+                background-color: $white;
+                font-weight: 500;
+                font-size: rem(14px);
+                line-height: rem(20px);
+                text-align: center;
+                color: $grey-700;
+            }
+
+            .target {
+                margin-right: rem(8px);
+                padding: rem(4px) rem(10px);
+                border-radius: rem(8px);
+                border: rem(1px) solid $grey-300;
+                background-color: $white;
+                font-weight: 500;
+                font-size: rem(14px);
+                line-height: rem(20px);
+                text-align: center;
+                color: $grey-700;
+
+                &.pay {
+                    padding-left: rem(24px);
+                    position: relative;
+
+                    &::before {
+                        content: '';
+                        width: rem(14px);
+                        height: rem(14px);
+                        background-image: url('../images/icons/icon-price.svg');
+                        background-repeat: no-repeat;
+                        background-size: contain;
+                        position: absolute;
+                        top: 50%;
+                        left: rem(8px);
+                        transform: translateY(-50%);
+                    }
+                }
+            }
         }
 
         &-image {
@@ -62,14 +131,18 @@
             background-size: contain;
             background-position: center;
 
-            svg {
-                image {
-                    width: calc(100% + 20px);
-                    width: rem(591px);
-                    height: 100%;
-                    object-fit: cover;
-                }
+            @include media(md) {
+                flex: 0 0 rem(488px);
             }
+
+            /* svg {
+                img,
+                image {
+                    width: 430px;
+                    object-fit: cover;
+                    object-position: center center;
+                }
+            } */
 
         }
     }

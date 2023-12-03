@@ -51,13 +51,13 @@
     {% block content %}
     
     {% if content.field_pg_blk_tab_id|render|striptags|trim %}
-      <div class="tab" id="{{content.field_pg_blk_tab_id|render|striptags|trim}}">
+      <div class="tab-pane tab-pane-{{content.field_pg_blk_tab_id|render|striptags|trim}} fade show" id="{{content.field_pg_blk_tab_id|render|striptags|trim}}">
     {% endif %}
     
-      {{ content }}
+      {{ content.field_pg_block_bloque }}
     
     {% if content.field_pg_blk_tab_id|render|striptags|trim %}
-      </div">
+      </div>
     {% endif %}
 
     {% endblock %}

@@ -35,15 +35,16 @@
     <div class="group-comments__content">
         <span class="group-comments__number">{{ fields.counter.content|render|striptags|trim }}</span>
 
-        {% if 'experto' in user.getroles()  %}
-            <div class="star_expertoTac"><img src="/themes/digitac/images/icons/icon-verified.svg" alt="" /></div>
-        {% endif %}
 
         <div class="group-comments__balls">
             {% set siglas = fields.uid_1.content|render|striptags|trim|split(' ') %}
             {% for item in siglas%}
             {{ item|first|upper }}
             {% endfor %}
+
+            {% if 'experto' in user.getroles()  %}
+                <div class="star_expertoTac"><img src="/themes/digitac/images/icons/icon-verified.svg" alt="" /></div>
+            {% endif %}
         </div>
         <span class="group-comments__user">{{ fields.uid_1.content|render|striptags|trim }}</span>
     </div>

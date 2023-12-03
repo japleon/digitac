@@ -78,6 +78,10 @@
                 width: auto;
                 max-width: inherit;
             }
+
+            &::before {
+                background-image: url('../images/icons/icon-new.svg');
+            }
         }
     }
 

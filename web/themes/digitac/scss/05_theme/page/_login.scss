@@ -215,6 +215,20 @@
 
             .btn {
                 width: 100%;
+                margin-top: 0;
+
+            }
+
+            #edit-submit {
+                color: $white;
+                border-color: $blue-600;
+                background-color: $blue-600;
+
+                &:hover {
+                border-color: $blue-700;
+                background-color: $blue-700;
+                color: $white;
+                }
             }
         }
     }

@@ -1,0 +1,23 @@
+.view-votingapi-votes {
+    .view-content {
+        display: flex;
+        align-items: center;
+
+        .number {
+            margin-left: rem(8px);
+            position: relative;
+            top: rem(1px);
+        }
+
+        .tooltip-icon {
+            margin-left: rem(8px);
+
+            &__icon {
+                img {
+                    position: relative;
+                    top: rem(2px);
+                }
+            }
+        }
+    }
+}
