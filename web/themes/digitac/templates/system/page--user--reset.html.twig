@@ -63,10 +63,13 @@ set footer_classes = 'footer' ~
 	</header>
 
 	<main role="main">
-AA{{proc}}AA
 		<div class="login login--password">
 			<div class="login__col login__col-left">
+				{% if proc == 'old' %}
 				<img src="/themes/digitac/images/digitac-login.jpg" alt="" class=""/>
+				{% else %}
+				<img src="/themes/digitac/images/digitac-register.jpg" alt="" class=""/>
+				{% endif %}
 
 				<div class="login__col-logo">
 					<img src="/themes/digitac/images/digitac-logo-white.svg" alt="" class="logo logo-desktop"/>
@@ -77,9 +80,14 @@ AA{{proc}}AA
 			<div class="login__col login__col-right">
 				<div class="login__col-container">
 					<div class="login__col-description">
-						<h1>{{'Establecer contraseña'|t}}</h1>
+						{% if proc == 'old' %}
+						<h1>{{'Reestablecer contraseña'|t}}</h1>
 						<p>{{'Elige una nueva contraseña para acceder a tu cuenta'|t}}
 						</p>
+						{% else %}
+						<h1>{{'¡ Hemos confirmado tu email !'|t}}</h1>
+						<p>{{'Elige una contraseña'|t}}
+						{% endif %}
 					</div>
 					{{ page.content }}
 				</div>
