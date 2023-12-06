@@ -13,5 +13,6 @@
  */
 #}
 {{ attach_library('bootstrap5/file') }}
-<span{{ attributes }}><a href="{{ link['#title'] }}">{{ icon }} {{ link['#title'] }} {{ file_size}} </a></span>
-<span><a href="{{ link['#title'] }}" class="btn btn-primary btn-primary--icon btn-primary--icon-download"> {{"Descargar"|t()}} </a></span>
+
+<span{{ attributes }}><a href="{{ link['#url'] }}">{{ icon }} {{ link['#title'] }} {{ file_size}} </a></span>
+<span><a href="{{ link['#url'] }}" class="btn btn-primary btn-primary--icon btn-primary--icon-download"> {{"Descargar"|t()}} </a></span>

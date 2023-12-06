@@ -501,7 +501,9 @@
 }
 
 .fieldgroup.form-composite,
-.vbo-table {
+.vbo-table,
+.table,
+.block-digitac-h {
     .form-type-checkbox {
         display: block;
         position: relative;
@@ -531,6 +533,7 @@
             font-size: rem(14px);
             line-height: rem(20px);
             color: $grey-700;
+            text-indent: -9999px;
             cursor: pointer;
         }
 
@@ -563,7 +566,9 @@
     }
 }
 
-.vbo-table {
+
+.vbo-table,
+.table {
     .form-type-checkbox {
         margin-bottom: 0;
 

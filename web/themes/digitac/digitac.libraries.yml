@@ -17,6 +17,12 @@ global-scripts:
     https://cdn.jsdelivr.net/npm/chart.js: {}
     js/slick.min.js: {}
     js/digitac.js: {}
+    js/digitac-menu.js: {}
+    js/digitac-sliders.js: {}
+    js/digitac-masonry.js: {}
+    js/digitac-modal.js: {}
+    js/digitac-tabs.js: {}
+    js/digitac-forms.js: {}
   dependencies:
     - core/jquery
     - core/drupal.ajax

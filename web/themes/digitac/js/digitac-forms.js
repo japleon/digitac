@@ -4,320 +4,12 @@
   /* Drupal.behaviors.someAbitraryKey = {
     attach: function (context, settings) {
 
-      jQuery('input:radio').change(function () {
-        jQuery(".poll-view-form").submit();
-      });
 
-      jQuery(".poll-view-form").submit(function (e) {
-
-        e.preventDefault();
-        var form = jQuery(this);
-        var actionUrl = form.attr('action');
-        jQuery.ajax({
-          type: "POST",
-          url: actionUrl,
-          data: form.serialize(),
-          success: function (data) {
-            jQuery('.post__poll').html(Drupal.t('Your vote has been registered.'));
-          },
-          error: function (data) {
-            jQuery('.post__poll').html(Drupal.t('There has been an error processing your vote. Try later.'));
-          }
-        });
-      });
-
-
-      jQuery('.js-example-basic-single').on('select2:select', function (e) {
-        var data = e.params.data;
-        window.location.href = "/ideasfordemocracy/"+jQuery('.js-example-basic-single').attr('data-lang')+'/tag/'+data.id;
-      });
 
     }
   }; */
 
 
-
-  // --------------------------------------
-  // menu burguer
-  // --------------------------------------
-
-  $('.js-open-menu').on('click', function (e) {
-    e.preventDefault();
-
-    $('body').addClass('overflow');
-    $('.header__nav').addClass('active');
-
-  });
-
-  $('.js-close-menu').on('click', function (e) {
-    e.preventDefault();
-
-    $('body').removeClass('overflow');
-
-    $('.header__nav').removeClass('active');
-  });
-
-
-  // header
-  $(function(){
-    $(window).scroll(function(){
-      var headerHeight = $('.header').height();
-      if($(this).scrollTop() >= headerHeight){
-        $('.header').addClass('fixed');
-        if($('body:not(.path-frontpage)').length) {
-          $('.wrap').addClass('push');
-        }
-      } else {
-        $('.header').removeClass('fixed');
-
-        if($('body:not(.path-frontpage)').length) {
-          $('.wrap').removeClass('push');
-        }
-      }
-    });
-  });
-
-
-  // menu burguer
-  $('.js-open-menu').on('click', function (e) {
-    e.preventDefault();
-
-    $('body').addClass('overflow');
-    $('.header').addClass('active');
-
-  });
-
-  $('.js-close-menu').on('click', function (e) {
-    e.preventDefault();
-
-    $('body').removeClass('overflow');
-
-    $('.header').removeClass('active');
-  });
-
-
-  // --------------------------------------
-  // SELECTBOX
-  // --------------------------------------
-  $('.selectBox ul').addClass('account-lang');
-
-  if($(window).width() >= 1280) {
-    $(".selectBox__value a").on("click", function(e) {
-      $(this).parents('.selectBox').toggleClass("show");
-    });
-
-    $('.selectBox .dropdown-item').on('click', function(e) {
-      e.preventDefault();
-      var dropdownItem = $(this);
-      var dropdownItemData = dropdownItem.attr('data-title');
-      var container = $(".selectBox__value");
-
-      console.log('dropdownItem', dropdownItem);
-      console.log('dropdownItemData', dropdownItemData);
-
-      container.text(dropdownItemData);
-      $(dropdownItem)
-        .addClass("active")
-        .siblings()
-        .removeClass("active");
-    });
-
-    $(document).on("mousedown touchstart",function(e){
-      var $info = $('.selectBox');
-      if (!$info.is(e.target) && $info.has(e.target).length === 0) {
-        $info.removeClass('show');
-      }
-    });
-  }
-
-
-
-  // --------------------------------------
-  // ----- SLIDERS ------
-  // --------------------------------------
-
-  // svg slider
-  if($(window).width() >= 768) {
-    $('#training-carousel').slick({
-      infinite: true,
-      slidesToShow: 4,
-      slidesToScroll: 1,
-      arrows: true,
-      dots: true,
-      responsive: [
-        {
-          breakpoint: 1200,
-          settings: {
-            slidesToShow: 4,
-            slidesToScroll: 1
-          }
-        },
-        {
-          breakpoint: 1024,
-          settings: {
-            slidesToShow: 2,
-            slidesToScroll: 1
-          }
-        },
-        {
-          breakpoint: 480,
-          settings: {
-            slidesToShow: 1,
-            slidesToScroll: 1
-          }
-        }
-      ]
-    });
-  }
-
-  // card type slider
-  $('.js-card-slider').slick({
-    infinite: true,
-    slidesToShow: 3,
-    slidesToScroll: 1,
-    arrows: true,
-    dots: true,
-    responsive: [
-      {
-        breakpoint: 1200,
-        settings: {
-          slidesToShow: 3,
-          slidesToScroll: 1
-        }
-      },
-      {
-        breakpoint: 1024,
-        settings: {
-          slidesToShow: 2,
-          slidesToScroll: 1
-        }
-      },
-      {
-        breakpoint: 480,
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1
-        }
-      }
-    ]
-  });
-
-  if($('.js-card-slider').length) {
-    if($(window).width() <= 480) {
-      console.log('menor de 480');
-      $('.js-card-slider').each(function() {
-        var items = $(this).find('.block-slider-news__item');
-
-        if (items.length < 2) {
-          console.log('menor de 2');
-          items.parents('.js-card-slider').find('.slick-dots').hide();
-        }
-      });
-    } else if($(window).width() >= 480 && $(window).width() < 1024) {
-      console.log('estoy por debajo de 1024');
-      $('.js-card-slider').each(function() {
-        var items = $(this).find('.block-slider-news__item');
-
-        if (items.length < 3) {
-          console.log('menor de 2');
-          items.parents('.js-card-slider').find('.slick-dots').hide();
-        }
-      });
-    } else if($(window).width() >= 1024) {
-      console.log('estoy por encima de 1024');
-      $('.js-card-slider').each(function() {
-        var items = $(this).find('.block-slider-news__item');
-
-        if (items.length < 4) {
-            items.parents('.js-card-slider').find('.slick-dots').hide();
-        }
-      });
-
-    }
-  }
-
-  // horizontal card / single card
-  $('.js-single-card-slider').slick({
-    infinite: true,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-    arrows: true,
-    dots: true
-  });
-
-  if($('.js-single-card-slider').length) {
-    $('.js-single-card-slider').each(function() {
-      var items = $(this).find('.block-slider-news__item');
-
-      if (items.length < 2) {
-          items.parents('.js-single-card-slider').find('.slick-dots').hide();
-      }
-    });
-  }
-
-  // head slider
-  $('.js-head-slider').slick({
-    infinite: true,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-    arrows: false,
-    dots: false,
-    infinite: true,
-    speed: 500,
-    fade: true,
-    cssEase: 'linear',
-    autoplay: true
-  });
-
-
-  // --------------------------------------
-  // ----- MASONRY ------
-  // --------------------------------------
-  if($(window).width() >= 768 ) {
-    $('.view-id-view_noticias.view-display-id-block_3 .view-content').masonry({
-      itemSelector: '.block-slider-news__item',
-      horizontalOrder: true,
-      gutter: 30
-    });
-
-    $('.view-id-view_retos.view-display-id-block_3 .view-content').masonry({
-      itemSelector: '.block-slider-news__item',
-      horizontalOrder: true,
-      gutter: 30
-    });
-
-    $('.view-id-distributivas.view-display-id-block_1 .view-content').masonry({
-      itemSelector: '.block-ideas__item',
-      horizontalOrder: true,
-      gutter: 30
-    });
-
-    $('.view-id-distributivas.view-display-id-block_3 .view-content').masonry({
-      itemSelector: '.block-ideas__item',
-      horizontalOrder: true,
-      gutter: 30
-    });
-  }
-
-  $('.nav-link').on('click', function() {
-    if($(this).hasClass('nav-link-ideas')) {
-      console.log('entra masonry ideas');
-      $('.view-id-distributivas.view-display-id-block_1 .view-content').masonry({
-        itemSelector: '.block-ideas__item',
-        horizontalOrder: true,
-        gutter: 30
-      });
-    }
-
-    if($(this).hasClass('nav-link-experience')) {
-      console.log('entra masonry experiencias');
-      $('.view-id-distributivas.view-display-id-block_3 .view-content').masonry({
-        itemSelector: '.block-ideas__item',
-        horizontalOrder: true,
-        gutter: 30
-      });
-    }
-  })
 
 
   // --------------------------------------
@@ -347,28 +39,30 @@
     });
   }
 
-  if ($('.node--type-reto').length) {
-    $(".block-ideas__item .region").each(function() {
-      var currentStateText = $(this).text().trim();
+  function regionIdeasStates () {
+    if ($('.node--type-reto').length) {
+      $(".block-ideas__item .region").each(function() {
+        var currentStateText = $(this).text().trim();
 
-      if (currentStateText.indexOf("17") !== -1) {
-        // abierta
-        $(this).addClass('region-01');
-        $(this).text(currentStateText.replace('17', ''));
-      } else if (currentStateText.indexOf("19") !== -1) {
-        // cerrada
-        $(this).addClass('region-02');
-        $(this).text(currentStateText.replace('19', ''));
-      } else if (currentStateText.indexOf("16") !== -1) {
-        // borrador
-        $(this).addClass('region-03');
-        $(this).text(currentStateText.replace('16', ''));
-      } else if (currentStateText.indexOf("18") !== -1) {
-        // evaluacion
-        $(this).addClass('region-04');
-        $(this).text(currentStateText.replace('18', ''));
-      }
-    });
+        if (currentStateText.indexOf("17") !== -1) {
+          // abierta
+          $(this).addClass('region-01');
+          $(this).text(currentStateText.replace('17', ''));
+        } else if (currentStateText.indexOf("19") !== -1) {
+          // cerrada
+          $(this).addClass('region-02');
+          $(this).text(currentStateText.replace('19', ''));
+        } else if (currentStateText.indexOf("16") !== -1) {
+          // borrador
+          $(this).addClass('region-03');
+          $(this).text(currentStateText.replace('16', ''));
+        } else if (currentStateText.indexOf("18") !== -1) {
+          // evaluacion
+          $(this).addClass('region-04');
+          $(this).text(currentStateText.replace('18', ''));
+        }
+      });
+    }
   }
 
   function regionStates () {
@@ -394,7 +88,24 @@
 
   $(document).ready(function() {
     regionStates();
+    regionIdeasStates();
   });
+
+  $('.nav-link').on('click', function () {
+    if ($(this).hasClass('nav-link-ideas') || $(this).hasClass('nav-link-experience')) {
+      regionIdeasStates();
+    }
+  });
+
+
+  $('.pager-show-more a').on('click', function() {
+    console.log('entra load');
+
+    $(document).ajaxComplete(function() {
+      regionStates();
+      regionIdeasStates();
+    });
+  })
 
 
   // --------------------------------------
@@ -603,23 +314,6 @@
       });
     }
   });
-
-
-  // --------------------------------------
-  // ---- COMENTARIOS - DESPLEGABLE ----
-  // --------------------------------------
-
-  $(".modal").on("shown.bs.modal", function () {
-    if ($(".modal-backdrop").length > 1) {
-      $(".modal-backdrop").not(':first').remove();
-    }
-    $(this).insertAfter('.modal-backdrop');
-  });
-
-  $('a[data-bs-toggle="modal"]').on('click', function() {
-    $('.modal-backdrop').prependTo($(this));
-  });
-
 
 
 
@@ -939,6 +633,46 @@
     // Puedes adaptar esto según cómo esté implementado en tu aplicación
     actualizarNumeroCursos();
   });
+
+
+  // --------------------------------------
+  // ---- CLONE BALL IN TO COMMENT FORM ----
+  // --------------------------------------
+
+  $(document).ready(function () {
+    // Función que se ejecutará cuando se inserte un nuevo nodo en el DOM
+    function onNodeInserted(event) {
+        var targetElement = $(event.target);
+
+        // Verificar si el nuevo nodo pertenece a .box-grey .comment-comment-form
+        if (targetElement.is(".box-grey .comment-comment-form")) {
+            var estructuraClonada = $(".header .user-ball").clone();
+            console.log('estructuraClonada', estructuraClonada);
+            targetElement.prepend(estructuraClonada);
+
+            console.log('Contenido de .comment-comment-form:', targetElement.html());
+        }
+    }
+
+    // Suscribir la función al evento DOMNodeInserted
+    $(document).on('DOMNodeInserted', onNodeInserted);
+  });
+
+
+  // --------------------------------------
+  // ---- RESPONDER COMENTARIOS FORM ----
+  // --------------------------------------
+
+  $(document).ready(function () {
+    console.log('esta ready');
+    $('.reply-button').on('click', function(e) {
+      e.preventDefault();
+
+      $(this).closest('.js-comment').find('.comment-form').slideToggle();
+
+    });
+  });
+
 
 
 

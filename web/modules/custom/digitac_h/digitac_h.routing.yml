@@ -38,3 +38,12 @@ digitac_h.comenario_aprobar:
     _title: 'Comentario Aprobar'
   requirements:
     _permission: 'access content'    
+
+
+digitac_h.cuenta_eliminar:
+  path: '/eliminar-cuenta/{id}'
+  defaults:
+    _controller: '\Drupal\digitac_h\Controller\DigitacHController::cuentaEliminar'
+    _title: 'Cuenta Eliminar'
+  requirements:
+    _permission: 'access content'

@@ -117,17 +117,24 @@ class DigitacHController extends ControllerBase {
 
   public function comentarioEliminar($id) {
     
+    
     $comment = \Drupal::entityTypeManager()->getStorage('comment')->load($id);  
+
     if ($comment){
 
       $userID = \Drupal::currentUser()->id();
+      $com_ent_id= $comment->getCommentedEntity()->id();
+      $com_ent_bundle= $comment->getCommentedEntity()->bundle();
 
+      \Drupal::logger('my_module')->error($com_ent_bundle);
+      
       if ($comment->getOwner()->id() == $userID)
       {
         $comment->delete();
         return [
             '#theme' => 'eliminar_comentario_template',
-            '#id' => $id,
+            '#com_ent_id' => $com_ent_id,
+            "#com_ent_bundle" => $com_ent_bundle
         ];
       }
       else
@@ -167,6 +174,42 @@ return [
       {
         throw new \Symfony\Component\HttpKernel\Exception\NotFoundHttpException();
       }*/
+
+    }
+    else
+    {
+      throw new \Symfony\Component\HttpKernel\Exception\NotFoundHttpException();
+    }
+
+
+
+  }
+
+
+  public function cuentaEliminar($id) {
+    
+
+    $user = \Drupal\user\Entity\User::load($id);
+    if ($user){
+      $curr_user_ID = \Drupal::currentUser()->id();
+
+      if($curr_user_ID == $user->id())
+      {
+        $user->block();
+        $user->save(); 
+        $session_manager = \Drupal::service('session_manager');
+        $session_manager->delete(\Drupal::currentUser()->id());   
+
+        return [
+          '#theme' => 'eliminar_cuenta_template',
+          '#id' => $id,
+      ];
+
+      }
+      else
+      {
+        throw new \Symfony\Component\HttpKernel\Exception\NotFoundHttpException();
+      }
 
     }
     else

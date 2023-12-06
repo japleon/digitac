@@ -123,7 +123,9 @@
             <div class="headband-company__content">
                   <div class="col col-company">
                         <span class="company__title">{{content.field_tramite_entidad.0}}</span>
-                        <span class="company__link"><a href="{{content.field_tramite_enlace.0['#url_title']}}">{{'Accede al trámite'|t}}</a></span>
+                        {% if content.field_tramite_enlace.0['#url_title'] != '' %}
+                        <span class="company__link"><a href="{{content.field_tramite_enlace.0['#url_title']}}" target='_blank'>{{'Accede al trámite'|t}}</a></span>
+                        {% endif %}
                   </div>
             </div>
       </div>

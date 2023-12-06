@@ -45,7 +45,11 @@
     }
 }
 
-.node-reto-frontal-form {
+.block-digitac-h-reto-block {
+}
+
+.node-reto-frontal-form,
+.node-idea-frontal-form {
     max-width: rem(1272px);
     margin: 0 auto;
     padding: 0 rem(12px);
@@ -67,11 +71,22 @@
         color: $primary;
     }
 
+    p {
+        margin-bottom: rem(40px);
+        font-family: $font-family-base;
+        font-style: normal;
+        font-weight: 400;
+        font-size: rem(16px);
+        line-height: rem(24px);
+        color: $grey-600;
+    }
+
     .form-item,
     h2,
     p {
         max-width: rem(904px);
     }
+
 
     .form-type-textfield {
         margin: 0 0 rem(6px);
@@ -374,52 +389,62 @@
 
 
     // switch
-    .form-type-checkbox {
-        display: block;
-        min-height: rem(30px);
-        padding-bottom: rem(22px);
-        margin-bottom: rem(22px);
-        border-bottom: rem(1px) solid $grey-300;
-
-        display: flex;
-        flex-direction: row-reverse;
-        justify-content: space-between;
-        align-items: center;
-
-        input {
-            width: 44px;
-            height: 24px;
-            margin-top: 4px;
-            vertical-align: top;
-            border-radius: rem(12px);
-            border: rem(1px) solid $blue-200;
-            background-color: $blue-200;
-            background-image: url('../images/icons/icon-switch-circle.svg');
-            background-repeat: no-repeat;
-            background-position: left center;
-            background-size: 20px;
-            appearance: none;
-            transition: background-position .15s ease-in-out;
-            cursor: pointer;
-
-
-            &:checked {
-                background-color: $blue-600;
-                border-color: $blue-600;
-                background-image: url('../images/icons/icon-switch-circle.svg');
-                background-position: right center;
-            }
+    .box-switch {
+        margin-bottom: rem(80px);
+        p {
+            margin-bottom: rem(24px);
         }
 
-        label {
-            width: 100%;
-            display: inline-block;
-            font-family: $font-family-base;
-            font-style: normal;
-            font-weight: 500;
-            font-size: rem(16px);
-            line-height: rem(24px);
-            color: $grey-800;
+        .form-type-checkbox {
+            display: block;
+            min-height: rem(30px);
+            padding-bottom: rem(22px);
+            margin-bottom: rem(22px);
+            border-bottom: rem(1px) solid $grey-300;
+
+            display: flex;
+            flex-direction: row-reverse;
+            justify-content: space-between;
+            align-items: center;
+
+            input {
+                width: 44px;
+                height: 24px;
+                margin-top: 4px;
+                vertical-align: top;
+                border-radius: rem(12px);
+                border: rem(1px) solid $blue-200;
+                background-color: $blue-200;
+                background-image: url('../images/icons/icon-switch-circle.svg');
+                background-repeat: no-repeat;
+                background-position: left center;
+                background-size: 20px;
+                appearance: none;
+                transition: background-position .15s ease-in-out;
+                cursor: pointer;
+                opacity: 1;
+
+
+                &:checked {
+                    background-color: $blue-600;
+                    border-color: $blue-600;
+                    background-image: url('../images/icons/icon-switch-circle.svg');
+                    background-position: right center;
+                    opacity: 1;
+                }
+            }
+
+            label {
+                width: 100%;
+                padding-left: 0;
+                display: inline-block;
+                font-family: $font-family-base;
+                font-style: normal;
+                font-weight: 500;
+                font-size: rem(16px);
+                line-height: rem(24px);
+                color: $grey-800;
+            }
         }
     }
 
@@ -428,12 +453,19 @@
     }
 
 
+    // related ideas
+    .fieldgroup.form-composite {
+        margin-bottom: rem(80px);
+    }
+
+
 
     // submits
-    .form-submit  {
+    .form-submit,
+    .button--danger  {
         width: auto;
         min-width: rem(108px);
-        margin-top: rem(80px);
+        margin-top: rem(40px);
     }
 
     #edit-submit-cancel {

@@ -4,22 +4,23 @@
         max-width: rem(903px);
         margin: 0 0 rem(80px);
 
+        .body .text-formatted,
         .body {
-            .text-formatted {
-                p {
-                    font-family: $font-family-base;
-                    font-style: normal;
-                    font-weight: 400;
-                    font-size: rem(18px);
-                    line-height: rem(28px);
-                    color: $grey-600;
-                }
+            p {
+                font-family: $font-family-base;
+                font-style: normal;
+                font-weight: 400;
+                font-size: rem(18px);
+                line-height: rem(28px);
+                color: $grey-600;
+            }
 
-                img {
-                    max-width: 100%;
-                    width: auto;
-                    height: auto;
-                }
+            img {
+                max-width: 100%;
+                width: auto;
+                height: auto;
+                margin: rem(28px) 0 rem(48px);
+                border-radius: rem(12px);
             }
         }
 
@@ -410,9 +411,9 @@
                     flex-direction: column;
                 }
 
-                .comment-form__title {
+                /* .comment-form__title {
                     display: none;
-                }
+                } */
 
                 .text-format-wrapper {
                     max-width: rem(846px);
@@ -493,9 +494,31 @@
                 .form-submit {
                     width: auto;
                     min-width: rem(132px);
-                    align-self: flex-end;
+                    margin-top: rem(32px);
                     margin-right: 0;
-                    //margin-right: rem(56px);
+                    align-self: flex-end;
+                }
+            }
+
+            .box-grey {
+                h2 {
+                    margin-bottom: rem(52px);
+                    font-family: $font-family-base;
+                    font-style: normal;
+                    font-weight: 400;
+                    font-size: rem(30px);
+                    line-height: rem(38px);
+                    color: $primary;
+                }
+
+                .comment-form {
+                    position: relative;
+                    .user-ball {
+                        border: 1px solid rgba($primary, 0.075);
+                        position: absolute;
+                        top: 0;
+                        left: rem(-56px);
+                    }
                 }
             }
         }
@@ -828,6 +851,10 @@
                             width: auto;
                             height: auto;
                         }
+                    }
+
+                    + .comment-form {
+                        display: none;
                     }
                 }
             }

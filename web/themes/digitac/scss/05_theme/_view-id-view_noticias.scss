@@ -9,6 +9,12 @@
         }
     }
 
+    .block-slider-news__item-image {
+        .region {
+            padding-left: rem(10px);
+        }
+    }
+
     &.view-display-id-block_3 {
         max-width: rem(1272px);
         margin: 0 auto;
@@ -80,10 +86,10 @@
                   }
             }
 
-            @include media(lg) {
+            /* @include media(lg) {
                 column-count: 3;
                 break-inside: avoid;
-            }
+            } */
 
             .block-slider-news__item {
                 width: 100%;

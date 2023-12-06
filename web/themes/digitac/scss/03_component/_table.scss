@@ -1,3 +1,4 @@
+.view-display-id-page_1,
 .view-display-id-page_4,
 .view-display-id-page_5,
 .view-display-id-page_6 {
@@ -114,6 +115,7 @@
     }
 
     .view-content {
+        margin: 0 auto;
         padding: 0;
     }
 
@@ -143,7 +145,7 @@
             }
         }
 
-        .vbo-view-form {
+        > form {
             display: flex;
             flex-direction: column;
 
@@ -168,6 +170,10 @@
             .form-type-select {
                 margin-bottom: 0;
                 order: 2;
+
+                label {
+                    display: none;
+                }
             }
 
             .btn {
@@ -241,7 +247,10 @@
     }
 
     // vbo-table
-    .vbo-table.table-striped {
+    .table.table-striped {
+        margin-bottom: 0;
+        border: rem(1px) solid $grey-300;
+
         .form-checkbox {
             width: rem(20px);
             height: rem(20px);

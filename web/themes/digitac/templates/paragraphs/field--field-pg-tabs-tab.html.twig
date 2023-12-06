@@ -54,15 +54,19 @@
 %}
 
   <div class="container">
-    <div class="tab-actions">
+    <div class="tab-actions js-aliados-tab">
       <ul>
         {% if multiple %}
-            {% for item in items %}
-              <li {{ item.attributes.addClass('field__item tab-actions__item') }}><a href="#" id="socios" data-bs-toggle="tab" data-bs-target="#socios" type="button" role="tab" aria-controls="socios" aria-selected="true">{{ item.content }}</a></li>
+            {% for key,item in items %}
+              <li {{ item.attributes.addClass('field__item tab-actions__item') }}>
+                <a href="#" id="{{ item.content|render|striptags|trim|split(' ')|first }}" {% if key == 0 %}class="active"{%endif%} type="button" role="tab" aria-controls="{{ item.content|render|striptags|trim|split(' ')|first }}">{{ item.content }}</a>
+              </li>
             {% endfor %}
         {% else %}
           {% for item in items %}
-            <li {{ attributes.addClass(classes, 'field__item tab-actions__item') }}><a href="#" id="Reconocimientos" data-bs-toggle="tab" data-bs-target="#Reconocimientos" type="button" role="tab" aria-controls="Reconocimientos" aria-selected="true">{{ item.content }}</a></li>
+            <li {{ attributes.addClass(classes, 'field__item tab-actions__item') }}>
+              <a href="#" id="Reconocimientos" type="button" role="tab" aria-controls="Reconocimientos" aria-selected="false" tabindex="-1">{{ item.content }}</a>
+            </li>
           {% endfor %}
         {% endif %}
       <ul>

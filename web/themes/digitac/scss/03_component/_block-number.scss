@@ -102,7 +102,11 @@
         font-size: rem(18px);
         line-height: rem(28px);
         color: $primary;
-        text-align: left;
+        text-align: center;
+
+        @include media(md) {
+            text-align: left;
+        }
     }
 }
 

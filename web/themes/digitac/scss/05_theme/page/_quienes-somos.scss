@@ -1,0 +1,9 @@
+.paragraph {
+    .tab-pane {
+        display: none;
+
+        &.show {
+            display: block;
+        }
+    }
+}

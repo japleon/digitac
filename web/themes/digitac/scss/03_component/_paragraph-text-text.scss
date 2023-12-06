@@ -49,6 +49,17 @@
 
             .field--name-field-pg-txt-txt-texto-dch {
                 a {
+                    font-weight: 600;
+                    color: $blue-600;
+                    text-decoration: none;
+
+                    &:hover {
+                        text-decoration: underline;
+                    }
+
+                }
+
+                .sol_button {
                     margin: rem(40px) 0 0;
                     padding: rem(10px) rem(16px);
                     text-align: center;
@@ -69,9 +80,9 @@
                     background-color: $blue-600;
 
                     &:hover {
-                    border-color: $blue-700;
-                    background-color: $blue-700;
-                    color: $white;
+                        border-color: $blue-700;
+                        background-color: $blue-700;
+                        color: $white;
                     }
                 }
             }

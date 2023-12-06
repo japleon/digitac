@@ -139,7 +139,7 @@
     <div class="container">
       <div class="idea">
         <div class="body">
-            {{ content.body }}
+            {{ content.body.0 }}
         </div>
 
         <div class="tags">
@@ -176,7 +176,7 @@
           {% if tiene_comentarios==1 %}
           <li class="nav-item" role="presentation">
             <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">
-              Comentarios <span class="number-comments">{{ content.field_idea_comentarios['#items'].comment_count }}</span>
+              {{'Comentarios'|t}} <span class="number-comments">{{ content.field_idea_comentarios['#items'].comment_count }}</span>
             </button>
           </li>
           {% endif %}
@@ -187,12 +187,12 @@
           {% endif %}
           <li class="nav-item" role="presentation">
             <button class="nav-link {% if tiene_comentarios==0 %}active{%endif%}" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="{% if tiene_comentarios==1 %}false{%else%}true{%endif%}">
-              Archivos adjuntos <span class="number-comments">{{files_count}}</span>
+             {{'Archivos adjuntos'|t}} <span class="number-comments">{{files_count}}</span>
             </button>
           </li>
           <li class="nav-item" role="presentation">
             <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact" type="button" role="tab" aria-controls="contact" aria-selected="false">
-              Estados
+              {{'Estados'|t}}
             </button>
           </li>
         </ul>

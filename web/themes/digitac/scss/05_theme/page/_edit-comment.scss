@@ -1,0 +1,28 @@
+.edit_content_wrapper {
+    .comment-form {
+        max-width: rem(1272px);
+        margin: rem(32px) auto;
+        padding: 0 rem(12px);
+
+        @include media(md) {
+            padding: 0 rem(32px);
+        }
+
+        @include media(lg) {
+            padding: 0 rem(12px);
+        }
+
+        #edit-submit {
+            margin-top: rem(32px);
+            color: $white;
+            border-color: $blue-600;
+            background-color: $blue-600;
+
+            &:hover {
+                border-color: $blue-700;
+                background-color: $blue-700;
+                color: $white;
+            }
+        }
+    }
+}

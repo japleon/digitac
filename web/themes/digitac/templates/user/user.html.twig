@@ -83,9 +83,31 @@
 
       <div class="user-box user-box--secondary">
         <div class="container">
-          <a href=# class="btn btn-secondary">{{ 'Eliminar mi cuenta'|t}}</a>
+          <a href data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-secondary">{{ 'Eliminar mi cuenta'|t}}</a>
         </div>
       </div>
+
+
+<!-- MODAL -->
+<div class="modal modal-delete fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div class="modal-header__content">
+          <h3 class="modal-title" id="exampleModalLabel">{{'Eliminar Cuenta'|t}}</h3>
+          <p>{{'¿Estás seguro de querer eliminar tu cuenta?<br>Este proceso es automático, y tu cuenta será deshabilitada de inmediato.'|t}}</p>
+        </div>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        <a href="/eliminar-cuenta/{{user.id}}" type="button" class="btn btn-primary btn-primary--alt">Eliminar</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+
 
 
     {% endif %}

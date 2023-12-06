@@ -121,7 +121,9 @@
             <div class="headband-company__content">
                   <div class="col col-company">
                         <span class="company__title">{{content.field_solucion_compania.0}}</span>
-                        <span class="company__link"><a href="{{content.field_solucion_enlace.0['#url_title']}}">{{'Accede a la solución'|t}}</a></span>
+                        {% if content.field_solucion_enlace.0['#url_title']!='' %}
+                        <span class="company__link"><a href="{{content.field_solucion_enlace.0['#url_title']}}" target='_blank'>{{'Accede a la solución'|t}}</a></span>
+                        {% endif %}
                   </div>
             </div>
       </div>

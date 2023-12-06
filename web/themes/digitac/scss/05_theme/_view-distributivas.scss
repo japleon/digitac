@@ -1,0 +1,22 @@
+.view-distributivas {
+    @include media(lg) {
+        margin-top: rem(-71px);
+    }
+
+    .view-filters {
+        .form--inline {
+            display: flex;
+            justify-content: flex-end;
+            align-items: flex-start;
+
+            .form-item {
+                min-width: rem(120px);
+            }
+
+            .btn {
+                margin-top: rem(28px);
+                margin-left: rem(4px);
+            }
+        }
+    }
+}

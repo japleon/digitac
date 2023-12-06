@@ -150,6 +150,7 @@
 
             .author {
                 margin-bottom: rem(24px);
+                display: flex;
 
                 &__letters {
                     min-width: rem(40px);
@@ -185,6 +186,17 @@
                     font-size: 14px;
                     line-height: 20px;
                     color: $primary;
+                    display: flex;
+                    flex-direction: column;
+
+                    .expertoTac {
+                        font-family: $font-family-base;
+                        font-style: normal;
+                        font-weight: 400;
+                        font-size: rem(14px);
+                        line-height: rem(20px);
+                        color: $grey-600;
+                    }
                 }
             }
         }

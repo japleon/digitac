@@ -1,8 +1,5 @@
-.block-digitac-h {
-    //padding: rem(40px) 0;
-    //background-color: $grey-50;
-    /* border-top: rem(1px) solid $grey-200;
-    border-bottom: rem(1px) solid $grey-200; */
+.block-digitac-h:not(.block-digitac-h-reto-block) {
+    background-color: $grey-50;
 
     @include media(md) {
         padding: rem(80px) 0;
@@ -57,34 +54,13 @@
             }
         }
 
-        /* .form-type-checkbox {
-            margin-bottom: rem(24px);
-
-            input {
-                border-color: $grey-400;
-            }
-
-            label {
-                font-family: $font-family-base;
-                font-style: normal;
-                font-weight: 500;
-                font-size: rem(14px);
-                line-height: rem(20px);
-                color: $grey-700;
-
-                a {
-                    color: $blue-600;
-                    text-decoration: none;
-                }
-            }
-        } */
-
-        /* .form-submit {
-            width: 100%;
-        } */
-
         .button--danger {
             display: none;
+        }
+
+        .form-submit {
+            width: 100%;
+            margin-top: rem(32px);
         }
     }
 
@@ -98,25 +74,10 @@
         }
     }
 
-
     .box-grey {
-        margin: rem(80px) 0;
-        padding: rem(40px) 0;
-        position: relative;
-
-        &::after {
-            content: '';
-            max-width: rem(1438px);
-            width: 100vw;
-            height: 100%;
-            border-top: rem(1px) solid $grey-200;
-            border-bottom: rem(1px) solid $grey-200;
-            background-color: $grey-50;
-            position: absolute;
-            top: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            z-index: -1;
-        }
+        margin: 0;
+        padding: 0;
+        background: none;
+        border: none;
     }
 }
