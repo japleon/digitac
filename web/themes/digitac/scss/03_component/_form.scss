@@ -533,7 +533,6 @@
             font-size: rem(14px);
             line-height: rem(20px);
             color: $grey-700;
-            text-indent: -9999px;
             cursor: pointer;
         }
 
@@ -567,12 +566,15 @@
 }
 
 
+
+
 .vbo-table,
 .table {
     .form-type-checkbox {
         margin-bottom: 0;
 
         label {
+            text-indent: -9999px;
             &.visually-hidden {
                 width: auto !important;
                 height: auto !important;

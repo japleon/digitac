@@ -1,4 +1,4 @@
-.block-digitac-h:not(.block-digitac-h-reto-block) {
+.block-digitac-h:not(.block-digitac-h-reto-block):not(.block-digitac-h-user-edit-block){
     background-color: $grey-50;
 
     @include media(md) {

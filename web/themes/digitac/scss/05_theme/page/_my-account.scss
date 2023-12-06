@@ -159,7 +159,140 @@
 }
 
 // form
-.block-formblock-user-edit {
+.block-digitac-h-user-edit-block {
     margin-top: rem(80px);
-    background-color: $white;
+    //background-color: $white;
+
+    .form-submit {
+        margin: 0;
+
+        &#edit-submit {
+            padding: rem(10px) rem(16px);
+            text-align: center;
+            border: none;
+            border-radius: 0;
+            border: rem(1px) solid $secondary;
+            font-family: $font-family-base;
+            font-weight: 600;
+            font-size: rem(14px);
+            line-height: rem(20px);
+            text-decoration: none;
+            transition: all 0.3s ease;
+
+            border-radius: rem(50px);
+            color: $white;
+            border-color: $blue-600;
+            background-color: $blue-600;
+
+            &:hover {
+                border-color: $blue-700;
+                background-color: $blue-700;
+                color: $white;
+            }
+        }
+    }
+
+    .form-item {
+        margin-bottom: rem(30px);
+
+        label {
+            margin-bottom: rem(6px);
+            font-family: $font-family-base;
+            font-style: normal;
+            font-weight: 500;
+            font-size: rem(14px);
+            line-height: rem(20px);
+            color: $grey-800;
+        }
+
+        .description {
+            margin-top: rem(6px);
+            font-family: $font-family-base;
+            font-style: normal;
+            font-weight: 500;
+            font-size: rem(12px);
+            line-height: rem(18px);
+            color: $grey-800;
+
+            a {
+                color: $blue-600;
+                text-decoration: none;
+
+                &:hover {
+                    text-decoration: underline;
+                }
+            }
+        }
+    }
+
+    // password
+    .form-type-password {
+        max-width: rem(904px);
+
+        .password-confirm-message {
+            font-family: $font-family-base;
+            font-style: normal;
+            font-weight: 500;
+            font-size: rem(12px);
+            line-height: rem(18px);
+            color: $grey-800;
+        }
+    }
+
+    .form-type-password-confirm {
+        .form-item {
+            max-width: rem(904px);
+            width: 100%;
+        }
+
+        .password-strength {
+            margin-top: rem(12px);
+            display: flex;
+            flex-direction: column-reverse;
+
+            .password-strength__meter {
+                height: rem(6px);
+                border-radius: rem(12px);
+            }
+
+            .password-strength__title{
+                font-family: $font-family-base;
+                font-style: normal;
+                font-weight: 500;
+                font-size: rem(12px);
+                line-height: rem(18px);
+                color: $grey-800;
+            }
+        }
+    }
+
+    .box-grey {
+       > p {
+            margin-bottom: rem(24px);
+            font-family: $font-family-base;
+            font-style: normal;
+            font-weight: 400;
+            font-size: rem(30px);
+            line-height: rem(30px);
+            color: $primary;
+
+            strong {
+                font-weight: 400;
+            }
+        }
+    }
+
+}
+.text-formatted.field--type-text-with-summary {
+    max-width: rem(1272px);
+    margin: 0 auto;
+    padding: 0 rem(12px);
+
+    @include media(md) {
+        padding: 0 rem(32px);
+    }
+
+    @include media(lg) {
+        padding: 0 rem(12px);
+    }
 }
