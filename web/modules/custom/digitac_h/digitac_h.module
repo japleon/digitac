@@ -1097,6 +1097,6 @@ function digitac_h_preprocess_paragraph(&$variables) {
 }
 
 function digitac_h_preprocess_page(&$variables) {
-  dpm($variables);
+      $variables['route_name'] = \Drupal::routeMatch()->getRouteName();
       $proc_id = explode('proc=',$_SERVER['REQUEST_URI'])[1];
 }
