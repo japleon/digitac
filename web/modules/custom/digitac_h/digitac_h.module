@@ -248,25 +248,32 @@ function digitac_h_form_user_register_form_alter(&$form, FormStateInterface $for
     ];
 }
 
- function setMessage(array $form, FormStateInterface $form_state) {
+function setMessage(array $form, FormStateInterface $form_state) {
 
 $user = \Drupal\user\Entity\User::create();
 
 $user->setPassword('password');
 $user->enforceIsNew();
-$user->setEmail($form_state->getValue('field_usr_mail')[0]['value']);
-$user->setUsername($form_state->getValue('field_usr_nombre')[0]['value']);
+$user->setEmail($form_state->getValue('mail'));
+$user->setUsername($form_state->getValue('field_usr_nombre')[0]['value'].' '.$form_state->getValue('field_usr_apellidos')[0]['value']);
+$user->set('field_usr_nombre', $form_state->getValue('field_usr_nombre')[0]['value']);
+$user->set('field_usr_apellidos', $form_state->getValue('field_usr_apellidos')[0]['value']);
+$user->set('field_usr_pais', $form_state->getValue('field_usr_pais')[0]['value']);
+$user->set('field_usr_acepto', $form_state->getValue('field_usr_acepto')['value']);
+$user->set('field_usr_empresa', $form_state->getValue('field_usr_empresa')[0]['value']);
 
 
-// Save user account.
 $result = $user->save();
+
+//   \Drupal::service('plugin.manager.mail')->mail('user_registrationpassword', 'register_confirmation_with_pass', $form_state->getValue('mail'),'ES');
+//    drupal_set_message(t('A welcome message with further instructions has been sent to your email address.'));
 
     $response = new AjaxResponse();
 
     $response->addCommand(
       new HtmlCommand(
         '#block-digitac-content',
-        '<div class="my_top_message">' . t('The ltdds is @result', ['@result' => $form_state->getValue('field_usr_nombre')[0]['value'] ]) . '</div>'),
+        '<div class="my_top_message">' . t('The ltdds is @result', ['@result' => $form_state->getValue('field_usr_pais')[0]['value'] ]) . '</div>'),
     );
     return $response;
 
