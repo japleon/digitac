@@ -93,7 +93,8 @@
                 "type:drupal-core"
             ],
             "web/libraries/{$name}": [
-                "type:drupal-library"
+                "type:drupal-library",
+                "harvesthq/chosen"
             ],
             "web/modules/contrib/{$name}": [
                 "type:drupal-module"
@@ -117,6 +118,9 @@
                 "type:drupal-custom-theme"
             ]
         },
+        "installer-types": [
+            "library"
+        ],
         "drupal-core-project-message": {
             "include-keys": [
                 "homepage",
