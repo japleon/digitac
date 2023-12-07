@@ -269,7 +269,7 @@ $result = $user->save();
 //    drupal_set_message(t('A welcome message with further instructions has been sent to your email address.'));
 
     $mail_domain = explode('@',$form_state->getValue('mail'))[1];
-    $mail_user = '***********'.substr(explode('@',$form_state->getValue('mail'))[0],-3);
+    $mail_user = '***********'.substr(explode('@',$form_state->getValue('mail'))[0],-3).'@';
 
     $response = new AjaxResponse();
 

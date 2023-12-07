@@ -125,7 +125,7 @@
         <div class="headband__col">
           {% if tiene_comentarios==1 %}
           <div class="comments">
-            <span class="sr-only">Comentarios:</span> {{ content.field_idea_comentarios['#items'].comment_count }}
+            <span class="visually-hidden">Comentarios:</span> {{ content.field_idea_comentarios['#items'].comment_count }}
           </div>
           {% endif %}
           {% if tiene_votacion==1 %}
@@ -211,7 +211,7 @@
             <div class="tab__comments">
               {{ content.field_idea_comentarios}}
             </div> {# tab comments #}
-            
+
             {% if not logged_in %}
               <span class="ratings__login">{{'Para hacer un comentario'|t}}&nbsp;<a href="/user/login">necesitas estar logado</a></span>
             {% endif %}
@@ -222,7 +222,7 @@
 
           <div class="tab-pane fade {% if tiene_comentarios==0 %}show active{%endif%}" id="profile" role="tabpanel" aria-labelledby="profile-tab">
             <div class="tab__files">
-              
+
               {% if content.field_idea_archivos.0 %}
                 {% for key, item in content.field_idea_archivos%}
                   {% if key|first != '#' %}
@@ -252,7 +252,7 @@
 
 
 
-              
+
             </div> {# tab files #}
           </div>
           <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">

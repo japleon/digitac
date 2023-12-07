@@ -144,12 +144,24 @@
         color: $grey-800;
     }
 
-    .image-widget {
+    .form-managed-file {
         display: flex;
+        align-items: center;
+
+        &.image-widget {
+            align-items: flex-start;
+        }
+    }
+
+    .file-widget-data {
+        .form-submit {
+            margin-top: 0;
+            margin-left: rem(16px);
+        }
     }
 
     .image-widget-data,
-    #edit-field-idea-archivos-0 {
+    .file-widget-data {
         width: 100%;
         margin: 0 0 rem(8px) !important;
         padding: rem(16px) rem(24px);
@@ -195,6 +207,24 @@
         }
     }
 
+    .file-widget-data {
+        &::before {
+            content: "Seleccionar archivo";
+        }
+
+        &.remove {
+            &::before {
+                display: none;
+            }
+        }
+    }
+
+    .file + .file-widget-data {
+        &::before {
+            display: none;
+        }
+    }
+
     #edit-field-idea-archivos-0 {
         img {
             max-width: rem(200px);
@@ -228,7 +258,11 @@
             }
 
             .form-submit {
-                margin-top: 0;
+                width: auto !important;
+                margin-top: 0 !important;
+                margin-bottom: rem(20px);
+                margin-left: auto;
+                display: inherit;
             }
         }
     }
@@ -261,7 +295,7 @@
 }
 
 .card {
-    .form-type-managed-file {
+    /* .form-type-managed-file {
         .form-managed-file {
             width: 100%;
             margin: 0 0 rem(8px) !important;
@@ -307,7 +341,7 @@
                 filter: alpha(opacity=0);
             }
         }
-    }
+    } */
 
     .table {
         img {
@@ -347,8 +381,14 @@
             .ck-content {
                 height: rem(300px);
                 min-height: inherit;
+                padding: rem(16px) rem(21px);
                 border-color: $grey-300;
                 border-radius: 0 0 rem(8px) rem(8px) !important;
+
+                p {
+                    margin-top: 0;
+                    margin-bottom: rem(26px);
+                }
             }
         }
 
@@ -500,10 +540,13 @@
     margin-top: rem(24px);
 }
 
-.fieldgroup.form-composite,
+/* .fieldgroup.form-composite,
 .vbo-table,
 .table,
-.block-digitac-h {
+.block-digitac-h,
+.user-register-form
+ */
+:not(.box-switch){
     .form-type-checkbox {
         display: block;
         position: relative;
@@ -527,6 +570,7 @@
             margin-left: 0;
             padding-left: rem(24px);
             display: flex;
+            flex-wrap: wrap;
             font-family: $font-family-base;
             font-style: normal;
             font-weight: 500;

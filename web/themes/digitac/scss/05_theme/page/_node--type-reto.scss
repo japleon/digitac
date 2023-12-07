@@ -3,6 +3,13 @@
     margin: 0 auto;
     padding: 0 rem(12px);
 
+    .tab_sobre_reto {
+        .cuerpo {
+            .text-formatted {
+                padding-left: 0;
+            }
+        }
+    }
 }
 
 .challenge {
@@ -33,10 +40,24 @@
             font-family: $font-family-base;
             font-style: normal;
             font-weight: 400;
-            font-size: rem(36px);
-            line-height: rem(44px);
+            font-size: rem(24px);
+            line-height: rem(32px);
             letter-spacing: -0.02em;
             color: $black;
+
+            @include media(xl) {
+                font-size: rem(36px);
+                line-height: rem(44px);
+            }
+
+            .field--name-title {
+                margin-bottom: rem(12px);
+                display: inline-flex;
+
+                @include media(xl) {
+                    margin-bottom: 0;
+                }
+            }
 
             a {
                 color: $black;
@@ -52,6 +73,7 @@
             line-height: rem(24px);
             color: $blue-500;
             text-transform: uppercase;
+            display: inline-flex;
 
             &.target {
                 margin-right: rem(8px);
@@ -75,7 +97,12 @@
         .tags {
             margin-bottom: rem(12px);
             display: flex;
+            justify-content: center;
             align-items: center;
+
+            @include media(xl) {
+                justify-content: flex-start;
+            }
 
             .field--name-field-solucion-tipo {
                 display: flex;
@@ -132,18 +159,24 @@
             background-position: center;
 
             @include media(md) {
+                max-width: rem(488px);
+                margin: 0 auto;
+            }
+
+            @include media(lg) {
+                max-width: inherit;
+                margin: 0;
                 flex: 0 0 rem(488px);
             }
 
-            /* svg {
-                img,
-                image {
-                    width: 430px;
-                    object-fit: cover;
-                    object-position: center center;
-                }
-            } */
+        }
 
+        .view-votingapi-votes .view-content {
+            justify-content: center;
+
+            @include media(xl) {
+                justify-content: flex-start;
+            }
         }
     }
 
@@ -154,5 +187,9 @@
 .challenge-content {
     .paragraph-pg-header {
         padding: 0;
+
+        &.paragraph--title--Nueva_idea {
+            margin-bottom: rem(32px);
+        }
     }
 }

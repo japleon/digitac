@@ -11,7 +11,7 @@
         $('#training-carousel').slick({
             infinite: true,
             slidesToShow: 4,
-            slidesToScroll: 1,
+            slidesToScroll: 4,
             arrows: true,
             dots: true,
             responsive: [
@@ -19,14 +19,14 @@
                     breakpoint: 1200,
                     settings: {
                         slidesToShow: 4,
-                        slidesToScroll: 1
+                        slidesToScroll: 4
                     }
                 },
                 {
                     breakpoint: 1024,
                     settings: {
                         slidesToShow: 2,
-                        slidesToScroll: 1
+                        slidesToScroll: 2
                     }
                 },
                 {

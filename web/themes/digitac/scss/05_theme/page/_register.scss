@@ -6,6 +6,10 @@
         align-items: center;
     }
 
+    @include media(lg) {
+        margin-bottom: rem(-60px);
+    }
+
     @include media(xl) {
         min-height: auto;
     }
@@ -111,7 +115,7 @@
             @include media(md) {
                 max-width: rem(520px);
                 margin: 0 auto;
-                padding: rem(100px) rem(32px) rem(54px);
+                padding: rem(80px) rem(32px) rem(54px);
                 background: $white;
                 box-shadow: 0 20px 24px -4px rgba(16, 24, 40, 0.08), 0px 8px 8px -4px rgba(16, 24, 40, 0.03);
                 border-radius: rem(12px);
@@ -128,6 +132,35 @@
         &-container {
             max-width: rem(480px);
             width: 100%;
+
+            .title_class {
+                margin-bottom: rem(12px);
+                font-family: $font-family-base;
+                font-style: normal;
+                font-weight: 400;
+                font-size: rem(30px);
+                line-height: rem(38px);
+                color: $primary;
+            }
+
+            .subtitle {
+                margin-bottom: rem(12px);
+                font-family: $font-family-base;
+                font-style: normal;
+                font-weight: 600;
+                font-size: rem(18px);
+                line-height: rem(28px);
+                color: $grey-500;
+            }
+
+            .parr {
+                font-family: $font-family-base;
+                font-style: normal;
+                font-weight: 400;
+                font-size: rem(16px);
+                line-height: rem(24px);
+                color: $grey-500;
+            }
         }
 
         &-description {
@@ -223,6 +256,7 @@
 
             .btn {
                 width: 100%;
+                margin-top: rem(24px);
             }
 
             // chosen

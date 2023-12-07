@@ -45,11 +45,9 @@
     }
 }
 
-.block-digitac-h-reto-block {
-}
-
 .node-reto-frontal-form,
-.node-idea-frontal-form {
+.node-idea-frontal-form,
+.node-experiencia-frontal-form {
     max-width: rem(1272px);
     margin: 0 auto;
     padding: 0 rem(12px);
@@ -437,6 +435,7 @@
             label {
                 width: 100%;
                 padding-left: 0;
+                padding-right: rem(60px);
                 display: inline-block;
                 font-family: $font-family-base;
                 font-style: normal;
@@ -461,16 +460,34 @@
 
 
     // submits
+    .button-wrapper {
+        max-width: rem(904px);
+        display: flex;
+        justify-content: flex-end;
+
+        .form-submit,
+        .button--danger  {
+            min-width: rem(108px);
+            margin-top: rem(40px);
+        }
+
+        .form-submit {
+            margin-left: rem(16px);
+            margin-right: 0;
+        }
+
+        #edit-submit-cancel,
+        #edit-submit {
+            margin-right: 0;
+        }
+    }
+
     .form-submit,
     .button--danger  {
-        width: auto;
-        min-width: rem(108px);
-        margin-top: rem(40px);
+        width: auto !important;
     }
 
     #edit-submit-cancel {
-        margin-right: rem(16px);
-        /* border-radius: rem(50px); */
         color: $grey-700;
         border-color: $grey-300;
         background-color: $white;
@@ -496,11 +513,20 @@
 
 
     .box-grey {
+        &:first-child {
+            margin-top: 0;
+        }
+
         // hour
         fieldset.form-wrapper {
+            margin-top: 0;
             margin-right: rem(40px);
             display: inline-flex;
             flex-direction: column;
+
+            .form-type-date {
+                margin-bottom: 0;
+            }
         }
     }
 }

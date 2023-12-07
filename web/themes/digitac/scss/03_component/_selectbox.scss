@@ -83,7 +83,7 @@
       flex-direction: column;
     }
 
-    a {
+    a, button {
       width: 100%;
       margin-bottom: rem(8px);
       padding: rem(12px) 0;
@@ -157,5 +157,83 @@
 
       transform: translateY(0);
     }
+  }
+}
+
+.statistics {
+  .selectBox {
+    $selectBoxParent: ".selectBox";
+
+    padding: 0;
+
+    &__value {
+      a {
+        display: block;
+        font-family: $font-family-base;
+        font-style: normal;
+        font-weight: 600;
+        font-size: rem(16px);
+        line-height: rem(24px);
+        color: $grey-600;
+
+        &::after {
+          background-image: url('../images/icons/icon-arrow-down-black.svg');
+        }
+      }
+    }
+
+    .dropdown-menu {
+      min-width: rem(242px);
+      padding: rem(12px);
+      background-color: $white;
+      border-radius: rem(12px);
+      border: rem(1px) solid $grey-200;
+      position: absolute;
+      opacity: 0;
+      top: 100%;
+      right: 0;
+      max-height: rem(250px);
+      z-index: -1;
+      transform: translateY(-15%);
+      visibility: hidden;
+
+
+      a, button {
+        padding-left: rem(16px);
+        transition: all 0.3s ease;
+
+        &.is-active {
+          padding-left: rem(46px);
+          background-color: $grey-50;
+
+        }
+      }
+    }
+
+    &.show {
+
+      #{$selectBoxParent}__value {
+        &:after {
+          transform: translateY(-50%) rotate(180deg);
+          transform-origin: center;
+        }
+      }
+
+      &:after {
+        transform: translateY(-50%) rotate(180deg);
+      }
+      .dropdown-menu {
+        transition: all 0.3s ease-in-out;
+
+        // max-height: 300px;
+        visibility: visible;
+
+        opacity: 1;
+        z-index: 2;
+
+        transform: translateY(0);
+      }
+    }
+
   }
 }

@@ -46,7 +46,6 @@
     }
 
     a {
-      min-height: rem(50px);
       padding: rem(10px) rem(14px);
       border-radius: rem(6px);
       font-family: $font-family-base;
@@ -59,6 +58,10 @@
       display: inline-flex;
       align-items: center;
       transition: all 0.3s ease;
+
+      @include media(md) {
+        min-height: rem(50px);
+      }
 
       @include media(xxl) {
         min-height: inherit;

@@ -1,21 +1,62 @@
 .block-digitac-h:not(.block-digitac-h-reto-block):not(.block-digitac-h-user-edit-block){
-    background-color: $grey-50;
+    //background-color: $grey-50;
 
-    @include media(md) {
+    /* @include media(md) {
         padding: rem(80px) 0;
-    }
+    } */
 
     #my-form-wrapper {
         max-width: rem(1272px);
-        margin: 0 auto;
+        margin: 0;
         padding: 0 rem(12px);
 
-        @include media(lg) {
+       // margin: rem(80px) 0;
+        padding: rem(80px) 0;
+        position: relative;
+
+        &::after {
+            content: '';
+            max-width: rem(1438px);
+            width: 100vw;
+            height: 100%;
+            margin: 0 auto;
+            border-top: rem(1px) solid $grey-200;
+            border-bottom: rem(1px) solid $grey-200;
+            background-color: $grey-50;
+            position: absolute;
+            top: 0;
+            right: 0;
+            left: 0;
+            z-index: -1;
+        }
+
+        /* @include media(lg) {
             padding: 0 rem(12px) 0 rem(312px);
+        } */
+        .fin-form {
+            padding: 0 rem(12px);
+
+            @include media(md) {
+                padding: 0 rem(32px);
+            }
+
+            @include media(lg) {
+                padding: 0 rem(12px) 0 rem(312px);
+            }
+
+            .box-grey {
+                margin: 0;
+                padding: 0;
+
+                &::after {
+                    display: none;
+                }
+            }
         }
     }
 
     form {
+
         h2 {
             margin-bottom: rem(20px);
             font-family: $font-family-base;
@@ -68,16 +109,17 @@
         max-width: rem(1272px);
         margin: rem(32px) auto 0;
         padding: 0 rem(12px);
+        display: none;
 
         @include media(md) {
             padding: 0 rem(12px) 0 rem(280px);
         }
     }
 
-    .box-grey {
+    /* .box-grey {
         margin: 0;
         padding: 0;
         background: none;
         border: none;
-    }
+    } */
 }

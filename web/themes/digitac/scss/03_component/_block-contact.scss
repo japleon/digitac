@@ -82,6 +82,20 @@
                 border-left: rem(1px) solid $grey-400;
                 padding-left: 111px;
             }
+
+            #edit-submit {
+                width: 100%;
+                margin-top: rem(24px);
+                color: $white;
+                border-color: $blue-600;
+                background-color: $blue-600;
+
+                &:hover {
+                    border-color: $blue-700;
+                    background-color: $blue-700;
+                    color: $white;
+                }
+            }
         }
     }
 }

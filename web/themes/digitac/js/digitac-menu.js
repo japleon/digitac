@@ -66,8 +66,10 @@
     // --------------------------------------
     $('.selectBox ul').addClass('account-lang');
 
-    if ($(window).width() >= 1280) {
+    function selectBox() {
         $(".selectBox__value a").on("click", function (e) {
+            e.preventDefault();
+
             $(this).parents('.selectBox').toggleClass("show");
         });
 
@@ -76,11 +78,14 @@
             var dropdownItem = $(this);
             var dropdownItemData = dropdownItem.attr('data-title');
             var container = $(".selectBox__value");
+            if($('.statistics').length) {
+                var container = $(".selectBox__value a");
+            }
 
             console.log('dropdownItem', dropdownItem);
             console.log('dropdownItemData', dropdownItemData);
 
-            container.text(dropdownItemData);
+            $(this).closest('.selectBox').find(container).text(dropdownItemData);
             $(dropdownItem)
                 .addClass("active")
                 .siblings()
@@ -93,6 +98,10 @@
                 $info.removeClass('show');
             }
         });
+    }
+
+    if ($(window).width() >= 1280) {
+        selectBox();
     }
 
 

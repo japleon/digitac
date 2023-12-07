@@ -12,6 +12,10 @@
         &__body {
             margin-bottom: rem(48px);
 
+            .text-formatted.field--type-text-with-summary {
+                padding: 0;
+            }
+
             h2 {
                 margin-bottom: rem(20px);
                 font-family: $font-family-base;
@@ -33,6 +37,15 @@
 
                 &:last-child {
                     margin-bottom: 0;
+                }
+
+                a {
+                    color: $blue-600;
+                    text-decoration: none;
+
+                    &:hover {
+                        text-decoration: underline;
+                    }
                 }
             }
 
@@ -59,7 +72,15 @@
     }
 
     .challenge {
-        margin-bottom: rem(100px);
+        @include media(lg) {
+            margin-bottom: rem(100px);
+        }
+
+        .tags {
+            @include media(lg) {
+                margin-top: rem(32px);
+            }
+        }
     }
 
     .ratings {

@@ -9,17 +9,18 @@
         display: flex;
         flex-direction: column;
 
-        @include media(lg) {
+        @include media(md) {
             margin-bottom: rem(57px);
             flex-direction: row;
             justify-content: space-between;
+            align-items: center;
         }
 
         .criba_pais {
             margin-top: rem(24px);
 
-            @include media(lg) {
-                max-width: 200px;
+            @include media(md) {
+                max-width: rem(200px);
                 margin-top: 0;
             }
 
@@ -103,6 +104,7 @@
 
                 input {
                     //width: rem(190px);
+                    width: 100%;
                     height: 100%;
                     padding-left: rem(40px);
                     padding-right: rem(10px);
@@ -116,6 +118,10 @@
                     color: $grey-700;
                     text-align: left;
                     cursor: pointer;
+
+                    @include media(md) {
+                        width: auto;
+                    }
                 }
             }
 
@@ -314,7 +320,7 @@
                     margin-right: rem(12px);
                     width: rem(40px);
                     height: rem(40px);
-                    padding: rem(6px);
+                    //padding: rem(6px);
                     border-radius: 50%;
                     border: rem(1px) solid rgba($grey-900, 0.075);
                     background-color: $grey-100;

@@ -16,7 +16,7 @@
   // ---- IDEA TAG -----
   // --------------------------------------
   if ($('.node--type-idea').length || $('.node--type-experiencia').length) {
-    $(".headband .state").each(function() {
+    $(".headband .state").each(function () {
       var currentStateText = $(this).text().trim();
 
       if (currentStateText.indexOf("17") !== -1) {
@@ -39,9 +39,9 @@
     });
   }
 
-  function regionIdeasStates () {
+  function regionIdeasStates() {
     if ($('.node--type-reto').length) {
-      $(".block-ideas__item .region").each(function() {
+      $(".block-ideas__item .region").each(function () {
         var currentStateText = $(this).text().trim();
 
         if (currentStateText.indexOf("17") !== -1) {
@@ -65,9 +65,9 @@
     }
   }
 
-  function regionStates () {
+  function regionStates() {
     if ($('.view-view-retos').length) {
-      $(".view-view-retos .region").each(function() {
+      $(".view-view-retos .region").each(function () {
         var currentStateText = $(this).text().trim();
         if (currentStateText.indexOf("14") !== -1) {
           // abierta
@@ -86,7 +86,7 @@
     }
   }
 
-  $(document).ready(function() {
+  $(document).ready(function () {
     regionStates();
     regionIdeasStates();
   });
@@ -98,10 +98,10 @@
   });
 
 
-  $('.pager-show-more a').on('click', function() {
+  $('.pager-show-more a').on('click', function () {
     console.log('entra load');
 
-    $(document).ajaxComplete(function() {
+    $(document).ajaxComplete(function () {
       regionStates();
       regionIdeasStates();
     });
@@ -171,7 +171,7 @@
   // --------------------------------------
 
   //open filters
-  $('.js-filters').on('click', function(e){
+  $('.js-filters').on('click', function (e) {
     e.preventDefault();
 
     $('.view-filters').addClass('active');
@@ -180,7 +180,7 @@
   });
 
   // close filters
-  $('.js-close-filters').on('click', function(e){
+  $('.js-close-filters').on('click', function (e) {
     e.preventDefault();
 
     $('.view-filters').removeClass('active');
@@ -192,8 +192,8 @@
   // --------------------------------------
   // ---- ESTADISTICAS ----
   // --------------------------------------
-  if($('input[name="daterange"]').length) {
-    $(function() {
+  if ($('input[name="daterange"]').length) {
+    $(function () {
       // Obtener el valor almacenado en localStorage
       var storedDateRange = localStorage.getItem('selectedDateRange');
 
@@ -210,7 +210,7 @@
         },
         startDate: initialDateRange.startDate,
         endDate: initialDateRange.endDate
-      }, function(start, end, label) {
+      }, function (start, end, label) {
         console.log("A new date selection was made: " + start.format('DD-MM-YYYY') + ' to ' + end.format('DD-MM-YYYY'));
 
         // Guardar el rango de fechas seleccionado en localStorage
@@ -238,7 +238,7 @@
   // --------------------------------------
   // ---- ESTADISTICAS - GRAFICA ----
   // --------------------------------------
-  if($('.statistics:not(.actions__item)').length) {
+  if ($('.statistics:not(.actions__item)').length) {
     console.log('array paises', array_paises);
 
     // Crear un nuevo elemento canvas
@@ -253,11 +253,11 @@
 
     // Obtener los datos en un formato adecuado para Chart.js
     var data = {
-      labels: array_paises.map(function(elemento) {
+      labels: array_paises.map(function (elemento) {
         return elemento[1];
       }),
       datasets: [{
-        data: array_paises.map(function(elemento) {
+        data: array_paises.map(function (elemento) {
           return elemento[0];
         }),
         /* backgroundColor: [
@@ -297,11 +297,11 @@
   // --------------------------------------
   // ---- COMENTARIOS - DESPLEGABLE ----
   // --------------------------------------
-  $(window).on('load', function() {
-    if($('.indented').length) {
+  $(window).on('load', function () {
+    if ($('.indented').length) {
       $('.indented').before('<a class="btn-drop js-drop-comments" href="#" role="button" aria-expanded="true">Respuestas</a>');
 
-      $('.js-drop-comments').on('click', function(e) {
+      $('.js-drop-comments').on('click', function (e) {
         e.preventDefault();
 
         $(this).toggleClass('is-closed');
@@ -321,7 +321,7 @@
   // --------------------------------------
   // ---- NOTA - IDEAS ----
   // --------------------------------------
-  $('.js-message-close').on('click', function(e) {
+  $('.js-message-close').on('click', function (e) {
     e.preventDefault(); // Evita la navegación predeterminada
 
     // Obtiene el ID del padre desde el atributo data-parent-id
@@ -329,7 +329,7 @@
     console.log(parentId);
 
     // Añade la clase al padre
-   $('#' + parentId).addClass('closed');
+    $('#' + parentId).addClass('closed');
 
     // Guarda la información en localStorage
     localStorage.setItem('closedMessageIdea', parentId);
@@ -338,7 +338,7 @@
   // Comprueba si hay información en localStorage al cargar la página
   var selectedItem = localStorage.getItem('closedMessageIdea');
   if (selectedItem) {
-      $('#' + selectedItem).addClass('closed');
+    $('#' + selectedItem).addClass('closed');
   }
 
 
@@ -347,7 +347,7 @@
   // --------------------------------------
 
   // Maneja el clic en los enlaces con anclas
-  $('.js-tab-actions a[href^="#"]').on('click', function(e) {
+  $('.js-tab-actions a[href^="#"]').on('click', function (e) {
     e.preventDefault();
     console.log('entra tab');
 
@@ -366,19 +366,19 @@
   });
 
   // Maneja el cambio en el anclaje de la URL
-  $(window).on('load', function() {
-    if($('.tab-pane').length) {
+  $(window).on('load', function () {
+    if ($('.tab-pane').length) {
       var tabPaneId = window.location.hash.substring(1);
 
       console.log('tabPaneId', tabPaneId);
 
       // Activa el tab pane correspondiente
-      if(tabPaneId !== '') {
+      if (tabPaneId !== '') {
         console.log('tabPaneId no esta vacio');
         $('.tab-pane').removeClass('active show');
         $('#' + tabPaneId).addClass('active show');
 
-        if($('.tab-pane-idea').hasClass('active')) {
+        if ($('.tab-pane-idea').hasClass('active')) {
           console.log('entra masonry ideas');
           $('.view-id-distributivas.view-display-id-block_1 .view-content').masonry({
             itemSelector: '.block-ideas__item',
@@ -387,7 +387,7 @@
           });
         }
 
-        if($('.tab-pane-experience').hasClass('active')) {
+        if ($('.tab-pane-experience').hasClass('active')) {
           console.log('entra masonry experiencias');
           $('.view-id-distributivas.view-display-id-block_3 .view-content').masonry({
             itemSelector: '.block-ideas__item',
@@ -400,9 +400,9 @@
         $('.nav-tabs-actions .nav-item button').removeClass('active');
 
         // Activa la pestaña correspondiente
-        console.log('que es esto', $('.nav-tabs-actions .nav-item button[data-bs-target="#' + tabPaneId +'"]'));
+        console.log('que es esto', $('.nav-tabs-actions .nav-item button[data-bs-target="#' + tabPaneId + '"]'));
 
-        $('.nav-tabs-actions .nav-item button[data-bs-target="#' + tabPaneId +'"]').addClass('active');
+        $('.nav-tabs-actions .nav-item button[data-bs-target="#' + tabPaneId + '"]').addClass('active');
 
       }
 
@@ -417,7 +417,7 @@
   // --------------------------------------
   function customizeCheckbox() {
     if (!$('.box-switch').length) {
-      $('.js-form-type-checkbox input').each(function() {
+      $('.js-form-type-checkbox input').each(function () {
         var inputElement = $(this);
         var labelElement = inputElement.closest('.js-form-type-checkbox').find('label');
 
@@ -431,12 +431,12 @@
   }
 
   // Llama a la función al cargar la página
-  $(document).ready(function() {
+  $(document).ready(function () {
     customizeCheckbox();
   });
 
   // Llama a la función después de cada recarga AJAX
-  $(document).ajaxComplete(function() {
+  $(document).ajaxComplete(function () {
     customizeCheckbox();
   });
 
@@ -444,8 +444,8 @@
   // --------------------------------------
   // ---- NUEVA IDEA / EXPERIENCIA - CUSTOM RADIO ----
   // --------------------------------------
-  if(!$('.rating-table').length) {
-    $('.js-form-type-radio input').each(function() {
+  if (!$('.rating-table').length) {
+    $('.js-form-type-radio input').each(function () {
       var inputElement = $(this);
       var labelElement = inputElement.closest('.js-form-type-radio').find('label');
 
@@ -457,32 +457,32 @@
     });
   }
 
-  $('.js-form-type-radio input').each(function() {
+  $('.js-form-type-radio input').each(function () {
     var radioInput = $(this);
     var radioContainer = radioInput.closest('.js-form-type-radio');
 
     // Verificar si el input está marcado
     if (radioInput.prop('checked')) {
-        // Si está marcado, agregar la clase 'active'
-        radioContainer.addClass('active');
+      // Si está marcado, agregar la clase 'active'
+      radioContainer.addClass('active');
     } else {
-        // Si no está marcado, eliminar la clase 'active'
-        radioContainer.removeClass('active');
+      // Si no está marcado, eliminar la clase 'active'
+      radioContainer.removeClass('active');
     }
   });
 
   // Agregar un controlador de eventos para actualizar la clase cuando cambia el estado del input
-  $('.js-form-type-radio input').on('change', function() {
-      var radioInput = $(this);
-      var radioContainer = radioInput.closest('.js-form-type-radio');
+  $('.js-form-type-radio input').on('change', function () {
+    var radioInput = $(this);
+    var radioContainer = radioInput.closest('.js-form-type-radio');
 
-      // Eliminar la clase 'active' de todos los elementos .js-form-type-radio
-      $('.js-form-type-radio').removeClass('active');
+    // Eliminar la clase 'active' de todos los elementos .js-form-type-radio
+    $('.js-form-type-radio').removeClass('active');
 
-      // Verificar si el input está marcado y agregar la clase 'active' si es necesario
-      if (radioInput.prop('checked')) {
-          radioContainer.addClass('active');
-      }
+    // Verificar si el input está marcado y agregar la clase 'active' si es necesario
+    if (radioInput.prop('checked')) {
+      radioContainer.addClass('active');
+    }
   });
 
 
@@ -501,32 +501,32 @@
 
     // Crea el enlace "Mostrar más" solo si hay más de 3 elementos
     if (totalElementos > elementosPorPagina) {
-        // Obtiene el número de elementos que quedan por mostrar
-        var elementosRestantes = totalElementos - elementosPorPagina;
+      // Obtiene el número de elementos que quedan por mostrar
+      var elementosRestantes = totalElementos - elementosPorPagina;
 
-        // Crea el enlace "Mostrar más" con el número de elementos entre paréntesis
-        var $toggleElementsLink = $('<a href="#" id="toggleElements" class="showmore">Mostrar más (' + elementosRestantes + ')</a>');
+      // Crea el enlace "Mostrar más" con el número de elementos entre paréntesis
+      var $toggleElementsLink = $('<a href="#" id="toggleElements" class="showmore">Mostrar más (' + elementosRestantes + ')</a>');
 
-        // Agrega el enlace al contenedor #edit-field-idea-ideas-relacionadas--wrapper
-        $('#edit-field-idea-ideas-relacionadas--wrapper').append($toggleElementsLink);
+      // Agrega el enlace al contenedor #edit-field-idea-ideas-relacionadas--wrapper
+      $('#edit-field-idea-ideas-relacionadas--wrapper').append($toggleElementsLink);
 
-        // Maneja el enlace "Mostrar más/Mostrar menos"
-        $toggleElementsLink.on('click', function (e) {
-            e.preventDefault();
+      // Maneja el enlace "Mostrar más/Mostrar menos"
+      $toggleElementsLink.on('click', function (e) {
+        e.preventDefault();
 
-            // Muestra u oculta los elementos ocultos
-            $('#edit-field-idea-ideas-relacionadas .form-type-checkbox:gt(' + (elementosPorPagina - 1) + ')').toggleClass('hidden');
+        // Muestra u oculta los elementos ocultos
+        $('#edit-field-idea-ideas-relacionadas .form-type-checkbox:gt(' + (elementosPorPagina - 1) + ')').toggleClass('hidden');
 
-            // Actualiza el número de elementos que quedan por mostrar
-            elementosRestantes = $('#edit-field-idea-ideas-relacionadas .form-type-checkbox.hidden').length;
+        // Actualiza el número de elementos que quedan por mostrar
+        elementosRestantes = $('#edit-field-idea-ideas-relacionadas .form-type-checkbox.hidden').length;
 
-            // Cambia el texto del enlace con el número de elementos restantes
-            var newText = ($('#edit-field-idea-ideas-relacionadas .form-type-checkbox:gt(' + (elementosPorPagina - 1) + ')').hasClass('hidden')) ? 'Mostrar más (' + elementosRestantes + ')' : 'Mostrar menos';
-            $toggleElementsLink.text(newText);
+        // Cambia el texto del enlace con el número de elementos restantes
+        var newText = ($('#edit-field-idea-ideas-relacionadas .form-type-checkbox:gt(' + (elementosPorPagina - 1) + ')').hasClass('hidden')) ? 'Mostrar más (' + elementosRestantes + ')' : 'Mostrar menos';
+        $toggleElementsLink.text(newText);
 
-            // Agrega o quita la clase "active" al enlace
-            $toggleElementsLink.toggleClass('active');
-        });
+        // Agrega o quita la clase "active" al enlace
+        $toggleElementsLink.toggleClass('active');
+      });
     }
   });
 
@@ -540,7 +540,7 @@
 
 
   // Agrega un controlador de clic para el botón js-remove-filters
-  $(document).on('click', '.js-remove-filters', function(e) {
+  $(document).on('click', '.js-remove-filters', function (e) {
     e.preventDefault();
 
     console.log('Desmarcar checkboxes');
@@ -623,12 +623,12 @@
   }
 
   // Contar y actualizar al cargar la página
-  $(document).ready(function() {
+  $(document).ready(function () {
     actualizarNumeroCursos();
   });
 
   // Evento para manejar recargas AJAX (ejemplo)
-  $(document).on('ajaxComplete', function() {
+  $(document).on('ajaxComplete', function () {
     // Suponiendo que la recarga AJAX afecta a los elementos .courses__item
     // Puedes adaptar esto según cómo esté implementado en tu aplicación
     actualizarNumeroCursos();
@@ -642,16 +642,16 @@
   $(document).ready(function () {
     // Función que se ejecutará cuando se inserte un nuevo nodo en el DOM
     function onNodeInserted(event) {
-        var targetElement = $(event.target);
+      var targetElement = $(event.target);
 
-        // Verificar si el nuevo nodo pertenece a .box-grey .comment-comment-form
-        if (targetElement.is(".box-grey .comment-comment-form")) {
-            var estructuraClonada = $(".header .user-ball").clone();
-            console.log('estructuraClonada', estructuraClonada);
-            targetElement.prepend(estructuraClonada);
+      // Verificar si el nuevo nodo pertenece a .box-grey .comment-comment-form
+      if (targetElement.is(".box-grey .comment-comment-form")) {
+        var estructuraClonada = $(".header .user-ball").clone();
+        console.log('estructuraClonada', estructuraClonada);
+        targetElement.prepend(estructuraClonada);
 
-            console.log('Contenido de .comment-comment-form:', targetElement.html());
-        }
+        console.log('Contenido de .comment-comment-form:', targetElement.html());
+      }
     }
 
     // Suscribir la función al evento DOMNodeInserted
@@ -665,7 +665,7 @@
 
   $(document).ready(function () {
     console.log('esta ready');
-    $('.reply-button').on('click', function(e) {
+    $('.reply-button').on('click', function (e) {
       e.preventDefault();
 
       $(this).closest('.js-comment').find('.comment-form').slideToggle();
@@ -674,6 +674,95 @@
   });
 
 
+  // --------------------------------------
+  // ---- EDIT USER FORM ----
+  // --------------------------------------
+
+  $(document).ready(function () {
+    $('.block-formblock-user-edit .user-form .box-grey').append($('#edit-submit'));
+
+  });
+
+
+  // --------------------------------------
+  // ---- INPUT FILE - FILE ----
+  // --------------------------------------
+
+  // Pte de mejoras de js
+
+
+  // Agrega una variable global para verificar si la función ya se ejecutó
+  var customInputFileExecuted = false;
+
+  function customImputFile() {
+    // Verifica si la función ya se ejecutó antes
+    if (!customInputFileExecuted) {
+      $('.form-managed-file:not(.image-widget)').each(function () {
+        var fileWidgetData = $('<div class="file-widget-data"></div>');
+
+        // Mueve el input a fileWidgetData
+        $(this).find('input').appendTo(fileWidgetData);
+
+        // Agrega fileWidgetData al contenedor
+        $(this).append(fileWidgetData);
+      });
+
+      // Marca la bandera como true para indicar que la función ya se ejecutó
+      customInputFileExecuted = true;
+    }
+  }
+
+  $(document).ready(function () {
+    // Llama a la función personalizada
+    customImputFile();
+
+    if ($('.file-widget-data').length) {
+      // Verifica si no tiene la clase 'remove'
+      if (!$('.file-widget-data').hasClass('remove')) {
+        // Agrega la clase 'remove' y mueve solo el input, no el .file
+        $('.file-widget-data').addClass('remove').prepend($('.file-widget-data input'));
+      } else {
+        // Verifica si el .file no está presente dentro de .file-widget-data
+        if ($('.file-widget-data .file').length === 0) {
+          // Elimina la clase 'remove' si .file no está presente
+          $('.file-widget-data').removeClass('remove');
+        }
+      }
+    }
+  });
+
+  $(document).on('click', '.remove .form-submit', function () {
+    // Verifica si el elemento clicado tiene un ancestro con la clase 'remove'
+    if ($(this).parents('.remove').length) {
+      $(document).ajaxStop(function () {
+        // Verifica si .file no está presente dentro del ancestro con la clase 'remove'
+        if ($(this).parents('.remove').find('.file').length === 0) {
+          // Elimina la clase 'remove' si .file no está presente
+          $(this).parents('.remove').removeClass('remove');
+        }
+
+        $(this).unbind('ajaxStop');
+      });
+    }
+  });
+
+  $(document).ajaxComplete(function () {
+    customImputFile();
+
+    if ($('.file-widget-data').length) {
+      if (!$('.file-widget-data').hasClass('remove')) {
+        $('.file-widget-data').addClass('remove').prepend($('.file-widget-data input'));
+      } else {
+        if ($('.file-widget-data .file').length === 0) {
+          $('.file-widget-data').removeClass('remove');
+        }
+      }
+    }
+
+    if (!$('.file').length) {
+      $('.file-widget-data').removeClass('remove');
+    }
+  });
 
 
 

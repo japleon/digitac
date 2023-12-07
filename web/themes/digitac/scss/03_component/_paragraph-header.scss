@@ -1,34 +1,51 @@
 .paragraph-pg-header {
-    padding: rem(80px) 0;
+    padding: rem(40px) 0;
 
-    /* @include media(lg) {
-
-    } */
+    @include media(lg) {
+        padding: rem(80px) 0;
+    }
 
     .container {
         display: flex;
         flex-direction: column-reverse;
+        align-items: center;
 
         @include media(lg) {
             display: flex;
             flex-direction: row;
             justify-content: space-between;
-            align-items: center;
         }
     }
 
     &__box {
-        max-width: rem(510px);
+        //max-width: rem(510px);
+        max-width: 100%;
+        text-align: center;
+
+        @include media(lg) {
+            max-width: rem(560px);
+            text-align: left;
+        }
 
         .title {
+            margin-top: rem(36px);
             margin-bottom: rem(8px);
             font-family: $font-family-base;
             font-style: normal;
             font-weight: 400;
-            font-size: rem(36px);
-            line-height: rem(44px);
+            /* font-size: rem(36px);
+            line-height: rem(44px); */
+            font-size: rem(24px);
+            line-height: rem(32px);
             letter-spacing: -0.02em;
             color: $primary;
+
+
+
+            @include media(md) {
+                font-size: rem(36px);
+                line-height: rem(44px);
+            }
 
 
             &-xl {
@@ -67,5 +84,35 @@
             }
         }
 
+    }
+
+    &.paragraph--title--Soluciones,
+    &.paragraph--title--Capacitación {
+        .container {
+            align-items: flex-start;
+
+            .title {
+                margin: 0;
+            }
+        }
+    }
+}
+
+
+
+
+.user-account {
+    padding: rem(80px) 0;
+
+    .paragraph-pg-header {
+        &__box {
+            .subtitle {
+                margin-bottom: rem(105px);
+
+                @include media(lg) {
+                    margin-bottom: rem(32px);
+                }
+            }
+        }
     }
 }

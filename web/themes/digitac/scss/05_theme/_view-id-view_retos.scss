@@ -22,6 +22,11 @@
 
             @include media(md) {
                 width: auto;
+                margin-top: rem(32px);
+            }
+
+            @include media(lg) {
+                margin-top: 0;
             }
 
             form {

@@ -1,20 +1,49 @@
 .view-distributivas {
     @include media(lg) {
-        margin-top: rem(-71px);
+        margin-top: rem(-43px);
     }
 
     .view-filters {
+        @include media(md) {
+            margin-top: rem(32px);
+        }
+
+        @include media(lg) {
+            margin-top: 0;
+        }
+
         .form--inline {
             display: flex;
             justify-content: flex-end;
             align-items: flex-start;
 
+            @include media(md) {
+                justify-content: flex-start;
+            }
+
+            @include media(lg) {
+                justify-content: flex-end;
+            }
+
             .form-item {
                 min-width: rem(120px);
+                width: 100%;
+
+                @include media(md) {
+                    width: auto;
+                }
+
+                label {
+                    display: none;
+                }
+
+                &.form-item-sort-order {
+                    display: none;
+                }
             }
 
             .btn {
-                margin-top: rem(28px);
+                margin-top: 0;
                 margin-left: rem(4px);
             }
         }
