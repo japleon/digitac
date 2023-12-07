@@ -294,7 +294,7 @@
 
         @include media(lg) {
             max-width: calc(1272px - 24px);
-            padding-right: 0;
+            padding-right: rem(24px);
         }
 
         .btn {

@@ -1,0 +1,51 @@
+.alert {
+    max-width: rem(400px);
+    padding-left: rem(52px);
+    border: 1px solid $grey-300;
+    background: $white;
+    border-radius: rem(12px);
+    box-shadow: 0px 12px 16px -4px rgba(16, 24, 40, 0.08), 0px 4px 6px -2px rgba(16, 24, 40, 0.03);
+    position: fixed;
+    top: rem(128px);
+    right: rem(24px);
+    z-index: 4;
+    transition: all 0.3s ease;
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 600;
+    font-size: rem(14px);
+    line-height: rem(20px);
+    color: $primary;
+
+    a {
+        color: $blue-600;
+        text-decoration: none;
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+
+
+    @include media(lg) {
+        top: rem(200px);
+        right: calc(50vw - 700px);
+    }
+
+    &::before {
+        content: '';
+        width: rem(38px);
+        height: rem(38px);
+        background-image: url('../images/icons/icon-info.svg');
+        background-repeat: no-repeat;
+        background-size: contain;
+        background-position: center;
+        position: absolute;
+        top: rem(7px);
+        left: rem(7px);
+    }
+
+    .btn-close {
+        display: none;
+    }
+}

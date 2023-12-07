@@ -541,16 +541,13 @@
       }
     }
 
+    .selectBox {
+      .selectBox__value {
+        a {
+          color: $primary;
 
-    .lang_sel {
-      .selectBox {
-        .selectBox__value {
-          a {
-            color: $primary;
-
-            &::after {
-              background-image: url('../images/icons/icon-arrow-down-black.svg');
-            }
+          &::after {
+            background-image: url('../images/icons/icon-arrow-down-black.svg');
           }
         }
       }

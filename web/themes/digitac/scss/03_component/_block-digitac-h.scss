@@ -41,7 +41,7 @@
             }
 
             @include media(lg) {
-                padding: 0 rem(12px) 0 rem(312px);
+                padding: 0 rem(24px) 0 rem(312px);
             }
 
             .box-grey {
@@ -112,7 +112,7 @@
         display: none;
 
         @include media(md) {
-            padding: 0 rem(12px) 0 rem(280px);
+            padding: 0 rem(24px) 0 rem(280px);
         }
     }
 

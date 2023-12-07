@@ -137,7 +137,7 @@
 
         @include media(lg) {
             max-width: calc(1272px - 24px);
-            width: auto;
+            width: calc(100% - 48px);
             bottom: rem(-60px);
         }
     }

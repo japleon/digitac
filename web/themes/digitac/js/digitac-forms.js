@@ -8,6 +8,15 @@
 
     }
   }; */
+  $(window).on('scroll', function() {
+    var headerHeight = $('.header.fixed').outerHeight();
+
+    $('.alert').css('top', headerHeight + 20);
+  });
+
+  setTimeout(function() {
+    $('.alert').fadeOut();
+  }, 5000);
 
 
 
@@ -690,80 +699,84 @@
 
   // Pte de mejoras de js
 
-
   // Agrega una variable global para verificar si la función ya se ejecutó
   var customInputFileExecuted = false;
 
-  function customImputFile() {
-    // Verifica si la función ya se ejecutó antes
-    if (!customInputFileExecuted) {
+  function createFileWidgetData() {
+    // Crea el contenedor .file-widget-data si no existe
+    if ($('.file-widget-data').length === 0) {
       $('.form-managed-file:not(.image-widget)').each(function () {
         var fileWidgetData = $('<div class="file-widget-data"></div>');
 
-        // Mueve el input a fileWidgetData
-        $(this).find('input').appendTo(fileWidgetData);
+        // Mueve tanto el input como el .file a fileWidgetData
+        $(this).find('input, .file').appendTo(fileWidgetData);
 
         // Agrega fileWidgetData al contenedor
         $(this).append(fileWidgetData);
-      });
 
-      // Marca la bandera como true para indicar que la función ya se ejecutó
-      customInputFileExecuted = true;
+        // Comprueba si el archivo está presente y agrega la clase 'remove' si es necesario
+        if ($(this).find('.file').length > 0) {
+          console.log('El archivo está presente dentro de form-managed-file');
+          fileWidgetData.addClass('remove');
+        } else {
+          console.log('El archivo NO está presente dentro de form-managed-file');
+        }
+      });
+    }
+  }
+
+  function movePDFFile() {
+    // Mueve .file--mime-application-pdf a fileWidgetData solo si no está presente
+    if ($('.file-widget-data .file--mime-application-pdf').length === 0) {
+      $('.file--mime-application-pdf').appendTo('.file-widget-data');
     }
   }
 
   $(document).ready(function () {
-    // Llama a la función personalizada
-    customImputFile();
+    // Crea el contenedor .file-widget-data
+    createFileWidgetData();
+
+    // Mueve .file--mime-application-pdf a fileWidgetData si no está presente
+    movePDFFile();
 
     if ($('.file-widget-data').length) {
       // Verifica si no tiene la clase 'remove'
       if (!$('.file-widget-data').hasClass('remove')) {
-        // Agrega la clase 'remove' y mueve solo el input, no el .file
-        $('.file-widget-data').addClass('remove').prepend($('.file-widget-data input'));
-      } else {
-        // Verifica si el .file no está presente dentro de .file-widget-data
-        if ($('.file-widget-data .file').length === 0) {
-          // Elimina la clase 'remove' si .file no está presente
-          $('.file-widget-data').removeClass('remove');
+        // Verifica si contiene el elemento .file
+        if ($('.file-widget-data .file').length > 0) {
+          // Agrega la clase 'remove' y mueve tanto el input como el .file
+          var fileWidgetData = $('.file-widget-data');
+          fileWidgetData.addClass('remove');
+          fileWidgetData.prepend(fileWidgetData.find('input, .file'));
         }
+      } else {
+        // Verifica si el .file no está presente dentro de .file-widget-data después de un breve retraso
+        setTimeout(function () {
+          if ($('.file-widget-data .file').length === 0) {
+            // Elimina la clase 'remove' si .file no está presente
+            $('.file-widget-data').removeClass('remove');
+          }
+        }, 500); // Ajusta el tiempo de espera según sea necesario
       }
     }
   });
 
-  $(document).on('click', '.remove .form-submit', function () {
-    // Verifica si el elemento clicado tiene un ancestro con la clase 'remove'
-    if ($(this).parents('.remove').length) {
-      $(document).ajaxStop(function () {
-        // Verifica si .file no está presente dentro del ancestro con la clase 'remove'
-        if ($(this).parents('.remove').find('.file').length === 0) {
-          // Elimina la clase 'remove' si .file no está presente
-          $(this).parents('.remove').removeClass('remove');
-        }
-
-        $(this).unbind('ajaxStop');
-      });
-    }
+  // Mueve .file--mime-application-pdf a fileWidgetData al hacer clic en .file-widget-data .form-submit
+  $(document).on('click', '.file-widget-data .form-submit', function () {
+    movePDFFile();
   });
 
   $(document).ajaxComplete(function () {
-    customImputFile();
+    // Crea el contenedor .file-widget-data
+    createFileWidgetData();
 
-    if ($('.file-widget-data').length) {
-      if (!$('.file-widget-data').hasClass('remove')) {
-        $('.file-widget-data').addClass('remove').prepend($('.file-widget-data input'));
-      } else {
-        if ($('.file-widget-data .file').length === 0) {
-          $('.file-widget-data').removeClass('remove');
-        }
-      }
-    }
+    // Mueve .file--mime-application-pdf a fileWidgetData después de una solicitud AJAX si no está presente
+    movePDFFile();
 
     if (!$('.file').length) {
       $('.file-widget-data').removeClass('remove');
     }
   });
-
 
 
 
