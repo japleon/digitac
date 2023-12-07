@@ -261,7 +261,7 @@ $user->set('field_usr_apellidos', $form_state->getValue('field_usr_apellidos')[0
 $user->set('field_usr_pais', $form_state->getValue('field_usr_pais')[0]['value']);
 $user->set('field_usr_acepto', $form_state->getValue('field_usr_acepto')['value']);
 $user->set('field_usr_empresa', $form_state->getValue('field_usr_empresa')[0]['value']);
-
+$user->activate();
 
 $result = $user->save();
 
