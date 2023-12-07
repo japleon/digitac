@@ -373,6 +373,12 @@ function digitac_h_form_user_login_form_alter(&$form, FormStateInterface $form_s
       'class' => ['user-reset-password-link'],
     ],
   ];
+  $form['#submit'][] = 'digitac_h_user_login_form_submit';
+}
+
+function digitac_h_user_login_form_submit($form, FormStateInterface $form_state) {
+  $url = Url::fromRoute('<front>');
+  $form_state->setRedirectUrl($url);
 }
 
 
@@ -1107,3 +1113,4 @@ function digitac_h_preprocess_page(&$variables) {
         $variables['proc'] =explode('proc=',$_SERVER['REQUEST_URI'])[1];
       }
 }
+
