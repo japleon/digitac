@@ -97,9 +97,7 @@
 
             <span class="author__letters">
               {% set siglas = author_name|render|striptags|trim|split(' ') %}
-              {% for item in siglas%}
-                {{ item|first|upper }}
-              {% endfor %}
+              {% for item in siglas%}{{ item|first|upper|trim }}{% endfor %}
 
               {% if 'experto' in node.getOwner().getroles()  %}
                 <div class="star_expertoTac"><img src="/themes/digitac/images/icons/icon-verified.svg" alt="" /></div>
@@ -236,7 +234,7 @@
               {% else %}
                 <div class="block-empty">
                   <span class="block-empty__title">{{ 'Oooooops'|t }}</span>
-                  <span class="block-empty__subtitle">{{ 'Parece que todabía no hay archivos adjuntos'|t }}</span>
+                  <span class="block-empty__subtitle">{{ 'Parece que todavía no hay archivos adjuntos'|t }}</span>
                 </div>
               {% endif %}
 

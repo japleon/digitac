@@ -91,9 +91,7 @@
 
         <div class="user-ball">
           {% set siglas = submitted.getArguments()['@username']|striptags|split(' ') %}
-          {% for item in siglas%}
-            {{ item|first|upper }}
-          {% endfor %}
+						{% for item in siglas%}{{ item|first|upper|trim }}{% endfor %}
 
           {% if 'experto' in comment.getOwner().getroles() %}
           <div class="star_expertoTac"><img src="/themes/digitac/images/icons/icon-verified.svg" alt="" /></div>
