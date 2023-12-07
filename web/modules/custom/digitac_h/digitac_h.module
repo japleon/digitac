@@ -268,12 +268,15 @@ $result = $user->save();
 //   \Drupal::service('plugin.manager.mail')->mail('user_registrationpassword', 'register_confirmation_with_pass', $form_state->getValue('mail'),'ES');
 //    drupal_set_message(t('A welcome message with further instructions has been sent to your email address.'));
 
+    $mail_domain = explode('@',$form_state->getValue('mail'))[1];
+    $mail_user = '***********'.substr(explode('@',$form_state->getValue('mail'))[0],-3);
+
     $response = new AjaxResponse();
 
     $response->addCommand(
       new HtmlCommand(
         '.register__col-container',
-        '<div class="title_class">' . t('¡Hola @result!', ['@result' => $form_state->getValue('field_usr_nombre')[0]['value'] ]) . '</div><div class="subtitle">'.t('Te enviaremos un email').'</div><div class="parr">'.t('Cuando se apruebe tu solicitud, te enviaremos un email con un enlace a @mail para verificar tu identidad. Por favor haz click en el enlace para completar el registro.', ['@mail' => $form_state->getValue('mail') ]).'</div>'),
+        '<div class="title_class">' . t('¡Hola @result!', ['@result' => $form_state->getValue('field_usr_nombre')[0]['value'] ]) . '</div><div class="subtitle">'.t('Te hemos enviado un email').'</div><div class="parr">'.t('Te hemos enviado un email con un enlace a @mail para verificar tu identidad. Por favor haz click en el enlace para completar el registro.', ['@mail' => $mail_user.''.$mail_domain ]).'</div>'),
     );
     return $response;
 
