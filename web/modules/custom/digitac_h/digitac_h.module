@@ -261,9 +261,12 @@ $user->set('field_usr_apellidos', $form_state->getValue('field_usr_apellidos')[0
 $user->set('field_usr_pais', $form_state->getValue('field_usr_pais')[0]['value']);
 $user->set('field_usr_acepto', $form_state->getValue('field_usr_acepto')['value']);
 $user->set('field_usr_empresa', $form_state->getValue('field_usr_empresa')[0]['value']);
-$user->activate();
-
 $result = $user->save();
+$user->activate();
+$result = $user->save();
+
+    drupal_set_message(t('A welcome message with further instructions has been sent to your email address.'));
+
 
 //   \Drupal::service('plugin.manager.mail')->mail('user_registrationpassword', 'register_confirmation_with_pass', $form_state->getValue('mail'),'ES');
 //    drupal_set_message(t('A welcome message with further instructions has been sent to your email address.'));
