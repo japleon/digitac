@@ -169,6 +169,25 @@
   </div>
 </div>
 
+
+<!-- MODAL -->
+<div class="modal modal-delete fade" id="loginModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div class="modal-header__content">
+          <h3 class="modal-title" id="exampleModalLabel">{{'Login'|t}}</h3>
+          <p>{{'Para hacer un comentario necesitas estar logado'|t}}</p>
+        </div>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-footer">
+        <a href="/user/login" type="button" class="btn btn-primary btn-primary--alt">Login</a>
+      </div>
+    </div>
+  </div>
+</div>
+
 {# <div class="modal modal-idea fade" id="exampleModal-{{comment.id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">

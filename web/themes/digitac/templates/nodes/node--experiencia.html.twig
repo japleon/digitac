@@ -207,10 +207,6 @@
               {{ content.field_idea_comentarios}}
             </div> {# tab comments #}
 
-            {% if not logged_in %}
-              <span class="ratings__login">{{'Para hacer un comentario'|t}}&nbsp;<a href="/user/login">necesitas estar logado</a></span>
-            {% endif %}
-
           </div>
           {% endif %}
           <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">

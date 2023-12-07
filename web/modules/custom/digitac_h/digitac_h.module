@@ -1014,6 +1014,8 @@ function digitac_h_comment_links_alter(array &$links, CommentInterface $comment,
     $cr_user = \Drupal::currentUser();
     $cm_user = $comment->getOwner();
 
+    dpm($links['comment']['#links']);
+
     if ($cm_user->id() != $cr_user->id())
     {
       unset($links['comment']['#links']['comment-edit']);

@@ -33,10 +33,16 @@
 #}
 {% if links -%}
   <ul{{ attributes }}>
+  {% if logged_in %}
     {%- for item in links -%}
       <li{{ item.attributes }}>
         <a href="{% if item.text_attributes.type=='reply'%}#reply-button-{{item.text_attributes.id}}{% else %}{{ item.link['#url'] }}{% endif %}" {% if item.text_attributes.type=='delete'%} data-bs-toggle="modal" data-bs-target="#exampleModal-{{item.text_attributes.id}}"{% endif %} {% if item.text_attributes.type=='reply'%} class="reply-button" id="#reply-button-{{item.text_attributes.id}}"{% endif %}><img src="../themes/digitac/images/{{ item.text }}.svg"></a>
       </li>
     {%- endfor -%}
+  {% else %}
+        <li>
+        <a href="#" data-bs-toggle="modal" data-bs-target="#loginModal"><img src="../themes/digitac/images/Respuesta.svg"></a>
+      </li>
+  {% endif %}
   </ul>
 {%- endif %}
