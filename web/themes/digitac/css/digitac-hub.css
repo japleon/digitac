@@ -6132,6 +6132,7 @@ body:not(.path-frontpage) .header.fixed {
 .modal {
   z-index: 4;
   transition: all 0.3s ease;
+  background: rgba(0, 0, 0, 0.45);
 }
 .modal.show {
   display: flex !important;
@@ -6236,6 +6237,7 @@ body:not(.path-frontpage) .header.fixed {
 }
 .modal-backdrop {
   z-index: 3;
+  display: none !important;
 }
 
 .tooltip-icon {

@@ -4,25 +4,19 @@
 
     // --------------------------------------
     // ---- COMENTARIOS - MODAL ----
-    // --------------------------------------
+    // -------------------------------------
 
-    $(".modal").on("shown.bs.modal", function (e) {
-        var modal = $(this);
+    $(document).ready(function() {
+        $('a[data-bs-toggle="modal"]').on('click', function(e) {
+            e.preventDefault();
+            $('.wrap').removeClass('push');
+            $('.header.fixed').css('position', 'relative');
+        });
 
-        if ($(".modal-backdrop").length > 1) {
-            $(".modal-backdrop").not(':first').remove();
-        }
-
-        modal.insertAfter('.modal-backdrop');
-        setTimeout(function () {
-            $(".modal-backdrop").addClass("show");
-
-        }, 300);
-
-    });
-
-    $('a[data-bs-toggle="modal"]').on('click', function () {
-        $('.modal-backdrop').prependTo($(this));
+        $(".modal").on("hidden.bs.modal", function () {
+            $('.wrap').addClass('push');
+            $('.header.fixed').css('position', 'fixed');
+        });
     });
 
 
