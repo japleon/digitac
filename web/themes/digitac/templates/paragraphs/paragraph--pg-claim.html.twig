@@ -64,6 +64,11 @@
           {{ content.field_pg_claim_subtitulo}}
         </div>
 
+
+        AA{{ not logged_in  }}BB
+        BB{{ content.field_pg_claim_boton_enlace.0|render|striptags|trim == '/nuevo-reto' }}CC
+        CC{{ not logged_in and content.field_pg_claim_boton_enlace.0|render|striptags|trim == '/nuevo-reto' }}DD
+
         {% if not logged_in and content.field_pg_claim_boton_enlace.0|render|striptags|trim == '/nuevo-reto'%}
             <a href="#" data-bs-toggle="modal" data-bs-target="#loginModalReto" class="btn btn--primary btn--primary--icon">{{ content.field_pg_claim_boton_texto.0}}</a>
         {% else %}
