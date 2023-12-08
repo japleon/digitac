@@ -60,14 +60,25 @@
           <span class="block-empty__title">{{ 'Oooooops'|t }}</span>
           <span class="block-empty__subtitle">{{ 'Parece que no hay ideas por aquí'|t }}</span>
           <span class="block-empty__text">{{ '¿Por que no propones tu la primera?'|t }}</span>
-          <a class="btn btn--primary btn-primary--icon btn-primary--icon-check" href='/nueva-idea/{{view.args[0]}}'>{{ 'Nueva idea'|t }}</a>
+            {% if logged_in %}
+              <a class="btn btn--primary btn-primary--icon btn-primary--icon-check" href='/nueva-idea/{{view.args[0]}}'>{{ 'Nueva idea'|t }}</a>
+            {% else %}
+              <a href="#" data-bs-toggle="modal" data-bs-target="#loginModal" class="btn btn-primary btn-primary--icon">{{'Nueva idea'|t}}</a>
+            {% endif %}
+
         </div>
       {% elseif display_id == 'block_3' %}
         <div class="block-empty">
           <span class="block-empty__title">{{ 'Oooooops'|t }}</span>
           <span class="block-empty__subtitle">{{ 'Parece que no hay experiencias por aquí'|t }}</span>
           <span class="block-empty__text">{{ '¿Por que no propones tu la primera?'|t }}</span>
-          <a class="btn btn--primary btn-primary--icon btn-primary--icon-check" href='/nueva-experiencia/{{view.args[0]}}'>{{ 'Nueva experiencia'|t }}</a>
+
+            {% if logged_in %}
+              <a class="btn btn--primary btn-primary--icon btn-primary--icon-check" href='/nueva-experiencia/{{view.args[0]}}'>{{ 'Nueva experiencia'|t }}</a>
+            {% else %}
+              <a href="#" data-bs-toggle="modal" data-bs-target="#loginModal2" class="btn btn-primary btn-primary--icon">{{'Nueva experiencia'|t}}</a>
+            {% endif %}
+
         </div>
       {% endif %}
 
@@ -87,3 +98,46 @@
     </div>
   {% endif %}
 </div>
+
+
+
+{% if not logged_in %}
+
+<div class="modal modal-idea fade" id="loginModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div class="modal-header__content">
+          <h3 class="modal-title" id="exampleModalLabel">{{'Login'|t}}</h3>
+          <p>{{'Para crear una nueva idea necesitas estar logado'|t}}</p>
+        </div>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-footer">
+        <a href="/user/login" type="button" class="btn btn-secondary">{{'Entrar en mi cuenta'|t}}</a>
+        <a href="/user/register" type="button" class="btn btn-primary">{{'Registrarme'|t}}</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="modal modal-idea fade" id="loginModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div class="modal-header__content">
+          <h3 class="modal-title" id="exampleModalLabel">{{'Login'|t}}</h3>
+          <p>{{'Para crear una nueva experiencia necesitas estar logado'|t}}</p>
+        </div>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-footer">
+        <a href="/user/login" type="button" class="btn btn-secondary">{{'Entrar en mi cuenta'|t}}</a>
+        <a href="/user/register" type="button" class="btn btn-primary">{{'Registrarme'|t}}</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endif %}

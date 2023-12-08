@@ -143,7 +143,14 @@
 
         <div class="actions">
           <ul>
+
+            {% if logged_in %}
             <li class="actions__item new nueva_idea"><a href="/nueva-idea/{{node.id}}" class="btn btn-primary btn-primary--icon">{{'Nueva idea'|t}}</a></li>
+            {% else %}
+            <li class="actions__item new nueva_idea">
+              <a href="#" data-bs-toggle="modal" data-bs-target="#loginModal" class="btn btn-primary btn-primary--icon">{{'Nueva idea'|t}}</a>
+            </li>
+            {% endif %}
             {% if 'administrator' in user.getroles(TRUE) or es_moderador == 1 %}
               <li class="actions__item admin admin_reto"><a href="/admin-ideas/{{node.id}}" class="btn btn-secondary btn-secondary--icon">{{'Administrar ideas'|t}}</a></li>
               <li class="actions__item statistics estadisticas"><a href="/estadisticas" class="btn btn-secondary btn-secondary--icon">{{'Estadísticas'|t}}</a> </li>
@@ -163,7 +170,14 @@
       <div class="tab-experiences">
         <div class="actions">
           <ul>
-            <li class="actions__item new nueva_idea"><a href="/nueva-experiencia/{{node.id}}" class="btn btn-primary btn-primary--icon">{{'Nueva experiencia'|t}}</a></li>
+            {% if logged_in %}
+              <li class="actions__item new nueva_idea"><a href="/nueva-experiencia/{{node.id}}" class="btn btn-primary btn-primary--icon">{{'Nueva experiencia'|t}}</a></li>
+            {% else %}
+            <li class="actions__item new nueva_idea">
+              <a href="#" data-bs-toggle="modal" data-bs-target="#loginModal2" class="btn btn-primary btn-primary--icon">{{'Nueva experiencia'|t}}</a>
+            </li>
+            {% endif %}
+
             {% if 'administrator' in user.getroles(TRUE) or es_moderador == 1 %}
               <li class="actions__item admin admin_reto"><a href="/admin-experiencias/{{node.id}}" class="btn btn-secondary btn-secondary--icon">{{'Administrar experiencias'|t}}</a></li>
               <li class="actions__item statistics estadisticas"><a href="/estadisticas" class="btn btn-secondary btn-secondary--icon">{{'Estadísticas'|t}}</a> </li>
@@ -192,6 +206,45 @@
 
 
 
+{% if not logged_in %}
+
+<div class="modal modal-idea fade" id="loginModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div class="modal-header__content">
+          <h3 class="modal-title" id="exampleModalLabel">{{'Login'|t}}</h3>
+          <p>{{'Para crear una nueva idea necesitas estar logado'|t}}</p>
+        </div>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-footer">
+        <a href="/user/login" type="button" class="btn btn-secondary">{{'Entrar en mi cuenta'|t}}</a>
+        <a href="/user/register" type="button" class="btn btn-primary">{{'Registrarme'|t}}</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal modal-idea fade" id="loginModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div class="modal-header__content">
+          <h3 class="modal-title" id="exampleModalLabel">{{'Login'|t}}</h3>
+          <p>{{'Para crear una nueva experiencia necesitas estar logado'|t}}</p>
+        </div>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-footer">
+        <a href="/user/login" type="button" class="btn btn-secondary">{{'Entrar en mi cuenta'|t}}</a>
+        <a href="/user/register" type="button" class="btn btn-primary">{{'Registrarme'|t}}</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endif %}
 
 
 

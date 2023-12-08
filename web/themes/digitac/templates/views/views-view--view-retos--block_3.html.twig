@@ -43,7 +43,14 @@
 
   <div class="actions">
     <ul>
+      {% if logged_in %}
       <li class="actions__item new nuevo_reto"><a href="/nuevo-reto" class="btn btn-primary btn-primary--icon">{{'Nuevo reto'|t}}</a></li>
+      {% else %}
+      <li class="actions__item new nuevo_reto">
+        <a href="#" data-bs-toggle="modal" data-bs-target="#loginModal" class="btn btn-primary btn-primary--icon">{{'Nuevo reto'|t}}</a>
+      </li>
+      {% endif %}
+
       {% if 'administrator' in user.getroles(TRUE) or 'moderador' in user.getroles(TRUE) %}
         <li class="actions__item admin admin_reto"><a href="/admin-retos" class="btn btn-secondary btn-secondary--icon">{{'Administrar retos'|t}}</a></li>
         <li class="actions__item statistics estadisticas"><a href="/estadisticas" class="btn btn-secondary btn-secondary--icon">{{'Estadísticas'|t}}</a> </li>
@@ -81,3 +88,26 @@
     </div>
   {% endif %}
 </div>
+
+
+{% if not logged_in %}
+
+<div class="modal modal-idea fade" id="loginModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div class="modal-header__content">
+          <h3 class="modal-title" id="exampleModalLabel">{{'Login'|t}}</h3>
+          <p>{{'Para crear un nuevo reto necesitas estar logado'|t}}</p>
+        </div>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-footer">
+        <a href="/user/login" type="button" class="btn btn-secondary">{{'Entrar en mi cuenta'|t}}</a>
+        <a href="/user/register" type="button" class="btn btn-primary">{{'Registrarme'|t}}</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endif %}
