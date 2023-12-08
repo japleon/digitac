@@ -63,7 +63,13 @@
         <div class="subtitle">
           {{ content.field_pg_claim_subtitulo}}
         </div>
-        <a href="{{ content.field_pg_claim_boton_enlace.0}}" class="btn btn--primary btn--primary--icon">{{ content.field_pg_claim_boton_texto.0}}</a>
+
+        {% if not logged_in and content.field_pg_claim_boton_enlace.0|render|striptags|trim == '/nuevo-reto'%}
+            <a href="#" data-bs-toggle="modal" data-bs-target="#loginModalReto" class="btn btn--primary btn--primary--icon">{{ content.field_pg_claim_boton_texto.0}}</a>
+        {% else %}
+            <a href="{{ content.field_pg_claim_boton_enlace.0}}" class="btn btn--primary btn--primary--icon">{{ content.field_pg_claim_boton_texto.0}}</a>
+        {% endif %}
+
       </div>
 
       <div class="paragraph-pg-claim__image">
@@ -81,4 +87,30 @@
     </div>
     {% endblock %}
   </div>
+
+
+{% if not logged_in and content.field_pg_claim_boton_enlace.0|render|striptags|trim == '/nuevo-reto'%}
+
+<div class="modal modal-idea fade" id="loginModalReto" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div class="modal-header__content">
+          <h3 class="modal-title" id="exampleModalLabel">{{'Login'|t}}</h3>
+          <p>{{'Para crear un nuevo reto necesitas estar logado'|t}}</p>
+        </div>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-footer">
+        <a href="/user/login" type="button" class="btn btn-secondary">{{'Entrar en mi cuenta'|t}}</a>
+        <a href="/user/register" type="button" class="btn btn-primary">{{'Registrarme'|t}}</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endif %}
+
+
+
 {% endblock paragraph %}
