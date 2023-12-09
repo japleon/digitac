@@ -15,16 +15,10 @@
  * @see template_preprocess_views_view_unformatted()
  */
 #}
-{% for row in rows %}
-{{- row.content|render|striptags|trim -}}
-{% endfor %}
 <script>
     var array_paises = [
     {% for row in rows %}
     {{- row.content -}}
     {% endfor %}
     ];
-
-
-
 </script>
