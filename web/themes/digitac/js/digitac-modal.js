@@ -10,11 +10,13 @@
         $('a[data-bs-toggle="modal"]').on('click', function(e) {
             e.preventDefault();
             $('.wrap').removeClass('push');
+            $('.header').css('z-index', 0);
             $('.header.fixed').css('position', 'relative');
         });
 
         $(".modal").on("hidden.bs.modal", function () {
             $('.wrap').addClass('push');
+            $('.header').css('z-index', 2);
             $('.header.fixed').css('position', 'fixed');
         });
     });
