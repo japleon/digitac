@@ -5,8 +5,31 @@
 
     .tab_sobre_reto {
         .cuerpo {
+            max-width: rem(903px);
+            width: 100%;
+
             .text-formatted {
                 padding-left: 0;
+
+                p {
+                    a:not(.btn) {
+                        text-decoration: underline;
+                        border: none;
+                        background: none;
+                        padding: 0;
+                        font-family: $font-family-base;
+                        font-style: normal;
+                        font-weight: 600;
+                        font-size: rem(18px);
+                        line-height: rem(28px);
+                        color: $blue-600;
+                        display: inline;
+
+                        &:hover {
+                            text-decoration: underline !important;
+                        }
+                    }
+                }
             }
         }
     }

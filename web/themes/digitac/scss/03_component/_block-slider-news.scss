@@ -150,7 +150,7 @@
                 overflow: hidden;
                 display: -webkit-box;
                 -webkit-box-orient: vertical;
-                -webkit-line-clamp: 6;
+                -webkit-line-clamp: 3;
                 text-overflow: ellipsis;
                 text-align: left;
 
@@ -170,6 +170,11 @@
                 line-height: rem(22px);
                 letter-spacing: -0.2px;
                 color: $grey;
+
+                strong {
+                    font-weight: 400;
+                    color: $grey;
+                }
             }
         }
 
@@ -206,6 +211,14 @@
 
                 img {
                     border-radius: rem(8px);
+                }
+            }
+
+            .title {
+                a {
+                    &::after {
+                        display: none;
+                    }
                 }
             }
 
@@ -298,7 +311,7 @@
         }
 
         .btn {
-            max-width: rem(340px);
+            //max-width: rem(340px);
             width: 100%;
 
             @include media(md) {

@@ -65,6 +65,25 @@
         width: auto;
         height: auto;
         margin: rem(48px) 0;
+        border-radius: rem(12px);
+    }
+
+    blockquote {
+        padding-left: rem(20px);
+        border: rem(1px) solid $primary;
+
+        p {
+            font-family: $font-family-base;
+            font-style: italic;
+            font-weight: 500;
+            font-size: rem(24px);
+            line-height: rem(36px);
+            color: $primary;
+
+            &:last-child {
+                margin-bottom: 0;
+            }
+        }
     }
 
     table {

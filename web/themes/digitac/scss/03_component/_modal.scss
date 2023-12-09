@@ -134,3 +134,14 @@
         display: none !important;
     }
 }
+
+
+.header {
+    &.relative {
+        position: sticky !important;
+    }
+
+    &.layer {
+        z-index: 0;
+    }
+}

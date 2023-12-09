@@ -240,7 +240,7 @@ function digitac_h_form_user_register_form_alter(&$form, FormStateInterface $for
 
     $form['actions'] = [
       '#type' => 'button',
-      '#value' => 'Envío',
+      '#value' => 'Registrarme',
       '#weight' => 99,
       '#ajax' => [
         'callback' => 'setMessage',
@@ -537,7 +537,7 @@ function digitac_h_form_node_form_alter(&$form, FormStateInterface $form_state, 
       $form['tit_estado'] = [
         '#type' => 'markup',
         '#weight' => 5,
-        '#markup' => t('<h2>Estado</h2><p>El estado por defecto del reto siempre es “Borrador”. Para que se vea en la plataforma debes cambiarlo a “Abierto” o “Cerrado”.</p>')
+        '#markup' => t('<h2>Estado</h2><p>El estado por defecto de la idea siempre es “Borrador”. Para que se vea en la plataforma debes cambiarlo a “Abierto”, “Cerrado” o "En evaluación".</p>')
       ];
       }
       else{
@@ -621,7 +621,7 @@ function digitac_h_form_node_form_alter(&$form, FormStateInterface $form_state, 
       $form['tit_estado'] = [
         '#type' => 'markup',
         '#weight' => 6,
-        '#markup' => t('<h2>Estado</h2><p>El estado por defecto del reto siempre es “Borrador”. Para que se vea en la plataforma debes cambiarlo a “Abierto” o “Cerrado”.</p>')
+        '#markup' => t('<h2>Estado</h2><p>El estado por defecto de la experiencia siempre es “Borrador”. Para que se vea en la plataforma debes cambiarlo a “Abierto”, “Cerrado” o "En evaluación".</p>')
       ];
       }
       else{

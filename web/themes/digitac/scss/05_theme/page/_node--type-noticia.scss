@@ -1,6 +1,10 @@
 .node-news {
     margin: 0;
-    padding: rem(87px) rem(12px) rem(100px);
+    padding: rem(87px) 0 rem(100px);
+
+    @include media(md) {
+        padding: rem(87px) rem(12px) rem(100px);
+    }
 
 
     &__content {
@@ -43,6 +47,12 @@
         //margin-bottom: rem(96px);
 
         .text-formatted {
+
+            &.field--type-text-with-summary {
+                padding-right: 0;
+                padding-left: 0;
+            }
+
             h2 {
                 margin-bottom: rem(16px);
                 font-family: $font-family-base;
@@ -132,17 +142,32 @@
 
     &__file {
         margin-bottom: rem(32px);
-        padding: 0 rem(32px);
+        padding: rem(24px);
         border-radius: rem(8px);
         border: rem(1px) solid $blue-50;
         background-color: $blue-25;
         display: flex;
-        justify-content: space-between;
-        align-items: center;
+        flex-direction: column;
+
+        @include media(md) {
+            padding: 0 rem(32px);
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+        }
 
         .file {
+            padding-left: rem(50px);
+            margin-bottom: rem(24px);
+            background-image: url('../images/icons/icon-pdf.svg');
+            background-repeat: no-repeat;
+            background-position: left center;
             background-size: rem(40px);
-            padding: rem(40px) rem(40px) rem(40px) rem(50px);
+
+            @include media(md) {
+                margin-bottom: 0;
+                padding: rem(40px) rem(40px) rem(40px) rem(50px);
+            }
 
             a {
                 font-family: $font-family-base;
@@ -156,6 +181,14 @@
                 &:hover {
                     text-decoration: underline;
                 }
+            }
+        }
+
+        .btn {
+            width: 100%;
+
+            @include media(md) {
+                width: auto;
             }
         }
     }

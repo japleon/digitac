@@ -97,6 +97,9 @@
                 line-height: rem(24px);
                 color: $black;
                 position: relative;
+                display: inline-flex;
+                justify-content: center;
+                align-items: center;
 
                 @include media(md) {
                     width: auto;
@@ -110,10 +113,20 @@
                     background-image: url('../images/icons/icon-rocket.svg');
                     background-repeat: no-repeat;
                     background-size: contain;
-                    position: absolute;
-                    top: 50%;
-                    left: rem(20px);
-                    transform: translateY(-50%);
+
+                    display: inline-flex;
+                    align-self: center;
+                    margin-right: rem(10px);
+                    margin-left: rem(-30px);
+
+                    @include media(md) {
+                        margin-right: 0;
+                        margin-left: 0;
+                        position: absolute;
+                        top: 50%;
+                        left: rem(20px);
+                        transform: translateY(-50%);
+                    }
                 }
             }
         }

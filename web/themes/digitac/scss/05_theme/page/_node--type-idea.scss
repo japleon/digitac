@@ -29,8 +29,11 @@
 
             .field--name-field-idea-tags {
                 display: flex;
+                flex-wrap: wrap;
+                align-items: center;
 
                 .field__item {
+                    margin-bottom: rem(10px);
                     margin-right: rem(8px);
                     padding: rem(4px) rem(10px);
                     border-radius: rem(8px);
@@ -405,8 +408,8 @@
 
             @include media(md) {
                 padding: 0 rem(32px);
-                flex-direction: row;
-                align-items: center;
+                /* flex-direction: row;
+                align-items: center; */
             }
 
             @include media(lg) {

@@ -157,10 +157,11 @@
     {% if tiene_votacion==1 %}
     <div class="ratings">
       <div class="ratings__content">
+        <span>{{'Valora esta idea'|t}}</span>  
         {% if logged_in %}
-        <span>{{'Valora esta idea'|t}}</span>  {{ content.rate_stars }}
+            {{ content.rate_stars }}
         {% else %}
-            <span class="ratings__login">{{'Para hacer una valoración'|t}}&nbsp;<a href="/user/login">necesitas estar logado</a></span>
+            <span class="ratings__login">{{'Para hacer una valoración debes'|t}}&nbsp;<a href="/user/login">{{'iniciar sesión'|t}}</a>&nbsp;o&nbsp;<a href="/user/register">{{'regístrarte'|t}}</a></span>
         {% endif %}
       </div>
     </div>

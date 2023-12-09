@@ -218,8 +218,10 @@
                     color: $grey-800;
 
                     a {
+                        margin: 0 rem(4px);
                         color: $blue-600;
                         text-decoration: none;
+                        display: inline-flex;
 
                         &:hover {
                             text-decoration: underline;
@@ -236,7 +238,15 @@
                     box-shadow: 0 rem(1px) rem(2px) rgba(16, 24, 40, 0.05);
                     border-radius: rem(8px);
                 }
+
+
+                &.form-type-email {
+                    .description {
+                        display: none;
+                    }
+                }
             }
+
 
             .user-reset-password-link {
                 margin: rem(4px) 0 rem(24px);

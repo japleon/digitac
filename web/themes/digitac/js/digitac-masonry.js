@@ -27,6 +27,7 @@
     }
 
     function masonryViews() {
+      console.log('entra masonry views');
       $('.view-id-view_retos.view-display-id-block_3 .view-content').masonry({
         itemSelector: '.block-slider-news__item',
         horizontalOrder: true,
@@ -61,6 +62,27 @@
         }
       });
     }
+
+
+    $('.pager-show-more a').on('click', function() {
+      $(document).ajaxComplete(function (event, xhr, settings) {
+
+        console.log('recarga masonry');
+
+        $('.view-id-view_noticias.view-display-id-block_3 .view-content').masonry('reloadItems');
+        $('.view-id-view_retos.view-display-id-block_3 .view-content').masonry('reloadItems');
+        $('.view-id-distributivas.view-display-id-block_1 .view-content').masonry('reloadItems');
+        $('.view-id-distributivas.view-display-id-block_3 .view-content').masonry('reloadItems');
+
+        // masonry
+        masonryViewsNews();
+        masonryViews();
+        masonryViewsIdeas();
+        masonryViewsExperiences();
+      });
+
+
+    });
 
 
 

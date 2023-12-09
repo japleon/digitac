@@ -146,6 +146,10 @@
                 line-height: rem(24px);
                 letter-spacing: -0.2px;
                 color: $grey;
+
+                strong {
+                    font-weight: 400;
+                }
             }
 
             .author {

@@ -40,10 +40,20 @@
         height: rem(20px);
         background-repeat: no-repeat;
         background-size: contain;
-        position: absolute;
-        top: 50%;
-        left: rem(12px);
-        transform: translateY(-50%);
+
+        display: inline-flex;
+        align-self: center;
+        margin-right: 10px;
+        margin-left: rem(-30px);
+
+        @include media(md) {
+          margin-right: 0;
+          margin-left: 0;
+          position: absolute;
+          top: 50%;
+          left: rem(12px);
+          transform: translateY(-50%);
+        }
       }
     }
 

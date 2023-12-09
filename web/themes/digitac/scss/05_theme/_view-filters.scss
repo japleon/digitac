@@ -1,10 +1,18 @@
 .view-row {
     margin-bottom: rem(40px);
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
+
+    @include media(md) {
+        flex-direction: row;
+        justify-content: space-between;
+    }
 
     > p {
-        flex: 0 1 rem(260px);
+
+        @include media(md) {
+            flex: 0 1 rem(400px);
+        }
     }
 }
 

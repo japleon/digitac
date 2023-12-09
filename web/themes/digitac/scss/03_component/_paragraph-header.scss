@@ -96,6 +96,11 @@
             }
         }
     }
+
+    &.paragraph--title--Moderar_comentarios_pendientes,
+    &.paragraph--title--Administrar_retos {
+        padding-bottom: 0;
+    }
 }
 
 

@@ -9,15 +9,23 @@
     $(document).ready(function() {
         $('a[data-bs-toggle="modal"]').on('click', function(e) {
             e.preventDefault();
-            $('.wrap').removeClass('push');
-            $('.header').css('z-index', 0);
-            $('.header.fixed').css('position', 'relative');
+
+
+            if($('.header.fixed').length) {
+                $('.wrap').removeClass('push');
+                $('.header.fixed').addClass('relative');
+            } else {
+                $('.header').addClass('layer');
+            }
         });
 
         $(".modal").on("hidden.bs.modal", function () {
-            $('.wrap').addClass('push');
-            $('.header').css('z-index', 2);
-            $('.header.fixed').css('position', 'fixed');
+            if($('.header.fixed').length) {
+                $('.wrap').addClass('push');
+                $('.header.fixed').removeClass('relative');
+            } else {
+                $('.header').removeClass('layer');
+            }
         });
     });
 

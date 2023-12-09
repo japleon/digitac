@@ -22,8 +22,7 @@
             <span class="date">{{ fields.created.content }}</span>
         </div>
         <div class="title">{{ fields.title.content }}</div>
-        <div class="content">{{ fields.body.content }}</div>
-
+        <div class="content"><p>{{ fields.body.content|render|striptags|trim }}</p></div>
 
 
         <div class="author">

@@ -12,12 +12,14 @@
     }
 
     .nav-item {
-        height: 46px;
+        width: 100%;
+        height: rem(46px);
         margin-bottom: rem(12px);
         display: inline-flex;
         align-items: center;
 
         @include media(md) {
+            width: auto;
             margin-bottom: 0;
             margin-left: rem(8px);
         }
@@ -44,6 +46,7 @@
         }
 
         button {
+            width: 100%;
             height: 100%;
             padding: rem(10px) rem(14px);
             border-radius: rem(6px);
@@ -57,6 +60,10 @@
             display: inline-flex;
             align-items: center;
             transition: all 0.3s ease;
+
+            @include media(md) {
+                width: auto;
+            }
 
             @include media(xxl) {
                 min-height: inherit;
