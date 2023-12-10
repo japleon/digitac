@@ -378,7 +378,7 @@
         console.log('tabPaneId no esta vacio');
 
         if (tabPaneId.includes("comment-"))
-        {tabPaneId = 'home'}
+        {tabPaneId = 'home';}
 
         $('.tab-pane').removeClass('active show');
         $('#' + tabPaneId).addClass('active show');

@@ -131,6 +131,7 @@
   <div class="tab-content" id="myTabContent">
     <div class="tab-pane tab-pane-idea fade show active" id="idea" role="tabpanel" aria-labelledby="idea-tab">
 
+      {% if esta_cerrado!=1 %}
       <div class="message" id="message-idea">
         <a href="#" class="message__close js-message-close"><span class="visually-hidden">Cerrar mensaje</span></a>
         <div class="message__content">
@@ -138,14 +139,16 @@
           <p class="message__text">{{'En este tablero puedes proponer nuevas ideas que den solución al reto, e interactuar con otras ideas que han propuesto otros usuarios'|t}}</p>
         </div>
       </div>
+      {% endif %}
 
       <div class="tab-ideas">
 
         <div class="actions">
           <ul>
-
             {% if logged_in %}
+              {% if esta_cerrado!=1 %}
             <li class="actions__item new nueva_idea"><a href="/nueva-idea/{{node.id}}" class="btn btn-primary btn-primary--icon">{{'Nueva idea'|t}}</a></li>
+              {% endif %}
             {% else %}
             <li class="actions__item new nueva_idea">
               <a href="#" data-bs-toggle="modal" data-bs-target="#loginModal" class="btn btn-primary btn-primary--icon">{{'Nueva idea'|t}}</a>
@@ -167,6 +170,7 @@
 
     <div class="tab-pane tab-pane-experience fade" id="experience" role="tabpanel" aria-labelledby="experience-tab">
 
+      {% if esta_cerrado!=1 %}
       <div class="message" id="message-idea">
         <a href="#" class="message__close js-message-close"><span class="visually-hidden">Cerrar mensaje</span></a>
         <div class="message__content">
@@ -174,13 +178,16 @@
           <p class="message__text">{{'En este tablero puedes proponer experiencias que hayas tenido y que den una solución total o parcial al reto propuesto'|t}}</p>
         </div>
       </div>
+      {% endif %}
 
 
       <div class="tab-experiences">
         <div class="actions">
           <ul>
             {% if logged_in %}
-              <li class="actions__item new nueva_idea"><a href="/nueva-experiencia/{{node.id}}" class="btn btn-primary btn-primary--icon">{{'Nueva experiencia'|t}}</a></li>
+              {% if esta_cerrado!=1 %}
+                <li class="actions__item new nueva_idea"><a href="/nueva-experiencia/{{node.id}}" class="btn btn-primary btn-primary--icon">{{'Nueva experiencia'|t}}</a></li>
+              {% endif %}
             {% else %}
             <li class="actions__item new nueva_idea">
               <a href="#" data-bs-toggle="modal" data-bs-target="#loginModal2" class="btn btn-primary btn-primary--icon">{{'Nueva experiencia'|t}}</a>

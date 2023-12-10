@@ -154,7 +154,7 @@
       </div> {# /.idea #}
     </div>
 
-    {% if tiene_votacion==1 %}
+    {% if tiene_votacion==1 and not reto_cerrado and not idea_cerrada %}
     <div class="ratings">
       <div class="ratings__content">
         <span>{{'Valora esta idea'|t}}</span>  

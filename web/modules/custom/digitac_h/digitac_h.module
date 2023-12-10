@@ -181,7 +181,8 @@ function digitac_h_theme() {
 
   $theme['aprobar_comentario_template'] = [
     'variables' => [
-      'id' => NULL,
+      'com_ent_id' => NULL,
+      'com_ent_bundle' => NULL
     ],
     'template' => 'aprobar-comentario',
   ];
@@ -710,6 +711,9 @@ function digitac_h_preprocess_node(&$vars) {
     $vars['tiene_comentarios']= $reto_r->field_reto_comentarios->getValue()[0]['value'];
     $vars['tiene_votacion']= $reto_r->field_reto_votacion->getValue()[0]['value'];
     $vars['es_moderador']= es_moderador_reto($reto_id);
+    $vars['reto_cerrado']= ($reto_r->field_reto_estado->getValue()[0]['target_id'] == 15);
+    $vars['idea_cerrada']= ($vars['node']->field_idea_estado->getValue()[0]['target_id'] == 19);
+
 
     $date_formatter = \Drupal::service('date.formatter');
     $currTime = \Drupal::time()->getCurrentTime();
@@ -728,6 +732,7 @@ function digitac_h_preprocess_node(&$vars) {
     $vars['tiene_comentarios']= $reto_r->field_reto_comentarios->getValue()[0]['value'];
     $vars['tiene_votacion']= $reto_r->field_reto_votacion->getValue()[0]['value'];
     $vars['es_moderador']= es_moderador_reto($reto_id);
+    $vars['esta_cerrado']= ($reto_r->field_reto_estado->getValue()[0]['target_id'] == 15);
   }
 
 
@@ -973,6 +978,15 @@ function digitac_h_preprocess_views_view(&$variables)
       $variables['viewimg'] = ($term->get('field_tx_cat_curso_imagen')->entity!=null)?$term->get('field_tx_cat_curso_imagen')->entity->getFileUri():''; 
   }
 
+  if ($view->id() == 'distributivas') 
+  {
+        $curr_rou = explode('/',\Drupal::service('path.current')->getPath());
+        $curr_rou_2 = explode('#',$curr_rou[2]);
+        $reto_id = $curr_rou_2[0];
+        $reto_n = \Drupal::entityTypeManager()->getStorage('node')->load($reto_id);    
+        $variables['reto_cerrado']= ($reto_n->field_reto_estado->getValue()[0]['target_id'] == 15);
+  }
+
 }
 
 function digitac_h_preprocess_views_view_fields(&$variables)
@@ -1081,28 +1095,44 @@ function digitac_h_preprocess_comment(&$variables)
   ])->toRenderable();
 
 
-$values = array(
-    'entity_type' => 'node',
-    'entity_id' => $variables['commented_entity']->id(),
-    'field_name' => 'field_idea_comentarios',
-    'comment_type' => 'comment',
-    'pid' =>  $variables['comment']->id(),
-  );
-
  $variables['reply_form']='';
 if ($variables['comment']->get('pid')->target_id == null)
 {
-  $comment = \Drupal::entityTypeManager()->getStorage('comment')->create($values);
-  $form = \Drupal::service('entity.form_builder')->getForm($comment);
+
+$pido= intval($variables['comment']->id());
+
+  $values = array(
+      'entity_type' => 'node',
+      'entity_id' => $variables['commented_entity']->id(),
+      'field_name' => 'field_idea_comentarios',
+      'comment_type' => 'comment',
+      'pid' =>  $pido,
+      'field_comm_p_id' => $variables['comment']->id(),
+
+    );
+
+  $commento = \Drupal::entityTypeManager()->getStorage('comment')->create($values);
+  $form = \Drupal::service('entity.form_builder')->getForm($commento,'default');
   $variables['reply_form']=$form;
+
 //  $variables['reply_form']['actions']['submit']['#value']=t('Send comment');
 //  dpm($variables['reply_form']['actions']['submit']);
 
-
 }
 
 }
 
+function digitac_h_entity_presave(&$variables) {
+  if ($variables->bundle()=='comment')
+  {
+//      dpm($variables->get('field_comm_p_id')->value);
+//    $variables->set('pid',48);
+//      $variables->pid[]=48;
+//      dpm($variables->pid);
+//      dpm($variables); 
+  }
+
+}
 
 function digitac_h_preprocess_paragraph(&$variables) {
   
@@ -1134,3 +1164,36 @@ function digitac_h_preprocess_page(&$variables) {
       }
 }
 
+
+function digitac_h_preprocess_field(&$variables) {
+
+  if($variables['field_type']=='comment')
+  {
+        $curr_rou = explode('/',\Drupal::service('path.current')->getPath());
+        $idea_id = $curr_rou[2];
+        $idea_n = \Drupal::entityTypeManager()->getStorage('node')->load($idea_id);
+        $reto_id = $idea_n->field_idea_reto->getValue()[0]['target_id'];
+        $reto_n = \Drupal::entityTypeManager()->getStorage('node')->load($reto_id);
+    
+        $variables['reto_cerrado']= ($reto_n->field_reto_estado->getValue()[0]['target_id'] == 15);
+        $variables['idea_cerrada']= ($idea_n->field_idea_estado->getValue()[0]['target_id'] == 19);
+
+  }
+
+}
+
+
+function digitac_h_preprocess_links(&$variables) {
+  if($variables['theme_hook_original']=='links__comment')
+  {
+        $curr_rou = explode('/',\Drupal::service('path.current')->getPath());
+        $idea_id = $curr_rou[2];
+        $idea_n = \Drupal::entityTypeManager()->getStorage('node')->load($idea_id);
+        $reto_id = $idea_n->field_idea_reto->getValue()[0]['target_id'];
+        $reto_n = \Drupal::entityTypeManager()->getStorage('node')->load($reto_id);
+    
+        $variables['reto_cerrado']= ($reto_n->field_reto_estado->getValue()[0]['target_id'] == 15);
+        $variables['idea_cerrada']= ($idea_n->field_idea_estado->getValue()[0]['target_id'] == 19);
+
+  }
+}

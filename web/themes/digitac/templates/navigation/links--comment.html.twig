@@ -31,7 +31,7 @@
  * @see template_preprocess_links()
  */
 #}
-{% if links -%}
+{% if links and not reto_cerrado and not idea_cerrada -%}
   <ul{{ attributes }}>
   {% if logged_in %}
     {%- for item in links -%}

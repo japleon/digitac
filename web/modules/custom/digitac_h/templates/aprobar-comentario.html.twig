@@ -1,1 +1,18 @@
-{{ drupal_entity('paragraphs_library_item', 15)| without('label') }}
+
+<div class="paragraph paragraph-cabecera paragraph-pg-header paragraph--type--cabecera paragraph--view-mode--default paragraph--title--Comentario_eliminado">
+    <div class="container">
+      <div class="paragraph-pg-header__box">
+        <div class="title">
+            {{'Comentario aprobado'|t}}
+        </div>
+        <div class="subtitle">
+            {{'El comentario ha sido aprobado.'|t}}
+        </div>
+        <a href="/admin-comentarios/{{com_ent_id}}" class="btn btn--link btn--link-back">{{ 'Volver'|t}}</a>
+      </div>
+
+      <div class="paragraph-pg-header__image">
+        <img loading="lazy" src="/sites/default/files/2023-11/Recurso%2010%201%20%282%29_6.png" width="326" height="252" alt="Comentario eliminado" class="img-fluid">      
+     </div>
+    </div>
+</div>

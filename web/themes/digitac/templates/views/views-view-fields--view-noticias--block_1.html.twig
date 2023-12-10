@@ -9,9 +9,8 @@
                 <span class="type">{{ fields.field_noticia_tipo.content }}</span>
                 <span class="date">{{ fields.created.content }}</span>
             </div>
-            <div class="title">{{ fields.title.content }}</div>
+            <div class="title"><a href="{{ fields.view_node.content|render|striptags|trim }}">{{ fields.title.content }}</a></div>
             <div class="content">{{ fields.body.content|render|striptags|trim }}</div>
-            <a href="{{ fields.view_node.content|render|striptags|trim }}" class="btn btn--link"> Leer {{ fields.field_noticia_tipo.content }}</a>
         </div>
     </div>
 

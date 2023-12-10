@@ -180,11 +180,16 @@ class DigitacHController extends ControllerBase {
 
 //      if ($comment->getOwner()->id() == $userID)
 //      {
+        $com_ent_id= $comment->getCommentedEntity()->id();
+        $com_ent_bundle= $comment->getCommentedEntity()->bundle();
+
         $comment->status = 1;
         $comment->save();
+
 return [
   '#theme' => 'aprobar_comentario_template',
-  '#id' => $id,
+  '#com_ent_id' => $com_ent_id,
+  "#com_ent_bundle" => $com_ent_bundle
 ];
 
  /*     }
