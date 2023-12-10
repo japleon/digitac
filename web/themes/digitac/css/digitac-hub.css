@@ -1698,7 +1698,7 @@ body:not(.path-frontpage) .header.fixed {
 .paragraph-pg-header.paragraph--title--Soluciones .container .title, .paragraph-pg-header.paragraph--title--Capacitación .container .title {
   margin: 0;
 }
-.paragraph-pg-header.paragraph--title--Moderar_comentarios_pendientes, .paragraph-pg-header.paragraph--title--Administrar_retos {
+.paragraph-pg-header.paragraph--title--Moderar_comentarios_pendientes, .paragraph-pg-header.paragraph--title--Administrar_retos, .paragraph-pg-header.paragraph--title--Mi_cuenta {
   padding-bottom: 0;
 }
 
@@ -9834,6 +9834,7 @@ body:not(.path-frontpage) .header.fixed {
 }
 
 .user-account {
+  padding-top: 0;
   /*  .block-number {
        margin-bottom: rem(122px);
    } */
@@ -9842,7 +9843,7 @@ body:not(.path-frontpage) .header.fixed {
   padding-bottom: 0;
 }
 .user-account__body {
-  margin: 5rem 0;
+  margin: 1rem 0 5rem;
 }
 .user-account__body h2 {
   margin-bottom: 2.5rem;
@@ -10035,28 +10036,27 @@ body:not(.path-frontpage) .header.fixed {
   }
 }
 
-.block-formblock-user-edit {
-  margin-top: 5rem;
+.block-formblock-user-edit,
+.block-digitac-h-user-edit-block {
+  margin-top: 1rem;
 }
-.block-formblock-user-edit .user-form {
-  max-width: 79.5rem;
-  margin: 0 auto;
-  padding: 0 0.75rem;
+.block-formblock-user-edit .user-form,
+.block-digitac-h-user-edit-block .user-form {
+  max-width: 56.5rem;
+  margin: 0;
+  padding: 0;
 }
-@media (min-width: 768px) {
-  .block-formblock-user-edit .user-form {
-    padding: 0 2rem;
-  }
+.block-formblock-user-edit .user-form .box-grey::after,
+.block-digitac-h-user-edit-block .user-form .box-grey::after {
+  left: calc(50% + 158px);
+  min-width: 90rem;
 }
-@media (min-width: 992px) {
-  .block-formblock-user-edit .user-form {
-    padding: 0 1.5rem;
-  }
-}
-.block-formblock-user-edit .form-submit {
+.block-formblock-user-edit .form-submit,
+.block-digitac-h-user-edit-block .form-submit {
   margin: 2.75rem 0 1.875rem;
 }
-.block-formblock-user-edit .form-submit#edit-submit {
+.block-formblock-user-edit .form-submit#edit-submit,
+.block-digitac-h-user-edit-block .form-submit#edit-submit {
   padding: 0.625rem 1rem;
   text-align: center;
   border: none;
@@ -10073,15 +10073,18 @@ body:not(.path-frontpage) .header.fixed {
   border-color: #196E8C;
   background-color: #196E8C;
 }
-.block-formblock-user-edit .form-submit#edit-submit:hover {
+.block-formblock-user-edit .form-submit#edit-submit:hover,
+.block-digitac-h-user-edit-block .form-submit#edit-submit:hover {
   border-color: #115B75;
   background-color: #115B75;
   color: #ffffff;
 }
-.block-formblock-user-edit .form-item {
+.block-formblock-user-edit .form-item,
+.block-digitac-h-user-edit-block .form-item {
   margin-bottom: 1.875rem;
 }
-.block-formblock-user-edit .form-item label {
+.block-formblock-user-edit .form-item label,
+.block-digitac-h-user-edit-block .form-item label {
   margin-bottom: 0.375rem;
   font-family: "Open Sans", arial, sans-serif;
   font-style: normal;
@@ -10090,7 +10093,8 @@ body:not(.path-frontpage) .header.fixed {
   line-height: 1.25rem;
   color: #1D2939;
 }
-.block-formblock-user-edit .form-item .description {
+.block-formblock-user-edit .form-item .description,
+.block-digitac-h-user-edit-block .form-item .description {
   margin-top: 0.375rem;
   font-family: "Open Sans", arial, sans-serif;
   font-style: normal;
@@ -10099,17 +10103,21 @@ body:not(.path-frontpage) .header.fixed {
   line-height: 1.125rem;
   color: #1D2939;
 }
-.block-formblock-user-edit .form-item .description a {
+.block-formblock-user-edit .form-item .description a,
+.block-digitac-h-user-edit-block .form-item .description a {
   color: #196E8C;
   text-decoration: none;
 }
-.block-formblock-user-edit .form-item .description a:hover {
+.block-formblock-user-edit .form-item .description a:hover,
+.block-digitac-h-user-edit-block .form-item .description a:hover {
   text-decoration: underline;
 }
-.block-formblock-user-edit .form-type-password {
+.block-formblock-user-edit .form-type-password,
+.block-digitac-h-user-edit-block .form-type-password {
   max-width: 56.5rem;
 }
-.block-formblock-user-edit .form-type-password .password-confirm-message {
+.block-formblock-user-edit .form-type-password .password-confirm-message,
+.block-digitac-h-user-edit-block .form-type-password .password-confirm-message {
   margin-top: 0.375rem;
   font-family: "Open Sans", arial, sans-serif;
   font-style: normal;
@@ -10118,20 +10126,24 @@ body:not(.path-frontpage) .header.fixed {
   line-height: 1.125rem;
   color: #1D2939;
 }
-.block-formblock-user-edit .form-type-password-confirm .form-item {
+.block-formblock-user-edit .form-type-password-confirm .form-item,
+.block-digitac-h-user-edit-block .form-type-password-confirm .form-item {
   max-width: 56.5rem;
   width: 100%;
 }
-.block-formblock-user-edit .form-type-password-confirm .password-strength {
+.block-formblock-user-edit .form-type-password-confirm .password-strength,
+.block-digitac-h-user-edit-block .form-type-password-confirm .password-strength {
   margin-top: 0.75rem;
   display: flex;
   flex-direction: column-reverse;
 }
-.block-formblock-user-edit .form-type-password-confirm .password-strength .password-strength__meter {
+.block-formblock-user-edit .form-type-password-confirm .password-strength .password-strength__meter,
+.block-digitac-h-user-edit-block .form-type-password-confirm .password-strength .password-strength__meter {
   height: 0.375rem;
   border-radius: 0.75rem;
 }
-.block-formblock-user-edit .form-type-password-confirm .password-strength .password-strength__title {
+.block-formblock-user-edit .form-type-password-confirm .password-strength .password-strength__title,
+.block-digitac-h-user-edit-block .form-type-password-confirm .password-strength .password-strength__title {
   font-family: "Open Sans", arial, sans-serif;
   font-style: normal;
   font-weight: 500;
@@ -10139,7 +10151,8 @@ body:not(.path-frontpage) .header.fixed {
   line-height: 1.125rem;
   color: #1D2939;
 }
-.block-formblock-user-edit .password-suggestions {
+.block-formblock-user-edit .password-suggestions,
+.block-digitac-h-user-edit-block .password-suggestions {
   padding: 0;
   border: none;
   font-family: "Inter", arial, sans-serif;
@@ -10150,16 +10163,19 @@ body:not(.path-frontpage) .header.fixed {
   letter-spacing: -0.2px;
   color: #667085;
 }
-.block-formblock-user-edit .password-suggestions ul {
+.block-formblock-user-edit .password-suggestions ul,
+.block-digitac-h-user-edit-block .password-suggestions ul {
   margin-top: 1.25rem;
   list-style: none;
 }
-.block-formblock-user-edit .password-suggestions ul li {
+.block-formblock-user-edit .password-suggestions ul li,
+.block-digitac-h-user-edit-block .password-suggestions ul li {
   margin-bottom: 0.75rem;
   padding-left: 1.75rem;
   position: relative;
 }
-.block-formblock-user-edit .password-suggestions ul li::before {
+.block-formblock-user-edit .password-suggestions ul li::before,
+.block-digitac-h-user-edit-block .password-suggestions ul li::before {
   content: "";
   width: 1.25rem;
   height: 1.25rem;
@@ -10171,7 +10187,8 @@ body:not(.path-frontpage) .header.fixed {
   top: 0.0625rem;
   left: 0;
 }
-.block-formblock-user-edit .box-grey > p {
+.block-formblock-user-edit .box-grey > p,
+.block-digitac-h-user-edit-block .box-grey > p {
   margin-bottom: 1.5rem;
   font-family: "Open Sans", arial, sans-serif;
   font-style: normal;
@@ -10180,8 +10197,20 @@ body:not(.path-frontpage) .header.fixed {
   line-height: 1.875rem;
   color: #101828;
 }
-.block-formblock-user-edit .box-grey > p strong {
+.block-formblock-user-edit .box-grey > p strong,
+.block-digitac-h-user-edit-block .box-grey > p strong {
   font-weight: 400;
+}
+.block-formblock-user-edit .button--danger,
+.block-digitac-h-user-edit-block .button--danger {
+  display: none;
+}
+
+.user-account-delete {
+  padding-top: 0;
+}
+.user-account-delete .user-box {
+  padding: 0;
 }
 
 .text-formatted.field--type-text-with-summary {

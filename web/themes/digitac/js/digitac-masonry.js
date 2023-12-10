@@ -81,7 +81,19 @@
         masonryViewsExperiences();
       });
 
+    });
 
+    $('.view-id-view_retos.view-display-id-block_3 .view-filters .form-submit').on('click', function () {
+      $(document).ajaxComplete(function () {
+        masonryViews();
+      });
+    });
+
+    $('.view-id-distributivas.view-display-id-block_1 .view-filters .form-submit').on('click', function () {
+      $(document).ajaxComplete(function () {
+        masonryViewsIdeas();
+        masonryViewsExperiences();
+      });
     });
 
 

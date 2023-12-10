@@ -100,6 +100,18 @@
     regionIdeasStates();
   });
 
+  $('.view-id-view_retos.view-display-id-block_3 .view-filters .form-submit').on('click', function () {
+    $(document).ajaxComplete(function () {
+      regionStates();
+    });
+  });
+
+  $('.view-id-distributivas.view-display-id-block_1 .view-filters .form-submit').on('click', function () {
+    $(document).ajaxComplete(function () {
+      regionIdeasStates();
+    });
+  });
+
   $('.nav-link').on('click', function () {
     if ($(this).hasClass('nav-link-ideas') || $(this).hasClass('nav-link-experience')) {
       regionIdeasStates();
@@ -318,9 +330,7 @@
 
       // Obtener el ID del mensaje actual
       parentMessageId = $(this).closest('.message').attr('id');
-      console.log(parentMessageId);
 
-      console.log('Entrando en el mensaje');
       // Añadir la clase al padre
       $('#' + parentMessageId).addClass('closed');
 
@@ -350,7 +360,6 @@
   // Maneja el clic en los enlaces con anclas
   $('.js-tab-actions a[href^="#"]').on('click', function (e) {
     e.preventDefault();
-    console.log('entra tab');
 
     // Obtiene el nombre del tab pane desde el enlace
     var tabPaneId = this.hash.substring(1);
@@ -370,8 +379,6 @@
   $(window).on('load', function () {
     if ($('.tab-pane').length) {
       var tabPaneId = window.location.hash.substring(1);
-
-      console.log('tabPaneId', tabPaneId);
 
       // Activa el tab pane correspondiente
       if (tabPaneId !== '') {
@@ -405,8 +412,6 @@
         $('.nav-tabs-actions .nav-item button').removeClass('active');
 
         // Activa la pestaña correspondiente
-        console.log('que es esto', $('.nav-tabs-actions .nav-item button[data-bs-target="#' + tabPaneId + '"]'));
-
         $('.nav-tabs-actions .nav-item button[data-bs-target="#' + tabPaneId + '"]').addClass('active');
 
       }
@@ -721,8 +726,7 @@
   // --------------------------------------
 
   $(document).ready(function () {
-    $('.block-formblock-user-edit .user-form .box-grey').append($('#edit-submit'));
-
+    $('.block-digitac-h-user-edit-block .user-form .box-grey').append($('#edit-submit'));
   });
 
 
@@ -810,6 +814,50 @@
       $('.file-widget-data').removeClass('remove');
     }
   });
+
+
+
+
+  // --------------------------------------
+  // ---- SOLUCIONES - CAPACITACION - MOSTRAR MÁS ----
+  // --------------------------------------
+  $(document).ready(function() {
+    if($(window).width() >= 992) {
+      if($('.view-soluciones').length) {
+        var $checkboxContainers = $('.view-soluciones .view-filters .form-checkboxes');
+      } else {
+        var $checkboxContainers = $('.view-cursos .view-filters .form-checkboxes');
+      }
+
+      $checkboxContainers.each(function(index, container) {
+        var $container = $(container);
+        var $checkboxes = $container.find('.form-type-checkbox');
+
+        if ($checkboxes.length > 5 && !$container.hasClass('bef-checkboxes')) {
+          $checkboxes.slice(5).hide();
+          var $verMasMenos = $('<a href="#" class="showmore">Ver más</a>');
+
+          // Insertar el enlace dentro del contenedor .form-checkboxes
+          $container.append($verMasMenos);
+
+          $verMasMenos.on('click', function(event) {
+            event.preventDefault();
+            $checkboxes.slice(5).toggle();
+
+            // Alternar la clase 'active' en el enlace
+            $verMasMenos.toggleClass('active');
+
+            var verMasTexto = "Ver más";
+            var verMenosTexto = "Ver menos";
+            $verMasMenos.text($verMasMenos.text() === verMasTexto ? verMenosTexto : verMasTexto);
+          });
+        }
+      });
+    }
+  });
+
+
+
 
 
 

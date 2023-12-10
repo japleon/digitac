@@ -1,4 +1,6 @@
 .user-account {
+    padding-top: 0;
+
     .paragraph-cabecera {
         padding-bottom: 0;
     }
@@ -8,7 +10,7 @@
     } */
 
     &__body {
-        margin: rem(80px) 0;
+        margin: rem(16px) 0 rem(80px);
 
         h2 {
             margin-bottom: rem(40px);
@@ -224,21 +226,21 @@
 }
 
 // form
-.block-formblock-user-edit {
-    margin-top: rem(80px);
+.block-formblock-user-edit,
+.block-digitac-h-user-edit-block {
+    margin-top: rem(16px);
     //background-color: $white;
 
     .user-form {
-        max-width: rem(1272px);
-        margin: 0 auto;
-        padding: 0 rem(12px);
+        max-width: rem(904px);
+        margin: 0;
+        padding: 0;
 
-        @include media(md) {
-            padding: 0 rem(32px);
-        }
-
-        @include media(lg) {
-            padding: 0 rem(24px);
+        .box-grey {
+            &::after {
+                left: calc(50% + 158px);
+                min-width: rem(1440px);
+            }
         }
     }
 
@@ -398,6 +400,18 @@
         }
     }
 
+    .button--danger {
+        display: none;
+    }
+
+}
+
+.user-account-delete {
+    padding-top: 0;
+
+    .user-box {
+        padding: 0;
+    }
 }
 
 .text-formatted.field--type-text-with-summary {
