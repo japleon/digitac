@@ -69,8 +69,9 @@
     }
 
     blockquote {
+        margin: rem(40px) 0;
         padding-left: rem(20px);
-        border: rem(1px) solid $primary;
+        border-left: rem(1px) solid $primary;
 
         p {
             font-family: $font-family-base;

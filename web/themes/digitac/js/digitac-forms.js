@@ -310,25 +310,37 @@
   // --------------------------------------
   // ---- NOTA - IDEAS ----
   // --------------------------------------
+  var storageKeyPrefixMessage = 'closed-';
+  var parentMessageId = null;
+
   $('.js-message-close').on('click', function (e) {
-    e.preventDefault(); // Evita la navegación predeterminada
+      e.preventDefault();
 
-    // Obtiene el ID del padre desde el atributo data-parent-id
-    var parentId = $(this).parent().attr('id');
-    console.log(parentId);
+      // Obtener el ID del mensaje actual
+      parentMessageId = $(this).closest('.message').attr('id');
+      console.log(parentMessageId);
 
-    // Añade la clase al padre
-    $('#' + parentId).addClass('closed');
+      console.log('Entrando en el mensaje');
+      // Añadir la clase al padre
+      $('#' + parentMessageId).addClass('closed');
 
-    // Guarda la información en localStorage
-    localStorage.setItem('closedMessageIdea', parentId);
+      // Guardar la información en localStorage
+      localStorage.setItem(storageKeyPrefixMessage + parentMessageId, true);
   });
 
-  // Comprueba si hay información en localStorage al cargar la página
-  var selectedItem = localStorage.getItem('closedMessageIdea');
-  if (selectedItem) {
-    $('#' + selectedItem).addClass('closed');
-  }
+  $(document).ready(function () {
+      // Al cargar la página, encontrar el primer mensaje cerrado en el localStorage
+      $('.message').each(function () {
+          var messageId = $(this).attr('id');
+          var isClosed = localStorage.getItem(storageKeyPrefixMessage + messageId);
+
+          if (isClosed) {
+              // Agregar la clase cerrada si está en el localStorage
+              $('#' + messageId).addClass('closed');
+          }
+      });
+  });
+
 
 
   // --------------------------------------

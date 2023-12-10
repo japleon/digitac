@@ -208,5 +208,15 @@
 
         }
     }
+
+    // not reply header
+    &.view-display-id-block_2:not(:first-child) {
+        display: none;
+    }
+}
+
+// not reply header
+.paragraph--title--Administrar_retos:not(:first-child) {
+    display: none;
 }
 
