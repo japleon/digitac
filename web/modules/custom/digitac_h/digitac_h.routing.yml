@@ -30,6 +30,23 @@ digitac_h.comenario_eliminar:
   requirements:
     _permission: 'access content'    
 
+digitac_h.idea_guardar:
+  path: '/guardar-idea/{id}'
+  defaults:
+    _controller: '\Drupal\digitac_h\Controller\DigitacHController::ideaGuardar'
+    _title: 'Idea Guardar'
+  requirements:
+    _permission: 'access content'
+
+digitac_h.experiencia_guardar:
+  path: '/guardar-experiencia/{id}'
+  defaults:
+    _controller: '\Drupal\digitac_h\Controller\DigitacHController::experienciaGuardar'
+    _title: 'Experiencia Guardar'
+  requirements:
+    _permission: 'access content'    
+
+
 
 digitac_h.comenario_aprobar:
   path: '/aprobar-comentario/{id}'

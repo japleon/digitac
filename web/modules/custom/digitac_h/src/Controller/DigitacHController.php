@@ -125,8 +125,6 @@ class DigitacHController extends ControllerBase {
       $userID = \Drupal::currentUser()->id();
       $com_ent_id= $comment->getCommentedEntity()->id();
       $com_ent_bundle= $comment->getCommentedEntity()->bundle();
-
-      \Drupal::logger('my_module')->error($com_ent_bundle);
       
       if ($comment->getOwner()->id() == $userID)
       {
@@ -151,6 +149,26 @@ class DigitacHController extends ControllerBase {
 
 
   }
+
+
+  public function ideaGuardar($id) {
+    
+        return [
+            '#theme' => 'guardar_idea_template',
+            '#reto_id' => $id
+        ];
+    
+  }
+
+  public function experienciaGuardar($id) {
+    
+    return [
+        '#theme' => 'guardar_experiencia_template',
+        '#reto_id' => $id
+    ];
+
+}
+
 
 
   public function comentarioAprobar($id) {

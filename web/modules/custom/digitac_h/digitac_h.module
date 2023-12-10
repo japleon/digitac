@@ -165,6 +165,20 @@ function digitac_h_theme() {
     'template' => 'eliminar-comentario',
   ];
 
+    $theme['guardar_idea_template'] = [
+    'variables' => [
+      'reto_id' => NULL
+    ],
+    'template' => 'guardar-idea',
+  ];
+
+  $theme['guardar_experiencia_template'] = [
+    'variables' => [
+      'reto_id' => NULL
+    ],
+    'template' => 'guardar-experiencia',
+  ];
+
   $theme['aprobar_comentario_template'] = [
     'variables' => [
       'id' => NULL,
@@ -655,10 +669,18 @@ function new_reto_submit_handler($form, &$form_state) {
   $form_state->setRedirect('entity.node.canonical', ['node' => 65]);
 }
 function new_idea_submit_handler($form, &$form_state) {
-  $form_state->setRedirect('entity.node.canonical', ['node' => '77']);
+//  $form_state->setRedirect('entity.node.canonical', ['node' => '77']);
+    $curr_rou = explode('/',\Drupal::service('path.current')->getPath());
+    $redirect_path = "/guardar-idea/".$curr_rou[2];
+    $url = url::fromUserInput($redirect_path);
+    $form_state->setRedirect($url->getRouteName(),$url->getRouteParameters());
 }
 function new_experiencia_submit_handler($form, &$form_state) {
-  $form_state->setRedirect('entity.node.canonical', ['node' => 79]);
+//  $form_state->setRedirect('entity.node.canonical', ['node' => 79]);
+    $curr_rou = explode('/',\Drupal::service('path.current')->getPath());
+    $redirect_path = "/guardar-experiencia/".$curr_rou[2];
+    $url = url::fromUserInput($redirect_path);
+    $form_state->setRedirect($url->getRouteName(),$url->getRouteParameters());
 }
 function new_idea_cancel_handler($form, &$form_state) {
    $curr_rou = explode('/',\Drupal::service('path.current')->getPath());

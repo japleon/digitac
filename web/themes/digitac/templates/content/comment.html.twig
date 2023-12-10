@@ -129,7 +129,7 @@
     <div class="file">
 
     {% if content.field_comment_archivo.0['#file'].filemime.value ends with 'pdf' %}
-        <a href="{{ file_url(content.field_comment_archivo.0['#file'].uri.value) }}">{{ content.field_comment_archivo.0['#file'].filename.value }} <span>({{ content.field_comment_archivo.0['#file'].filesize.value}} B)</span></a></span>
+        <a href="{{ file_url(content.field_comment_archivo.0['#file'].uri.value) }}">{{ content.field_comment_archivo.0['#file'].filename.value }} <span>&nbsp;({{ content.field_comment_archivo.0['#file'].filesize.value}} B)</span></a></span>
     {% else %}
       <img src="{{ file_url(content.field_comment_archivo.0['#file'].uri.value) }}"></img>
     {% endif %}
@@ -157,7 +157,7 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <p> {{ content.comment_body }}</p>
+        <p> {{ content.comment_body|render|striptags|trim|slice(0,100) }}</p>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>

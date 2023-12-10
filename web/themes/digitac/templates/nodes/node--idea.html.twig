@@ -233,7 +233,14 @@
                     </div>
 
                     <div class="tab__files-file">
-                    {{ item }}
+                      <div class="file">
+                      {% if item['#file'].filemime.value ends with 'pdf' %}
+                          <a href="{{ file_url(item['#file'].uri.value) }}">{{ item['#file'].filename.value }} <span>&nbsp;({{ item['#file'].filesize.value}} B)</span></a></span>
+                      {% else %}
+                          <img src="{{ file_url(item['#file'].uri.value) }}"></img>
+                      {% endif %}
+                      </div>
+
                     </div>
                   </div>
                   {% endif %}
