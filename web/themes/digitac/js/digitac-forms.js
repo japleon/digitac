@@ -376,6 +376,10 @@
       // Activa el tab pane correspondiente
       if (tabPaneId !== '') {
         console.log('tabPaneId no esta vacio');
+
+        if (tabPaneId.includes("comment-"))
+        {tabPaneId = 'home'}
+
         $('.tab-pane').removeClass('active show');
         $('#' + tabPaneId).addClass('active show');
 
