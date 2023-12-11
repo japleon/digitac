@@ -265,12 +265,13 @@ function digitac_h_form_user_register_form_alter(&$form, FormStateInterface $for
 
 function setMessage(array $form, FormStateInterface $form_state) {
 
-
+  $valid_errors = "";
   $response = new AjaxResponse();
   $form_valido = true;
   if(!$form_state->getValue('mail'))
   {
      $response->addCommand(new InvokeCommand('.form-item-mail', 'addClass', array('error-form-item')));
+     $valid_errors .= t('El campo Mail es obligatorio<br>');
      $form_valido = false;
   }
   else
@@ -279,6 +280,7 @@ function setMessage(array $form, FormStateInterface $form_state) {
   if($form_state->getValue('field_usr_nombre')[0]['value']=='')
   {
      $response->addCommand(new InvokeCommand('.form-item-field-usr-nombre-0-value', 'addClass', array('error-form-item')));
+     $valid_errors .= t('El campo Nombre es obligatorio<br>');
      $form_valido = false;
   }
   else
@@ -287,6 +289,7 @@ function setMessage(array $form, FormStateInterface $form_state) {
   if($form_state->getValue('field_usr_apellidos')[0]['value']=='')
   {
      $response->addCommand(new InvokeCommand('.form-item-field-usr-apellidos-0-value', 'addClass', array('error-form-item')));
+     $valid_errors .= t('El campo Apellidos es obligatorio<br>');
      $form_valido = false;
   }
   else
@@ -295,6 +298,7 @@ function setMessage(array $form, FormStateInterface $form_state) {
   if($form_state->getValue('field_usr_pais')[0]['value']=='')
   {
      $response->addCommand(new InvokeCommand('.form-item-field-usr-pais', 'addClass', array('error-form-item')));
+     $valid_errors .= t('El campo País es obligatorio<br>');
      $form_valido = false;
   }
   else
@@ -303,6 +307,7 @@ function setMessage(array $form, FormStateInterface $form_state) {
   if($form_state->getValue('field_usr_acepto')['value']==0)
   {
      $response->addCommand(new InvokeCommand('.form-item-field-usr-acepto-value', 'addClass', array('error-form-item')));
+     $valid_errors .= t('Aceptar las condiciones de uso es obligatorio<br>');
      $form_valido = false;
   }
   else
@@ -356,6 +361,14 @@ function setMessage(array $form, FormStateInterface $form_state) {
 
   }
   else{
+
+      $response->addCommand(
+          new HtmlCommand(
+            '.error-box',
+            '<div class="title_class">' . $valid_errors . '</div>'),
+        );
+ 
+
     $messages = \Drupal::messenger()->deleteAll();
   }
 
@@ -1201,6 +1214,14 @@ $pido= intval($variables['comment']->id());
 function digitac_h_entity_presave(&$variables) {
   if ($variables->bundle()=='comment')
   {
+    
+    $idea_n = \Drupal::entityTypeManager()->getStorage('node')->load($variables->get('entity_id')->target_id);
+    $reto_id = $idea_n->field_idea_reto->getValue()[0]['target_id'];
+
+    if (es_moderador_reto($reto_id))
+    {  $variables->status = 1;}
+        
+
 //      dpm($variables->get('field_comm_p_id')->value);
 //    $variables->set('pid',48);
 //      $variables->pid[]=48;
