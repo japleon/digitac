@@ -270,43 +270,43 @@ function setMessage(array $form, FormStateInterface $form_state) {
   $form_valido = true;
   if(!$form_state->getValue('mail'))
   {
-     $response->addCommand(new InvokeCommand('.form-item-mail', 'addClass', array('error')));
+     $response->addCommand(new InvokeCommand('.form-item-mail', 'addClass', array('error-form-item')));
      $form_valido = false;
   }
   else
-  {  $response->addCommand(new InvokeCommand('.form-item-mail', 'removeClass', array('error')));}
+  {  $response->addCommand(new InvokeCommand('.form-item-mail', 'removeClass', array('error-form-item')));}
 
   if($form_state->getValue('field_usr_nombre')[0]['value']=='')
   {
-     $response->addCommand(new InvokeCommand('.form-item-field-usr-nombre-0-value', 'addClass', array('error')));
+     $response->addCommand(new InvokeCommand('.form-item-field-usr-nombre-0-value', 'addClass', array('error-form-item')));
      $form_valido = false;
   }
   else
-  {  $response->addCommand(new InvokeCommand('.form-item-field-usr-nombre-0-value', 'removeClass', array('error')));}
+  {  $response->addCommand(new InvokeCommand('.form-item-field-usr-nombre-0-value', 'removeClass', array('error-form-item')));}
 
   if($form_state->getValue('field_usr_apellidos')[0]['value']=='')
   {
-     $response->addCommand(new InvokeCommand('.form-item-field-usr-apellidos-0-value', 'addClass', array('error')));
+     $response->addCommand(new InvokeCommand('.form-item-field-usr-apellidos-0-value', 'addClass', array('error-form-item')));
      $form_valido = false;
   }
   else
-  {  $response->addCommand(new InvokeCommand('.form-item-field-usr-apellidos-0-value', 'removeClass', array('error')));}
+  {  $response->addCommand(new InvokeCommand('.form-item-field-usr-apellidos-0-value', 'removeClass', array('error-form-item')));}
 
   if($form_state->getValue('field_usr_pais')[0]['value']=='')
   {
-     $response->addCommand(new InvokeCommand('.form-item-field-usr-pais', 'addClass', array('error')));
+     $response->addCommand(new InvokeCommand('.form-item-field-usr-pais', 'addClass', array('error-form-item')));
      $form_valido = false;
   }
   else
-  {  $response->addCommand(new InvokeCommand('.form-item-field-usr-pais', 'removeClass', array('error')));}
+  {  $response->addCommand(new InvokeCommand('.form-item-field-usr-pais', 'removeClass', array('error-form-item')));}
 
   if($form_state->getValue('field_usr_acepto')['value']==0)
   {
-     $response->addCommand(new InvokeCommand('.form-item-field-usr-acepto-value', 'addClass', array('error')));
+     $response->addCommand(new InvokeCommand('.form-item-field-usr-acepto-value', 'addClass', array('error-form-item')));
      $form_valido = false;
   }
   else
-  {  $response->addCommand(new InvokeCommand('.form-item-field-usr-acepto-value', 'removeClass', array('error')));}
+  {  $response->addCommand(new InvokeCommand('.form-item-field-usr-acepto-value', 'removeClass', array('error-form-item')));}
 
 
 
