@@ -112,6 +112,12 @@
     });
   });
 
+  $('.view-id-distributivas.view-display-id-block_3 .view-filters .form-submit').on('click', function () {
+    $(document).ajaxComplete(function () {
+      regionIdeasStates();
+    });
+  });
+
   $('.nav-link').on('click', function () {
     if ($(this).hasClass('nav-link-ideas') || $(this).hasClass('nav-link-experience')) {
       regionIdeasStates();

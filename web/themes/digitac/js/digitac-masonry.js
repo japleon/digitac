@@ -108,16 +108,24 @@
 
 
 
+    // ideas - experiences
 
     $('.view-id-distributivas.view-display-id-block_1 .view-filters .form-submit').on('click', function () {
       $(document).ajaxComplete(function () {
+
         $('.view-id-distributivas.view-display-id-block_1 .view-content').masonry('reloadItems');
-        $('.view-id-distributivas.view-display-id-block_3 .view-content').masonry('reloadItems');
-
         masonryViewsIdeas();
-        masonryViewsExperiences();
-      });
 
+      });
+    });
+
+    $('.view-id-distributivas.view-display-id-block_3 .view-filters .form-submit').on('click', function () {
+      $(document).ajaxComplete(function () {
+
+        $('.view-id-distributivas.view-display-id-block_3 .view-content').masonry('reloadItems');
+        masonryViewsExperiences();
+
+      });
     });
 
 

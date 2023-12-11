@@ -360,3 +360,26 @@
         }
     }
 }
+
+
+// error forms
+.register,
+.login {
+    .form-item {
+        &.error-form-item {
+            input:not(.form-checkbox),
+            .form-select {
+                border: rem(1.5px) solid $red-600;
+            }
+        }
+    }
+
+    :not(.box-switch) .form-type-checkbox {
+        &.error-form-item {
+            .checkmark {
+                border: rem(1.5px) solid $red-600;
+            }
+        }
+
+    }
+}

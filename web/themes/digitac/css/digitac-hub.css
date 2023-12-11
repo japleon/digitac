@@ -9855,6 +9855,17 @@ body:not(.path-frontpage) .header.fixed {
   border-radius: 0.625rem 0.625rem 0 0;
 }
 
+.register .form-item.error-form-item input:not(.form-checkbox),
+.register .form-item.error-form-item .form-select,
+.login .form-item.error-form-item input:not(.form-checkbox),
+.login .form-item.error-form-item .form-select {
+  border: 0.09375rem solid #D92D20;
+}
+.register :not(.box-switch) .form-type-checkbox.error-form-item .checkmark,
+.login :not(.box-switch) .form-type-checkbox.error-form-item .checkmark {
+  border: 0.09375rem solid #D92D20;
+}
+
 .user-account {
   padding-top: 0;
   /*  .block-number {
