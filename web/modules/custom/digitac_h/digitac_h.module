@@ -265,34 +265,109 @@ function digitac_h_form_user_register_form_alter(&$form, FormStateInterface $for
 
 function setMessage(array $form, FormStateInterface $form_state) {
 
-$user = \Drupal\user\Entity\User::create();
 
-$user->setPassword(\Drupal::service('password_generator')->generate(10));
-$user->enforceIsNew();
-$user->setEmail($form_state->getValue('mail'));
-$user->setUsername($form_state->getValue('field_usr_nombre')[0]['value'].' '.$form_state->getValue('field_usr_apellidos')[0]['value']);
-$user->set('field_usr_nombre', $form_state->getValue('field_usr_nombre')[0]['value']);
-$user->set('field_usr_apellidos', $form_state->getValue('field_usr_apellidos')[0]['value']);
-$user->set('field_usr_pais', $form_state->getValue('field_usr_pais')[0]['value']);
-$user->set('field_usr_acepto', $form_state->getValue('field_usr_acepto')['value']);
-$user->set('field_usr_empresa', $form_state->getValue('field_usr_empresa')[0]['value']);
-$result = $user->save();
-$user->activate();
-$result = $user->save();
+  $response = new AjaxResponse();
+  $form_valido = true;
+  if(!$form_state->getValue('mail'))
+  {
+     $response->addCommand(new InvokeCommand('.form-item-mail', 'addClass', array('error')));
+     $form_valido = false;
+  }
+  else
+  {  $response->addCommand(new InvokeCommand('.form-item-mail', 'removeClass', array('error')));}
+
+  if($form_state->getValue('field_usr_nombre')[0]['value']=='')
+  {
+     $response->addCommand(new InvokeCommand('.form-item-field-usr-nombre-0-value', 'addClass', array('error')));
+     $form_valido = false;
+  }
+  else
+  {  $response->addCommand(new InvokeCommand('.form-item-field-usr-nombre-0-value', 'removeClass', array('error')));}
+
+  if($form_state->getValue('field_usr_apellidos')[0]['value']=='')
+  {
+     $response->addCommand(new InvokeCommand('.form-item-field-usr-apellidos-0-value', 'addClass', array('error')));
+     $form_valido = false;
+  }
+  else
+  {  $response->addCommand(new InvokeCommand('.form-item-field-usr-apellidos-0-value', 'removeClass', array('error')));}
+
+  if($form_state->getValue('field_usr_pais')[0]['value']=='')
+  {
+     $response->addCommand(new InvokeCommand('.form-item-field-usr-pais', 'addClass', array('error')));
+     $form_valido = false;
+  }
+  else
+  {  $response->addCommand(new InvokeCommand('.form-item-field-usr-pais', 'removeClass', array('error')));}
+
+  if($form_state->getValue('field_usr_acepto')['value']==0)
+  {
+     $response->addCommand(new InvokeCommand('.form-item-field-usr-acepto-value', 'addClass', array('error')));
+     $form_valido = false;
+  }
+  else
+  {  $response->addCommand(new InvokeCommand('.form-item-field-usr-acepto-value', 'removeClass', array('error')));}
+
+
+
+  if($form_valido)
+  {
+    $user = \Drupal\user\Entity\User::create();
+
+    $user->setPassword(\Drupal::service('password_generator')->generate(10));
+    $user->enforceIsNew();
+    $user->setEmail($form_state->getValue('mail'));
+    $user->setUsername($form_state->getValue('field_usr_nombre')[0]['value'].' '.$form_state->getValue('field_usr_apellidos')[0]['value']);
+    $user->set('field_usr_nombre', $form_state->getValue('field_usr_nombre')[0]['value']);
+    $user->set('field_usr_apellidos', $form_state->getValue('field_usr_apellidos')[0]['value']);
+    $user->set('field_usr_pais', $form_state->getValue('field_usr_pais')[0]['value']);
+    $user->set('field_usr_acepto', $form_state->getValue('field_usr_acepto')['value']);
+    $user->set('field_usr_empresa', $form_state->getValue('field_usr_empresa')[0]['value']);
+
+    $violations = $user->validate();
+    if (count($violations)) {
+          $response->addCommand(
+          new HtmlCommand(
+            '.error-box',
+            '<div class="title_class">' . $violations[0]->getMessage() . '</div>'),
+        );
+        $messages = \Drupal::messenger()->deleteAll();
+    }
+    else
+    {          
+      
+    $response->addCommand(new HtmlCommand('.error-box',''));
+
+    $result = $user->save();
+    $user->activate();
+    $result = $user->save();
+
+
+        $mail_domain = explode('@',$form_state->getValue('mail'))[1];
+        $mail_user = '***********'.substr(explode('@',$form_state->getValue('mail'))[0],-3).'@';
+
+        $response->addCommand(
+          new HtmlCommand(
+            '.register__col-container',
+            '<div class="title_class">' . t('¡Hola @result!', ['@result' => $form_state->getValue('field_usr_nombre')[0]['value'] ]) . '</div><div class="subtitle">'.t('Te hemos enviado un email').'</div><div class="parr">'.t('Te hemos enviado un email con un enlace a @mail para verificar tu identidad. Por favor haz click en el enlace para completar el registro.', ['@mail' => $mail_user.''.$mail_domain ]).'</div>'),
+        );
+    }
+
+
+  }
+  else{
+    $messages = \Drupal::messenger()->deleteAll();
+  }
+
+
+
 
 //   \Drupal::service('plugin.manager.mail')->mail('user_registrationpassword', 'register_confirmation_with_pass', $form_state->getValue('mail'),'ES');
 //    drupal_set_message(t('A welcome message with further instructions has been sent to your email address.'));
 
-    $mail_domain = explode('@',$form_state->getValue('mail'))[1];
-    $mail_user = '***********'.substr(explode('@',$form_state->getValue('mail'))[0],-3).'@';
 
-    $response = new AjaxResponse();
 
-    $response->addCommand(
-      new HtmlCommand(
-        '.register__col-container',
-        '<div class="title_class">' . t('¡Hola @result!', ['@result' => $form_state->getValue('field_usr_nombre')[0]['value'] ]) . '</div><div class="subtitle">'.t('Te hemos enviado un email').'</div><div class="parr">'.t('Te hemos enviado un email con un enlace a @mail para verificar tu identidad. Por favor haz click en el enlace para completar el registro.', ['@mail' => $mail_user.''.$mail_domain ]).'</div>'),
-    );
+    
     return $response;
 
    }
@@ -308,7 +383,8 @@ $result = $user->save();
         'callback' => 'setMessageResetPass',
       ],
     ];
-}*/
+}
+
 
  function setMessageResetPass(array $form, FormStateInterface $form_state) {
 
@@ -322,7 +398,7 @@ $result = $user->save();
     );
     return $response;
 
-   }
+   }*/
 
 function digitac_h_form_user_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
 
