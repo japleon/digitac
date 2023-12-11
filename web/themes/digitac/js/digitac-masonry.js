@@ -65,7 +65,7 @@
 
 
     $('.pager-show-more a').on('click', function() {
-      $(document).ajaxComplete(function (event, xhr, settings) {
+      $(document).ajaxComplete(function () {
 
         console.log('recarga masonry');
 
@@ -80,20 +80,44 @@
         masonryViewsIdeas();
         masonryViewsExperiences();
       });
-
     });
+
+
 
     $('.view-id-view_retos.view-display-id-block_3 .view-filters .form-submit').on('click', function () {
       $(document).ajaxComplete(function () {
         masonryViews();
+
+        if (window.location.href.indexOf('field_reto_categoria_target_id=All') > -1) {
+          console.log('encuentra parametro');
+
+          $('.pager-show-more a').on('click', function() {
+
+            $(document).ajaxComplete(function () {
+              $('.view-id-view_retos.view-display-id-block_3 .view-content').masonry('reloadItems');
+
+              masonryViews();
+            });
+
+          });
+        }
+
+
       });
     });
 
+
+
+
     $('.view-id-distributivas.view-display-id-block_1 .view-filters .form-submit').on('click', function () {
       $(document).ajaxComplete(function () {
+        $('.view-id-distributivas.view-display-id-block_1 .view-content').masonry('reloadItems');
+        $('.view-id-distributivas.view-display-id-block_3 .view-content').masonry('reloadItems');
+
         masonryViewsIdeas();
         masonryViewsExperiences();
       });
+
     });
 
 

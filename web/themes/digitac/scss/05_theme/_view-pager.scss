@@ -1,0 +1,79 @@
+.view-id-view_noticias.view-display-id-block_3,
+.view-id-view_retos.view-display-id-block_3,
+.view-id-distributivas.view-display-id-block_1,
+.view-id-distributivas.view-display-id-block_3 {
+    .pager-show-more {
+        width: 100%;
+        margin-top: rem(40px);
+        padding: 0;
+        display: flex;
+        justify-content: center;
+
+        .pager__item {
+            width: 100%;
+            padding: 0;
+            display: inline-flex;
+
+            @include media(md) {
+                width: auto;
+            }
+
+            a {
+                min-width: rem(120px);
+                width: 100%;
+                margin: 0;
+                padding: rem(10px) rem(16px);
+                text-align: center;
+                border: none;
+                border-radius: 0;
+                border: rem(1px) solid $secondary;
+                font-family: $font-family-base;
+                font-weight: 600;
+                font-size: rem(14px);
+                line-height: rem(20px);
+                text-decoration: none;
+                border-radius: rem(50px);
+                color: $white;
+                border-color: $blue-600;
+                background-color: $blue-600;
+                transition: all 0.3s ease;
+                padding-left: rem(40px);
+                position: relative;
+                display: inline-flex;
+                justify-content: center;
+                align-items: center;
+
+                &::before {
+                    content: '';
+                    width: rem(20px);
+                    height: rem(20px);
+                    background-image: url('../images/icons/icon-load-more.svg');
+                    background-repeat: no-repeat;
+                    background-size: contain;
+
+                    display: inline-flex;
+                    align-self: center;
+                    margin-right: rem(10px);
+                    margin-left: rem(-30px);
+
+                    @include media(md) {
+                        margin-right: 0;
+                        margin-left: 0;
+                        position: absolute;
+                        top: 50%;
+                        left: rem(12px);
+                        transform: translateY(-50%);
+                    }
+
+                }
+
+                &:hover {
+                    border-color: $blue-700;
+                    background-color: $blue-700;
+                    color: $white;
+                }
+            }
+        }
+
+    }
+}
