@@ -6,9 +6,9 @@
         align-items: center;
     }
 
-    @include media(lg) {
+    /* @include media(lg) {
         margin-bottom: rem(-60px);
-    }
+    } */
 
     @include media(xl) {
         min-height: auto;
@@ -381,5 +381,19 @@
             }
         }
 
+    }
+
+    .error-box {
+
+        .title_class {
+            margin-bottom: rem(14px);
+            padding: rem(10px);
+            border: rem(1.5px) solid $red-600;
+            border-radius: rem(8px);
+            font-weight: 500;
+            font-size: rem(16px);
+            line-height: rem(20px);
+            color: $red-600;
+        }
     }
 }

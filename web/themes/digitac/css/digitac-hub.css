@@ -9301,17 +9301,17 @@ body:not(.path-frontpage) .header.fixed {
   }
 }
 
+.login {
+  /* @include media(lg) {
+     margin-bottom: rem(-60px);
+  } */
+}
 @media (min-width: 768px) {
   .login {
     min-height: 60rem;
     display: flex;
     justify-content: center;
     align-items: center;
-  }
-}
-@media (min-width: 992px) {
-  .login {
-    margin-bottom: -3.75rem;
   }
 }
 @media (min-width: 1024px) {
@@ -9533,17 +9533,17 @@ body:not(.path-frontpage) .header.fixed {
   margin-top: 0.75rem;
 }
 
+.register {
+  /* @include media(lg) {
+      margin-bottom: rem(-60px);
+  } */
+}
 @media (min-width: 768px) {
   .register {
     min-height: 60rem;
     display: flex;
     justify-content: center;
     align-items: center;
-  }
-}
-@media (min-width: 992px) {
-  .register {
-    margin-bottom: -3.75rem;
   }
 }
 @media (min-width: 1024px) {
@@ -9864,6 +9864,17 @@ body:not(.path-frontpage) .header.fixed {
 .register :not(.box-switch) .form-type-checkbox.error-form-item .checkmark,
 .login :not(.box-switch) .form-type-checkbox.error-form-item .checkmark {
   border: 0.09375rem solid #D92D20;
+}
+.register .error-box .title_class,
+.login .error-box .title_class {
+  margin-bottom: 0.875rem;
+  padding: 0.625rem;
+  border: 0.09375rem solid #D92D20;
+  border-radius: 0.5rem;
+  font-weight: 500;
+  font-size: 1rem;
+  line-height: 1.25rem;
+  color: #D92D20;
 }
 
 .user-account {

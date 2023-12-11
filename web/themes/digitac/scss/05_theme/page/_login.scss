@@ -8,9 +8,9 @@
         align-items: center;
     }
 
-    @include media(lg) {
+    /* @include media(lg) {
        margin-bottom: rem(-60px);
-    }
+    } */
 
     @include media(xl) {
         min-height: auto;
