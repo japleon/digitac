@@ -253,6 +253,19 @@ function digitac_h_node_presave(\Drupal\Core\Entity\EntityInterface $node)  {
 // REDIRECT AFTER USER REGISTER
 function digitac_h_form_user_register_form_alter(&$form, FormStateInterface $form_state) {
 
+    $form['agrupador_1'] = [
+            '#type' => 'markup',
+            '#weight' => -3,
+            '#markup' => t('<div class="name_wrapper">')
+    ];
+
+    $form['agrupador_2'] = [
+            '#type' => 'markup',
+            '#weight' => 1,
+            '#markup' => t('</div>')
+    ];
+
+
     $form['actions'] = [
       '#type' => 'button',
       '#value' => 'Registrarme',
