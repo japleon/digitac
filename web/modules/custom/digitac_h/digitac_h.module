@@ -1324,9 +1324,9 @@ function digitac_h_preprocess_fieldset(&$variables)
 {
   if( ($variables['element']['#options']==null) || (count($variables['element']['#options'])==0))
   {
-/*    if ($variables['legend']['title']['#markup']=='Ideas relacionadas')
+    if ($variables['legend']['title']['#markup']=='Ideas relacionadas')
     {$variables['prefix']= t('<div class="empty_fieldset">Todavía no hay ideas para relacionar</div>');}
     else if ($variables['legend']['title']['#markup']=='Experiencias relacionadas')
-    {$variables['prefix']= t('<div class="empty_fieldset">Todavía no hay experiencias para relacionar</div>');}*/
+    {$variables['prefix']= t('<div class="empty_fieldset">Todavía no hay experiencias para relacionar</div>');}
   }
 }
