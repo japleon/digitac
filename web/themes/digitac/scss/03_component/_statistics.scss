@@ -249,12 +249,15 @@
                 }
 
                 &__title {
-                    margin-bottom: rem(12px);
-                    font-style: normal;
-                    font-weight: 600;
-                    font-size: rem(14px);
-                    line-height: rem(20px);
-                    color: $blue-700;
+                    a{
+                        margin-bottom: rem(12px);
+                        font-style: normal;
+                        font-weight: 600;
+                        font-size: rem(14px);
+                        line-height: rem(20px);
+                        color: $blue-700;
+                        text-decoration: none;
+                    }
                 }
 
                 &__rating {

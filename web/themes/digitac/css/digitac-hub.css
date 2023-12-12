@@ -5439,13 +5439,14 @@ body:not(.path-frontpage) .header.fixed {
   line-height: 1.75rem;
   color: #667085;
 }
-.statistics .statistics-box__content .group-row__title {
+.statistics .statistics-box__content .group-row__title a {
   margin-bottom: 0.75rem;
   font-style: normal;
   font-weight: 600;
   font-size: 0.875rem;
   line-height: 1.25rem;
   color: #115B75;
+  text-decoration: none;
 }
 .statistics .statistics-box__content .group-row__rating {
   display: flex;
