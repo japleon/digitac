@@ -200,7 +200,13 @@ function digitac_h_theme() {
 
 function digitac_h_node_presave(\Drupal\Core\Entity\EntityInterface $node)  {
 
-  if (($node->bundle() == 'idea') || ($node->bundle() == 'experiencia')) {
+ if ($node->bundle() == 'reto') {
+      if ( ($node->field_reto_estado->first()->getValue()['target_id']) == 13)
+      { $node->status = 0;}
+      else
+      { $node->status = 1;} 
+ }
+ else if (($node->bundle() == 'idea') || ($node->bundle() == 'experiencia')) {
 
 // cambios de estado.
 
@@ -1233,6 +1239,11 @@ function digitac_h_entity_presave(&$variables) {
 
     if (es_moderador_reto($reto_id))
     {  $variables->status = 1;}
+    else{
+      $messages = \Drupal::messenger()->deleteAll();
+      $messages = \Drupal::messenger()->addMessage(t('Mensaje en proceso de revision.'));
+    }
+
         
 
 //      dpm($variables->get('field_comm_p_id')->value);
@@ -1305,5 +1316,17 @@ function digitac_h_preprocess_links(&$variables) {
         $variables['reto_cerrado']= ($reto_n->field_reto_estado->getValue()[0]['target_id'] == 15);
         $variables['idea_cerrada']= ($idea_n->field_idea_estado->getValue()[0]['target_id'] == 19);
 
+  }
+}
+
+
+function digitac_h_preprocess_fieldset(&$variables)
+{
+  if( ($variables['element']['#options']) && (count($variables['element']['#options'])==0))
+  {
+    if ($variables['legend']['title']['#markup']=='Ideas relacionadas')
+    {$variables['prefix']= t('<div class="empty_fieldset">Todavía no hay ideas para relacionar</div>');}
+    else if ($variables['legend']['title']['#markup']=='Experiencias relacionadas')
+    {$variables['prefix']= t('<div class="empty_fieldset">Todavía no hay experiencias para relacionar</div>');}
   }
 }
