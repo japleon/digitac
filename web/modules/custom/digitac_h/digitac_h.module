@@ -1078,6 +1078,7 @@ function digitac_h_views_query_alter(&$view,$query) {
 
 function digitac_h_preprocess_views_view(&$variables)
 {
+  
   $view = $variables['view'];
   if (($view->id() == 'cursos') && ($view->current_display == 'block_1') )
   {
@@ -1099,6 +1100,7 @@ function digitac_h_preprocess_views_view(&$variables)
 
 function digitac_h_preprocess_views_view_fields(&$variables)
 {
+
   $view = $variables['view'];
 
   if (($view->id() == 'distributivas'))
@@ -1329,4 +1331,73 @@ function digitac_h_preprocess_fieldset(&$variables)
     else if ($variables['legend']['title']['#markup']=='Experiencias relacionadas')
     {$variables['prefix']= t('<div class="empty_fieldset">Todavía no hay experiencias para relacionar</div>');}
   }
+}
+
+
+function digitac_h_preprocess_field__field_idea_ideas_relacionadas(&$variables) {
+\Drupal::logger('my_module')->error("AAAAAAA");
+dpm($variables);
+//ideas_relacionadas
+}
+
+
+
+function digitac_h_views_pre_build(\Drupal\views\ViewExecutable $view) {
+
+if ($view->id() == 'ideas_relacionadas' && $view->getDisplay()->display['id'] == 'entity_reference_1')
+{
+
+  $curr_rou = $_SERVER['REQUEST_URI'];
+  
+  if (str_contains($curr_rou,'nueva-idea'))
+  {
+    $reto_id = explode('/',$curr_rou)[2];
+    $view->filter['field_idea_reto_target_id']->value = ["min" => "","max" => "","value" => $reto_id];
+  }
+  else if (str_contains($curr_rou,'editar-idea'))
+  {
+    $idea_id = explode('nid=',$curr_rou)[1];
+    $idea_n = \Drupal::entityTypeManager()->getStorage('node')->load($idea_id);
+    $reto_id = $idea_n->field_idea_reto->getValue()[0]['target_id'];
+    $view->filter['field_idea_reto_target_id']->value = ["min" => "","max" => "","value" => $reto_id];
+  }
+  else if (str_contains($curr_rou,'node'))
+  {
+    $idea_id = explode('/',$curr_rou)[2];
+    $idea_n = \Drupal::entityTypeManager()->getStorage('node')->load($idea_id);
+    $reto_id = $idea_n->field_idea_reto->getValue()[0]['target_id'];
+    $view->filter['field_idea_reto_target_id']->value = ["min" => "","max" => "","value" => $reto_id];
+  }
+  
+}
+
+if ($view->id() == 'ideas_relacionadas' && $view->getDisplay()->display['id'] == 'entity_reference_2')
+{
+
+  $curr_rou = $_SERVER['REQUEST_URI'];
+  
+  if (str_contains($curr_rou,'nueva-experiencia'))
+  {
+    $reto_id = explode('/',$curr_rou)[2];
+    $view->filter['field_idea_reto_target_id']->value = ["min" => "","max" => "","value" => $reto_id];
+  }
+  else if (str_contains($curr_rou,'editar-experiencia'))
+  {
+    $idea_id = explode('nid=',$curr_rou)[1];
+    $idea_n = \Drupal::entityTypeManager()->getStorage('node')->load($idea_id);
+    $reto_id = $idea_n->field_idea_reto->getValue()[0]['target_id'];
+    $view->filter['field_idea_reto_target_id']->value = ["min" => "","max" => "","value" => $reto_id];
+  }
+  else if (str_contains($curr_rou,'node'))
+  {
+    $idea_id = explode('/',$curr_rou)[2];
+    $idea_n = \Drupal::entityTypeManager()->getStorage('node')->load($idea_id);
+    $reto_id = $idea_n->field_idea_reto->getValue()[0]['target_id'];
+    $view->filter['field_idea_reto_target_id']->value = ["min" => "","max" => "","value" => $reto_id];
+  }
+  
+}
+
+
+
 }
