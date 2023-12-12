@@ -63,7 +63,11 @@ set footer_classes = 'footer' ~
   <main role="main">
     <div class="login">
       <div class="login__col login__col-left">
-        <img src="/themes/digitac/images/digitac-login.jpg" alt="" class=""/>
+        <picture>
+					<source srcset="/themes/digitac/images/digitac-login-tablet.jpg" media="(max-width: 1199px)" />
+					<source srcset="/themes/digitac/images/digitac-login.jpg" media="(min-width: 1200px)" />
+					<img src="/themes/digitac/images/digitac-login.jpg" alt="MDN" />
+				</picture>
 
         <div class="login__col-logo">
           <img src="/themes/digitac/images/digitac-logo-white.svg" alt="" class="logo logo-desktop"/>

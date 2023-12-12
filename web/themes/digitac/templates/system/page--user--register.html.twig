@@ -63,7 +63,12 @@ set footer_classes = 'footer' ~
 
 		<div class="register">
 			<div class="register__col register__col-left">
-				<img src="/themes/digitac/images/digitac-register.jpg" alt="" class=""/>
+				{# <img src="/themes/digitac/images/digitac-register.jpg" alt="" class=""/> #}
+				<picture>
+					<source srcset="/themes/digitac/images/digitac-register-tablet.jpg" media="(max-width: 1199px)" />
+					<source srcset="/themes/digitac/images/digitac-register.jpg" media="(min-width: 1200px)" />
+					<img src="/themes/digitac/images/digitac-register.jpg" alt="MDN" />
+				</picture>
 
 				<div class="register__col-instructions">
 					<img src="/themes/digitac/images/digitac-logo-white.svg" alt="" class=""/>

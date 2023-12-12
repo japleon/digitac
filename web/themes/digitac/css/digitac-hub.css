@@ -9301,17 +9301,17 @@ body:not(.path-frontpage) .header.fixed {
   }
 }
 
-.login {
-  /* @include media(lg) {
-     margin-bottom: rem(-60px);
-  } */
-}
 @media (min-width: 768px) {
   .login {
     min-height: 60rem;
     display: flex;
     justify-content: center;
     align-items: center;
+  }
+}
+@media (min-width: 992px) {
+  .login {
+    margin-bottom: -3.75rem;
   }
 }
 @media (min-width: 1024px) {
@@ -9387,13 +9387,13 @@ body:not(.path-frontpage) .header.fixed {
     position: relative;
   }
 }
-.login__col-left > img {
+.login__col-left > picture img {
   display: none;
   -o-object-fit: cover;
      object-fit: cover;
 }
 @media (min-width: 768px) {
-  .login__col-left > img {
+  .login__col-left > picture img {
     width: 100%;
     height: 100%;
     display: block;
@@ -9533,17 +9533,17 @@ body:not(.path-frontpage) .header.fixed {
   margin-top: 0.75rem;
 }
 
-.register {
-  /* @include media(lg) {
-      margin-bottom: rem(-60px);
-  } */
-}
 @media (min-width: 768px) {
   .register {
     min-height: 60rem;
     display: flex;
     justify-content: center;
     align-items: center;
+  }
+}
+@media (min-width: 992px) {
+  .register {
+    margin-bottom: -3.75rem;
   }
 }
 @media (min-width: 1024px) {
@@ -9631,13 +9631,13 @@ body:not(.path-frontpage) .header.fixed {
     position: relative;
   }
 }
-.register__col-left > img {
+.register__col-left > picture img {
   display: none;
   -o-object-fit: cover;
      object-fit: cover;
 }
 @media (min-width: 768px) {
-  .register__col-left > img {
+  .register__col-left > picture img {
     width: 100%;
     height: 100%;
     display: block;
@@ -9735,6 +9735,17 @@ body:not(.path-frontpage) .header.fixed {
 .register__col .user-register-form {
   width: 100%;
 }
+@media (min-width: 768px) {
+  .register__col .user-register-form .name_wrapper {
+    display: flex;
+    justify-content: space-between;
+  }
+}
+@media (min-width: 768px) {
+  .register__col .user-register-form .name_wrapper .form-item {
+    width: calc(50% - 6px);
+  }
+}
 .register__col .user-register-form .form-item {
   margin: 0 0 1.25rem;
 }
@@ -9820,6 +9831,7 @@ body:not(.path-frontpage) .header.fixed {
   display: none;
 }
 .register__col .user-register-form .form-type-select .chosen-container {
+  width: 100% !important;
   height: 3rem;
   padding: 0;
   box-shadow: none;

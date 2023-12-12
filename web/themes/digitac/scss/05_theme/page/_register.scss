@@ -6,9 +6,9 @@
         align-items: center;
     }
 
-    /* @include media(lg) {
+    @include media(lg) {
         margin-bottom: rem(-60px);
-    } */
+    }
 
     @include media(xl) {
         min-height: auto;
@@ -94,7 +94,7 @@
                 position: relative;
             }
 
-            > img {
+            > picture img {
                 display: none;
                 object-fit: cover;
 
@@ -206,6 +206,19 @@
         .user-register-form {
             width: 100%;
 
+            .name_wrapper {
+                @include media(md) {
+                    display: flex;
+                    justify-content: space-between;
+                }
+
+                .form-item {
+                    @include media(md) {
+                        width: calc(50% - 6px);
+                    }
+                }
+            }
+
             .form-item {
                 margin: 0 0 rem(20px);
 
@@ -310,6 +323,7 @@
                 }
 
                 .chosen-container {
+                    width: 100% !important;
                     height: rem(48px);
                     padding: 0;
                     box-shadow: none;
