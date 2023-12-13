@@ -149,13 +149,17 @@
 
     {% if tiene_votacion==1 and not reto_cerrado and not idea_cerrada %}
     <div class="ratings">
-      <div class="ratings__content">
-      <span>{{'Valora esta experiencia'|t}}</span>  
-        {% if logged_in %}
-           {{ content.rate_stars }}
-        {% else %}
-            <span class="ratings__login">{{'Para hacer una valoración debes'|t}}&nbsp;<a href="/user/login">{{'iniciar sesión'|t}}</a>&nbsp;o&nbsp;<a href="/user/register">{{'regístrarte'|t}}</a></span>
-        {% endif %}
+      <div class="container">
+        <div class="ratings__content">
+          <span>{{'Valora esta experiencia'|t}}</span>
+          {% if logged_in %}
+            {{ content.rate_stars }}
+
+            <span class="ratings__message">¡Gracias por tu valoración!</span>
+          {% else %}
+              <span class="ratings__login">{{'Para hacer una valoración debes'|t}}&nbsp;<a href="/user/login">{{'iniciar sesión'|t}}</a>&nbsp;o&nbsp;<a href="/user/register">{{'regístrarte'|t}}</a></span>
+          {% endif %}
+        </div>
       </div>
     </div>
     {% endif %}

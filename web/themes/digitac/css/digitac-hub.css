@@ -577,8 +577,13 @@ main {
   font-weight: 600;
   font-size: 14px;
   line-height: 20px;
-  color: #ffffff;
+  color: #101828;
   position: relative;
+}
+@media (min-width: 1280px) {
+  .header .account-list:not(.account-lang) .nav-item:first-child .nav-link {
+    color: #ffffff;
+  }
 }
 .header .account-list:not(.account-lang) .nav-item:first-child .nav-link::after {
   content: "";
@@ -6589,9 +6594,9 @@ body:not(.path-frontpage) .header.fixed {
     /* column-count: 2;
     break-inside: avoid;
     column-gap: rem(16px); */
+    gap: 1.25rem;
     flex-direction: row;
     flex-wrap: wrap;
-    justify-content: space-between;
   }
   .view-id-view_retos.view-display-id-block_3 .view-content::after {
     content: "";
@@ -6601,14 +6606,13 @@ body:not(.path-frontpage) .header.fixed {
 }
 .view-id-view_retos.view-display-id-block_3 .view-content .block-slider-news__item {
   width: 100%;
-  margin-bottom: 2rem;
   -moz-column-break-inside: avoid;
        break-inside: avoid;
   padding-right: 0;
   padding-left: 0;
-  /*  position: relative !important;
-   top: 0 !important;
-   left: 0 !important; */
+  position: relative !important;
+  top: 0 !important;
+  left: 0 !important;
 }
 @media (min-width: 768px) {
   .view-id-view_retos.view-display-id-block_3 .view-content .block-slider-news__item {
@@ -6621,7 +6625,7 @@ body:not(.path-frontpage) .header.fixed {
   }
 }
 .view-id-view_retos.view-display-id-block_3 .view-content .block-slider-news__item-container {
-  height: auto;
+  height: 100%;
   border-radius: 1rem;
   border: 1px solid #EAECF0;
 }
@@ -8172,9 +8176,9 @@ body:not(.path-frontpage) .header.fixed {
 }
 .node--type-idea .ratings__content,
 .node--type-experiencia .ratings__content {
-  max-width: 79.5rem;
-  margin: 0 auto;
-  padding: 0 0.75rem;
+  max-width: 56.5rem;
+  margin: 0;
+  padding: 0;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -8182,15 +8186,8 @@ body:not(.path-frontpage) .header.fixed {
 @media (min-width: 768px) {
   .node--type-idea .ratings__content,
 .node--type-experiencia .ratings__content {
-    padding: 0 2rem;
-    /* flex-direction: row;
-    align-items: center; */
-  }
-}
-@media (min-width: 992px) {
-  .node--type-idea .ratings__content,
-.node--type-experiencia .ratings__content {
-    padding: 0 1.5rem;
+    flex-direction: row;
+    align-items: center;
   }
 }
 .node--type-idea .ratings__content span,
@@ -8211,6 +8208,24 @@ body:not(.path-frontpage) .header.fixed {
     margin-bottom: 0;
   }
 }
+.node--type-idea .ratings__content span.ratings__message,
+.node--type-experiencia .ratings__content span.ratings__message {
+  margin: 1rem 0 0;
+  font-family: "Open Sans", arial, sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 1rem;
+  line-height: 1.5rem;
+  text-align: right;
+  color: #344054;
+  display: none;
+}
+@media (min-width: 768px) {
+  .node--type-idea .ratings__content span.ratings__message,
+.node--type-experiencia .ratings__content span.ratings__message {
+    margin: 0 0 0 auto;
+  }
+}
 .node--type-idea .ratings__content span.ratings__login,
 .node--type-experiencia .ratings__content span.ratings__login {
   margin: 0;
@@ -8221,13 +8236,14 @@ body:not(.path-frontpage) .header.fixed {
   line-height: 1.5rem;
   color: #344054;
   display: inline-flex;
-  flex-direction: column;
+  flex-wrap: wrap;
 }
 @media (min-width: 768px) {
   .node--type-idea .ratings__content span.ratings__login,
 .node--type-experiencia .ratings__content span.ratings__login {
     margin-bottom: 0;
     flex-direction: row;
+    margin-left: auto;
   }
 }
 .node--type-idea .ratings__content span.ratings__login a,
@@ -8334,10 +8350,6 @@ body:not(.path-frontpage) .header.fixed {
   max-width: 56.5rem;
   display: flex;
   flex-direction: column;
-}
-.node--type-idea .tab-content .tab__comments .field--type-comment .text-format-wrapper,
-.node--type-experiencia .tab-content .tab__comments .field--type-comment .text-format-wrapper {
-  max-width: 52.875rem;
 }
 .node--type-idea .tab-content .tab__comments .field--type-comment .text-format-wrapper .ck-editor .ck-editor__top .ck-toolbar,
 .node--type-experiencia .tab-content .tab__comments .field--type-comment .text-format-wrapper .ck-editor .ck-editor__top .ck-toolbar {
@@ -10340,5 +10352,12 @@ body:not(.path-frontpage) .header.fixed {
 }
 .paragraph .tab-pane.show {
   display: block;
+}
+
+.ajax-progress.ajax-progress-fullscreen {
+  background-image: url("../images/spinner.gif");
+  background-size: 52px;
+  width: 2rem;
+  height: 2rem;
 }
 /*# sourceMappingURL=digitac-hub.css.map */

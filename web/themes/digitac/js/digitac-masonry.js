@@ -6,7 +6,7 @@
       if ($(window).width() >= 768) {
         // masonry
         masonryViewsNews();
-        masonryViews();
+        //masonryViews();
         masonryViewsIdeas();
         masonryViewsExperiences();
       }
@@ -76,7 +76,7 @@
 
         // masonry
         masonryViewsNews();
-        masonryViews();
+       // masonryViews();
         masonryViewsIdeas();
         masonryViewsExperiences();
       });
@@ -84,7 +84,7 @@
 
 
 
-    $('.view-id-view_retos.view-display-id-block_3 .view-filters .form-submit').on('click', function () {
+    /* $('.view-id-view_retos.view-display-id-block_3 .view-filters .form-submit').on('click', function () {
       $(document).ajaxComplete(function () {
         masonryViews();
 
@@ -105,7 +105,7 @@
 
       });
     });
-
+ */
 
 
     // ideas - experiences

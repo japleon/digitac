@@ -399,21 +399,16 @@
         }
 
         &__content {
-            max-width: rem(1272px);
-            margin: 0 auto;
-            padding: 0 rem(12px);
+            max-width: rem(904px);
+            margin: 0;
+            padding: 0;
             display: flex;
             flex-direction: column;
             align-items: flex-start;
 
             @include media(md) {
-                padding: 0 rem(32px);
-                /* flex-direction: row;
-                align-items: center; */
-            }
-
-            @include media(lg) {
-                padding: 0 rem(24px);
+                flex-direction: row;
+                align-items: center;
             }
 
             span {
@@ -431,6 +426,22 @@
                     margin-bottom: 0;
                 }
 
+                &.ratings__message {
+                    margin: rem(16px) 0 0;
+                    font-family: $font-family-base;
+                    font-style: normal;
+                    font-weight: 500;
+                    font-size: rem(16px);
+                    line-height: rem(24px);
+                    text-align: right;
+                    color: $grey-700;
+                    display: none;
+
+                    @include media(md) {
+                        margin: 0 0 0 auto;
+                    }
+                }
+
                 &.ratings__login {
                     margin: 0;
                     font-family: $font-family-base;
@@ -440,12 +451,14 @@
                     line-height: rem(24px);
                     color: $grey-700;
                     display: inline-flex;
-                    flex-direction: column;
+                    flex-wrap: wrap;
+                    //flex-direction: column;
 
 
                     @include media(md) {
                         margin-bottom: 0;
                         flex-direction: row;
+                        margin-left: auto;
                     }
 
                     a {
@@ -556,7 +569,7 @@
                 } */
 
                 .text-format-wrapper {
-                    max-width: rem(846px);
+                    //max-width: rem(846px);
                     .ck-editor {
                         .ck-editor__top {
                             .ck-toolbar {

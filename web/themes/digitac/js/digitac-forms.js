@@ -864,7 +864,20 @@
 
 
 
+  // --------------------------------------
+  // ---- IDEAS - EXPERIENCIAS - VOTE FORM ----
+  // --------------------------------------
+  $(document).ready(function() {
+    if($('.node--type-idea').length || $('.node--type-experiencia').length) {
+      $('.ratings .vote-form').on('click', function() {
 
+        $(document).ajaxComplete(function () {
+          $('.ratings__message').fadeIn();
+        });
+
+      });
+    }
+  });
 
 
 
