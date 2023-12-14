@@ -494,6 +494,12 @@ $variables['login_form'] = Drupal::service('renderer')->renderPlain($form);
 
 }
 
+function digitac_h_form_user_reset_form_alter(&$form, FormStateInterface $form_state) {
+
+  dpm($form);
+
+}
+
 
 function digitac_h_form_user_login_form_alter(&$form, FormStateInterface $form_state) {
 
