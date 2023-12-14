@@ -20,7 +20,7 @@
 
   <div class="user-ball">
     {% set siglas = user.name.0.value|striptags|split(',') %}
-    {% for item in siglas%}{{ item|first|upper|trim }}{% endfor %}
+    {% for item in siglas|slice(0, 2)%}{{ item|first|upper|trim }}{% endfor %}
 
     {% if 'experto' in user.getroles()  %}
       <div class="star_expertoTac"><img src="/themes/digitac/images/icons/icon-verified.svg" alt="" /></div>

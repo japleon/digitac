@@ -165,6 +165,16 @@ function digitac_h_theme() {
     'template' => 'eliminar-comentario',
   ];
 
+    $theme['guardar_reto_template'] = [
+    'variables' => [
+      'reto_id' => NULL,
+      'reto_state' => NULL,
+      'reto_is_new' => NULL
+    ],
+    'template' => 'guardar-reto',
+  ];
+
+
     $theme['guardar_idea_template'] = [
     'variables' => [
       'reto_id' => NULL
@@ -775,7 +785,16 @@ function digitac_h_form_node_form_alter(&$form, FormStateInterface $form_state, 
 }
 
 function new_reto_submit_handler($form, &$form_state) {
-  $form_state->setRedirect('entity.node.canonical', ['node' => 65]);
+//  $form_state->setRedirect('entity.node.canonical', ['node' => 65]);
+
+    $curr_rou = $_SERVER['REQUEST_URI'];
+    $reto_is_new = (str_contains($curr_rou,'nuevo-reto'))? 1:0;
+    $reto_id=  $form_state->getValue('nid');
+    $reto_state=  $form_state->getValue('field_reto_estado');
+
+    $redirect_path = "/guardar-reto/".$reto_id."/".$reto_state[0]['target_id']."/".$reto_is_new;
+    $url = url::fromUserInput($redirect_path);
+    $form_state->setRedirect($url->getRouteName(),$url->getRouteParameters());
 }
 function new_idea_submit_handler($form, &$form_state) {
 //  $form_state->setRedirect('entity.node.canonical', ['node' => '77']);

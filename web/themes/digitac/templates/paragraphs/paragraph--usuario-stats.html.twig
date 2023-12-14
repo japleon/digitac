@@ -56,7 +56,7 @@
             <div class="user-ball">
 
               {% set siglas = usuario.account.name|striptags|split(' ') %}
-  						{% for item in siglas%}{{ item|first|upper|trim }}{% endfor %}
+  						{% for item in siglas|slice(0, 2)%}{{ item|first|upper|trim }}{% endfor %}
 
               {% if 'experto' in usuario.account.getroles()  %}
               <div class="star_expertoTac">

@@ -28,7 +28,15 @@ digitac_h.comenario_eliminar:
     _controller: '\Drupal\digitac_h\Controller\DigitacHController::comentarioEliminar'
     _title: 'Comentario Eliminar'
   requirements:
-    _permission: 'access content'    
+    _permission: 'access content'  
+
+digitac_h.reto_guardar:
+  path: '/guardar-reto/{id}/{state}/{is_new}'
+  defaults:
+    _controller: '\Drupal\digitac_h\Controller\DigitacHController::retoGuardar'
+    _title: 'Reto Guardar'
+  requirements:
+    _permission: 'access content'  
 
 digitac_h.idea_guardar:
   path: '/guardar-idea/{id}'

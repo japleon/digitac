@@ -150,6 +150,16 @@ class DigitacHController extends ControllerBase {
 
   }
 
+  public function retoGuardar($id,$state,$is_new) {
+    
+    return [
+        '#theme' => 'guardar_reto_template',
+        '#reto_id' => $id,
+        '#reto_state' => $state,
+        '#reto_is_new' => $is_new
+    ];
+
+}
 
   public function ideaGuardar($id) {
     
