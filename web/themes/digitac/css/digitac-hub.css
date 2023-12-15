@@ -652,6 +652,7 @@ main {
   max-width: 1438px;
   margin: 0 auto;
   background-color: #ffffff;
+  border-top: 0.25rem solid #196E8C;
   border-bottom: 0.0625rem solid rgb(232, 232, 234);
   position: fixed;
 }
@@ -721,7 +722,8 @@ body:not(.path-frontpage) .header {
   position: sticky;
   top: 0;
   background-color: #ffffff;
-  border-bottom: 1px solid rgb(232, 232, 234);
+  border-top: 0.25rem solid #196E8C;
+  border-bottom: 0.0625rem solid rgb(232, 232, 234);
 }
 body:not(.path-frontpage) .header .header__menu .navbar-nav a {
   color: #101828;
@@ -5996,6 +5998,26 @@ body:not(.path-frontpage) .header.fixed {
   vertical-align: middle;
 }
 
+.text-formatted {
+  /* blockquote {
+      margin: rem(40px) 0;
+      padding: rem(8px) 0 rem(8px) rem(20px);
+      border-left: rem(2px) solid $blue-700;
+
+      p {
+          font-family: $font-family-base;
+          font-style: italic;
+          font-weight: 500;
+          font-size: rem(24px);
+          line-height: rem(36px);
+          color: $primary;
+
+          &:last-child {
+              margin-bottom: 0;
+          }
+      }
+  } */
+}
 .text-formatted.field--name-body h2 {
   margin-top: 2rem;
   margin-bottom: 1rem;
@@ -6046,19 +6068,12 @@ body:not(.path-frontpage) .header.fixed {
   line-height: 1.75rem;
   color: #475467;
 }
-.text-formatted img {
-  max-width: 100%;
-  width: auto;
-  height: auto;
-  margin: 3rem 0;
-  border-radius: 0.75rem;
-}
-.text-formatted blockquote {
+.text-formatted.field--name-body blockquote {
   margin: 2.5rem 0;
-  padding-left: 1.25rem;
-  border-left: 0.0625rem solid #101828;
+  padding: 0.5rem 0 0.5rem 1.25rem;
+  border-left: 0.125rem solid #115B75;
 }
-.text-formatted blockquote p {
+.text-formatted.field--name-body blockquote p {
   font-family: "Open Sans", arial, sans-serif;
   font-style: italic;
   font-weight: 500;
@@ -6066,8 +6081,15 @@ body:not(.path-frontpage) .header.fixed {
   line-height: 2.25rem;
   color: #101828;
 }
-.text-formatted blockquote p:last-child {
+.text-formatted.field--name-body blockquote p:last-child {
   margin-bottom: 0;
+}
+.text-formatted img {
+  max-width: 100%;
+  width: auto;
+  height: auto;
+  margin: 3rem 0;
+  border-radius: 0.75rem;
 }
 .text-formatted table {
   width: 100%;

@@ -28,10 +28,10 @@
         </div>
 
         {% if reto_state == 14%}
-          <a href="/reto/{{reto_id}}" class="btn btn--link btn--link-back">{{ 'Ir a ver reto >'|t}}</a>
+          <a href="/reto/{{reto_id}}" class="btn btn--link">{{ 'Ir a ver reto'|t}}</a>
         {% else %}
-          <a href="/admin-retos" class="btn btn--link btn--link-back">{{ 'Ir a Administrar Retos >'|t}}</a>
-          <a href="/retos" class="btn btn--link btn--link-back">{{ 'Ir a Retos TAC >'|t}}</a>
+          <a href="/admin-retos" class="btn btn--link">{{ 'Ir a Administrar Retos'|t}}</a>
+          <a href="/retos" class="btn btn--link">{{ 'Ir a Retos TAC'|t}}</a>
         {% endif %}
 
       </div>

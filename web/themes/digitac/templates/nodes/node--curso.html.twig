@@ -123,7 +123,7 @@
                   <div class="col col-company">
                         <span class="company__title">{{content.field_curso_empresa_formacion.0}}</span>
                         {% if content.field_curso_enlace.0['#url_title'] %}
-                        <span class="company__link"><a href="{{content.field_curso_enlace.0['#url_title']}}">{{'Accede al curso'|t}}</a></span>
+                        <span class="company__link"><a href="{{content.field_curso_enlace.0['#url_title']}}" target="_blank">{{'Accede al curso'|t}}</a></span>
                         {% endif %}
                   </div>
                   <div class="col col--price">

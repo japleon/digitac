@@ -482,6 +482,7 @@
     max-width: calc(1440px - 2px);
     margin: 0 auto;
     background-color: $white;
+    border-top: rem(4px) solid $blue-600;
     border-bottom: rem(1px) solid rgb(232, 232, 234);
     position: fixed;
 
@@ -608,7 +609,8 @@ body:not(.path-frontpage) {
     position: sticky;
     top: 0;
     background-color: $white;
-    border-bottom: 1px solid rgb(232, 232, 234);
+    border-top: rem(4px) solid $blue-600;
+    border-bottom: rem(1px) solid rgb(232, 232, 234);
 
     #{$headerParent}__menu {
       .navbar-nav {

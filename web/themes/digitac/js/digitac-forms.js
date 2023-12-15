@@ -873,6 +873,10 @@
 
         $(document).ajaxComplete(function () {
           $('.ratings__message').fadeIn();
+
+          setTimeout(function() {
+            $('.ratings__message').fadeOut();
+          }, 3000);
         });
 
       });

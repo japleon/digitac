@@ -17,9 +17,15 @@ use Drupal\Core\Url;
 use Drupal\Core\StringTranslation\TranslatableMarkup;
 use Drupal\taxonomy\Entity\Term;
 use Drupal\Core\StringTranslation;
+use Drupal\Core\Mail\MailManagerInterface;
+use Drupal\Component\Utility\SafeMarkup;
+use Drupal\Component\Utility\Html;
+
 
 
 function digitac_h_form_alter(&$form, &$form_state, $form_id) {
+
+// \Drupal::logger('my_module')->error($form_id);
 
    if ( (str_contains($form_id,'views_form_content_page_4')) || (str_contains($form_id,'views_form_content_page_5')) || (str_contains($form_id,'views_form_content_page_6')) )
     {
@@ -42,9 +48,24 @@ function digitac_h_form_alter(&$form, &$form_state, $form_id) {
       $form['field_noticia_region_target_id']['#options']['All'] = t('Regiones');
       $form['field_noticia_tematica_target_id']['#options']['All'] = t('Temática');
 
+        
+
 
       foreach($form['field_curso_target_target_id']['#options'] as $key => $value){  
         $query = \Drupal::entityQuery('node')->accessCheck(TRUE)->condition('type', 'curso')->condition('field_curso_target', $key);
+
+     /*   if($form_state->getUserInput()['field_curso_target_target_id'])
+        {
+          $or_group = $query->orConditionGroup();
+          foreach($form_state->getUserInput()['field_curso_target_target_id'] as $key => $condition){  
+              if (is_numeric($key)) {
+                $or_group->condition('field_curso_target', $condition, '=');
+              }        
+          }
+          $query->condition($or_group);
+        }*/
+
+       
         $counter = $query->count()->execute();
         $form['field_curso_target_target_id']['#options'][$key] .= ' ('. $counter .')';
       }
@@ -252,19 +273,61 @@ function digitac_h_node_presave(\Drupal\Core\Entity\EntityInterface $node)  {
     
     if ($node->isNew()) 
       {$node->field_idea_reto->target_id= intval($reto_id);}
-/*    if ($display_id == 'page_1')
-      {$node->field_idea_experiencia=false;}
-    else
-      {$node->field_idea_experiencia=true;}*/
 
     if ($node->isNew()) 
-    {$query = \Drupal::entityQuery('node')->accessCheck(TRUE)->condition('type', $node->bundle());
-    $counter = $query->count()->execute();
-    $node->field_idea_numero=$counter+1;}
+    {
+      $query = \Drupal::entityQuery('node')->accessCheck(TRUE)->condition('type', $node->bundle());
+      $counter = $query->count()->execute();
+      $node->field_idea_numero=$counter+1;
+    }
 
   }
 }
 
+
+function digitac_h_entity_insert(Drupal\Core\Entity\EntityInterface $entity) {
+  
+  if ($entity->getEntityTypeId() !== 'node') {
+    return;
+  }
+
+  if ((!$entity->isPublished()) && ($entity->bundle() == 'idea' || $entity->bundle() == 'experiencia'))
+  {
+
+    $mailManager = \Drupal::service('plugin.manager.mail');
+    $module = 'digitac_h';
+    $key = 'create_idea';
+    $to = \Drupal::currentUser()->getEmail();
+    $params['message'] = $entity->bundle();
+    $params['node_title'] =  $entity->label();
+    $langcode = \Drupal::currentUser()->getPreferredLangcode();
+    $send = true;
+
+    $result = $mailManager->mail($module, $key, $to, $langcode, $params, NULL, $send);
+
+    if ($result['result'] !== true) {
+          $messages = \Drupal::messenger()->addMessage(t('There was a problem sending your message and it was not sent.'),'error');
+    }
+  }
+
+
+}
+
+function digitac_h_mail($key, &$message, $params) {
+
+ $options = array(
+   'langcode' => $message['langcode'],
+ );
+
+ switch ($key) {
+   case 'create_idea':
+     $message['from'] = \Drupal::config('system.site')->get('mail');
+     $message['subject'] = t('DigitacHub: @bundle creada, pendiente de aprobación.', array('@bundle' => $params['message']), $options);
+     $message['body'][] = t('La @bundle creada (@title) pendiente de aprobación por parte de los moderadores del Reto.', array('@bundle' => $params['message'],'@title' => $params['node_title']), $options);
+     break;
+ }
+
+}
 
 // REDIRECT AFTER USER REGISTER
 function digitac_h_form_user_register_form_alter(&$form, FormStateInterface $form_state) {
@@ -442,6 +505,8 @@ function setMessage(array $form, FormStateInterface $form_state) {
 
    }*/
 
+
+
 function digitac_h_form_user_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
 
 
@@ -494,11 +559,13 @@ $variables['login_form'] = Drupal::service('renderer')->renderPlain($form);
 
 }
 
-function digitac_h_form_user_reset_form_alter(&$form, FormStateInterface $form_state) {
+/*function digitac_h_form_user_edit_form_alter(&$form, FormStateInterface $form_state) {
 
   dpm($form);
+  $form['actions']['submit']['#value']=t('Enviar');
 
-}
+
+}*/
 
 
 function digitac_h_form_user_login_form_alter(&$form, FormStateInterface $form_state) {
@@ -877,9 +944,17 @@ function digitac_h_entity_operation(\Drupal\Core\Entity\EntityInterface $entity)
 
   if ($entity->getEntityTypeId() == 'comment') {
     
+    $comment_path = "/comentario/".$entity->id();
+    $comment_path_url = url::fromUserInput($comment_path);
+
     $operations=[];
+    $operations['ver_comentario'] = [
+      'title' => t('ver'),
+      'url' => $comment_path_url,
+      'weight' => 9990,
+    ]; 
     $operations['aprobar_comentario'] = [
-      'title' => t('Aprobar'),
+      'title' => t('Aprobarlo'),
       'url' => Url::fromRoute('comment.approve', ['comment' => $entity->id()]),
       'weight' => 99950,
       'query' => [
@@ -1425,4 +1500,20 @@ if ($view->id() == 'ideas_relacionadas' && $view->getDisplay()->display['id'] ==
 
 
 
+}
+
+
+
+
+function digitac_h_element_info_alter(array &$types) {
+  
+  if (isset($types['password_confirm'])) {
+//    $types['password_confirm']['#process'][] = '_digitac_h_change_title';
+  }
+}
+
+function _digitac_h_change_title(&$element) {
+  $element['pass1']['#title'] = t('New title 1');
+  $element['pass2']['#title'] = t('New title 2');
+  return $element;
 }

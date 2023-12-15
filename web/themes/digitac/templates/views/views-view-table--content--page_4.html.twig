@@ -128,7 +128,9 @@
                     <span class="reto_cerrado">{{'Cerrado'|t}}</span>
                   {% endif %}  
                 {% else %}
+                  {% if loop.parent.loop.index == 2 %}<a href="/reto/{{row['columns']['nid'].content.0.field_output['#markup']|striptags|trim }}">{%endif%}
                   {{ content.field_output -}}
+                  {% if loop.parent.loop.index == 2 %}</a>{%endif%}
                 {% endif %}
 
               {% endfor %}
@@ -138,6 +140,7 @@
         {% endfor %}
         <td><select onchange="ejecuta_accion({{row['columns']['nid'].content.0.field_output['#markup']|striptags|trim }})" id="accion-{{row['columns']['nid'].content.0.field_output['#markup']|striptags|trim }}">
             <option value="null">{{ 'Selecciona una acción'|t }}</option>
+            <option value="ver">{{ 'Ver'|t }}</option>
             <option value="edi">{{ 'Editar'|t }}</option>
             <option value="bor">{{ 'Estado Borrador'|t }}</option>
             <option value="abi">{{ 'Estado Abierto'|t }}</option>
@@ -156,6 +159,10 @@ function ejecuta_accion(id)
     if(accion=='edi')
     {
       window.location.href = "/editar-reto?nid="+id;
+    }
+    else if(accion=='ver')
+    {
+      window.location.href = "/reto/"+id;
     }
     else if(accion!='null')
     {
