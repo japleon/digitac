@@ -72,10 +72,13 @@ class DigitacHController extends ControllerBase {
     }
 
     return [
-        '#theme' => 'estado_idea_template',
-        '#nid' => $nid,
-        '#estado' => $estado
+    '#theme' => 'guardar_idea_template',
+    '#reto_id' => $node->field_idea_reto->target_id,
+    '#idea_id' => $nid,
+    '#idea_state' => $node->field_idea_estado->target_id,
+    '#idea_is_new' => false
     ];
+
   }
 
 
@@ -107,10 +110,13 @@ class DigitacHController extends ControllerBase {
     }
 
     return [
-        '#theme' => 'estado_experiencia_template',
-        '#nid' => $nid,
-        '#estado' => $estado
-    ];
+      '#theme' => 'guardar_experiencia_template',
+      '#reto_id' => $node->field_idea_reto->target_id,
+      '#experiencia_id' => $nid,
+      '#experiencia_state' => $node->field_idea_estado->target_id,
+      '#experiencia_is_new' => false
+      ];
+
   }
 
 
@@ -161,21 +167,27 @@ class DigitacHController extends ControllerBase {
 
 }
 
-  public function ideaGuardar($id) {
+  public function ideaGuardar($id,$idea_id,$idea_state,$is_new) {
     
         return [
             '#theme' => 'guardar_idea_template',
-            '#reto_id' => $id
+            '#reto_id' => $id,
+            '#idea_id' => $idea_id,
+            '#idea_state' => $idea_state,
+            '#idea_is_new' => $is_new
         ];
     
   }
 
-  public function experienciaGuardar($id) {
+  public function experienciaGuardar($id,$experiencia_id,$experiencia_state,$is_new) {
     
     return [
         '#theme' => 'guardar_experiencia_template',
-        '#reto_id' => $id
-    ];
+        '#reto_id' => $id,
+        '#experiencia_id' => $experiencia_id,
+        '#experiencia_state' => $experiencia_state,
+        '#experiencia_is_new' => $is_new
+];
 
 }
 

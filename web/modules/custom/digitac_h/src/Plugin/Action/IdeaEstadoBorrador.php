@@ -31,7 +31,7 @@ class IdeaEstadoBorrador extends ViewsBulkOperationsActionBase {
     $entity->set('field_idea_estado',16); 
     $entity->set('status',0); 
     $entity->save();  
-    return $this->t('Some result');
+    return $this->t('El estado de las :bundles ha cambiado a Borrador.',[':bundle' => $entity->bundle()]);
 
   }
 
@@ -41,8 +41,7 @@ class IdeaEstadoBorrador extends ViewsBulkOperationsActionBase {
   public function access($object, AccountInterface $account = NULL, $return_as_object = FALSE) {
     if ($object instanceof Node) {
       $can_update = $object->access('update', $account, TRUE);
-      $can_edit = $object->access('edit', $account, TRUE);
-      return $can_edit->andIf($can_update);
+      return $can_update;
     }
     return FALSE;
   }

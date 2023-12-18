@@ -5,7 +5,7 @@
     function init() {
       if ($(window).width() >= 768) {
         // masonry
-        masonryViewsNews();
+        //masonryViewsNews();
         //masonryViews();
         masonryViewsIdeas();
         masonryViewsExperiences();
@@ -75,7 +75,7 @@
         $('.view-id-distributivas.view-display-id-block_3 .view-content').masonry('reloadItems');
 
         // masonry
-        masonryViewsNews();
+        //masonryViewsNews();
        // masonryViews();
         masonryViewsIdeas();
         masonryViewsExperiences();

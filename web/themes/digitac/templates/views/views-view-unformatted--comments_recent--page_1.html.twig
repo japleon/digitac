@@ -16,8 +16,14 @@
  */
 #}
 {% for row in rows %}
+<div class="approve-comments">
 {{- row.content -}}
-<a href="/aprobar-comentario/{{row.content['#row'].cid}}">{{'Aprobar'|t}}</a>
-<a href="javascript:history:back()">{{'Volver'|t}}</a>
+
+    <div class="approve-comments__buttons">
+        <a href="javascript:history:back()" class="btn btn--link btn--link-back">{{'Volver'|t}}</a>
+        <a href="/aprobar-comentario/{{row.content['#row'].cid}}" class="btn btn-primary">{{'Aprobar'|t}}</a>
+    </div>
+
+</div>
 
 {% endfor %}

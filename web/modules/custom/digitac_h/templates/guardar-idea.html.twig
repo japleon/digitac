@@ -1,14 +1,40 @@
+{% set message = "" %}
+{% if idea_state == 16 %}
+  {% set message = "en Borrador. No estará disponible para los usuarios hasta que lo actualices a Idea Abierta." %}
+{% elseif idea_state == 18 %}
+  {% set message = "En evaluación, por tanto ya está disponible para todos los usuarios de Digitac Hub." %}
+{% elseif idea_state == 17 %}
+  {% set message = "Abierta, por tanto ya está disponible para todos los usuarios de Digitac Hub." %}
+{% elseif idea_state == 19 %}
+  {% set message = "Cerrada. No estará disponible para los usuarios hasta que lo actualices a Idea Abierta." %}
+{% endif %}
 
 <div class="paragraph paragraph-cabecera paragraph-pg-header paragraph--type--cabecera paragraph--view-mode--default paragraph--title--Comentario_eliminado">
     <div class="container">
       <div class="paragraph-pg-header__box">
         <div class="title">
+            {% if idea_is_new %}
             {{'Idea guardada'|t}}
+            {% else %}
+            {{'Idea actualizada'|t}}
+            {% endif %}
         </div>
         <div class="subtitle">
-            {{'La idea ha sido almacenada en la plataforma.'|t}}
+            {% if idea_is_new %}
+            {{'Tu idea ha sido guardada como Idea '|t}}{{message|t}}
+            {% else %}
+            {{'Tu idea ha sido actualiada como Idea '|t}}{{message|t}}
+            {% endif %}
         </div>
-        <a href="/reto/{{reto_id}}" class="btn btn--link btn--link-back">{{ 'Volver'|t}}</a>
+
+        {% if idea_state == 17%}
+          <a href="/idea/{{idea_id}}" class="btn btn--link">{{ 'Ir a idea'|t}}</a>
+          <a href="/admin-ideas/{{reto_id}}" class="btn btn--link">{{ 'Ir a Administrar Ideas'|t}}</a>
+        {% else %}
+          <a href="/admin-ideas/{{reto_id}}" class="btn btn--link">{{ 'Ir a Administrar Ideas'|t}}</a>
+          <a href="/reto/{{reto_id}}" class="btn btn--link">{{ 'Ir a ideas de reto'|t}}</a>
+        {% endif %}
+
       </div>
 
       <div class="paragraph-pg-header__image">

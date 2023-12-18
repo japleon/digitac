@@ -334,6 +334,20 @@
                 line-height: rem(20px);
                 color: $grey-800;
                 vertical-align: middle;
+
+                a {
+                    font-family: $font-family-base;
+                    font-style: normal;
+                    font-weight: 400;
+                    font-size: rem(14px);
+                    line-height: rem(20px);
+                    color: $blue-600;
+                    text-decoration: none;
+
+                    &:hover {
+                        text-decoration: underline;
+                    }
+                }
             }
         }
     }

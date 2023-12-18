@@ -160,24 +160,6 @@ function digitac_h_theme() {
     'template' => 'estado-reto',
   ];
 
-    $theme['estado_idea_template'] = [
-    'variables' => [
-      'custom_text' => NULL,
-      'nid' => NULL,
-      'estado' => NULL
-    ],
-    'template' => 'estado-idea',
-  ];
-
-  $theme['estado_experiencia_template'] = [
-    'variables' => [
-      'custom_text' => NULL,
-      'nid' => NULL,
-      'estado' => NULL
-    ],
-    'template' => 'estado-experiencia',
-  ];
-
     $theme['eliminar_comentario_template'] = [
     'variables' => [
       'com_ent_id' => NULL,
@@ -198,14 +180,20 @@ function digitac_h_theme() {
 
     $theme['guardar_idea_template'] = [
     'variables' => [
-      'reto_id' => NULL
+      'reto_id' => NULL,
+      'idea_id' => NULL,
+      'idea_state' => NULL,
+      'idea_is_new' => NULL
     ],
     'template' => 'guardar-idea',
   ];
 
   $theme['guardar_experiencia_template'] = [
     'variables' => [
-      'reto_id' => NULL
+      'reto_id' => NULL,
+      'experiencia_id' => NULL,
+      'experiencia_state' => NULL,
+      'experiencia_is_new' => NULL
     ],
     'template' => 'guardar-experiencia',
   ];
@@ -654,7 +642,7 @@ function digitac_h_form_node_form_alter(&$form, FormStateInterface $form_state, 
       $form['tit_dates'] = [
         '#type' => 'markup',
         '#weight' => 7,
-        '#markup' => t('<div class="box-grey"><h2>Programar fechas</h2><p>Si lo deseas, puedes programar un comienzo y un fin para este reto. Si programas la finalización, al finalizar cambiará de estado automáticamente a “Cerrado”.</p>')
+        '#markup' => t('<div class="box-grey"><h2>Programar fechas</h2><p>Si lo deseas, puedes programar un comienzo y un fin para este reto. Si programas la finalización, al finalizar cambiará de estado automáticamente a “Cerrado”. <i>(Huso horario GMT-6).</i></p>')
       ];
 
       $form['tit_config'] = [
@@ -695,6 +683,8 @@ function digitac_h_form_node_form_alter(&$form, FormStateInterface $form_state, 
 
   if($form_id == 'node_idea_frontal_form'){
 
+
+
       $idea_id = explode('nid=',$_SERVER['REQUEST_URI'])[1];
       $idea_id = explode('&',$idea_id)[0];
 
@@ -707,6 +697,7 @@ function digitac_h_form_node_form_alter(&$form, FormStateInterface $form_state, 
       { $reto_id = \Drupal::routeMatch()->getParameter('arg_0');}
 
       $moderador_reto = es_moderador_reto($reto_id);
+
 
       $form['agrupador_1'] = [
         '#type' => 'markup',
@@ -871,17 +862,37 @@ function new_reto_submit_handler($form, &$form_state) {
 }
 function new_idea_submit_handler($form, &$form_state) {
 //  $form_state->setRedirect('entity.node.canonical', ['node' => '77']);
-    $curr_rou = explode('/',\Drupal::service('path.current')->getPath());
-    $redirect_path = "/guardar-idea/".$curr_rou[2];
+    $curr_rou_ = $_SERVER['REQUEST_URI'];
+
+    $idea_is_new = (str_contains($curr_rou_,'nueva-idea'))? 1:0;
+    $idea_id=  $form_state->getValue('nid');
+    $idea_n = \Drupal::entityTypeManager()->getStorage('node')->load($idea_id);
+    $reto_id = $idea_n->field_idea_reto->getValue()[0]['target_id'];
+
+    $idea_state=  $form_state->getValue('field_idea_estado');
+    $idea_state = ($idea_state)? $idea_state[0]['target_id']:16;
+
+    $redirect_path = "/guardar-idea/".$reto_id."/".$idea_id."/".$idea_state."/".$idea_is_new;
     $url = url::fromUserInput($redirect_path);
     $form_state->setRedirect($url->getRouteName(),$url->getRouteParameters());
 }
 function new_experiencia_submit_handler($form, &$form_state) {
 //  $form_state->setRedirect('entity.node.canonical', ['node' => 79]);
-    $curr_rou = explode('/',\Drupal::service('path.current')->getPath());
-    $redirect_path = "/guardar-experiencia/".$curr_rou[2];
+
+    $curr_rou_ = $_SERVER['REQUEST_URI'];
+
+    $experiencia_is_new = (str_contains($curr_rou_,'nueva-experiencia'))? 1:0;
+    $experiencia_id=  $form_state->getValue('nid');
+    $experiencia_n = \Drupal::entityTypeManager()->getStorage('node')->load($experiencia_id);
+    $reto_id = $experiencia_n->field_idea_reto->getValue()[0]['target_id'];
+
+    $experiencia_state=  $form_state->getValue('field_idea_estado');
+    $experiencia_state = ($experiencia_state)? $experiencia_state[0]['target_id']:16;
+
+    $redirect_path = "/guardar-experiencia/".$reto_id."/".$experiencia_id."/".$experiencia_state."/".$experiencia_is_new;
     $url = url::fromUserInput($redirect_path);
     $form_state->setRedirect($url->getRouteName(),$url->getRouteParameters());
+
 }
 function new_idea_cancel_handler($form, &$form_state) {
    $curr_rou = explode('/',\Drupal::service('path.current')->getPath());
@@ -1184,6 +1195,7 @@ function digitac_h_preprocess_views_view(&$variables)
   {
       $term = Term::load($view->args[0]);
       $variables['viewcat'] = $term->getName(); 
+      $variables['cat_id'] = $term->id(); 
       $variables['viewimg'] = ($term->get('field_tx_cat_curso_imagen')->entity!=null)?$term->get('field_tx_cat_curso_imagen')->entity->getFileUri():''; 
   }
 
@@ -1234,6 +1246,7 @@ function digitac_h_preprocess_views_view_unformatted(&$variables)
   {
       $term = Term::load($view->args[0]);
       $variables['viewcat'] = $term->getName(); 
+      $variables['cat_id'] = $term->id(); 
       $variables['viewimg'] = ($term->get('field_tx_cat_curso_imagen')->entity!=null)?$term->get('field_tx_cat_curso_imagen')->entity->getFileUri():''; 
   }
 

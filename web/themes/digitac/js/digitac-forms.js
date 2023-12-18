@@ -678,6 +678,16 @@
   // Contar y actualizar al cargar la página
   $(document).ready(function () {
     actualizarNumeroCursos();
+
+    const currentUrl = window.location.href;
+    var currentId='';
+    if (currentUrl.indexOf('#') > -1)
+    {
+      currentId = currentUrl.split("#")[1];
+      $("#edit-field-curso-categoria-target-id-"+currentId ).prop( "checked", true );
+      $("#edit-field-curso-categoria-target-id-"+currentId).trigger('change');
+
+    }
   });
 
   // Evento para manejar recargas AJAX (ejemplo)
@@ -732,7 +742,7 @@
   // --------------------------------------
 
   $(document).ready(function () {
-    $('.block-digitac-h-user-edit-block .user-form .box-grey').append($('#edit-submit'));
+    $('.block-digitac-h-user-edit-block .user-form').append($('.user-account-delete'));
   });
 
 

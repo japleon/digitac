@@ -77,7 +77,7 @@
                 column-gap: rem(16px); */
                 flex-direction: row;
                 flex-wrap: wrap;
-                justify-content: space-between;
+                gap: rem(16px) rem(28px);
 
                 &::after {
                     content: '';
@@ -93,17 +93,22 @@
 
             .block-slider-news__item {
                 width: 100%;
-                margin-bottom: rem(32px);
+                margin-bottom: 0;
                 break-inside: avoid;
                 padding-right: 0;
                 padding-left: 0;
 
                 @include media(md) {
                     width: calc(50% - 15px);
+
                 }
 
                 @include media(lg) {
                     width: calc(33.3% - 20px);
+                }
+
+                &-container {
+                    height: 100%;
                 }
             }
         }

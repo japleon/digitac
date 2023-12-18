@@ -39,7 +39,7 @@ digitac_h.reto_guardar:
     _permission: 'access content'  
 
 digitac_h.idea_guardar:
-  path: '/guardar-idea/{id}'
+  path: '/guardar-idea/{id}/{idea_id}/{idea_state}/{is_new}'
   defaults:
     _controller: '\Drupal\digitac_h\Controller\DigitacHController::ideaGuardar'
     _title: 'Idea Guardar'
@@ -47,7 +47,7 @@ digitac_h.idea_guardar:
     _permission: 'access content'
 
 digitac_h.experiencia_guardar:
-  path: '/guardar-experiencia/{id}'
+  path: '/guardar-experiencia/{id}/{experiencia_id}/{experiencia_state}/{is_new}'
   defaults:
     _controller: '\Drupal\digitac_h\Controller\DigitacHController::experienciaGuardar'
     _title: 'Experiencia Guardar'

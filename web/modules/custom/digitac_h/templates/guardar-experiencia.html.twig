@@ -1,14 +1,40 @@
+{% set message = "" %}
+{% if experiencia_state == 16 %}
+  {% set message = "en Borrador. No estará disponible para los usuarios hasta que lo actualices a experiencia Abierta." %}
+{% elseif experiencia_state == 18 %}
+  {% set message = "En evaluación, por tanto ya está disponible para todos los usuarios de Digitac Hub." %}
+{% elseif experiencia_state == 17 %}
+  {% set message = "Abierta, por tanto ya está disponible para todos los usuarios de Digitac Hub." %}
+{% elseif experiencia_state == 19 %}
+  {% set message = "Cerrada. No estará disponible para los usuarios hasta que lo actualices a Experiencia Abierta." %}
+{% endif %}
 
 <div class="paragraph paragraph-cabecera paragraph-pg-header paragraph--type--cabecera paragraph--view-mode--default paragraph--title--Comentario_eliminado">
     <div class="container">
       <div class="paragraph-pg-header__box">
         <div class="title">
+            {% if experiencia_is_new %}
             {{'Experiencia guardada'|t}}
+            {% else %}
+            {{'Experiencia actualizada'|t}}
+            {% endif %}
         </div>
         <div class="subtitle">
-            {{'La experiencia ha sido almacenada en la plataforma.'|t}}
+            {% if experiencia_is_new %}
+            {{'Tu experiencia ha sido guardada como Experiencia '|t}}{{message|t}}
+            {% else %}
+            {{'Tu experiencia ha sido actualiada como Experiencia '|t}}{{message|t}}
+            {% endif %}
         </div>
-        <a href="/reto/{{reto_id}}#experience" class="btn btn--link btn--link-back">{{ 'Volver'|t}}</a>
+
+        {% if experiencia_state == 17%}
+          <a href="/experiencia/{{experiencia_id}}" class="btn btn--link">{{ 'Ir a experiencia'|t}}</a>
+          <a href="/admin-experiencias/{{reto_id}}" class="btn btn--link">{{ 'Ir a Administrar Experiencias'|t}}</a>
+        {% else %}
+          <a href="/admin-experiencias/{{reto_id}}" class="btn btn--link">{{ 'Ir a Administrar Experiencias'|t}}</a>
+          <a href="/reto/{{reto_id}}#experience" class="btn btn--link">{{ 'Ir a experiencias de reto'|t}}</a>
+        {% endif %}
+
       </div>
 
       <div class="paragraph-pg-header__image">

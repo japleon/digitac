@@ -248,6 +248,7 @@
         margin: rem(44px) 0 rem(30px);
 
         &#edit-submit {
+            margin: 0;
             padding: rem(10px) rem(16px);
             text-align: center;
             border: none;
@@ -259,6 +260,8 @@
             line-height: rem(20px);
             text-decoration: none;
             transition: all 0.3s ease;
+            display: inline-flex;
+            justify-content: center;
 
             border-radius: rem(50px);
             color: $white;
@@ -407,10 +410,17 @@
 }
 
 .user-account-delete {
+    margin: 0 0 0 rem(16px);
     padding-top: 0;
+    display: inline-flex;
+    justify-content: center;
 
     .user-box {
         padding: 0;
+
+        .container {
+            padding: 0;
+        }
     }
 }
 

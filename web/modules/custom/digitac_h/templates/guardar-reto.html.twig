@@ -1,5 +1,5 @@
 
-  
+
 {% set message = "" %}
 {% if reto_state == 13 %}
   {% set message = "en Borrador. No estará disponible para los usuarios hasta que lo actualices a Reto Abierto." %}
@@ -28,16 +28,19 @@
         </div>
 
         {% if reto_state == 14%}
-          <a href="/reto/{{reto_id}}" class="btn btn--link">{{ 'Ir a ver reto'|t}}</a>
-        {% else %}
+          <a href="/reto/{{reto_id}}" class="btn btn--link">{{ 'Ir a reto'|t}}</a>
           <a href="/admin-retos" class="btn btn--link">{{ 'Ir a Administrar Retos'|t}}</a>
-          <a href="/retos" class="btn btn--link">{{ 'Ir a Retos TAC'|t}}</a>
+        {% else %}
+          <div class="paragraph-pg-header__flex">
+            <a href="/admin-retos" class="btn btn--link">{{ 'Ir a Administrar Retos'|t}}</a>
+            <a href="/retos" class="btn btn--link">{{ 'Ir a Retos TAC'|t}}</a>
+          </div>
         {% endif %}
 
       </div>
 
       <div class="paragraph-pg-header__image">
-        <img loading="lazy" src="/sites/default/files/2023-11/Recurso%2010%201%20%282%29_6.png" width="326" height="252" alt="Idea creada" class="img-fluid">      
+        <img loading="lazy" src="/sites/default/files/2023-11/Recurso%2010%201%20%282%29_6.png" width="326" height="252" alt="Idea creada" class="img-fluid">
      </div>
     </div>
 </div>

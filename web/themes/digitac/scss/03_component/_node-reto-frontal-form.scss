@@ -317,6 +317,17 @@
     // related ideas
     .fieldgroup.form-composite {
         margin-bottom: rem(80px);
+
+        .empty_fieldset {
+            margin: 0;
+            font-family: $font-family-base;
+            font-style: normal;
+            font-weight: 600;
+            font-size: rem(18px);
+            line-height: rem(26px);
+            text-align: left;
+            color: $primary;
+        }
     }
 
 

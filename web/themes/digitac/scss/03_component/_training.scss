@@ -36,7 +36,7 @@
     }
 
     &__item {
-        &-title {
+        &-title a{
             font-family: $font-family-base;
             font-style: normal;
             font-weight: 600;
@@ -45,6 +45,7 @@
             text-align: center;
             color: $primary;
             display: block;
+            text-decoration: none;
         }
 
         &-number {

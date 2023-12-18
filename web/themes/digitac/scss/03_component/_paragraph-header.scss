@@ -86,6 +86,19 @@
 
     }
 
+    &__flex {
+        display: flex;
+        flex-direction: column;
+
+        a {
+            align-self: flex-start;
+
+            + a {
+                margin-top: rem(16px);
+            }
+        }
+    }
+
     &.paragraph--title--Soluciones,
     &.paragraph--title--Capacitación {
         .container {

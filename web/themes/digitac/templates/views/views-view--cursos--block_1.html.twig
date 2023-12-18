@@ -43,6 +43,7 @@
     {{ rows }}
   {% elseif empty -%}
     <div class="training__image">
+    <a href="/capacitacion">
       <svg width="278" height="279" viewBox="0 0 278 279" fill="none" xmlns="http://www.w3.org/2000/svg">
         <clipPath id="clip-path">
         <rect y="88.4844" width="125.31" height="267.991" rx="62.655" transform="rotate(-44.9202 0 88.4844)" fill="#D9D9D9"/>
@@ -51,8 +52,9 @@
         <image clip-path="url(#clip-path)" xlink:href="{{ file_url(viewimg) }}" alt="Image" class="svg__image">
         {% endif %}
       </svg>
+    </a>
     </div>
-    <span class="training__item-title">{{ viewcat }}</span>
+    <span class="training__item-title"><a href="/capacitacion">{{ viewcat }}</a></span>
     <span class="training__item-number">0 {{'cursos'|t}}</span>
   {% endif %}
 </div>

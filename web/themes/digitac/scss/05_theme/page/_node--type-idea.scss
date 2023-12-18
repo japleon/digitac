@@ -971,6 +971,15 @@
                             font-size: rem(16px);
                             line-height: rem(24px);
                             color: $grey-600;
+
+                            a {
+                                color: $blue-600;
+                                text-decoration: none;
+
+                                &:hover {
+                                    text-decoration: underline;
+                                }
+                            }
                         }
 
                         img {
@@ -981,6 +990,7 @@
                     }
 
                     .file {
+                        margin-bottom: rem(32px);
                         padding-left: 0;
 
                         a {

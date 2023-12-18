@@ -211,7 +211,8 @@
     .paragraph-pg-header {
         padding: 0;
 
-        &.paragraph--title--Nueva_idea {
+        &.paragraph--title--Nueva_idea,
+        &.paragraph--title--Nueva_experiencia {
             margin-bottom: rem(32px);
         }
     }

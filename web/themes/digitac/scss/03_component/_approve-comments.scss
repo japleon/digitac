@@ -1,0 +1,29 @@
+.approve-comments {
+    .views-field-comment-body {
+        p {
+            font-family: $font-family-base;
+            font-style: normal;
+            font-weight: 400;
+            font-size: rem(18px);
+            line-height: rem(28px);
+            color: $secondary;
+
+            a {
+                color: $secondary;
+                text-decoration: underline;
+            }
+        }
+    }
+
+
+
+    &__buttons {
+        margin-top: rem(52px);
+
+        .btn {
+            + .btn {
+                margin-left: rem(32px);
+            }
+        }
+    }
+}
