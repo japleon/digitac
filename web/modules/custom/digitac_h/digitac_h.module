@@ -1517,9 +1517,12 @@ if ($view->id() == 'ideas_relacionadas' && $view->getDisplay()->display['id'] ==
   else if (str_contains($curr_rou,'node'))
   {
     $idea_id = explode('/',$curr_rou)[2];
-    $idea_n = \Drupal::entityTypeManager()->getStorage('node')->load($idea_id);
-    $reto_id = $idea_n->field_idea_reto->getValue()[0]['target_id'];
-    $view->filter['field_idea_reto_target_id']->value = ["min" => "","max" => "","value" => $reto_id];
+    if($idea_id!="add")
+    {
+      $idea_n = \Drupal::entityTypeManager()->getStorage('node')->load($idea_id);
+      $reto_id = $idea_n->field_idea_reto->getValue()[0]['target_id'];
+      $view->filter['field_idea_reto_target_id']->value = ["min" => "","max" => "","value" => $reto_id];
+    }
   }
   
 }
@@ -1544,9 +1547,12 @@ if ($view->id() == 'ideas_relacionadas' && $view->getDisplay()->display['id'] ==
   else if (str_contains($curr_rou,'node'))
   {
     $idea_id = explode('/',$curr_rou)[2];
-    $idea_n = \Drupal::entityTypeManager()->getStorage('node')->load($idea_id);
-    $reto_id = $idea_n->field_idea_reto->getValue()[0]['target_id'];
-    $view->filter['field_idea_reto_target_id']->value = ["min" => "","max" => "","value" => $reto_id];
+    if($idea_id!="add")
+    {
+      $idea_n = \Drupal::entityTypeManager()->getStorage('node')->load($idea_id);
+      $reto_id = $idea_n->field_idea_reto->getValue()[0]['target_id'];
+      $view->filter['field_idea_reto_target_id']->value = ["min" => "","max" => "","value" => $reto_id];
+    }
   }
   
 }
