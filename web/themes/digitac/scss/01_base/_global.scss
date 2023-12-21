@@ -115,6 +115,7 @@ svg {
   background-color: $white;
   border-left: rem(1px) solid $grey-300;
   border-right: rem(1px) solid $grey-300;
+  z-index: 0;
 
   &.push {
     @include media(lg) {
@@ -169,5 +170,5 @@ svg {
 
 main {
   position: relative;
-  z-index: 1;
-  }
+  //z-index: 1;
+}

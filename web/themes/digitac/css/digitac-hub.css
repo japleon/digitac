@@ -128,6 +128,7 @@ svg {
   background-color: #ffffff;
   border-left: 0.0625rem solid #D0D5DD;
   border-right: 0.0625rem solid #D0D5DD;
+  z-index: 0;
 }
 @media (min-width: 992px) {
   .wrap.push {
@@ -180,7 +181,6 @@ svg {
 } */
 main {
   position: relative;
-  z-index: 1;
 }
 
 .overflow {
@@ -6368,15 +6368,18 @@ body:not(.path-frontpage) .header.fixed {
   }
 }
 
-.alert:not(.alert-info) {
+.alert:not(.alert-info),
+.messages--error {
   max-width: 25rem;
+  width: 100%;
   padding-left: 3.25rem;
+  padding-right: 2.8125rem;
   border: 1px solid #D0D5DD;
   background: #ffffff;
   border-radius: 0.75rem;
   box-shadow: 0px 12px 16px -4px rgba(16, 24, 40, 0.08), 0px 4px 6px -2px rgba(16, 24, 40, 0.03);
   position: fixed;
-  top: 8rem;
+  top: 1.5rem;
   right: 1.5rem;
   z-index: 4;
   transition: all 0.3s ease;
@@ -6387,20 +6390,24 @@ body:not(.path-frontpage) .header.fixed {
   line-height: 1.25rem;
   color: #101828;
 }
-.alert:not(.alert-info) a {
+.alert:not(.alert-info) a,
+.messages--error a {
   color: #196E8C;
   text-decoration: none;
 }
-.alert:not(.alert-info) a:hover {
+.alert:not(.alert-info) a:hover,
+.messages--error a:hover {
   text-decoration: underline;
 }
 @media (min-width: 992px) {
-  .alert:not(.alert-info) {
-    top: 12.5rem;
+  .alert:not(.alert-info),
+.messages--error {
+    top: 1.5rem;
     right: calc(50vw - 700px);
   }
 }
-.alert:not(.alert-info)::before {
+.alert:not(.alert-info)::before,
+.messages--error::before {
   content: "";
   width: 2.375rem;
   height: 2.375rem;
@@ -6412,8 +6419,12 @@ body:not(.path-frontpage) .header.fixed {
   top: 0.4375rem;
   left: 0.4375rem;
 }
-.alert:not(.alert-info) .btn-close {
-  display: none;
+.messages--error::before {
+  background-image: url("../images/icons/icon-error.svg");
+}
+
+.user-logged-in .alert:not(.alert-info) {
+  top: 4rem;
 }
 
 .approve-comments .views-field-comment-body p {
@@ -9577,6 +9588,19 @@ body:not(.path-frontpage) .header.fixed {
 .login__col-description p a:hover {
   text-decoration: underline;
 }
+.login__col-message h2 {
+  margin-bottom: 0.75rem;
+}
+.login__col-message p {
+  margin-bottom: 0.75rem;
+}
+.login__col-message p:last-of-type {
+  margin-bottom: 2rem;
+}
+.login__col-message .btn {
+  width: 100%;
+  margin-top: 0 !important;
+}
 .login__col form .form-item {
   margin: 0 0 0.75rem;
 }
@@ -9840,18 +9864,47 @@ body:not(.path-frontpage) .header.fixed {
 .register__col-description p a:hover {
   text-decoration: underline;
 }
+.register__col-message h2 {
+  margin-bottom: 0.75rem;
+}
+.register__col-message p {
+  margin-bottom: 0.75rem;
+}
+.register__col-message p:last-of-type {
+  margin-bottom: 2rem;
+}
+.register__col-message .btn {
+  width: 100%;
+  margin-top: 0 !important;
+}
 .register__col .user-register-form {
   width: 100%;
 }
 @media (min-width: 768px) {
   .register__col .user-register-form .name_wrapper {
-    display: flex;
-    justify-content: space-between;
+    /* display: flex;
+    justify-content: space-between; */
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
   }
 }
+.register__col .user-register-form .name_wrapper .nombre_req {
+  margin: -1rem 0 1.25rem;
+  grid-area: 2/1/3/2;
+}
 @media (min-width: 768px) {
-  .register__col .user-register-form .name_wrapper .form-item {
-    width: calc(50% - 6px);
+  .register__col .user-register-form .name_wrapper .nombre_req {
+    margin: -2.375rem 0 1.25rem;
+  }
+}
+.register__col .user-register-form .name_wrapper .apellido_req {
+  margin: -1rem 0 1.25rem;
+  grid-area: 2/2/3/3;
+}
+@media (min-width: 768px) {
+  .register__col .user-register-form .name_wrapper .apellido_req {
+    margin: -2.375rem 0 1.25rem;
   }
 }
 .register__col .user-register-form .form-item {
@@ -9973,6 +10026,19 @@ body:not(.path-frontpage) .header.fixed {
 }
 .register__col .user-register-form .form-type-select .chosen-container-active .chosen-choices {
   border-radius: 0.625rem 0.625rem 0 0;
+}
+.register__col .user-register-form .req {
+  margin: -1rem 0 1.25rem;
+  font-family: "Open Sans", arial, sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  color: #D92D20;
+  display: none;
+}
+.register__col .user-register-form .req.error-form-item {
+  display: block;
 }
 
 .register .form-item.error-form-item input:not(.form-checkbox),

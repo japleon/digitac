@@ -12,6 +12,7 @@ use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Ajax\AjaxResponse;
 use Drupal\Core\Ajax\HtmlCommand;
 use Drupal\Core\Ajax\InvokeCommand;
+use Drupal\Core\Ajax\MessageCommand;
 use Drupal\user\Entity\User;
 use Drupal\Core\Url;
 use Drupal\Core\StringTranslation\TranslatableMarkup;
@@ -20,6 +21,7 @@ use Drupal\Core\StringTranslation;
 use Drupal\Core\Mail\MailManagerInterface;
 use Drupal\Component\Utility\SafeMarkup;
 use Drupal\Component\Utility\Html;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 
 
 
@@ -317,8 +319,8 @@ function digitac_h_mail($key, &$message, $params) {
 
 }
 
-// REDIRECT AFTER USER REGISTER
 function digitac_h_form_user_register_form_alter(&$form, FormStateInterface $form_state) {
+
 
     $form['agrupador_1'] = [
             '#type' => 'markup',
@@ -332,6 +334,11 @@ function digitac_h_form_user_register_form_alter(&$form, FormStateInterface $for
             '#markup' => t('</div>')
     ];
 
+    $form['field_usr_nombre']['#suffix'] =  t("<div class='nombre_req req'>Campo requerido</div>");
+    $form['field_usr_apellidos']['#suffix'] = t("<div class='apellido_req req'>Campo requerido</div>");
+    $form['field_usr_pais']['#suffix'] = t("<div class='pais_req req'>Campo requerido</div>");
+    $form['field_usr_acepto']['#prefix'] = t("<div class='mail_req req'>Campo requerido</div>");
+    $form['field_usr_acepto']['#suffix'] = t("<div class='acepto_req req'>Campo requerido</div>");
 
     $form['actions'] = [
       '#type' => 'button',
@@ -345,53 +352,47 @@ function digitac_h_form_user_register_form_alter(&$form, FormStateInterface $for
 
 function setMessage(array $form, FormStateInterface $form_state) {
 
-  $valid_errors = "";
   $response = new AjaxResponse();
   $form_valido = true;
   if(!$form_state->getValue('mail'))
   {
-     $response->addCommand(new InvokeCommand('.form-item-mail', 'addClass', array('error-form-item')));
-     $valid_errors .= t('El campo Mail es obligatorio<br>');
+     $response->addCommand(new InvokeCommand('.mail_req', 'addClass', array('error-form-item')));
      $form_valido = false;
   }
   else
-  {  $response->addCommand(new InvokeCommand('.form-item-mail', 'removeClass', array('error-form-item')));}
+  {  $response->addCommand(new InvokeCommand('.mail_req', 'removeClass', array('error-form-item')));}
 
   if($form_state->getValue('field_usr_nombre')[0]['value']=='')
   {
-     $response->addCommand(new InvokeCommand('.form-item-field-usr-nombre-0-value', 'addClass', array('error-form-item')));
-     $valid_errors .= t('El campo Nombre es obligatorio<br>');
+     $response->addCommand(new InvokeCommand('.nombre_req', 'addClass', array('error-form-item')));
      $form_valido = false;
   }
   else
-  {  $response->addCommand(new InvokeCommand('.form-item-field-usr-nombre-0-value', 'removeClass', array('error-form-item')));}
+  {  $response->addCommand(new InvokeCommand('.nombre_req', 'removeClass', array('error-form-item')));}
 
   if($form_state->getValue('field_usr_apellidos')[0]['value']=='')
   {
-     $response->addCommand(new InvokeCommand('.form-item-field-usr-apellidos-0-value', 'addClass', array('error-form-item')));
-     $valid_errors .= t('El campo Apellidos es obligatorio<br>');
+     $response->addCommand(new InvokeCommand('.apellido_req', 'addClass', array('error-form-item')));
      $form_valido = false;
   }
   else
-  {  $response->addCommand(new InvokeCommand('.form-item-field-usr-apellidos-0-value', 'removeClass', array('error-form-item')));}
+  {  $response->addCommand(new InvokeCommand('.apellido_req', 'removeClass', array('error-form-item')));}
 
   if($form_state->getValue('field_usr_pais')[0]['value']=='')
   {
-     $response->addCommand(new InvokeCommand('.form-item-field-usr-pais', 'addClass', array('error-form-item')));
-     $valid_errors .= t('El campo País es obligatorio<br>');
+     $response->addCommand(new InvokeCommand('.pais_req', 'addClass', array('error-form-item')));
      $form_valido = false;
   }
   else
-  {  $response->addCommand(new InvokeCommand('.form-item-field-usr-pais', 'removeClass', array('error-form-item')));}
+  {  $response->addCommand(new InvokeCommand('.pais_req', 'removeClass', array('error-form-item')));}
 
   if($form_state->getValue('field_usr_acepto')['value']==0)
   {
-     $response->addCommand(new InvokeCommand('.form-item-field-usr-acepto-value', 'addClass', array('error-form-item')));
-     $valid_errors .= t('Aceptar las condiciones de uso es obligatorio<br>');
+     $response->addCommand(new InvokeCommand('.acepto_req', 'addClass', array('error-form-item')));
      $form_valido = false;
   }
   else
-  {  $response->addCommand(new InvokeCommand('.form-item-field-usr-acepto-value', 'removeClass', array('error-form-item')));}
+  {  $response->addCommand(new InvokeCommand('.acepto_req', 'removeClass', array('error-form-item')));}
 
 
 
@@ -411,17 +412,22 @@ function setMessage(array $form, FormStateInterface $form_state) {
 
     $violations = $user->validate();
     if (count($violations)) {
-          $response->addCommand(
+
+/*          $response->addCommand(
           new HtmlCommand(
             '.error-box',
             '<div class="title_class">' . $violations[0]->getMessage() . '</div>'),
         );
+        $messages = \Drupal::messenger()->deleteAll();*/
+
         $messages = \Drupal::messenger()->deleteAll();
+        $response->addCommand(new MessageCommand($violations[0]->getMessage(),NULL,['type' => 'error']));
+
     }
     else
     {          
       
-    $response->addCommand(new HtmlCommand('.error-box',''));
+    $messages = \Drupal::messenger()->deleteAll();
 
     $result = $user->save();
     $user->activate();
@@ -440,30 +446,27 @@ function setMessage(array $form, FormStateInterface $form_state) {
 
 
   }
-  else{
-
-      $response->addCommand(
-          new HtmlCommand(
-            '.error-box',
-            '<div class="title_class">' . $valid_errors . '</div>'),
-        );
- 
 
     $messages = \Drupal::messenger()->deleteAll();
-  }
-
-
-
-
-//   \Drupal::service('plugin.manager.mail')->mail('user_registrationpassword', 'register_confirmation_with_pass', $form_state->getValue('mail'),'ES');
-//    drupal_set_message(t('A welcome message with further instructions has been sent to your email address.'));
-
-
-
     
     return $response;
 
    }
+
+
+/*   function digitac_h_user_insert(\Drupal\Core\Entity\EntityInterface $entity)
+   {
+
+    $mail_domain = explode('@',$form_state->getValue('mail'))[1];
+    $mail_user = '***********'.substr(explode('@',$form_state->getValue('mail'))[0],-3).'@';
+
+    //'<div class="title_class">' . t('¡Hola @result!', ['@result' => $form_state->getValue('field_usr_nombre')[0]['value'] ]) . '</div><div class="subtitle">'.t('Te hemos enviado un email').'</div><div class="parr">'.t('Te hemos enviado un email con un enlace a @mail para verificar tu identidad. Por favor haz click en el enlace para completar el registro.', ['@mail' => $mail_user.''.$mail_domain ]).'</div>'),
+
+
+    $response = new RedirectResponse('/retos');
+    $response->send();
+    return;
+   }*/
 
 
 /*function digitac_h_form_user_form_alter(&$form, FormStateInterface $form_state) {
@@ -497,37 +500,71 @@ function setMessage(array $form, FormStateInterface $form_state) {
 
 function digitac_h_form_user_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
 
-
   if (!in_array('administrator', \Drupal::currentUser()->getRoles())) {
 
     if($form_id == 'user_form'){
 
-          $form['agrupador_1'] = [
-            '#type' => 'markup',
-            '#weight' => 3,
-            '#markup' => t('<div class="box-grey">')
-          ];
 
-          $form['account']['mail']['#access'] = FALSE;
+        $curr_rou_ = $_SERVER['REQUEST_URI'];
+        $is_pass_reset = (str_contains($curr_rou_,'user/reset'))? 1:0;
+        $is_pass_reg = (str_contains($curr_rou_,'proc=new'))? 1:0;
 
-          $form['contrass'] = [
-            '#type' => 'markup',
-            '#weight' => 3,
-            '#markup' => t('<p><strong>Contraseña</strong></p>')
-          ]; 
-          $form['actions']['submit']['#weight'] = 4;
 
-          $form['agrupador_2'] = [
-            '#type' => 'markup',
-            '#weight' => 5,
-            '#markup' => t('</div>')
-          ];
+          if($is_pass_reset && $is_pass_reg)
+          {
+            $form['actions']['submit']['#submit'][]= 'custom_password_redirect_register';
+          }
+          else if($is_pass_reset && !$is_pass_reg)
+          {
+            $form['actions']['submit']['#submit'][]= 'custom_password_redirect_recover';
+          }
+          else{
+
+            $form['agrupador_1'] = [
+              '#type' => 'markup',
+              '#weight' => 3,
+              '#markup' => t('<div class="box-grey">')
+            ];
+
+            $form['account']['mail']['#access'] = FALSE;
+
+            $form['contrass'] = [
+              '#type' => 'markup',
+              '#weight' => 3,
+              '#markup' => t('<p><strong>Contraseña</strong></p>')
+            ]; 
+            $form['actions']['submit']['#weight'] = 4;
+
+            $form['agrupador_2'] = [
+              '#type' => 'markup',
+              '#weight' => 5,
+              '#markup' => t('</div>')
+            ];
+
+
+          }
+
 
     }
 
 
   }
 }
+
+function custom_password_redirect_register(&$form, &$form_state){
+
+    $redirect_path = "/node/231";
+    $url = url::fromUserInput($redirect_path);
+    $form_state->setRedirect($url->getRouteName(),$url->getRouteParameters());
+}
+function custom_password_redirect_recover(&$form, &$form_state){
+
+    $redirect_path = "/node/232";
+    $url = url::fromUserInput($redirect_path);
+    $form_state->setRedirect($url->getRouteName(),$url->getRouteParameters());
+}
+
+
 
 function digitac_h_preprocess_user(&$variables)
 {
@@ -556,6 +593,8 @@ $variables['login_form'] = Drupal::service('renderer')->renderPlain($form);
 }*/
 
 
+
+
 function digitac_h_form_user_login_form_alter(&$form, FormStateInterface $form_state) {
 
   $url_object = Url::fromRoute('user.pass');
@@ -574,6 +613,7 @@ function digitac_h_user_login_form_submit($form, FormStateInterface $form_state)
   $url = Url::fromRoute('<front>');
   $form_state->setRedirectUrl($url);
 }
+
 
 
 

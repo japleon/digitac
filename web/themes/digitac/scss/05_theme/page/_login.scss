@@ -167,6 +167,25 @@
             }
         }
 
+        &-message {
+            h2 {
+                margin-bottom: rem(12px);
+            }
+
+            p {
+                margin-bottom: rem(12px);
+
+                &:last-of-type {
+                    margin-bottom: rem(32px);
+                }
+            }
+
+            .btn {
+                width: 100%;
+                margin-top: 0 !important;
+            }
+        }
+
         form {
             .form-item {
                 margin: 0 0 rem(12px);

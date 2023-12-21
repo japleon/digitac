@@ -8,15 +8,10 @@
 
     }
   }; */
-  $(window).on('scroll', function() {
-    var headerHeight = $('.header.fixed').outerHeight();
 
-    $('.alert').css('top', headerHeight + 20);
-  });
-
-  setTimeout(function() {
-    $('.alert').fadeOut();
-  }, 5000);
+  // --------------------------------------
+  // ---- MESSAGE CLOSE -----
+  // --------------------------------------
 
 
 
