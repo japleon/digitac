@@ -276,7 +276,7 @@ function digitac_h_node_presave(\Drupal\Core\Entity\EntityInterface $node)  {
 
 
 function digitac_h_entity_insert(Drupal\Core\Entity\EntityInterface $entity) {
-  
+
   if ($entity->getEntityTypeId() !== 'node') {
     return;
   }
@@ -299,6 +299,7 @@ function digitac_h_entity_insert(Drupal\Core\Entity\EntityInterface $entity) {
           $messages = \Drupal::messenger()->addMessage(t('There was a problem sending your message and it was not sent.'),'error');
     }
   }
+
 
 
 }
@@ -1364,28 +1365,31 @@ if ($variables['comment']->get('pid')->target_id == null)
 
 $pido= intval($variables['comment']->id());
 
+  $values = null;
   $values = array(
       'entity_type' => 'node',
       'entity_id' => $variables['commented_entity']->id(),
       'field_name' => 'field_idea_comentarios',
       'comment_type' => 'comment',
       'pid' =>  $pido,
-      'field_comm_p_id' => $variables['comment']->id(),
-
+      'field_comm_p_id' => $pido
     );
+
 
   $commento = \Drupal::entityTypeManager()->getStorage('comment')->create($values);
   $form = \Drupal::service('entity.form_builder')->getForm($commento,'default');
   $variables['reply_form']=$form;
 
 //  $variables['reply_form']['actions']['submit']['#value']=t('Send comment');
-//  dpm($variables['reply_form']['actions']['submit']);
+//  dpm($variables['reply_form']);
 
 }
 
 }
 
 function digitac_h_entity_presave(&$variables) {
+ 
+
   if ($variables->bundle()=='comment')
   {
     
@@ -1399,16 +1403,14 @@ function digitac_h_entity_presave(&$variables) {
       $messages = \Drupal::messenger()->addMessage(t('Mensaje en proceso de revision.'));
     }
 
-        
+      $variables->set('pid',$variables->field_comm_p_id->value);
+      $parent = $variables->getParentComment();
+      $variables->set('thread',$parent->getThread().'.01/');
 
-//      dpm($variables->get('field_comm_p_id')->value);
-//    $variables->set('pid',48);
-//      $variables->pid[]=48;
-//      dpm($variables->pid);
-//      dpm($variables); 
   }
 
 }
+
 
 function digitac_h_preprocess_paragraph(&$variables) {
   

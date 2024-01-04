@@ -4815,6 +4815,10 @@ body:not(.path-frontpage) .header.fixed {
   color: #344054;
 }
 
+.form-item-field-comm-p-id-0-value {
+  display: none;
+}
+
 .block-formblock-node {
   max-width: 79.5rem;
   margin: 0 auto;

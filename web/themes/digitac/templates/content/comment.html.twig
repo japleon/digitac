@@ -64,6 +64,7 @@
  * @see template_preprocess_comment()
  */
 #}
+
 {% if threaded %}
   {{ attach_library('bootstrap5/indented') }}
 {% endif %}
@@ -77,6 +78,7 @@
   ]
 %}
 {% if status== 'published' %}
+
 <article{{ attributes.addClass(classes) }}>
   {#
     Hide the "new" indicator by default, let a piece of JavaScript ask the
@@ -89,10 +91,9 @@
     <div class="comment__submitted">
       <div class="comment__user">
 
-
         <div class="user-ball">
-          {% set siglas = submitted.getArguments()['@username']|striptags|split(' ') %}
-						{% for item in siglas%}{{ item|first|upper|trim }}{% endfor %}
+          {% set siglas = submitted.getArguments()['@username']|striptags|trim|split(' ') %}
+						{% for item in siglas|slice(0, 2)%}{{ item|first|upper|trim }}{% endfor %}
 
           {% if 'experto' in comment.getOwner().getroles() %}
           <div class="star_expertoTac"><img src="/themes/digitac/images/icons/icon-verified.svg" alt="" /></div>
@@ -188,39 +189,3 @@
 </div>
 
 {%endif%}
-
-{# <div class="modal modal-idea fade" id="exampleModal-{{comment.id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <div class="modal-header__content">
-          <h3 class="modal-title" id="exampleModalLabel">Crear nueva idea</h3>
-          <p>Para crear una idea necesitas estar registrado en la plataforma</p>
-        </div>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary">Iniciar sesión</button>
-        <button type="button" class="btn btn-primary">Registrarme</button>
-      </div>
-    </div>
-  </div>
-</div> #}
-
-{# <div class="modal modal-idea fade" id="exampleModal-{{comment.id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <div class="modal-header__content">
-          <h3 class="modal-title" id="exampleModalLabel">Valorar idea</h3>
-          <p>Para valorar una idea necesitas estar registrado en la plataforma</p>
-        </div>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary">Iniciar sesión</button>
-        <button type="button" class="btn btn-primary">Registrarme</button>
-      </div>
-    </div>
-  </div>
-</div> #}
